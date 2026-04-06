@@ -41,6 +41,20 @@
 
 <!-- variant がないコンポーネントはこのテーブルを省略 -->
 
+#### コード例（webcomponent）
+
+```html
+<!-- mitsubachi-ui のタグを使う場合 -->
+<mi-{name} variant="{variant}">{content}</mi-{name}>
+```
+
+#### コード例（html）
+
+```html
+<!-- 素の HTML + CSS で再現する場合 -->
+<{tag} style="...デザイン仕様に従ったスタイル...">{content}</{tag}>
+```
+
 ---
 
 ## サイズ
@@ -99,7 +113,11 @@
 - {ルール 2}
 
 ```html
-<!-- 配置の例 -->
+<!-- webcomponent の場合 -->
+```
+
+```html
+<!-- html の場合 -->
 ```
 
 ---

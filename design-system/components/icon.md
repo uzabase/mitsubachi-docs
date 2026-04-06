@@ -9,6 +9,42 @@ UI 上の操作や状態を視覚的に伝える小さなシンボル。
 - すべて 24×24 の SVG で統一
 - アイコンのサイズはテキストサイズに連動させる
 
+### コード例（webcomponent）
+
+```html
+<!-- 単体 -->
+<mi-icon type="search"></mi-icon>
+<mi-icon type="chevron-right"></mi-icon>
+
+<!-- サイズ変更は親の font-size で -->
+<span style="font-size: 32px;">
+  <mi-icon type="bell"></mi-icon>
+</span>
+
+<!-- ボタンにアイコンを付ける場合は icon-type 属性 -->
+<mi-neutral-button variant="primary" icon-type="plus">新規作成</mi-neutral-button>
+<mi-icon-button icon-type="search" aria-label="検索"></mi-icon-button>
+```
+
+### コード例（html）
+
+```html
+<!-- アイコンは SVG またはテキスト/絵文字で代替する -->
+<!-- 実際のプロジェクトでは SVG スプライトやアイコンフォントを使う -->
+<span role="img" aria-hidden="true" style="
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; font-size: 16px;
+">🔍</span>
+
+<!-- ボタンにアイコンを付ける -->
+<button style="
+  display: inline-flex; align-items: center; gap: 4px;
+  min-height: 32px; padding: 2px 12px;
+  background: #282828; color: #fff; border: none; border-radius: 9999px;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+">＋ 新規作成</button>
+```
+
 ---
 
 ## アイコン一覧

@@ -10,6 +10,38 @@
 
 ---
 
+## 実装モード
+
+画面を作るとき、以下の 3 つのモードから 1 つを選ぶ。各コンポーネントのドキュメントにモード別のコード例がある。
+
+| モード | 説明 | いつ使うか |
+|--------|------|-----------|
+| **webcomponent** | mitsubachi-ui の Web Component タグ（`<mi-*>`）を使う。スタイルはコンポーネントに内蔵されている | mitsubachi-ui を導入済みの環境で作るとき |
+| **html** | 素の HTML + CSS で、デザイン仕様に従って作る | mitsubachi-ui を使わずに作るとき。モック・プロトタイプにも向く |
+
+**現在のモード: `webcomponent`**
+
+> モードを切り替えるには、上の行の値を `html` に変更してください。
+> コード例の中で、現在のモードに該当するセクションだけを参照してください。
+
+### webcomponent モードの導入方法
+
+```html
+<script type="module" src="https://unpkg.com/mitsubachi-ui/dist/index.js"></script>
+```
+
+npm でインストールする場合:
+
+```bash
+npm install mitsubachi-ui
+```
+
+```javascript
+import "mitsubachi-ui";
+```
+
+---
+
 ## ドキュメント構成
 
 | ファイル | 内容 |
