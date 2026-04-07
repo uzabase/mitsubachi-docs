@@ -26,12 +26,6 @@
 
 ### webcomponent モードの導入方法
 
-```html
-<script type="module" src="https://unpkg.com/mitsubachi-ui/dist/index.js"></script>
-```
-
-npm でインストールする場合:
-
 ```bash
 npm install mitsubachi-ui
 ```
@@ -39,6 +33,8 @@ npm install mitsubachi-ui
 ```javascript
 import "mitsubachi-ui";
 ```
+
+- [GitHub リポジトリ / dist](https://github.com/uzabase/mitsubachi-ui/blob/main/dist/index.js)
 
 ---
 
