@@ -6,7 +6,18 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5305-1126
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
+## コンポーネント一覧
+
+| コンポーネント | 役割 | いつ使うか |
+|---------------|------|-----------|
+| **link-tag** | クリック可能なタグ | タグをクリックして絞り込み・遷移する場合 |
+| **read-only-tag** | 読み取り専用のタグ | 情報の表示のみで操作が不要な場合 |
+
 ## 使い分け
+
+### コンポーネントの選択
+- ユーザーがタグを操作する → `link-tag`
+- 情報を表示するだけ → `read-only-tag`
 
 ### パターン
 | パターン | 用途 |
