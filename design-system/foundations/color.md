@@ -1,6 +1,6 @@
 # カラー運用ルール
 
-> 具体的な色の値や CSS 変数名は `tokens/tokens.json` および [mitsubachi-tokens.css](https://github.com/uzabase/mitsubachi-token) を参照。
+> 具体的な色の値や CSS 変数名は [mitsubachi-token](https://github.com/uzabase/mitsubachi-token) を参照。
 > ここでは **使い分けの判断基準** を定義する。
 
 ---

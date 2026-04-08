@@ -43,9 +43,22 @@ import "mitsubachi-ui";
 | ファイル | 内容 |
 |---------|------|
 | **このファイル** | 全体像・デザインの基本ルール |
-| `foundations/` | カラー運用ルール、設計原則 |
+| `foundations/` | デザインの基盤となるトークン・ルール |
 | `components/` | 各 UI パーツのデザイン仕様・使い分け・コード例 |
 | `prohibited.md` | **やってはいけないこと（必ず確認）** |
+
+### foundations/
+
+| ファイル | 内容 |
+|---------|------|
+| `primitive-token.md` | Dimension・Typography のベース値 |
+| `spacing.md` | 余白トークン（2px〜80px） |
+| `border-radius.md` | 角丸トークン（2px〜8px） |
+| `icon-size.md` | アイコンサイズ（14px〜66px） |
+| `elevation.md` | 影・グラデーション（検討中） |
+| `typography.md` | フォントサイズ・ウェイト |
+| `color.md` | 色の使い分けルール |
+| `principles.md` | 設計原則（一貫性・階層・余白・アクセシビリティ） |
 
 ---
 
@@ -83,21 +96,16 @@ import "mitsubachi-ui";
 | 48px | 大きなセクション間 |
 | 64px | ページセクション間 |
 
+詳細は `foundations/spacing.md` を参照。
+
 ### アイコン
 
-このデザインシステムには独自のアイコンセットがある。
+このデザインシステムには独自のアイコンセット（100種類以上）がある。
 
-利用できるアイコン（抜粋）:
+- 一覧にないアイコンは使わない
+- アイコンのみで使う場合はラベルを併用する
 
-> `arrow-down`, `arrow-left`, `bell`, `bookmark`, `building`, `calendar`,
-> `check`, `chevron-down`, `chevron-left`, `chevron-right`, `chevron-up`,
-> `clock`, `copy`, `cross`, `download`, `error-fill`, `exit`, `eye`, `eye-slash`,
-> `gear`, `history`, `home`, `information`, `kebab-menu`, `lock`, `magic`,
-> `mail`, `menu`, `minus`, `money`, `open-in-new`, `pencil-square`,
-> `person`, `person-add`, `plus`, `plus-circle`, `question-circle`,
-> `search`, `share`, `success`, `unlock`, `warning-fill`
-
-一覧にないものは使わない。近いものを仮で使い、要確認であることを注記する。
+詳細は `components/icon.md` を参照。サイズは `foundations/icon-size.md` を参照。
 
 ---
 
