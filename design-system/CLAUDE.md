@@ -12,32 +12,42 @@
 
 色の意味・パーツの使い分け・レイアウトのルールなど、守るべきデザインの仕様を定義しています。
 
+### mitsubachi-ui の構成
+
+| リポジトリ | 役割 |
+|-----------|------|
+| **このリポジトリ（docs）** | AI がデザインシステムを使うためのデザインルール・仕様 |
+| [mitsubachi-ui](https://github.com/uzabase/mitsubachi-ui) | Web Component のコンポーネント群 |
+| [mitsubachi-ui-react](https://github.com/uzabase/mitsubachi-ui-react) | React のコンポーネント群 |
+| [mitsubachi-token](https://github.com/uzabase/mitsubachi-token) | デザイントークン（色・余白・タイポグラフィ等の具体値） |
+
 ### 目的
 
-このドキュメントは **モックアップ作成** に使う。デザイン仕様に従った画面モックを作ることをゴールとする。
+このドキュメントは **AI がデザインシステムに従った画面を作る** ときに使う。モックアップ作成、実装、レビューなど、mitsubachi-ui に基づく作業全般が対象。
 
-### モックアップの作成方法
+### 画面の作成方法
 
-以下の 2 つのモードから 1 つを選ぶ。
+以下の 3 つのモードから 1 つを選ぶ。
 
-| モード | 説明 |
-|--------|------|
-| **react** | mitsubachi-ui-react の React コンポーネントを使ってモックを作る |
-| **html** | 素の HTML + CSS で、デザイン仕様に従ってモックを作る |
+| モード | 説明 | 使える環境 |
+|--------|------|-----------|
+| **react** | mitsubachi-ui-react の React コンポーネントを使って画面を作る | React プロジェクト |
+| **web-component** | mitsubachi-ui の Web Component を使って画面を作る | Web Component が動く環境 |
+| **html** | 素の HTML + CSS で、デザイン仕様に従って画面を作る | Claude AI / Claude Design など |
 
 **現在のモード: `html`**
 
-> モードを切り替えるには、上の行の値を `html` または `react` に変更してください。
+> モードを切り替えるには、上の行の値を `html`、`react`、または `web-component` に変更してください。
 
 #### react モードについて
 
 - [GitHub リポジトリ（プライベート）](https://github.com/uzabase/mitsubachi-ui-react)
+- [Storybook](https://uzabase.github.io/mitsubachi-ui-react/)
 
-```bash
-npm install @uzabase/mitsubachi-ui-react
-```
+#### web-component モードについて
 
-コンポーネントが用意されていない部分は、素の JSX + CSS でデザイン仕様に従って組む。
+- [GitHub リポジトリ](https://github.com/uzabase/mitsubachi-ui)
+- [Storybook](https://uzabase.github.io/mitsubachi-ui/)
 
 ---
 
@@ -45,10 +55,9 @@ npm install @uzabase/mitsubachi-ui-react
 
 | ファイル | 内容 |
 |---------|------|
-| **このファイル** | 全体像・デザインの基本ルール |
-| `foundations/` | デザインの基盤となるトークン・ルール |
-| `components/` | 各 UI パーツのデザイン仕様・使い分け |
-| `prohibited.md` | **やってはいけないこと（必ず確認）** |
+| **このファイル** | 全体像・ドキュメント構成・モード選択 |
+| `foundations/` | デザインの基盤となるトークン・ルール・設計原則・アクセシビリティ・Do/Don't |
+| `components/` | 各 UI パーツのデザイン仕様・使い分け・Do/Don't |
 
 ### foundations/
 
@@ -61,66 +70,5 @@ npm install @uzabase/mitsubachi-ui-react
 | `elevation.md` | 影・グラデーション（検討中） |
 | `typography.md` | フォントサイズ・ウェイト |
 | `color.md` | 色の使い分けルール |
-| `principles.md` | 設計原則（一貫性・階層・余白・アクセシビリティ） |
-
----
-
-## デザインの基本ルール
-
-### 色
-
-| 用途 | 色 | 補足 |
-|------|-----|------|
-| 主要アクション（ボタン等） | 黒（`rgba(0,0,0,0.84)`） | 白文字と組み合わせる |
-| 破壊的操作（削除等） | 赤（`#db351f`） | 白文字と組み合わせる |
-| リンク・選択状態 | 青（`#315ce8` 系） | — |
-| 見出しテキスト | ほぼ黒 | — |
-| 本文テキスト | 濃いグレー | — |
-| 補足テキスト | グレー | — |
-| ボーダー・区切り線 | 薄いグレー | — |
-| 成功 | 緑 | テキストやアイコンと併用する（色だけで伝えない） |
-| 警告 | オレンジ | 同上 |
-| エラー | 赤 | 同上 |
-
-詳細は `foundations/color.md` を参照。
-
-### 余白
-
-4px 刻みのスケールを使う。関連する要素は近く、無関係な要素は遠く配置する。
-
-| 値 | 主な用途 |
-|-----|---------|
-| 4px | アイコンとテキストの間 |
-| 8px | インライン要素間、ボタン同士の間隔 |
-| 12px | コンパクトなパディング |
-| 16px | 標準的なパディング、フォーム要素間 |
-| 24px | カード内のパディング |
-| 32px | セクション間 |
-| 48px | 大きなセクション間 |
-| 64px | ページセクション間 |
-
-詳細は `foundations/spacing.md` を参照。
-
-### アイコン
-
-このデザインシステムには独自のアイコンセット（100種類以上）がある。
-
-- 一覧にないアイコンは使わない
-- アイコンのみで使う場合はラベルを併用する
-
-詳細は `components/icon.md` を参照。サイズは `foundations/icon-size.md` を参照。
-
----
-
-## 画面を組むときのルール
-
-1. **`prohibited.md` を守る** — 非推奨のパターンを避ける
-2. **アクセシビリティ** — アイコンだけのボタンにはラベルを付ける。色だけで情報を伝えない。プレースホルダーをラベルの代わりにしない
-3. **各パーツの仕様は `components/` を確認する** — ボタンの種類、入力フィールドの使い方など
-
----
-
-## 参考リンク
-
-- [Storybook（コンポーネントの見た目を確認できる）](https://uzabase.github.io/mitsubachi-ui/)
-- [GitHub リポジトリ](https://github.com/uzabase/mitsubachi-ui)
+| `principles.md` | 設計原則（一貫性・階層・余白） |
+| `accessibility.md` | アクセシビリティの横断ルール |
