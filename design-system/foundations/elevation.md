@@ -1,34 +1,13 @@
-# Elevation
+# elevation
 
-影（box-shadow）とグラデーションを定義するトークン。
+影（box-shadow）に使用するトークン。要素の浮き具合を表現する。
 
-## Figma
-- https://www.figma.com/design/DqZ5hW947kqhcIFQrp0QTA/Token-Speeda-3.1-MITSUBACHI?node-id=1136-14779
+> 具体的な値は Figma MCP（`get_variable_defs`）または [mitsubachi-token](https://github.com/uzabase/mitsubachi-token) を参照。
 
-## ステータス
+## 使い分け
 
-> **検討中**: シャドウとグラデーションの定義は現在整理中です。
-
-## 検討メモ
-
-- シャドウと一緒にグラデーションを考える
-- グラデーションはナビなどの「潜り込む」表現に使用
-- FAB（Floating Action Button）は検討中
-
-## 現在の方針
-
-### シャドウの用途
-| 用途 | 説明 |
-|------|------|
-| **カード** | 背景から浮き上がる表現 |
-| **ドロップダウン** | メニューやセレクトボックスの展開時 |
-| **モーダル** | ダイアログの背景との分離 |
-| **FAB** | フローティングアクションボタン（検討中） |
-
-### ライト/ダークテーマ
-- ライトテーマとダークテーマで影の見え方が異なる
-- 詳細は Figma を参照
-
-## 注意点
-- 影を多用しすぎない（階層が曖昧になる）
-- 影のレベルは要素の重なり順に対応させる
+| トークン | 使い分け | コンポーネント例 |
+|---------|---------|----------------|
+| **elevation-30** | 操作で出現・消える要素 | menu, suggestion, tooltip, snackbar, banner, drawer |
+| **brand-elevation** | 常時表示し浮いている要素 | floating-button |
+| **elevation-50** | overlay とセットで使う要素 | dialog, side navigation |

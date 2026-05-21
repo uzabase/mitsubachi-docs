@@ -1,39 +1,25 @@
-# Border Radius
+# border-radius
 
-角丸の値を定義するトークン。
+コンポーネントの角丸に使用するトークン。primitive と semantic の2層で構成される。
 
-## Figma
-- https://www.figma.com/design/DqZ5hW947kqhcIFQrp0QTA/Token-Speeda-3.1-MITSUBACHI?node-id=1-4
+> 具体的な値は Figma MCP（`get_variable_defs`）または [mitsubachi-token](https://github.com/uzabase/mitsubachi-token) を参照。
 
-## 基本ルール
+## primitive
 
-- 基本的には下記と設定する
-- 特殊コンポーネントは2px以外の値が適用されることがあり、コンポーネント設計していくなかで随時整理していく方針
-- 検討状況での値は確定次第追加される(Tokenを増やす方向に考える)
+- [primitive-scale](./primitive-scale.md) の dimension-scale の値を参照する
+- 9999px は border-radius でのみ使用する特殊値
 
-## Primitive Token | ワンスピーダ
+## semantic
 
-| 値 | 倍率 | 使用トークン | 使用プロダクト | 備考 |
-|----|------|-------------|--------------|------|
-| 2px | 0.25x | border-radius | スタートアップ情報リサーチ... | 化粧品類・チェックボックス |
-| 4px | 0.5x | border-radius, Spacing | 経済情報リサーチ、開発企業 | 未定/空室・table/block・text等 |
-| 6px | 0.75x | border-radius | | 検討優先 ボタン |
-| 8px | 1x | border-radius, Spacing | 経済情報リサーチ、開発企業 | 未定/空室・テーブル・モラン |
-
-## Semantic Token
-
-| Primitive Token | Semantic Token |
-|-----------------|----------------|
-| dimension-scale-10 (2px) | border-radius-2x-small |
-| dimension-scale-20 (4px) | border-radius-x-small |
-| dimension-scale-30 (6px) | border-radius-small |
-| dimension-scale-40 (8px) | border-radius-medium |
+- primitive の値を用途に応じて semantic 名で参照する
 
 ## 使い分け
 
-| 値 | 用途 |
-|----|------|
-| **2px** | 小さい要素（チェックボックス、小さいタグなど） |
-| **4px** | 標準的な要素（カード、入力フィールドなど） |
-| **6px** | ボタン |
-| **8px** | 大きめの要素（モーダル、大きいカードなど） |
+| 用途 | 例 |
+|------|-----|
+| 最小サイズ。正方形のため丸すぎる印象を避けたいコンポーネント | checkbox |
+| 高さが小さいコンポーネント / コンポーネント内部の要素 | read-only-tag, toolchip, breadcrumb, segment-control |
+| 基準サイズ。コンポーネントの small・medium にあたる部分 | search-box, text-area |
+| コンポーネントの large・x-large にあたる部分 | カード類 |
+| 最大サイズ。高さが大きめのコンポーネント | dialog, 投資実績カード |
+| 丸い形状が一般的なアクション要素 | floating-button |
