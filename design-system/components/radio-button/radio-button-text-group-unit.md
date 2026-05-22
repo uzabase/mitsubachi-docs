@@ -1,0 +1,49 @@
+# radio-button-text-group-unit
+
+radio-button-text-group-unit は、[label-unit](../label-unit.md)（ラベル・補足テキスト・必須表示）と[radio-button-text-group](./radio-button-text-group.md)を組み合わせたコンポーネントです。フォームにおける「ラベル付きのラジオボタングループ」として機能し、ユーザーが「何を選ぶのか」を明確に理解した上で選択できるようにします。
+
+## いつ使うか
+
+- フォーム内でラベルとラジオボタングループをセットで表示する場合。
+- 選択肢に「必須」を表示したい場合。
+- 選択内容に関する補足説明が必要な場合。
+
+## いつ使わないか
+
+- ラベルが不要でグループだけを表示する場合は [radio-button-text-group](./radio-button-text-group.md) を使います。
+- [radio-button-card-group-unit](./radio-button-card-group-unit.md) との違い：radio-button-card-group-unit は内容の補足情報（サポートテキスト）を含むradio-button-cardとlabel-unitを組み合わせたコンポーネントです。ラベルのみで充分な場合は radio-button-text-group-unit を使います。
+- [../checkbox/checkbox-text-group-unit.md](../checkbox/checkbox-text-group-unit.md) との違い：構成は同様ですが、radio-button-text-group-unit は排他的選択（1つのみ選択）に限定されます。
+
+## Figma
+
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=1-182
+
+## バリアントプロパティ
+
+| プロパティ | 値 | 説明 |
+|---|---|---|
+| direction | horizontal / vertical | 配置方向 |
+
+## variant の使い分け
+
+### direction（配置方向）
+
+| 値 | 使いどころ |
+|---|---|
+| **horizontal** | 選択肢を横並びに表示します。 |
+| **vertical** | 選択肢を縦並びに表示します。 |
+
+## コンテンツルール
+
+- [label-unit](../label-unit.md) のラベルテキストは、選択肢の内容（何を選ぶか）が導かれる簡潔な表現にします。
+- [label-unit](../label-unit.md) の補足テキスト（support text）は必要な場合のみ表示します。入力内容の補足説明や制約を簡潔に述べます。
+- 選択必須な場合は required を true に設定し、「必須」バッジを表示します。
+
+## Do
+
+- ラベルテキストは選択肢の内容が導かれる簡潔な表現にする
+- 補足テキストは必要な場合のみ表示する
+
+## Don't
+
+- ラベルが不要な場面で使わない → [radio-button-text-group](./radio-button-text-group.md) を使う
