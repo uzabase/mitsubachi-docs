@@ -16,7 +16,7 @@ AIによる生成・提案・自動補完など、生成系AIを実行する操�
 
 ## Figma
 
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/button-mi-ai-button--basic
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8357-5237
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

@@ -14,7 +14,7 @@ Loading（ローディング）は、処理中であることをユーザーに�
 - **Skeleton**（未定義）: ページやコンテンツの構造を維持しながら読み込み中を示したい場合に使います。Loadingはコンテンツ構造が不確定なときや、ページ全体・小さなボタン内など範囲が狭い場面に適しています
 
 ## Figma
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/loading-mi-loading--default
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=866-2609
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

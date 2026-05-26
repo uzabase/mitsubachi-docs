@@ -14,7 +14,7 @@ sub-menu-item は、サブメニューを持つメニューアイテムです。
 
 ## Figma
 
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui-react/?path=/story/components-menu-submenuitem--normal
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8376-4959
 
 ## バリアントプロパティ
 

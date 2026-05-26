@@ -16,7 +16,7 @@ checkboxは、ひとつの項目に対して選択・解除を行うためのコ
 
 ## Figma
 
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/checkbox-mi-checkbox--basic
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=178-197
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

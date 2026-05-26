@@ -15,7 +15,7 @@
 
 ## Figma
 
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/dialog-mi-action-dialog--default
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=9079-10648
 
 ## バリアントプロパティ
 

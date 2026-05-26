@@ -15,7 +15,7 @@ action-menu-item は、クリックするとアクション（コマンド）を
 
 ## Figma
 
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui-react/?path=/story/components-menu-actionmenuitem--normal
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8376-4715
 
 ## バリアントプロパティ
 

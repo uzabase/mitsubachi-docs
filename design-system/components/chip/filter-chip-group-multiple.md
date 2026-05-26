@@ -15,7 +15,7 @@
 
 ## Figma
 
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui-react/?path=/story/components-chip-filterchipmultiselectgroup--default
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=7216-14722
 - 各variantの値は Figma MCP(`get_design_context`)で取得
 
 ## バリアントプロパティ

@@ -14,7 +14,7 @@ search-box は、ユーザーが必要な情報を素早く見つけるための
 - search-box-unit との違い：search-box-unit は label-unit を組み合わせ、ラベル・必須バッジ・補足テキストを含むフォーム項目をワンセットで表現します。ラベルが不要な場合は search-box を直接使用します
 
 ## Figma
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui-react/?path=/story/components-searchbox--default
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5789-1881
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

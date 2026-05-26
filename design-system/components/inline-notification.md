@@ -16,7 +16,7 @@ inline-notification は、ユーザーの操作に対して即座に理解すべ
 - [dialog](./dialog/index.md) はユーザーの操作フローを一時停止させ、明示的な確認を求めます。情報の緊急度・永続性・ユーザーへの介入度に応じて使い分けます
 
 ## Figma
-- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/inlinenotification-mi-inline-notification--default
+- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5638-4139
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ
