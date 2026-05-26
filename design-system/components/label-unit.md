@@ -12,7 +12,7 @@ label-unit は、フォーム上の入力欄や選択肢が「何を入力・選
 - label-unit はラベルを表示する責務のみを持ち、入力欄そのものは持ちません。実際のフォーム項目を構成する際は、他コンポーネントと組み合わせて使用します
 
 ## Figma
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=3-327
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/label-unit-mi-label-unit--default
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

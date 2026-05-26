@@ -3,7 +3,7 @@
 情報を視覚的に伝えるためのシンボル。ボタンやラベルと組み合わせて使用する。
 
 ## Figma
-- https://www.figma.com/design/0TyVfKpH9I54YV21lcOLeQ/Iconography?node-id=0-1&t=QkVMCef1Qcm5klSE-1
+- https://uzabase.github.io/mitsubachi-ui/?path=/story/icon-mi-icon--default
 
 ## SVG の取得元
 - [icons.ts](https://github.com/uzabase/mitsubachi-ui/blob/main/src/components/icon/icons.ts) - 各アイコンの SVG パスデータ

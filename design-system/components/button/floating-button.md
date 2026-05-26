@@ -17,7 +17,7 @@
 
 ## Figma
 
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5413-2377
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/floating-button-mi-floating-button--default
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

@@ -13,7 +13,7 @@ report-headingは、レポートや記事などの読み物コンテンツにお
 - report-headingはレポートや記事といった「読み物」に特化した見出しです。読み物の文脈を伴わないUI上の見出しや、画面・セクションの名称を示すラベルには、別途用意されたコンポーネントを検討します
 
 ## Figma
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=9479-1540
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui-react/?path=/story/components-reportheading--level-1
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

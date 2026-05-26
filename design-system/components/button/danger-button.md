@@ -17,7 +17,7 @@
 
 ## Figma
 
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8357-5236
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/button-mi-danger-button--basic
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

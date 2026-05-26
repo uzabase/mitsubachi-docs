@@ -15,7 +15,7 @@ snackbar は、ユーザー操作に対する短いフィードバックを、�
 - [action-dialog](./dialog/action-dialog.md): ユーザーの操作フローを一時停止させ、明示的な確認を求めます。snackbar はユーザーの作業を止めずに情報を提示します
 
 ## Figma
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5607-6067
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/snackbar-mi-snackbar--small
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

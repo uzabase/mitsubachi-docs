@@ -3,7 +3,7 @@
 1行のテキスト入力を受け付けるフォームコンポーネント。
 
 ## Figma
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=3-325
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/text-field-mi-text-field--default
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
 ## 使い分け

@@ -17,7 +17,7 @@ tooltip（ツールチップ）は、UI要素に関する補足情報や説明�
 - [banner](./banner.md) / [inline-notification](./inline-notification.md)：重要度が高く、ユーザーに必ず見せたい情報にはこちらを使います。tooltipはあくまで補足であり、ユーザーが意図して操作しないと表示されません
 
 ## Figma
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=6656-2364
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/tooltip-mi-tooltip--basic
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
 ## バリアントプロパティ

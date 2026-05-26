@@ -3,7 +3,7 @@
 AI との対話を表示するコンポーネント。
 
 ## Figma
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=9336-8319
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui-react/?path=/story/components-aichat-aichatarea--default
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
 ## 使い分け

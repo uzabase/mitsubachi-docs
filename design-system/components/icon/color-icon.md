@@ -14,7 +14,7 @@
 
 ## Figma
 
-- コンポーネント: https://www.figma.com/design/0TyVfKpH9I54YV21lcOLeQ/Iconography?node-id=891-1242
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui/?path=/story/icon-mi-icon-color--default
 
 ## バリアントプロパティ
 

@@ -15,7 +15,7 @@ select-menu-item は、選択状態（チェックマーク）を持つメニュ
 
 ## Figma
 
-- コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8376-4776
+- コンポーネント: https://uzabase.github.io/mitsubachi-ui-react/?path=/story/components-menu-selectmenuitem--normal
 
 ## バリアントプロパティ
 
