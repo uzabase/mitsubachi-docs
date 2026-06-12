@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — tab / filter-chip / notification-badge</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 24px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <h1>tab / filter-chip / notification-badge — mockup kit 見本</h1>
+
+  <h2>page-tab（ページ全体の切り替え・下線インジケーター式）</h2>
+  <div class="mi-page-tab-group" role="tablist" style="max-width: 520px;">
+    <button class="mi-page-tab mi-page-tab--selected" role="tab" aria-selected="true">企業概要</button>
+    <button class="mi-page-tab" role="tab">財務</button>
+    <button class="mi-page-tab" role="tab">ニュース</button>
+    <button class="mi-page-tab" role="tab" disabled>レポート</button>
+  </div>
+
+  <h2>section-tab（セクション内の表示切り替え。desktop / 選択中は青ボーダー）</h2>
+  <div class="mi-section-tab-group" role="tablist">
+    <button class="mi-section-tab mi-section-tab--selected" role="tab" aria-selected="true">四半期</button>
+    <button class="mi-section-tab" role="tab">年次</button>
+    <button class="mi-section-tab" role="tab" disabled>月次</button>
+  </div>
+
+  <h2>section-tab（viewport=phone。高さ40px / 文字14px）</h2>
+  <div class="mi-section-tab-group" role="tablist">
+    <button class="mi-section-tab mi-section-tab--phone mi-section-tab--selected" role="tab" aria-selected="true">四半期</button>
+    <button class="mi-section-tab mi-section-tab--phone" role="tab">年次</button>
+  </div>
+
+  <h2>filter-chip（絞り込み条件のトグル。desktop）</h2>
+  <div class="mi-chip-group" role="group" aria-label="地域で絞り込み">
+    <button class="mi-chip mi-chip--selected" aria-pressed="true">
+      <span class="mi-icon mi-icon--check" aria-hidden="true"></span>すべて
+    </button>
+    <button class="mi-chip" aria-pressed="false">国内</button>
+    <button class="mi-chip" aria-pressed="false">海外</button>
+    <button class="mi-chip" aria-pressed="false" disabled>非上場</button>
+  </div>
+
+  <h2>filter-chip（viewport=phone。高さ 28px / 文字 14px）</h2>
+  <div class="mi-chip-group" role="group" aria-label="期間で絞り込み">
+    <button class="mi-chip mi-chip--phone mi-chip--selected" aria-pressed="true">
+      <span class="mi-icon mi-icon--check" aria-hidden="true"></span>四半期
+    </button>
+    <button class="mi-chip mi-chip--phone" aria-pressed="false">年次</button>
+    <button class="mi-chip mi-chip--phone" aria-pressed="false">月次</button>
+  </div>
+
+  <h2>notification-badge（数値 / 99+ / ドット）</h2>
+  <div class="row">
+    <span class="mi-badge" aria-label="9件の未読通知">9</span>
+    <span class="mi-badge" aria-label="99件の未読通知">99</span>
+    <span class="mi-badge" aria-label="100件以上の未読通知">99+</span>
+    <span class="mi-badge mi-badge--dot" aria-label="未読あり"></span>
+  </div>
+
+  <h2>右上に重ねる配置（.mi-badge-anchor。基準: notification-badge.md）</h2>
+  <div class="row">
+    <span class="mi-badge-anchor">
+      <button class="mi-button mi-button--ghost mi-button--medium" aria-label="通知">
+        <span class="mi-icon mi-icon--magic" aria-hidden="true"></span>
+      </button>
+      <span class="mi-badge" aria-label="3件の未読通知">3</span>
+    </span>
+    <span class="mi-badge-anchor">
+      <button class="mi-button mi-button--ghost mi-button--medium" aria-label="お知らせ">
+        <span class="mi-icon mi-icon--magic" aria-hidden="true"></span>
+      </button>
+      <span class="mi-badge mi-badge--dot" aria-label="未読あり"></span>
+    </span>
+  </div>
+</body>
+</html>

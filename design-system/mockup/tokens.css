@@ -1,0 +1,276 @@
+/* ============================================================================
+ * mitsubachi-ui mockup tokens
+ * ----------------------------------------------------------------------------
+ * mockup（パッケージ非依存の見た目再現）で使うデザイントークンの「値の単一の源」。
+ * mitsubachi-mockup.css などの kit はこのファイルの CSS 変数を参照するだけで、
+ * 生の値（#xxxxxx や px）を持たない。
+ *
+ * 【値の出所（スナップショット）】
+ *   1. mitsubachi-token（公式トークン）: lib/mitsubachi-tokens.css
+ *        https://github.com/uzabase/mitsubachi-token
+ *        （Generated 2026-05-25 / 取得日 2026-06-11）— semantic カラーの正
+ *   2. Figma: Base-Component-Speeda-3.1-MITSUBACHI（fileKey: kHQNLM1dnk0EhZwOKBEBkL）
+ *        Figma MCP（get_variable_defs / get_design_context）で取得
+ *        neutral-button: 178-3446 / ai-button: 8357-5237 / read-only-tag: 5646-1874
+ *        page-tab: 5634-1167 / section-tab: 5634-1269 / notification-badge: 10748-4969
+ *        filter-chip: 10771-20108 / switch: 9925-6684 / banner: 5702-2824
+ *        select-box: 8257-8293 / text-area: 182-4766（取得日 2026-06-08〜11）
+ *        ※ md の Figma URL がページを指す場合、get_design_context は失敗する。
+ *          get_metadata でページ内のコンポーネントセット node を特定してから取得する。
+ *   3. mitsubachi-ui（公式実装）: text-field / search-box の styles.css
+ *        https://github.com/uzabase/mitsubachi-ui （取得日 2026-06-11）
+ *
+ * 【重要】
+ *   - 値の正は常に Figma。優先順位は Figma MCP > mitsubachi-token > このファイル。
+ *   - このファイルは正規ソースを機械的に写したスナップショットであり、人が値を決めた
+ *     ものではない（＝ハードコードではない）。手で値を編集しないこと。古くなった
+ *     疑いがあるときは上記ソースから取り直す。
+ *   - 変数名は semantic-color のパスを slash → hyphen に正規化したもの
+ *     （例: surface/strong-default → --surface-strong-default）。
+ *     mitsubachi-token の正式名は `--color-semantic-` 接頭辞付き（例:
+ *     --color-semantic-surface-strong-default）。kit では接頭辞を省いた短縮形を使う。
+ *     foundations/layout.md の既存記法（var(--zabuton-semi-strong, #F8F8F8)）に準拠。
+ * ========================================================================== */
+
+:root {
+  /* --- background / zabuton（画面の面） --- */
+  --background-regular: #ffffff;
+  --background-semi-strong: #f8f8f8;
+  --zabuton-regular: #ffffff;
+  --zabuton-semi-strong: #f8f8f8;
+
+  /* --- surface（コンポーネントの面塗り） --- */
+  --surface-strong-default: #282828;
+  --surface-strong-hover: #191919;
+  --surface-strong-active: #000000;
+  --surface-regular-default: #ffffff;
+  --surface-regular-hover: #f5f5f5;
+  --surface-regular-active: #ededed;
+  --surface-regular-disabled: rgba(0, 0, 0, 0.03);
+  --surface-semi-strong-default: #ededed;
+  --surface-semi-strong-hover: #e5e5e5;
+  --surface-semi-strong-active: #dfdfdf;
+  --surface-semi-strong-disabled: rgba(0, 0, 0, 0.07);
+  --surface-selected-default: #e8edff;
+  --surface-selected-hover: #dbe4ff;
+  --surface-selected-active: #d5dfff;
+  --surface-overlay-hover: rgba(0, 0, 0, 0.07);
+  --surface-overlay-active: rgba(0, 0, 0, 0.1);
+  --surface-overlay-current: rgba(0, 0, 0, 0.07);
+  --surface-information: #edf1ff;
+  --surface-positive: #dff5ea;
+  --surface-negative: #ffedeb;
+  --surface-warning: #fcf6d4;
+  --surface-error-default: #ffedeb;
+
+  /* --- text（文字色） --- */
+  --text-regular: rgba(0, 0, 0, 0.84);
+  --text-weak: rgba(0, 0, 0, 0.54);
+  --text-inverse: #ffffff;
+  --text-static-white: #ffffff;
+  --text-disabled: rgba(0, 0, 0, 0.35);
+  --text-selected: #315ce8;
+  --text-link: #315ce8;
+  --text-information: #315ce8;
+  --text-positive: #00783c;
+  --text-negative: #c92812;
+  --text-error: #c92812;
+  --text-danger: #c92812;
+  --text-required: #c92812;
+
+  /* --- border（線） --- */
+  --border-strong: rgba(0, 0, 0, 0.84);
+  --border-semi-strong-default: rgba(0, 0, 0, 0.2);
+  --border-semi-strong-hover: rgba(0, 0, 0, 0.35);
+  --border-semi-strong-active: rgba(0, 0, 0, 0.54);
+  --border-regular: rgba(0, 0, 0, 0.1);
+  --border-selected: #3f69f2;
+  --border-disabled: rgba(0, 0, 0, 0.07);
+  --border-error-default: #db351f;
+  --border-danger: #db351f;
+
+  /* --- object（アイコン・装飾要素） --- */
+  --object-regular: rgba(0, 0, 0, 0.84);
+  --object-weak: rgba(0, 0, 0, 0.54);
+  --object-inverse: #ffffff;
+  --object-selected: #315ce8;
+  --object-regular-disabled: rgba(0, 0, 0, 0.35);
+  --object-semi-weak-disabled: rgba(0, 0, 0, 0.1);
+  --object-positive: #00783c;
+  --object-negative: #c92812;
+  --object-error: #c92812;
+  --object-notice: #db351f;
+
+  /* --- palette（意味を持たない色） --- */
+  --palette-semi-strong-red: #d30030; /* notification-badge の背景 */
+  --palette-regular-red: #f72a48; /* report-heading h3 の縦線・floating-button */
+  --border-inverse: #ffffff; /* avatar-group の境界線 */
+
+  /* --- focus-ring（フォーカス枠） --- */
+  --focus-ring-regular: #191919;
+
+  /* --- elevation（影。Figma の elevation 定義より合成） --- */
+  --elevation-semi-weak: rgba(0, 0, 0, 0.1);
+  --elevation-regular: rgba(0, 0, 0, 0.13);
+  --elevation-30: 0 0 6px var(--elevation-semi-weak), 0 8px 16px var(--elevation-regular);
+  --elevation-50: 0 0 10px var(--elevation-semi-weak), 0 16px 32px var(--elevation-regular);
+
+  /* --- typography --- */
+  --typography-font-family: Arial, YakuHanJPs, "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", Meiryo, "Noto Sans JP", sans-serif;
+  --typography-font-weight-bold: 700;
+  --typography-font-weight-normal: 400;
+  --line-height-label: 1.5;
+  --line-height-tight: 1.3;
+  /* label のサイズ（ボタンの size に対応: medium→small, large→medium, x-large→large） */
+  --font-size-label-2x-small: 10px; /* notification-badge のカウント */
+  --font-size-label-small: 12px;
+  --font-size-label-medium: 14px;
+  --font-size-label-large: 16px;
+
+  /* --- dimension（dimension-scale 由来） --- */
+  --border-radius-small: 4px;   /* tag など高さが小さい要素 */
+  --border-radius-medium: 6px;  /* 基準。text-field / search-box / tab（公式: --radius-medium） */
+  --border-radius-large: 8px;   /* カード類 */
+  --border-radius-full: 9999px; /* pill。border-radius でのみ使う特殊値 */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  /* neutral-button の size 別 min-height */
+  --button-min-height-medium: 32px;
+  --button-min-height-large: 40px;
+  --button-min-height-x-large: 48px;
+
+  /* --- component 固有値（mitsubachi-ui 公式実装の styles.css より） --- */
+  /* text-field（src/components/text-field/text-field/styles.css） */
+  --text-field-height: 48px;
+  --text-field-border: #b6b6b6;
+  --text-field-border-hover: #0000008f;
+  --text-field-placeholder: #0000008a;
+  --text-field-disabled-text: #000000ad;
+  --text-field-disabled-bg: #0000000d;
+  --text-field-disabled-border: #e5e5e5;
+  /* search-box（src/components/search-box/search-box.css） */
+  --search-box-min-height: 40px;
+  /* page-tab（Figma 5634-1167） */
+  --page-tab-height: 48px;
+  --page-tab-indicator-height: 4px;
+  /* section-tab（Figma 5634-1269） */
+  --section-tab-min-height-desktop: 32px;
+  --section-tab-min-height-phone: 40px;
+  /* button（mitsubachi-ui 公式実装 button.styles.ts） */
+  --button-overlay-hover: rgba(0, 0, 0, 0.04);
+  --button-overlay-active: rgba(0, 0, 0, 0.07);
+  --button-tertiary-border: rgba(0, 0, 0, 0.29);
+  --button-tertiary-border-selected: rgba(0, 0, 0, 0.2);
+  --button-border-disabled: rgba(0, 0, 0, 0.1);
+  --button-plane-text: #315ce8;
+  --button-plane-hover: rgba(49, 92, 232, 0.08);
+  --button-plane-active: rgba(49, 92, 232, 0.12);
+  /* danger-button（mitsubachi-ui 公式実装 button.styles.ts / mitsubachi-token） */
+  --surface-regular-danger-default: #db351f;
+  --surface-regular-danger-hover: #c92812;
+  --surface-regular-danger-active: #b02412;
+  --danger-button-overlay-hover: #fff4f2;
+  --danger-button-overlay-active: #ffedeb;
+  /* switch（Figma 9925-6684。desktop 40x24 / phone 56x32） */
+  --switch-track-width: 40px;
+  --switch-track-height: 24px;
+  --switch-knob-size: 20px;
+  --switch-track-width-phone: 56px;
+  --switch-track-height-phone: 32px;
+  --switch-knob-size-phone: 28px;
+  /* banner（Figma 5702-2824） */
+  --banner-shadow: 0 8px 8px rgba(0, 0, 0, 0.13), 0 0 3px rgba(0, 0, 0, 0.1);
+  /* select-box（Figma 8257-8293） */
+  --select-min-height: 40px;
+  /* text-area（Figma 182-4766。size=medium） */
+  --text-area-min-height: 58px;
+  /* layout 汎用①（Figma 11395-2402） */
+  --layout-sidenav-width: 240px;
+  --layout-header-min-height: 56px;
+  --layout-page-title-min-height: 64px;
+  --font-size-headline-medium: 22px; /* ページタイトル */
+  /* filter-chip（Figma 10771-20108） */
+  --chip-min-height-desktop: 24px;
+  --chip-min-height-phone: 28px;
+  --chip-icon-size-desktop: 18px; /* selected 時の check アイコン */
+  --chip-icon-size-phone: 20px;
+
+  /* --- checked / switch（mitsubachi-token 公式） --- */
+  --surface-checked-default: #3f69f2;
+  --surface-checked-hover: #315ce8;
+  --surface-checked-active: #143dd0;
+  --surface-switch-unchecked-default: #b6b6b6;
+  --surface-switch-unchecked-hover: #acacac;
+  --surface-switch-unchecked-active: #9b9b9b;
+  --surface-success: #dff5ea;
+
+  /* --- palette（avatar の色バリエーション。mitsubachi-token 公式） --- */
+  --palette-plum: #910091;
+  --palette-violet: #3e31d5;
+  --palette-blue: #214dde;
+  --palette-viridian: #0d8282;
+  --palette-green: #008744;
+  --palette-brown: #ae6022;
+  --palette-red: #d30030;
+
+  /* --- neutral alpha（dialog の backdrop / 影） --- */
+  --neutral-50-alpha: rgba(0, 0, 0, 0.29);
+  --neutral-30-alpha: rgba(0, 0, 0, 0.13);
+
+  /* --- typography 追加 --- */
+  --font-size-headline-small: 18px; /* font-scale-60。dialog タイトル等 */
+
+  /* --- dimension 追加 --- */
+  --border-radius-x-small: 2px; /* checkbox */
+  --border-radius-x-large: 12px; /* dialog */
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* --- checkbox（mitsubachi-ui 公式実装 checkbox/*.css） --- */
+  --checkbox-border: rgba(0, 0, 0, 0.29);
+  --checkbox-checked-hover: #2666bf;
+  --checkbox-hover-ring: rgba(0, 0, 0, 0.04);
+  --checkbox-active-ring: rgba(0, 0, 0, 0.07);
+  --checkbox-disabled-bg: #e5e5e5;
+  --checkbox-disabled-border: rgba(0, 0, 0, 0.05);
+
+  /* --- radio-button（mitsubachi-ui 公式実装 radio-button-text.styles.ts） --- */
+  --radio-border: #cbcbcb;
+  --radio-checked-hover: #315ce8;
+  --radio-checked-active: #214dde;
+
+  /* --- segmented-control（mitsubachi-ui 公式実装 segment.styles.ts） --- */
+  --segment-overlay-hover: rgba(0, 0, 0, 0.04);
+  --segment-overlay-active: rgba(0, 0, 0, 0.07);
+  --segment-selected-hover: #dce3ff;
+  --segment-selected-active: #d0d9ff;
+
+  /* --- menu（mitsubachi-ui 公式実装 control-menu/*.css） --- */
+  --menu-shadow: 0 5px 9px 2px rgba(0, 0, 0, 0.13);
+  --menu-item-selected: #f0f6ff;
+  --menu-item-selected-hover: #e3efff;
+  --menu-item-selected-active: #d4e6ff;
+
+  /* --- dialog（mitsubachi-ui 公式実装 dialog.styles.ts） --- */
+  --dialog-size-small: 560px;
+  --dialog-size-medium: 800px;
+  --dialog-size-large: 1280px;
+  --dialog-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.29), 0 8px 12px 3px rgba(0, 0, 0, 0.13);
+
+  /* --- floating-button / loading の AI グラデーション（mitsubachi-ui 公式実装） --- */
+  --floating-button-icon: #f72a48; /* primitive red-90 */
+  --ai-gradient-conic: conic-gradient(
+    from 15deg,
+    rgb(42, 42, 247) 5%,
+    rgb(42, 42, 247) 20%,
+    rgb(71, 212, 255) 40%,
+    rgb(255, 46, 213) 60%,
+    rgb(247, 42, 72) 80%,
+    rgb(247, 42, 72) 95%,
+    rgb(42, 42, 247) 100%
+  );
+}

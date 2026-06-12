@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — card / layout</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    .demo-pad { padding: 32px; }
+    h1 { font-size: 20px; margin: 0 0 24px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 720px; }
+    .card-title { margin: 0 0 4px; font-size: 12px; color: var(--text-weak, rgba(0,0,0,0.54)); }
+    .card-value { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.3; }
+    .layout-demo { height: 240px; border: 1px dashed rgba(0,0,0,0.2); overflow: hidden; max-width: 720px; }
+    .layout-demo .mi-layout { min-height: 100%; }
+    .demo-note { padding: 12px; font-size: 12px; color: var(--text-weak, rgba(0,0,0,0.54)); }
+  </style>
+</head>
+<body>
+  <div class="demo-pad">
+    <h1>card / layout — mockup kit 見本</h1>
+
+    <h2>mi-card（zabuton 面 / outlined。影は付けない＝elevation.md）</h2>
+    <div class="grid">
+      <div class="mi-card">
+        <p class="card-title">合計売上高（既定: zabuton）</p>
+        <p class="card-value">42.8<span style="font-size:14px; font-weight:400;"> 兆円</span></p>
+      </div>
+      <div class="mi-card mi-card--outlined">
+        <p class="card-title">平均営業利益率（outlined）</p>
+        <p class="card-value">9.4<span style="font-size:14px; font-weight:400;"> %</span></p>
+      </div>
+    </div>
+
+    <h2>汎用レイアウト①（2カラム。Figma 11395-2402: サイドナビ240px・ヘッダー56px・ページタイトル64px）</h2>
+    <div class="layout-demo" style="height: 320px;">
+      <div class="mi-layout">
+        <nav class="mi-layout__sidenav">
+          <p class="demo-note">サイドナビ 240px<br>（zabuton-semi-strong）</p>
+        </nav>
+        <div class="mi-layout__content">
+          <header class="mi-layout__header">
+            <p class="demo-note" style="padding:0;">ヘッダー（min-h 56px）</p>
+          </header>
+          <div class="mi-layout__page-title">
+            <h1 class="mi-layout__page-title-text">ページタイトル（22px）</h1>
+            <button class="mi-button mi-button--primary mi-button--medium">アクション</button>
+          </div>
+          <main class="mi-layout__contents">
+            <p class="demo-note" style="padding:0;">コンテンツ（padding 24px）。3セクションは区切り線なく白背景で連続。</p>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <h2>汎用レイアウト②（1カラム: ヘッダー + コンテンツ。layout.md）</h2>
+    <div class="layout-demo">
+      <header class="mi-header">
+        <p class="demo-note">ヘッダー（zabuton-semi-strong）</p>
+      </header>
+      <div>
+        <p class="demo-note">コンテンツエリア（background-regular）</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

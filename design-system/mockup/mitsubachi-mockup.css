@@ -1,0 +1,2454 @@
+/* ============================================================================
+ * mitsubachi-ui mockup kit
+ * ----------------------------------------------------------------------------
+ * mockup（パッケージ非依存の見た目再現）で mitsubachi-ui のコンポーネントを
+ * 「自作せず組み立てる」ための CSS。クラスを当てるだけで正確な見た目になる。
+ *
+ *   <button class="mi-button mi-button--primary mi-button--large">保存する</button>
+ *
+ * - 値は必ず tokens.css の var(--token) を参照する（このファイルは生の値を持たない）。
+ *   tokens.css を必ず一緒に読み込むこと。
+ * - 値の正は Figma。出所・鮮度・優先順位は tokens.css のヘッダーを参照。
+ * - 対応コンポーネント: button(neutral/danger/ai/icon/floating) / tag / table / badge /
+ *   text-field / text-field-unit / error-text / text-area / search-box / select-box /
+ *   checkbox / radio / switch / segmented-control / filter-chip / page-tab /
+ *   section-tab / card / layout / dialog / menu / tooltip / snackbar /
+ *   snackbar-viewport / inline-notification / banner / avatar / label-unit /
+ *   loading / breadcrumb / pagination /
+ *   icon(magic, magic-fill, search, check, chevron-down/right, cross) /
+ *   icon-color(error, information, success, warning)
+ * - ロゴ（speeda-ja/en/zh, uzabase）は別ファイル mitsubachi-logos.css（任意読み込み）
+ * - アイコン全97種は別ファイル mitsubachi-icons.css（任意読み込み。一覧は
+ *   components/icons.html。本体には頻出7種のみ同梱）
+ *
+ * 【ボタンの命名】
+ *   .mi-button                      … 基底（既定 size = medium）
+ *   .mi-button--primary|secondary|tertiary|ghost|plane  … variant（--plain は plane の別名）
+ *   .mi-button--danger              … danger-button（primary/secondary/tertiary/ghost と併用）
+ *   .mi-button--medium|large|x-large                    … size
+ *   .mi-button--selected            … 選択状態（secondary / tertiary / ghost のみ）
+ *   :disabled / [aria-disabled=true] / .mi-button--disabled … 非活性
+ *
+ * 【注意】
+ *   - variant 名は公式実装・md に合わせ "plane"（Figma プロパティ表記は plain）。
+ *     互換のため .mi-button--plain も同じ見た目になる。
+ *   - ボタンの色・状態は mitsubachi-ui 公式実装（button.styles.ts）由来。
+ * ========================================================================== */
+
+/* --- 基底（既定 size = medium 相当） --- */
+.mi-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4, 4px);
+  box-sizing: border-box;
+  margin: 0;
+  min-height: var(--button-min-height-medium, 32px);
+  padding: 2px var(--space-12, 12px);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-full, 9999px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.12px; /* label = font-size の約 1% */
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+/* --- size --- */
+.mi-button--medium {
+  min-height: var(--button-min-height-medium, 32px);
+  padding-left: var(--space-12, 12px);
+  padding-right: var(--space-12, 12px);
+  font-size: var(--font-size-label-small, 12px);
+  letter-spacing: 0.12px;
+}
+.mi-button--large {
+  min-height: var(--button-min-height-large, 40px);
+  padding-left: var(--space-16, 16px);
+  padding-right: var(--space-16, 16px);
+  font-size: var(--font-size-label-medium, 14px);
+  letter-spacing: 0.14px;
+}
+.mi-button--x-large {
+  min-height: var(--button-min-height-x-large, 48px);
+  padding-left: var(--space-16, 16px);
+  padding-right: var(--space-16, 16px);
+  font-size: var(--font-size-label-large, 16px);
+  letter-spacing: 0.16px;
+}
+
+/* --- アイコン（任意。テキストと併用。アイコンのみは icon-button を使う） --- */
+.mi-button__icon {
+  display: inline-flex;
+  flex: none;
+  width: 1.5em;
+  height: 1.5em;
+}
+.mi-button__icon > svg,
+.mi-button__icon > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ===== variant: primary（最重要アクション。1画面に1つ） ===== */
+.mi-button--primary {
+  background-color: var(--surface-strong-default, #282828);
+  color: var(--text-inverse, #ffffff);
+  border-color: transparent;
+}
+.mi-button--primary:hover {
+  background-color: var(--surface-strong-hover, #191919);
+}
+.mi-button--primary:active {
+  background-color: var(--surface-strong-active, #000000);
+}
+
+/* ===== variant: secondary（次に重要。キャンセル・戻る等） ===== */
+.mi-button--secondary {
+  background-color: transparent;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  border-color: var(--border-strong, rgba(0, 0, 0, 0.84));
+}
+.mi-button--secondary:hover {
+  background-color: var(--button-overlay-hover, rgba(0, 0, 0, 0.04));
+}
+.mi-button--secondary:active {
+  background-color: var(--button-overlay-active, rgba(0, 0, 0, 0.07));
+}
+
+/* ===== variant: tertiary（補助的なアクション） ===== */
+.mi-button--tertiary {
+  background-color: transparent;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  border-color: var(--button-tertiary-border, rgba(0, 0, 0, 0.29));
+}
+.mi-button--tertiary:hover {
+  background-color: var(--button-overlay-hover, rgba(0, 0, 0, 0.04));
+}
+.mi-button--tertiary:active {
+  background-color: var(--button-overlay-active, rgba(0, 0, 0, 0.07));
+}
+
+/* ===== variant: ghost（背景に馴染む控えめなスタイル） ===== */
+.mi-button--ghost {
+  background-color: transparent;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  border-color: transparent;
+}
+.mi-button--ghost:hover {
+  background-color: var(--button-overlay-hover, rgba(0, 0, 0, 0.04));
+}
+.mi-button--ghost:active {
+  background-color: var(--button-overlay-active, rgba(0, 0, 0, 0.07));
+}
+
+/* ===== variant: plane（最も存在感を抑える。ツールバー等のテキスト風・青）
+ * 公式実装どおり、パディング最小・min-height 解除・リンク色。--plain は別名。 ===== */
+.mi-button--plane,
+.mi-button--plain {
+  background-color: transparent;
+  color: var(--button-plane-text, #315ce8);
+  border-color: transparent;
+  min-height: auto;
+  padding-left: var(--space-4, 4px);
+  padding-right: var(--space-4, 4px);
+}
+.mi-button--plane.mi-button--medium,
+.mi-button--plain.mi-button--medium {
+  min-height: auto;
+  padding: 0 var(--space-4, 4px);
+}
+.mi-button--plane.mi-button--large,
+.mi-button--plain.mi-button--large,
+.mi-button--plane.mi-button--x-large,
+.mi-button--plain.mi-button--x-large {
+  min-height: auto;
+  padding-left: var(--space-4, 4px);
+  padding-right: var(--space-4, 4px);
+}
+.mi-button--plane:hover,
+.mi-button--plain:hover {
+  background-color: var(--button-plane-hover, rgba(49, 92, 232, 0.08));
+}
+.mi-button--plane:active,
+.mi-button--plain:active {
+  background-color: var(--button-plane-active, rgba(49, 92, 232, 0.12));
+}
+
+/* ===== selected（トグル ON。公式実装どおり variant ごとに異なる） ===== */
+/* secondary: 青ボーダー＋青文字＋selected 面 */
+.mi-button--secondary.mi-button--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+  border-color: var(--border-selected, #3f69f2);
+  color: var(--text-selected, #315ce8);
+}
+/* tertiary: ボーダーは弱いグレーのまま・文字色も変えない */
+.mi-button--tertiary.mi-button--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+  border-color: var(--button-tertiary-border-selected, rgba(0, 0, 0, 0.2));
+}
+/* ghost: 面のみ */
+.mi-button--ghost.mi-button--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+}
+.mi-button--secondary.mi-button--selected:hover,
+.mi-button--tertiary.mi-button--selected:hover,
+.mi-button--ghost.mi-button--selected:hover {
+  background-color: var(--surface-selected-hover, #dbe4ff);
+}
+.mi-button--secondary.mi-button--selected:active,
+.mi-button--tertiary.mi-button--selected:active,
+.mi-button--ghost.mi-button--selected:active {
+  background-color: var(--surface-selected-active, #d5dfff);
+}
+
+/* ===== danger（破壊的操作。.mi-button--danger を variant と併用） ===== */
+.mi-button--danger.mi-button--primary {
+  background-color: var(--surface-regular-danger-default, #db351f);
+  color: var(--text-inverse, #ffffff);
+  border-color: transparent;
+}
+.mi-button--danger.mi-button--primary:hover {
+  background-color: var(--surface-regular-danger-hover, #c92812);
+}
+.mi-button--danger.mi-button--primary:active {
+  background-color: var(--surface-regular-danger-active, #b02412);
+}
+.mi-button--danger.mi-button--secondary,
+.mi-button--danger.mi-button--tertiary {
+  background-color: transparent;
+  color: var(--text-danger, #c92812);
+  border-color: var(--border-danger, #db351f);
+}
+.mi-button--danger.mi-button--ghost {
+  background-color: transparent;
+  color: var(--text-danger, #c92812);
+  border-color: transparent;
+}
+.mi-button--danger.mi-button--secondary:hover,
+.mi-button--danger.mi-button--tertiary:hover,
+.mi-button--danger.mi-button--ghost:hover {
+  background-color: var(--danger-button-overlay-hover, #fff4f2);
+}
+.mi-button--danger.mi-button--secondary:active,
+.mi-button--danger.mi-button--tertiary:active,
+.mi-button--danger.mi-button--ghost:active {
+  background-color: var(--danger-button-overlay-active, #ffedeb);
+}
+
+/* ===== focus（キーボード操作時の二重リング） ===== */
+.mi-button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+
+/* ===== disabled（公式実装どおり variant ごとに異なる） ===== */
+.mi-button:disabled,
+.mi-button[aria-disabled="true"],
+.mi-button--disabled {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/* primary: 面が薄いグレーで塗られる */
+.mi-button--primary:disabled,
+.mi-button--primary[aria-disabled="true"],
+.mi-button--primary.mi-button--disabled {
+  background-color: var(--surface-semi-strong-disabled, rgba(0, 0, 0, 0.07));
+  border-color: transparent;
+}
+/* secondary / tertiary: 面は透明のまま、ボーダーが弱まる */
+.mi-button--secondary:disabled,
+.mi-button--secondary[aria-disabled="true"],
+.mi-button--secondary.mi-button--disabled,
+.mi-button--tertiary:disabled,
+.mi-button--tertiary[aria-disabled="true"],
+.mi-button--tertiary.mi-button--disabled {
+  background-color: transparent;
+  border-color: var(--button-border-disabled, rgba(0, 0, 0, 0.1));
+}
+/* ghost / plane: すべて透明で文字だけ弱まる */
+.mi-button--ghost:disabled,
+.mi-button--ghost[aria-disabled="true"],
+.mi-button--ghost.mi-button--disabled,
+.mi-button--plane:disabled,
+.mi-button--plane[aria-disabled="true"],
+.mi-button--plane.mi-button--disabled,
+.mi-button--plain:disabled,
+.mi-button--plain[aria-disabled="true"],
+.mi-button--plain.mi-button--disabled {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* ============================================================================
+ * ai-button（AI実行ボタン）
+ * ----------------------------------------------------------------------------
+ * 見た目は neutral-button の primary / secondary と「同一」で、先頭に magic-fill
+ * アイコン（✦）が固定で付くだけ（Figma 実体が neutral と同色のため専用色トークンは無い）。
+ * → 専用クラスは設けず、.mi-button--primary / --secondary に magic-fill アイコンを置く。
+ *   <button class="mi-button mi-button--primary mi-button--large">
+ *     <span class="mi-button__icon" aria-hidden="true"><svg>…magic-fill…</svg></span>
+ *     AIで要約する
+ *   </button>
+ * magic-fill アイコンの SVG は components/button.html の「ai-button」例を参照。
+ * AI実行以外の操作には使わない（neutral-button を使う）。
+ * ========================================================================== */
+
+/* ============================================================================
+ * read-only-tag（表示専用ラベル・クリック不可）
+ * ----------------------------------------------------------------------------
+ *   <span class="mi-tag mi-tag--positive">増収</span>
+ * variant: neutral / information / positive / negative
+ * 色だけに依存せず、テキスト（必要ならアイコン）でも意味を伝えること。
+ * ========================================================================== */
+.mi-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4, 4px);
+  padding: var(--space-2, 2px) var(--space-8, 8px);
+  border-radius: var(--border-radius-small, 4px); /* border-radius.md: tag = 小さい角丸 */
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-small, 12px);
+  font-weight: var(--typography-font-weight-normal, 400);
+  line-height: 1.3;
+  letter-spacing: 0.12px;
+  white-space: nowrap;
+}
+.mi-tag--neutral {
+  background-color: var(--surface-semi-strong-default, #ededed);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-tag--information {
+  background-color: var(--surface-information, #edf1ff);
+  color: var(--text-information, #315ce8);
+}
+.mi-tag--positive {
+  background-color: var(--surface-positive, #dff5ea);
+  color: var(--text-positive, #00783c);
+}
+.mi-tag--negative {
+  background-color: var(--surface-negative, #ffedeb);
+  color: var(--text-negative, #c92812);
+}
+
+/* ============================================================================
+ * table（データテーブル）
+ * ----------------------------------------------------------------------------
+ *   <table class="mi-table"> <thead><tr><th>…</th></tr></thead>
+ *     <tbody><tr><td>…</td><td class="mi-table__num">…</td></tr></tbody> </table>
+ * - ヘッダーは label（弱い文字色）。行 hover でハイライト。選択行は tr[aria-selected="true"]。
+ * - 数値列は td/th に .mi-table__num（右寄せ）。
+ * 注: table は Figma node 未取得のため、既存トークンと table.md の規約に基づく構築。
+ * ========================================================================== */
+.mi-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--surface-regular-default, #ffffff);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-medium, 14px);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-table thead th {
+  text-align: left;
+  font-size: var(--font-size-label-small, 12px);
+  font-weight: var(--typography-font-weight-bold, 700);
+  letter-spacing: 0.12px;
+  color: var(--text-weak, rgba(0, 0, 0, 0.55));
+  padding: var(--space-12, 12px) var(--space-16, 16px);
+  border-bottom: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  white-space: nowrap;
+}
+.mi-table tbody td {
+  padding: var(--space-12, 12px) var(--space-16, 16px);
+  border-bottom: 1px solid var(--border-disabled, rgba(0, 0, 0, 0.07));
+  vertical-align: middle;
+}
+.mi-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.mi-table tbody tr:hover {
+  background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07));
+}
+.mi-table tbody tr[aria-selected="true"] {
+  background-color: var(--surface-selected-default, #e8edff);
+}
+.mi-table__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+ * icon（mitsubachi-ui 公式アイコンセットの一部）
+ * ----------------------------------------------------------------------------
+ *   <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+ * 色は currentColor に追従（mask 方式）。SVG パスは mitsubachi-ui
+ * src/components/icon/icons.ts の公式定義をそのまま使用。
+ * ai-button の固定アイコンは magic-fill。検索は search。
+ * ========================================================================== */
+.mi-icon {
+  display: inline-block;
+  flex: none;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.mi-icon--magic-fill {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.45995 6.66957C9.55995 6.33957 10.02 6.33957 10.13 6.66957C11.23 10.0896 13.91 12.7696 17.33 13.8696C17.66 13.9696 17.66 14.4296 17.33 14.5396C13.91 15.6396 11.23 18.3196 10.13 21.7396C10.03 22.0696 9.56995 22.0696 9.45995 21.7396C8.35995 18.3196 5.67995 15.6396 2.25995 14.5396C1.92995 14.4396 1.92995 13.9796 2.25995 13.8696C5.67995 12.7696 8.35995 10.0896 9.45995 6.66957ZM12.84 6.40957C12.53 6.46957 12.53 6.90957 12.84 6.96957C14.95 7.38957 16.6 9.03957 17.02 11.1496C17.08 11.4596 17.52 11.4596 17.58 11.1496C18 9.03957 19.65 7.38957 21.76 6.96957C22.07 6.90957 22.07 6.46957 21.76 6.40957C19.65 5.98957 18 4.33957 17.58 2.22957C17.52 1.91957 17.08 1.91957 17.02 2.22957C16.6 4.33957 14.95 5.98957 12.84 6.40957Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.45995 6.66957C9.55995 6.33957 10.02 6.33957 10.13 6.66957C11.23 10.0896 13.91 12.7696 17.33 13.8696C17.66 13.9696 17.66 14.4296 17.33 14.5396C13.91 15.6396 11.23 18.3196 10.13 21.7396C10.03 22.0696 9.56995 22.0696 9.45995 21.7396C8.35995 18.3196 5.67995 15.6396 2.25995 14.5396C1.92995 14.4396 1.92995 13.9796 2.25995 13.8696C5.67995 12.7696 8.35995 10.0896 9.45995 6.66957ZM12.84 6.40957C12.53 6.46957 12.53 6.90957 12.84 6.96957C14.95 7.38957 16.6 9.03957 17.02 11.1496C17.08 11.4596 17.52 11.4596 17.58 11.1496C18 9.03957 19.65 7.38957 21.76 6.96957C22.07 6.90957 22.07 6.46957 21.76 6.40957C19.65 5.98957 18 4.33957 17.58 2.22957C17.52 1.91957 17.08 1.91957 17.02 2.22957C16.6 4.33957 14.95 5.98957 12.84 6.40957Z'/%3E%3C/svg%3E");
+}
+.mi-icon--magic {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.02 2.23C17.08 1.92 17.52 1.92 17.58 2.23C18 4.34 19.65 5.99 21.76 6.41C22.07 6.47 22.07 6.91 21.76 6.97C19.65 7.39 18 9.04 17.58 11.15C17.52 11.46 17.08 11.46 17.02 11.15C16.6 9.04 14.95 7.39 12.84 6.97C12.53 6.91 12.53 6.47 12.84 6.41C14.95 5.99 16.6 4.34 17.02 2.23ZM10.79 21.25C11.71 18.4 13.95 16.15 16.8 15.24C17.24 15.1 17.54 14.69 17.54 14.22C17.54 13.76 17.24 13.35 16.8 13.21C13.95 12.29 11.7 10.05 10.79 7.2C10.65 6.76 10.24 6.46 9.77 6.46C9.3 6.46 8.9 6.76 8.75 7.2C7.83 10.05 5.59 12.3 2.74 13.21C2.3 13.35 2 13.76 2 14.22C2 14.69 2.3 15.09 2.74 15.24C5.59 16.16 7.84 18.4 8.75 21.25C8.89 21.69 9.3 21.99 9.77 21.99C10.24 21.99 10.64 21.69 10.79 21.25ZM9.78 8.73C10.87 11.17 12.83 13.13 15.27 14.22C12.83 15.31 10.87 17.27 9.78 19.71C8.69 17.27 6.73 15.31 4.29 14.22C6.73 13.13 8.69 11.17 9.78 8.73Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.02 2.23C17.08 1.92 17.52 1.92 17.58 2.23C18 4.34 19.65 5.99 21.76 6.41C22.07 6.47 22.07 6.91 21.76 6.97C19.65 7.39 18 9.04 17.58 11.15C17.52 11.46 17.08 11.46 17.02 11.15C16.6 9.04 14.95 7.39 12.84 6.97C12.53 6.91 12.53 6.47 12.84 6.41C14.95 5.99 16.6 4.34 17.02 2.23ZM10.79 21.25C11.71 18.4 13.95 16.15 16.8 15.24C17.24 15.1 17.54 14.69 17.54 14.22C17.54 13.76 17.24 13.35 16.8 13.21C13.95 12.29 11.7 10.05 10.79 7.2C10.65 6.76 10.24 6.46 9.77 6.46C9.3 6.46 8.9 6.76 8.75 7.2C7.83 10.05 5.59 12.3 2.74 13.21C2.3 13.35 2 13.76 2 14.22C2 14.69 2.3 15.09 2.74 15.24C5.59 16.16 7.84 18.4 8.75 21.25C8.89 21.69 9.3 21.99 9.77 21.99C10.24 21.99 10.64 21.69 10.79 21.25ZM9.78 8.73C10.87 11.17 12.83 13.13 15.27 14.22C12.83 15.31 10.87 17.27 9.78 19.71C8.69 17.27 6.73 15.31 4.29 14.22C6.73 13.13 8.69 11.17 9.78 8.73Z'/%3E%3C/svg%3E");
+}
+.mi-icon--search {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.57 19.51L16.02 14.96C17.08 13.67 17.72 12.01 17.72 10.22C17.72 6.08 14.36 2.72 10.22 2.72C6.08 2.72 2.72 6.08 2.72 10.22C2.72 14.36 6.08 17.72 10.22 17.72C12.02 17.72 13.67 17.08 14.96 16.02L19.51 20.57L20.57 19.51ZM4.22 10.21C4.22 6.9 6.91 4.21 10.22 4.21C13.53 4.21 16.22 6.9 16.22 10.21C16.22 13.52 13.53 16.21 10.22 16.21C6.91 16.21 4.22 13.52 4.22 10.21Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.57 19.51L16.02 14.96C17.08 13.67 17.72 12.01 17.72 10.22C17.72 6.08 14.36 2.72 10.22 2.72C6.08 2.72 2.72 6.08 2.72 10.22C2.72 14.36 6.08 17.72 10.22 17.72C12.02 17.72 13.67 17.08 14.96 16.02L19.51 20.57L20.57 19.51ZM4.22 10.21C4.22 6.9 6.91 4.21 10.22 4.21C13.53 4.21 16.22 6.9 16.22 10.21C16.22 13.52 13.53 16.21 10.22 16.21C6.91 16.21 4.22 13.52 4.22 10.21Z'/%3E%3C/svg%3E");
+}
+
+/* ============================================================================
+ * notification-badge（未読・通知インジケーター）
+ * ----------------------------------------------------------------------------
+ *   数値: <span class="mi-badge" aria-label="9件の未読通知">9</span>
+ *   ドット: <span class="mi-badge mi-badge--dot" aria-label="未読あり"></span>
+ * 0件のときは表示しない。100以上は「99+」。
+ * 親の右上に重ねるときは .mi-badge-anchor で包む。
+ * ========================================================================== */
+.mi-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  min-height: 16px;
+  padding: 0 var(--space-2, 2px);
+  border-radius: var(--border-radius-full, 9999px);
+  background-color: var(--palette-semi-strong-red, #d30030);
+  color: var(--text-static-white, #ffffff);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-2x-small, 10px);
+  font-weight: var(--typography-font-weight-normal, 400);
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: 0.1px;
+  box-sizing: border-box;
+}
+.mi-badge--dot {
+  min-width: 0;
+  min-height: 0;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+}
+/* 右上重ね配置のヘルパー（配置基準は notification-badge.md: 右上に少し重ねる） */
+.mi-badge-anchor {
+  position: relative;
+  display: inline-flex;
+}
+.mi-badge-anchor > .mi-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(40%, -20%);
+}
+
+/* ============================================================================
+ * text-field（1行テキスト入力）
+ * ----------------------------------------------------------------------------
+ *   <input class="mi-text-field" type="text" placeholder="入力してください">
+ * エラー時: .mi-text-field--error ＋ aria-invalid="true"
+ * 値は mitsubachi-ui 公式実装（text-field/styles.css）由来。
+ * ラベルは上・エラーメッセージは下に配置（text-field.md）。
+ * ========================================================================== */
+.mi-text-field {
+  width: 100%;
+  box-sizing: border-box;
+  height: var(--text-field-height, 48px);
+  background-color: var(--surface-regular-default, #ffffff);
+  border: 1px solid var(--text-field-border, #b6b6b6);
+  border-radius: var(--border-radius-medium, 6px);
+  padding: var(--space-4, 4px) var(--space-12, 12px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-large, 16px);
+  line-height: var(--line-height-label, 1.5);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-text-field::placeholder {
+  color: var(--text-field-placeholder, rgba(0, 0, 0, 0.54));
+}
+.mi-text-field:hover {
+  border-color: var(--text-field-border-hover, rgba(0, 0, 0, 0.56));
+}
+.mi-text-field:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-text-field--error,
+.mi-text-field[aria-invalid="true"] {
+  border-color: var(--border-error-default, #db351f);
+}
+.mi-text-field:disabled {
+  color: var(--text-field-disabled-text, rgba(0, 0, 0, 0.68));
+  background-color: var(--text-field-disabled-bg, rgba(0, 0, 0, 0.05));
+  border-color: var(--text-field-disabled-border, #e5e5e5);
+}
+.mi-text-field:disabled::placeholder {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+}
+
+/* ============================================================================
+ * search-box（検索専用入力）
+ * ----------------------------------------------------------------------------
+ *   <label class="mi-search-box mi-search-box--primary">
+ *     <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
+ *     <input class="mi-search-box__input" type="search" placeholder="企業名で検索">
+ *   </label>
+ * variant: primary（画面/テーブル全体の検索）/ secondary（フォーム内の検索補助）
+ * 値は mitsubachi-ui 公式実装（search-box.css）由来。
+ * ========================================================================== */
+.mi-search-box {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4, 4px);
+  min-height: var(--search-box-min-height, 40px);
+  padding: var(--space-2, 2px) var(--space-8, 8px);
+  border-radius: var(--border-radius-medium, 6px);
+  box-sizing: border-box;
+  cursor: text;
+}
+.mi-search-box--primary {
+  background-color: var(--surface-semi-strong-default, #ededed);
+  border: none;
+}
+.mi-search-box--primary:hover:not(:focus-within) {
+  background-color: var(--surface-semi-strong-hover, #e5e5e5);
+}
+.mi-search-box--secondary {
+  background-color: var(--surface-regular-default, #ffffff);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+}
+.mi-search-box--secondary:hover:not(:focus-within) {
+  border-color: var(--border-semi-strong-hover, rgba(0, 0, 0, 0.35));
+}
+.mi-search-box:focus-within {
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-search-box__icon {
+  width: 20px;
+  height: 20px;
+  color: var(--object-weak, rgba(0, 0, 0, 0.54));
+}
+.mi-search-box__input {
+  flex: 1 0 0;
+  min-width: 1px;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 0;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-search-box__input::placeholder {
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+
+/* ============================================================================
+ * page-tab（ページ全体の切り替えタブ・下線インジケーター式）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-page-tab-group" role="tablist">
+ *     <button class="mi-page-tab mi-page-tab--selected" role="tab" aria-selected="true">概要</button>
+ *     <button class="mi-page-tab" role="tab">財務</button>
+ *   </div>
+ * 値は Figma page-tab（node 5634-1167）由来。
+ * ========================================================================== */
+.mi-page-tab-group {
+  display: flex;
+  align-items: stretch;
+  /* グループ下のヘアラインは暫定（グループフレーム未取得） */
+  border-bottom: 1px solid var(--border-regular, rgba(0, 0, 0, 0.1));
+}
+.mi-page-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--page-tab-height, 48px);
+  padding: var(--space-4, 4px) var(--space-16, 16px);
+  border: none;
+  background: transparent;
+  border-radius: var(--border-radius-medium, 6px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.14px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.mi-page-tab:hover {
+  background-color: var(--surface-regular-hover, #f5f5f5);
+}
+.mi-page-tab:active {
+  background-color: var(--surface-regular-active, #ededed);
+}
+.mi-page-tab:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-page-tab--selected {
+  font-weight: var(--typography-font-weight-bold, 700);
+  color: var(--text-selected, #315ce8);
+  padding-top: calc(var(--space-4, 4px) + var(--page-tab-indicator-height, 4px));
+}
+.mi-page-tab--selected::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: var(--space-16, 16px);
+  right: var(--space-16, 16px);
+  height: var(--page-tab-indicator-height, 4px);
+  background-color: var(--object-selected, #315ce8);
+  border-radius: var(--space-2, 2px) var(--space-2, 2px) 0 0;
+}
+.mi-page-tab:disabled {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  background: transparent;
+  cursor: not-allowed;
+}
+.mi-page-tab--selected:disabled::after {
+  background-color: var(--object-semi-weak-disabled, rgba(0, 0, 0, 0.1));
+}
+
+/* ============================================================================
+ * section-tab（セクション内の表示切り替えタブ）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-section-tab-group" role="tablist">
+ *     <button class="mi-section-tab mi-section-tab--selected" role="tab" aria-selected="true">四半期</button>
+ *     <button class="mi-section-tab" role="tab">年次</button>
+ *   </div>
+ * 値は Figma section-tab（node 5634-1269）由来。
+ * 基底は viewport=desktop（高さ32px・文字12px）。phone は .mi-section-tab--phone
+ * を併用（高さ40px・文字14px）。selected は青ボーダー＋selected 面＋青太字。
+ * ========================================================================== */
+.mi-section-tab-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4, 4px);
+}
+.mi-section-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4, 4px);
+  min-height: var(--section-tab-min-height-desktop, 32px);
+  padding: var(--space-4, 4px) var(--space-12, 12px);
+  border: none;
+  border-radius: var(--border-radius-medium, 6px);
+  background-color: var(--surface-semi-strong-default, #ededed);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.12px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.mi-section-tab:hover {
+  background-color: var(--surface-semi-strong-hover, #e5e5e5);
+}
+.mi-section-tab:active {
+  background-color: var(--surface-semi-strong-active, #dfdfdf);
+}
+.mi-section-tab:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-section-tab--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+  border: 1px solid var(--border-selected, #3f69f2);
+  color: var(--text-selected, #315ce8);
+  font-weight: var(--typography-font-weight-bold, 700);
+}
+.mi-section-tab:disabled {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  background-color: var(--surface-regular-disabled, rgba(0, 0, 0, 0.03));
+  cursor: not-allowed;
+}
+/* viewport=phone（高さ40px・文字14px） */
+.mi-section-tab--phone {
+  min-height: var(--section-tab-min-height-phone, 40px);
+  font-size: var(--font-size-label-medium, 14px);
+  letter-spacing: 0.14px;
+}
+
+/* ============================================================================
+ * card（カード/パネル。KPIカード・サマリー枠などの「面」）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-card">…</div>
+ * zabuton（状態変化のない独立した面）＋ 角丸 large（border-radius.md: カード類）。
+ * 専用の Figma コンポーネントは無いことを確認済み（radio-button-card は別物）。
+ * layout.md / border-radius.md / principles.md の規約に基づく構成パーツ。
+ * 影は付けない（elevation.md: elevation-30 は「操作で出現・消える要素」専用。
+ * 常時表示のカードは zabuton か outlined で区切る）。
+ * ========================================================================== */
+.mi-card {
+  background-color: var(--zabuton-semi-strong, #f8f8f8);
+  border-radius: var(--border-radius-large, 8px);
+  padding: var(--space-16, 16px);
+  box-sizing: border-box;
+}
+/* 白地＋ヘアライン枠のカード */
+.mi-card--outlined {
+  background-color: var(--zabuton-regular, #ffffff);
+  border: 1px solid var(--border-regular, rgba(0, 0, 0, 0.1));
+}
+
+/* ============================================================================
+ * layout（画面の骨格。汎用①は Figma node 11395-2402 由来）
+ * ----------------------------------------------------------------------------
+ * 汎用レイアウト①（2カラム）:
+ *   <div class="mi-layout">
+ *     <nav class="mi-layout__sidenav">…（ロゴ + サイドナビ）</nav>
+ *     <div class="mi-layout__content">
+ *       <header class="mi-layout__header">…</header>
+ *       <div class="mi-layout__page-title"><h1 class="mi-layout__page-title-text">ページ名</h1> <div>アクション</div></div>
+ *       <main class="mi-layout__contents">…</main>
+ *     </div>
+ *   </div>
+ * 汎用レイアウト②（1カラム）:
+ *   <header class="mi-header">…</header> ＋ コンテンツ（背景は background-regular）
+ * ========================================================================== */
+.mi-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--background-regular, #ffffff);
+}
+.mi-layout__sidenav {
+  flex: none;
+  width: var(--layout-sidenav-width, 240px);
+  position: sticky;
+  top: 0;
+  background-color: var(--zabuton-semi-strong, #f8f8f8);
+  box-sizing: border-box;
+}
+.mi-layout__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-regular, #ffffff);
+}
+/* コンテンツ列ヘッダー（min-h 56 / px16 py8 / 白。区切り線なし） */
+.mi-layout__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24, 24px);
+  min-height: var(--layout-header-min-height, 56px);
+  padding: var(--space-8, 8px) var(--space-16, 16px);
+  background-color: var(--surface-regular-default, #ffffff);
+  box-sizing: border-box;
+}
+/* ページタイトル行（min-h 64 / px32 py4。タイトル左・アクション右） */
+.mi-layout__page-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24, 24px);
+  min-height: var(--layout-page-title-min-height, 64px);
+  padding: var(--space-4, 4px) var(--space-32, 32px);
+  box-sizing: border-box;
+}
+.mi-layout__page-title-text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-headline-medium, 22px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.44px; /* headline 22px = +2% */
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+/* メインコンテンツ（padding 24px） */
+.mi-layout__contents {
+  flex: 1;
+  padding: var(--space-24, 24px);
+  box-sizing: border-box;
+}
+.mi-header {
+  background-color: var(--zabuton-semi-strong, #f8f8f8);
+}
+
+/* ============================================================================
+ * icon 追加（check / chevron-down / chevron-right / cross。公式 icons.ts）
+ * ========================================================================== */
+.mi-icon--check {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.81001 17.99L2.99001 11.2L4.05001 10.14L9.81001 15.88L19.95 5.76L21.01 6.82L9.81001 17.99Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.81001 17.99L2.99001 11.2L4.05001 10.14L9.81001 15.88L19.95 5.76L21.01 6.82L9.81001 17.99Z'/%3E%3C/svg%3E");
+}
+.mi-icon--chevron-down {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 17L3.03 8.97998L4.03 7.85999L12 14.99L19.45 8.37999L20.45 9.49999L12 17Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 17L3.03 8.97998L4.03 7.85999L12 14.99L19.45 8.37999L20.45 9.49999L12 17Z'/%3E%3C/svg%3E");
+}
+.mi-icon--chevron-right {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.01 21.01L7.89 20.01L14.99 12L7.89 3.98999L9.01 2.98999L17 12L9.01 21.01Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.01 21.01L7.89 20.01L14.99 12L7.89 3.98999L9.01 2.98999L17 12L9.01 21.01Z'/%3E%3C/svg%3E");
+}
+.mi-icon--chevron-left {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.99 21.01L7 12L14.99 2.98999L16.11 3.98999L9.01 12L16.11 20.01L14.99 21.01Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.99 21.01L7 12L14.99 2.98999L16.11 3.98999L9.01 12L16.11 20.01L14.99 21.01Z'/%3E%3C/svg%3E");
+}
+.mi-icon--chevron-right-small {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10.75 18L9.62 17.01L14.01 12L9.62 6.99L10.75 6L16.01 12L10.75 18Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10.75 18L9.62 17.01L14.01 12L9.62 6.99L10.75 6L16.01 12L10.75 18Z'/%3E%3C/svg%3E");
+}
+.mi-icon--cross {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 5.06L18.94 4L12 10.94L5.07 4.01L4.01 5.07L10.94 12L4 18.94L5.06 20L12 13.06L18.93 19.99L19.99 18.93L13.06 12L20 5.06Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 5.06L18.94 4L12 10.94L5.07 4.01L4.01 5.07L10.94 12L4 18.94L5.06 20L12 13.06L18.93 19.99L19.99 18.93L13.06 12L20 5.06Z'/%3E%3C/svg%3E");
+}
+
+/* ============================================================================
+ * checkbox（mitsubachi-ui 公式実装 checkbox/*.css 由来）
+ * ----------------------------------------------------------------------------
+ *   <label class="mi-checkbox-label">
+ *     <input type="checkbox" class="mi-checkbox"> 利用規約に同意する
+ *   </label>
+ * 中間状態は .mi-checkbox--indeterminate を併用。
+ * ========================================================================== */
+.mi-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 4px;
+  background: var(--surface-regular-default, #ffffff) 50% 50% no-repeat;
+  border: 1.5px solid var(--checkbox-border, rgba(0, 0, 0, 0.29));
+  border-radius: var(--border-radius-x-small, 2px);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.mi-checkbox:hover:not(:disabled) {
+  border-color: var(--border-semi-strong-active, rgba(0, 0, 0, 0.54));
+  outline: 4px solid var(--checkbox-hover-ring, rgba(0, 0, 0, 0.04));
+}
+.mi-checkbox:active:not(:disabled) {
+  outline: 4px solid var(--checkbox-active-ring, rgba(0, 0, 0, 0.07));
+}
+.mi-checkbox:checked,
+.mi-checkbox--indeterminate {
+  background-color: var(--surface-checked-default, #3f69f2);
+  border-color: var(--surface-checked-default, #3f69f2);
+}
+.mi-checkbox:checked {
+  /* 公式実装と同一のチェックマーク（白 16px） */
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIuNDE0MSA2LjIwNzAzTDYuNzA3MDMgMTEuOTE0MUwzIDguMjA3MDNMNC40MTQwNiA2Ljc5Mjk3TDYuNzA3MDMgOS4wODU5NEwxMSA0Ljc5Mjk3TDEyLjQxNDEgNi4yMDcwM1oiIGZpbGw9IndoaXRlIi8+PC9zdmc+");
+}
+.mi-checkbox--indeterminate {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgN1Y5SDRWN0gxMloiIGZpbGw9IndoaXRlIi8+PC9zdmc+");
+}
+.mi-checkbox:checked:hover:not(:disabled),
+.mi-checkbox--indeterminate:hover:not(:disabled) {
+  background-color: var(--checkbox-checked-hover, #2666bf);
+  border-color: var(--checkbox-checked-hover, #2666bf);
+}
+.mi-checkbox:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-checkbox:disabled {
+  background-color: var(--checkbox-disabled-bg, #e5e5e5);
+  border-color: var(--checkbox-disabled-border, rgba(0, 0, 0, 0.05));
+  cursor: not-allowed;
+}
+.mi-checkbox-label {
+  display: inline-flex;
+  align-items: flex-start;
+  cursor: pointer;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: 0.02em;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  padding: 3px var(--space-4, 4px);
+}
+.mi-checkbox-label:has(.mi-checkbox:disabled) {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * radio-button（mitsubachi-ui 公式実装 radio-button-text.styles.ts 由来）
+ * ----------------------------------------------------------------------------
+ *   <label class="mi-radio-label">
+ *     <input type="radio" name="g" class="mi-radio" checked> 選択肢A
+ *   </label>
+ * ========================================================================== */
+.mi-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 4px;
+  background-color: var(--surface-regular-default, #ffffff);
+  border: 1px solid var(--radio-border, #cbcbcb);
+  border-radius: 50%;
+  cursor: pointer;
+  box-sizing: border-box;
+  --_checked: var(--surface-checked-default, #3f69f2);
+}
+.mi-radio:hover:not(:disabled) {
+  outline: 3px solid var(--checkbox-hover-ring, rgba(0, 0, 0, 0.04));
+  --_checked: var(--radio-checked-hover, #315ce8);
+}
+.mi-radio:active:not(:disabled) {
+  outline: 3px solid var(--checkbox-active-ring, rgba(0, 0, 0, 0.07));
+  --_checked: var(--radio-checked-active, #214dde);
+}
+.mi-radio:checked {
+  border: 1.5px solid var(--_checked);
+  background-image: radial-gradient(circle 4px at 50% 50%, var(--_checked) 97%, transparent);
+}
+.mi-radio:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-radio:disabled {
+  border-color: var(--border-disabled, rgba(0, 0, 0, 0.07));
+  cursor: not-allowed;
+}
+.mi-radio-label {
+  display: inline-flex;
+  align-items: flex-start;
+  cursor: pointer;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: 0.02em;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  padding: 3px var(--space-4, 4px);
+}
+.mi-radio-label:has(.mi-radio:disabled) {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * switch（ON/OFF トグル。Figma node 9925-6684 由来）
+ * ----------------------------------------------------------------------------
+ *   <input type="checkbox" class="mi-switch" role="switch" checked>
+ * 既定は viewport=desktop（40×24）。phone は .mi-switch--phone（56×32）。
+ * ON 時はノブに check アイコンが付く（Figma 仕様）。
+ * ラベルは Switch の左側に置く（switch.md。switch-text は提供しない）。
+ * ========================================================================== */
+.mi-switch {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: none;
+  width: var(--switch-track-width, 40px);
+  height: var(--switch-track-height, 24px);
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--border-radius-full, 9999px);
+  background-color: var(--surface-switch-unchecked-default, #b6b6b6);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+/* ノブ（白。track 内 2px インセット） */
+.mi-switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: var(--switch-knob-size, 20px);
+  height: var(--switch-knob-size, 20px);
+  border-radius: 50%;
+  background-color: var(--surface-regular-default, #ffffff);
+  transition: transform 0.15s ease;
+}
+.mi-switch:hover:not(:disabled) {
+  background-color: var(--surface-switch-unchecked-hover, #acacac);
+}
+.mi-switch:active:not(:disabled) {
+  background-color: var(--surface-switch-unchecked-active, #9b9b9b);
+}
+.mi-switch:checked {
+  background-color: var(--surface-checked-default, #3f69f2);
+}
+.mi-switch:checked:hover:not(:disabled) {
+  background-color: var(--surface-checked-hover, #315ce8);
+}
+.mi-switch:checked:active:not(:disabled) {
+  background-color: var(--surface-checked-active, #143dd0);
+}
+.mi-switch:checked::before {
+  /* track幅 - 2pxインセット×2 - ノブ幅 ぶん右へ */
+  transform: translateX(calc(var(--switch-track-width, 40px) - 4px - var(--switch-knob-size, 20px)));
+}
+/* ON 時のノブ内 check アイコン（公式 icons.ts の check） */
+.mi-switch:checked::after {
+  content: "";
+  position: absolute;
+  top: calc(2px + (var(--switch-knob-size, 20px) - 16px) / 2);
+  right: calc(2px + (var(--switch-knob-size, 20px) - 16px) / 2);
+  width: 16px;
+  height: 16px;
+  background-color: var(--surface-checked-default, #3f69f2);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.81001 17.99L2.99001 11.2L4.05001 10.14L9.81001 15.88L19.95 5.76L21.01 6.82L9.81001 17.99Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.81001 17.99L2.99001 11.2L4.05001 10.14L9.81001 15.88L19.95 5.76L21.01 6.82L9.81001 17.99Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.mi-switch:checked:hover:not(:disabled)::after {
+  background-color: var(--surface-checked-hover, #315ce8);
+}
+.mi-switch:checked:active:not(:disabled)::after {
+  background-color: var(--surface-checked-active, #143dd0);
+}
+.mi-switch:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-switch:disabled {
+  background-color: var(--surface-semi-strong-disabled, rgba(0, 0, 0, 0.07));
+  cursor: not-allowed;
+}
+.mi-switch:disabled:checked::after {
+  background-color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+}
+/* viewport=phone（56×32 / ノブ28px） */
+.mi-switch--phone {
+  width: var(--switch-track-width-phone, 56px);
+  height: var(--switch-track-height-phone, 32px);
+}
+.mi-switch--phone::before {
+  width: var(--switch-knob-size-phone, 28px);
+  height: var(--switch-knob-size-phone, 28px);
+}
+.mi-switch--phone:checked::before {
+  transform: translateX(calc(var(--switch-track-width-phone, 56px) - 4px - var(--switch-knob-size-phone, 28px)));
+}
+.mi-switch--phone:checked::after {
+  top: calc(2px + (var(--switch-knob-size-phone, 28px) - 16px) / 2);
+  right: calc(2px + (var(--switch-knob-size-phone, 28px) - 16px) / 2);
+}
+
+/* ============================================================================
+ * segmented-control（mitsubachi-ui 公式実装 segment.styles.ts 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-segmented-control" role="radiogroup">
+ *     <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">
+ *       <span class="mi-icon mi-icon--check" style="width:18px;height:18px;" aria-hidden="true"></span> 表
+ *     </button>
+ *     <button class="mi-segment" role="radio">グラフ</button>
+ *   </div>
+ * 選択中セグメントには check アイコンを付ける（公式仕様）。
+ * ========================================================================== */
+.mi-segmented-control {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  max-width: 100%;
+  padding-inline-start: 1px; /* margin -1px の重なり補正（公式実装と同じ） */
+}
+.mi-segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4, 4px);
+  box-sizing: border-box;
+  min-height: 32px;
+  min-width: 56px;
+  padding: var(--space-4, 4px) var(--space-12, 12px);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  margin-inline-start: -1px;
+  background-color: var(--surface-regular-default, #ffffff);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.02em;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.mi-segment:first-child {
+  border-start-start-radius: var(--border-radius-medium, 6px);
+  border-end-start-radius: var(--border-radius-medium, 6px);
+}
+.mi-segment:last-child {
+  border-start-end-radius: var(--border-radius-medium, 6px);
+  border-end-end-radius: var(--border-radius-medium, 6px);
+}
+.mi-segment:hover:not(.mi-segment--selected):not(:disabled) {
+  background-image: linear-gradient(var(--segment-overlay-hover, rgba(0, 0, 0, 0.04)), var(--segment-overlay-hover, rgba(0, 0, 0, 0.04)));
+  z-index: 1;
+}
+.mi-segment:active:not(.mi-segment--selected):not(:disabled) {
+  background-image: linear-gradient(var(--segment-overlay-active, rgba(0, 0, 0, 0.07)), var(--segment-overlay-active, rgba(0, 0, 0, 0.07)));
+  z-index: 1;
+}
+.mi-segment--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+  z-index: 1;
+}
+.mi-segment--selected:hover:not(:disabled) {
+  background-color: var(--segment-selected-hover, #dce3ff);
+}
+.mi-segment--selected:active:not(:disabled) {
+  background-color: var(--segment-selected-active, #d0d9ff);
+}
+.mi-segment:focus-visible {
+  outline: none;
+  z-index: 2;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-segment:disabled {
+  background-color: var(--surface-regular-disabled, rgba(0, 0, 0, 0.03));
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  border-color: var(--border-disabled, rgba(0, 0, 0, 0.07));
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * text-area（複数行テキスト入力。Figma node 182-4766 由来）
+ * ----------------------------------------------------------------------------
+ *   <textarea class="mi-text-area" rows="3" placeholder="コメントを入力"></textarea>
+ * エラー時: .mi-text-area--error ＋ aria-invalid="true"
+ * 文字数カウントを置く場合は下に 12px の右寄せテキスト（_text-area-count）。
+ * ========================================================================== */
+.mi-text-area {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: var(--text-area-min-height, 58px);
+  background-color: var(--surface-regular-default, #ffffff);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  border-radius: var(--border-radius-medium, 6px);
+  padding: var(--space-8, 8px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.14px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  resize: vertical;
+}
+.mi-text-area::placeholder {
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+.mi-text-area:hover:not(:disabled) {
+  border-color: var(--border-semi-strong-hover, rgba(0, 0, 0, 0.35));
+}
+.mi-text-area:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-text-area--error,
+.mi-text-area[aria-invalid="true"] {
+  border-color: var(--border-error-default, #db351f);
+}
+.mi-text-area:disabled {
+  background-color: var(--surface-regular-disabled, rgba(0, 0, 0, 0.03));
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  border-color: var(--border-disabled, rgba(0, 0, 0, 0.07));
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * select-box（単一選択の入力。Figma node 8257-8293 由来）
+ * ----------------------------------------------------------------------------
+ *   <select class="mi-select"><option>選択してください</option></select>
+ * 高さ40px・文字14px・chevron-down-small 付き。
+ * hover/エラーの枠線色は同系統の状態トークン（semi-strong-hover / error-default）。
+ * ========================================================================== */
+.mi-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: var(--select-min-height, 40px);
+  background-color: var(--surface-regular-default, #ffffff);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  border-radius: var(--border-radius-medium, 6px);
+  padding: var(--space-4, 4px) 32px var(--space-4, 4px) var(--space-8, 8px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.14px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+  /* chevron-down（公式 icons.ts。object/regular 相当） */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23454545'%3E%3Cpath d='M12 17L3.03 8.97998L4.03 7.85999L12 14.99L19.45 8.37999L20.45 9.49999L12 17Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px;
+}
+.mi-select:hover:not(:disabled) {
+  border-color: var(--border-semi-strong-hover, rgba(0, 0, 0, 0.35));
+}
+.mi-select:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-select--error,
+.mi-select[aria-invalid="true"] {
+  border-color: var(--border-error-default, #db351f);
+}
+.mi-select:disabled {
+  background-color: var(--surface-regular-disabled, rgba(0, 0, 0, 0.03));
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  border-color: var(--border-disabled, rgba(0, 0, 0, 0.07));
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * dialog（mitsubachi-ui 公式実装 dialog.styles.ts 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-dialog-backdrop">
+ *     <div class="mi-dialog" role="dialog" aria-modal="true" aria-labelledby="t">
+ *       <div class="mi-dialog__header"><h2 class="mi-dialog__title" id="t">タイトル</h2></div>
+ *       <div class="mi-dialog__body">…</div>
+ *       <div class="mi-dialog__footer">
+ *         <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
+ *         <button class="mi-button mi-button--primary mi-button--large">保存する</button>
+ *       </div>
+ *     </div>
+ *   </div>
+ * サイズ: 既定 small(560px) / --medium(800px) / --large(1280px・form用)
+ * ========================================================================== */
+.mi-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24, 24px);
+  background-color: var(--neutral-50-alpha, rgba(0, 0, 0, 0.29));
+  z-index: 1000;
+  box-sizing: border-box;
+}
+.mi-dialog {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--dialog-size-small, 560px);
+  max-height: calc(100vh - 48px);
+  overflow: hidden;
+  background-color: var(--zabuton-regular, #ffffff);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  border: 1px solid var(--border-regular, rgba(0, 0, 0, 0.1));
+  border-radius: var(--border-radius-x-large, 12px);
+  box-shadow: var(--dialog-shadow);
+}
+.mi-dialog--medium { max-width: var(--dialog-size-medium, 800px); }
+.mi-dialog--large { max-width: var(--dialog-size-large, 1280px); }
+.mi-dialog__header {
+  flex: none;
+  padding: var(--space-16, 16px) var(--space-24, 24px) var(--space-8, 8px);
+}
+.mi-dialog__title {
+  margin: 0;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-headline-small, 18px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.02em;
+}
+.mi-dialog__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-16, 16px) var(--space-24, 24px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.02em;
+}
+.mi-dialog__footer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-8, 8px);
+  padding: var(--space-16, 16px) var(--space-24, 24px) var(--space-16, 16px) var(--space-16, 16px);
+}
+
+/* ============================================================================
+ * menu（mitsubachi-ui 公式実装 control-menu/*.css 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-menu" role="menu">
+ *     <div class="mi-menu-item" role="menuitem">操作A</div>
+ *     <div class="mi-menu-item mi-menu-item--selected" role="menuitem">選択中
+ *       <span class="mi-icon mi-icon--check" style="width:24px;height:24px;" aria-hidden="true"></span>
+ *     </div>
+ *   </div>
+ * ========================================================================== */
+.mi-menu {
+  display: inline-block;
+  min-width: 160px;
+  padding: var(--space-8, 8px) 0;
+  background-color: var(--surface-regular-default, #ffffff);
+  border-radius: var(--border-radius-medium, 6px);
+  box-shadow: var(--menu-shadow, 0 5px 9px 2px rgba(0, 0, 0, 0.13));
+}
+.mi-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: var(--space-8, 8px);
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: var(--space-4, 4px) var(--space-12, 12px) var(--space-4, 4px) var(--space-16, 16px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-medium, 14px);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+}
+.mi-menu-item:hover { background-color: var(--zabuton-semi-strong, #f8f8f8); }
+.mi-menu-item:active { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
+.mi-menu-item--selected { background-color: var(--menu-item-selected, #f0f6ff); }
+.mi-menu-item--selected:hover { background-color: var(--menu-item-selected-hover, #e3efff); }
+.mi-menu-item--selected:active { background-color: var(--menu-item-selected-active, #d4e6ff); }
+.mi-menu-item--disabled,
+.mi-menu-item[aria-disabled="true"] {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  background-color: transparent;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * tooltip（mitsubachi-ui 公式実装 tooltip.styles.ts 由来）
+ * ----------------------------------------------------------------------------
+ *   <span class="mi-tooltip" role="tooltip">補足の説明テキスト</span>
+ * 位置決め（fixed / anchor）はモック側で行う。ここは見た目のみ。
+ * ========================================================================== */
+.mi-tooltip {
+  display: inline-block;
+  max-width: 200px;
+  padding: var(--space-4, 4px) var(--space-8, 8px);
+  background-color: var(--surface-strong-default, #282828);
+  border-radius: var(--border-radius-small, 4px);
+  box-shadow: var(--elevation-30);
+  color: var(--text-inverse, #ffffff);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-small, 12px);
+  letter-spacing: 0.24px;
+  line-height: var(--line-height-tight, 1.3);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================================
+ * snackbar（成功フィードバック。mitsubachi-ui 公式実装 snackbar.styles.ts 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-snackbar" role="status">
+ *     <span class="mi-icon mi-icon--check mi-snackbar__icon" aria-hidden="true"></span>
+ *     <p class="mi-snackbar__text">保存しました</p>
+ *   </div>
+ * 画面右下等への固定配置はモック側で行う。
+ * ========================================================================== */
+.mi-snackbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8, 8px);
+  box-sizing: border-box;
+  max-width: 400px;
+  min-height: 56px;
+  padding: var(--space-12, 12px) var(--space-8, 8px) var(--space-12, 12px) var(--space-12, 12px);
+  background-color: var(--surface-success, #dff5ea);
+  border-radius: var(--border-radius-medium, 6px);
+  box-shadow: var(--elevation-30);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+}
+.mi-snackbar__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--object-positive, #00783c);
+}
+.mi-snackbar__text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.02em;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+
+/* ============================================================================
+ * inline-notification（mitsubachi-ui 公式実装由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-inline-notification mi-inline-notification--information" role="status">
+ *     <span class="mi-icon mi-icon--magic mi-inline-notification__icon" aria-hidden="true"></span>
+ *     <div>お知らせの本文</div>
+ *   </div>
+ * type: --error / --information / --success / --warning
+ * ========================================================================== */
+.mi-inline-notification {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8, 8px);
+  padding: var(--space-16, 16px);
+  border-radius: var(--border-radius-medium, 6px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-inline-notification--error { background-color: var(--surface-negative, #ffedeb); }
+.mi-inline-notification--information { background-color: var(--surface-information, #edf1ff); }
+.mi-inline-notification--success { background-color: var(--surface-success, #dff5ea); }
+.mi-inline-notification--warning { background-color: var(--surface-warning, #fcf6d4); }
+.mi-inline-notification__icon {
+  flex: none;
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+}
+.mi-inline-notification--error .mi-inline-notification__icon { color: var(--object-error, #c92812); }
+.mi-inline-notification--information .mi-inline-notification__icon { color: var(--text-information, #315ce8); }
+.mi-inline-notification--success .mi-inline-notification__icon { color: var(--object-positive, #00783c); }
+
+/* ============================================================================
+ * banner（重要な横断通知のオーバーレイ。Figma node 5702-2824 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-banner mi-banner--information" role="status">
+ *     <span class="mi-icon mi-icon--magic mi-banner__icon" aria-hidden="true"></span>
+ *     <div class="mi-banner__content">
+ *       <p class="mi-banner__title">メンテナンスのお知らせ</p>
+ *       <p class="mi-banner__text">6/15（月）2:00〜5:00 に実施します。</p>
+ *     </div>
+ *     <button class="mi-banner__close" aria-label="閉じる">
+ *       <span class="mi-icon mi-icon--cross" aria-hidden="true"></span>
+ *     </button>
+ *   </div>
+ * status: --information / --success / --warning / --error
+ * 自動では消えない（閉じるボタンで非表示）。コンテンツエリア上部の中央に
+ * 重ねて表示する（配置はモック側。banner.md 参照）。
+ * ========================================================================== */
+.mi-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12, 12px);
+  box-sizing: border-box;
+  padding: var(--space-8, 8px) var(--space-8, 8px) var(--space-8, 8px) var(--space-16, 16px);
+  border-radius: var(--border-radius-medium, 6px);
+  box-shadow: var(--banner-shadow, 0 8px 8px rgba(0, 0, 0, 0.13), 0 0 3px rgba(0, 0, 0, 0.1));
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-banner--information { background-color: var(--surface-information, #edf1ff); }
+.mi-banner--success { background-color: var(--surface-success, #dff5ea); }
+.mi-banner--warning { background-color: var(--surface-warning, #fcf6d4); }
+.mi-banner--error { background-color: var(--surface-negative, #ffedeb); }
+.mi-banner__icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: var(--space-4, 4px);
+}
+.mi-banner--information .mi-banner__icon { color: var(--text-information, #315ce8); }
+.mi-banner--success .mi-banner__icon { color: var(--object-positive, #00783c); }
+.mi-banner--error .mi-banner__icon { color: var(--object-error, #c92812); }
+.mi-banner__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 4px);
+  padding: var(--space-4, 4px) 0;
+}
+.mi-banner__title {
+  margin: 0;
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: var(--font-size-label-large, 16px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.16px;
+}
+.mi-banner__text {
+  margin: 0;
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.28px; /* text = 2% */
+}
+.mi-banner__close {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: var(--space-4, 4px);
+  border: none;
+  border-radius: var(--border-radius-full, 9999px);
+  background: transparent;
+  color: var(--object-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+}
+.mi-banner__close:hover { background-color: var(--button-overlay-hover, rgba(0, 0, 0, 0.04)); }
+.mi-banner__close:active { background-color: var(--button-overlay-active, rgba(0, 0, 0, 0.07)); }
+.mi-banner__close > .mi-icon { width: 20px; height: 20px; }
+
+/* ============================================================================
+ * avatar（mitsubachi-ui 公式実装 avatar.styles.ts 由来）
+ * ----------------------------------------------------------------------------
+ *   <span class="mi-avatar mi-avatar--large mi-avatar--blue">TS</span>
+ *   <span class="mi-avatar mi-avatar--medium"><img class="mi-avatar__image" src="…" alt="山田"></span>
+ * size: --small(24) / 既定 medium(32) / --large(40) / --x-large(80) / --2x-large(96)
+ * color: --plum / --violet / --blue / --viridian / --green / --brown / --red
+ * ========================================================================== */
+.mi-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: var(--font-size-label-small, 12px);
+}
+.mi-avatar--small { width: 24px; height: 24px; font-size: var(--font-size-label-2x-small, 10px); }
+.mi-avatar--large { width: 40px; height: 40px; font-size: var(--font-size-label-medium, 14px); }
+.mi-avatar--x-large { width: 80px; height: 80px; font-size: 32px; }
+.mi-avatar--2x-large { width: 96px; height: 96px; font-size: 40px; }
+.mi-avatar__image { width: 100%; height: 100%; object-fit: cover; }
+.mi-avatar--plum { background-color: var(--palette-plum, #910091); color: var(--text-static-white, #ffffff); }
+.mi-avatar--violet { background-color: var(--palette-violet, #3e31d5); color: var(--text-static-white, #ffffff); }
+.mi-avatar--blue { background-color: var(--palette-blue, #214dde); color: var(--text-static-white, #ffffff); }
+.mi-avatar--viridian { background-color: var(--palette-viridian, #0d8282); color: var(--text-static-white, #ffffff); }
+.mi-avatar--green { background-color: var(--palette-green, #008744); color: var(--text-static-white, #ffffff); }
+.mi-avatar--brown { background-color: var(--palette-brown, #ae6022); color: var(--text-static-white, #ffffff); }
+.mi-avatar--red { background-color: var(--palette-red, #d30030); color: var(--text-static-white, #ffffff); }
+.mi-avatar--inactive {
+  background-color: var(--surface-semi-strong-default, #ededed) !important;
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35)) !important;
+  filter: grayscale(100%);
+}
+
+/* ============================================================================
+ * label-unit（フォーム項目のラベル＋補足。mitsubachi-ui 公式実装由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-label-unit">
+ *     <span class="mi-label-unit__label">企業名 <span class="mi-label-unit__required">必須</span></span>
+ *     <span class="mi-label-unit__support">正式名称で入力してください</span>
+ *   </div>
+ * ========================================================================== */
+.mi-label-unit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 4px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+}
+.mi-label-unit__label {
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: var(--font-size-label-medium, 14px);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-label-unit__support {
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+.mi-label-unit__required {
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  color: var(--text-required, #c92812);
+}
+
+/* ============================================================================
+ * floating-button（mitsubachi-ui 公式実装由来。AI グラデーションリングの円形ボタン）
+ * ----------------------------------------------------------------------------
+ *   <button class="mi-floating-button" aria-label="AIに質問する">
+ *     <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+ *   </button>
+ * 画面右下などへの固定配置はモック側で行う。
+ * ========================================================================== */
+.mi-floating-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 6px 2px rgba(247, 42, 72, 0.1);
+  cursor: pointer;
+}
+.mi-floating-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--ai-gradient-conic);
+  z-index: 0;
+}
+.mi-floating-button::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  background: var(--surface-regular-default, #ffffff);
+  z-index: 1;
+}
+.mi-floating-button:hover::before {
+  transform: rotate(1turn);
+  transition: transform 0.3s ease;
+}
+.mi-floating-button:active::after { inset: 2px; }
+.mi-floating-button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-floating-button > .mi-icon {
+  position: relative;
+  z-index: 2;
+  width: 25px;
+  height: 25px;
+  color: var(--floating-button-icon, #f72a48);
+}
+
+/* ============================================================================
+ * loading（スピナー。mitsubachi-ui 公式実装 loading.css 由来）
+ * ----------------------------------------------------------------------------
+ *   <span class="mi-loading" role="status" aria-label="読み込み中"></span>
+ *   <span class="mi-loading mi-loading--ai"></span>（AI 実行中）
+ * size: --medium(12.5) / 既定 large(15) / --x-large(17.5) / --2x-large(20) /
+ *       --3x-large(26) / --4x-large(40)
+ * ========================================================================== */
+.mi-loading {
+  --_size: 15px;
+  display: inline-block;
+  flex: none;
+  width: var(--_size);
+  height: var(--_size);
+  border: calc(var(--_size) / 10) solid transparent;
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--surface-regular-default, #ffffff), var(--surface-regular-default, #ffffff)) padding-box,
+    conic-gradient(var(--object-regular, rgba(0, 0, 0, 0.84)) 0deg 270deg, var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)) 270deg 360deg) border-box;
+  -webkit-mask-image: radial-gradient(circle closest-side, transparent 80%, black 80%);
+  mask-image: radial-gradient(circle closest-side, transparent 80%, black 80%);
+  animation: mi-spin 1s linear infinite;
+  box-sizing: border-box;
+}
+.mi-loading--ai {
+  background:
+    linear-gradient(var(--surface-regular-default, #ffffff), var(--surface-regular-default, #ffffff)) padding-box,
+    var(--ai-gradient-conic) border-box;
+}
+.mi-loading--medium { --_size: 12.5px; }
+.mi-loading--x-large { --_size: 17.5px; }
+.mi-loading--2x-large { --_size: 20px; }
+.mi-loading--3x-large { --_size: 26px; }
+.mi-loading--4x-large { --_size: 40px; }
+@keyframes mi-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ============================================================================
+ * breadcrumb（パンくず。Figma _breadcrumb-page node 9926-7237 由来）
+ * ----------------------------------------------------------------------------
+ *   <nav class="mi-breadcrumb" aria-label="パンくず">
+ *     <a class="mi-breadcrumb__item" href="#">ホーム</a>
+ *     <span class="mi-icon mi-icon--chevron-right-small mi-breadcrumb__sep" aria-hidden="true"></span>
+ *     <span class="mi-breadcrumb__item mi-breadcrumb__item--no-link" aria-current="page">企業詳細</span>
+ *   </nav>
+ * リンク項目は通常色（hover で面が出る）。リンクの無い項目（現在ページ・
+ * リンク先が存在しない階層）は弱い文字色。Level 1（ホーム）では表示しない。
+ * phone は .mi-breadcrumb--phone（文字14px）。
+ * ========================================================================== */
+.mi-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4, 4px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.12px;
+}
+.mi-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-4, 4px);
+  border-radius: var(--border-radius-small, 4px);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  text-decoration: none;
+}
+a.mi-breadcrumb__item:hover { background-color: var(--surface-regular-hover, #f5f5f5); }
+a.mi-breadcrumb__item:active { background-color: var(--surface-regular-active, #ededed); }
+a.mi-breadcrumb__item:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+/* リンクの無い項目（現在ページなど）は弱い文字色 */
+.mi-breadcrumb__item--no-link,
+.mi-breadcrumb__item--current {
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mi-breadcrumb__sep {
+  width: 16px;
+  height: 16px;
+  color: var(--object-weak, rgba(0, 0, 0, 0.54));
+}
+/* viewport=phone（文字14px・タップ領域広め） */
+.mi-breadcrumb--phone { font-size: var(--font-size-label-medium, 14px); letter-spacing: 0.14px; }
+.mi-breadcrumb--phone .mi-breadcrumb__item { padding: var(--space-4, 4px); }
+
+/* ============================================================================
+ * pagination（ページ送り。Figma node 8910-6776 由来）
+ * ----------------------------------------------------------------------------
+ *   <nav class="mi-pagination" aria-label="ページ送り">
+ *     <button class="mi-icon-button mi-icon-button--ghost" aria-label="前のページ" disabled>
+ *       <span class="mi-icon mi-icon--chevron-left" aria-hidden="true"></span>
+ *     </button>
+ *     <span class="mi-pagination__page">
+ *       <select class="mi-select mi-pagination__select" aria-label="ページ番号"><option>1</option></select>
+ *       / 3
+ *     </span>
+ *     <button class="mi-icon-button mi-icon-button--ghost" aria-label="次のページ">
+ *       <span class="mi-icon mi-icon--chevron-right" aria-hidden="true"></span>
+ *     </button>
+ *   </nav>
+ * 前へ/次へは icon-button（tooltip 併用）、ページ番号は select-box（幅64px）。
+ * 先頭ページでは「前へ」、最終ページでは「次へ」を disabled にする。
+ * テーブルやリストの下に配置（phone は下のみ・中央揃え）。
+ * ========================================================================== */
+.mi-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-8, 8px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+}
+.mi-pagination__page {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8, 8px);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.14px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  white-space: nowrap;
+}
+.mi-pagination__select { width: 64px; }
+
+/* ============================================================================
+ * filter-chip（絞り込み条件のトグル切り替え。components/chip/filter-chip.md）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-chip-group" role="group" aria-label="絞り込み">
+ *     <button class="mi-chip" aria-pressed="false">すべて</button>
+ *     <button class="mi-chip mi-chip--selected" aria-pressed="true">
+ *       <span class="mi-icon mi-icon--check" aria-hidden="true"></span>国内
+ *     </button>
+ *   </div>
+ * 値は Figma filter-chip（node 10771-20108）由来。基底は viewport=desktop。
+ * phone は .mi-chip--phone を併用（高さ 28px / 文字 14px / アイコン 20px）。
+ * selected 時のみ先頭に check アイコン（任意アイコンの追加は不可。md 参照）。
+ * ※check は公式 icons.ts の check（24px グリッド）。Figma の check-small より
+ *   グリフがやや大きい近似。
+ * ========================================================================== */
+.mi-chip {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  min-height: var(--chip-min-height-desktop, 24px);
+  padding: var(--space-2, 2px) var(--space-8, 8px);
+  border: none;
+  border-radius: var(--border-radius-full, 9999px);
+  background-color: var(--surface-semi-strong-default, #ededed);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.12px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+.mi-chip:hover {
+  background-color: var(--surface-semi-strong-hover, #e5e5e5);
+}
+.mi-chip:active {
+  background-color: var(--surface-semi-strong-active, #dfdfdf);
+}
+.mi-chip:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+
+/* selected（薄い青紫面 + check アイコン。アイコン側の左 padding は 4px） */
+.mi-chip--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+  padding-left: var(--space-4, 4px);
+}
+.mi-chip--selected:hover {
+  background-color: var(--surface-selected-hover, #dbe4ff);
+}
+.mi-chip--selected:active {
+  background-color: var(--surface-selected-active, #d5dfff);
+}
+.mi-chip--selected > .mi-icon {
+  width: var(--chip-icon-size-desktop, 18px);
+  height: var(--chip-icon-size-desktop, 18px);
+}
+
+/* disabled（面は default のまま、文字のみ弱まる。Figma 由来） */
+.mi-chip:disabled,
+.mi-chip[aria-disabled="true"] {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  cursor: not-allowed;
+}
+.mi-chip:disabled:hover,
+.mi-chip[aria-disabled="true"]:hover {
+  background-color: var(--surface-semi-strong-default, #ededed);
+}
+.mi-chip--selected:disabled:hover,
+.mi-chip--selected[aria-disabled="true"]:hover {
+  background-color: var(--surface-selected-default, #e8edff);
+}
+
+/* viewport=phone */
+.mi-chip--phone {
+  min-height: var(--chip-min-height-phone, 28px);
+  padding-left: var(--space-12, 12px);
+  padding-right: var(--space-12, 12px);
+  font-size: var(--font-size-label-medium, 14px);
+  letter-spacing: 0.14px;
+}
+.mi-chip--phone.mi-chip--selected {
+  padding-left: var(--space-4, 4px);
+}
+.mi-chip--phone.mi-chip--selected > .mi-icon {
+  width: var(--chip-icon-size-phone, 20px);
+  height: var(--chip-icon-size-phone, 20px);
+}
+
+/* group（chip の間隔 4px は Figma _filter-chip-group-single/multiple 由来。
+ * 単一選択/複数選択の挙動は md（filter-chip-group-single/multiple.md）参照） */
+.mi-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4, 4px);
+}
+
+/* ============================================================================
+ * icon-button（アイコンのみのボタン。mitsubachi-ui 公式実装 icon-button.styles.ts 由来）
+ * ----------------------------------------------------------------------------
+ *   <button class="mi-icon-button mi-icon-button--ghost" aria-label="閉じる">
+ *     <span class="mi-icon mi-icon--cross" aria-hidden="true"></span>
+ *   </button>
+ * size: --small(24/icon18) / 既定 medium(32/icon20) / --large(40/icon22)
+ * variant: --primary / --secondary / --tertiary / --ghost、選択は --selected
+ * 意味が伝わるよう必ず aria-label と tooltip を併用する（icon-button.md）。
+ * ========================================================================== */
+.mi-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: var(--space-4, 4px);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-full, 9999px);
+  background-color: transparent;
+  color: var(--object-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.mi-icon-button > .mi-icon { width: 20px; height: 20px; }
+.mi-icon-button--small { width: 24px; height: 24px; padding: var(--space-2, 2px); }
+.mi-icon-button--small > .mi-icon { width: 18px; height: 18px; }
+.mi-icon-button--large { width: 40px; height: 40px; }
+.mi-icon-button--large > .mi-icon { width: 22px; height: 22px; }
+/* variant: primary */
+.mi-icon-button--primary {
+  background-color: var(--surface-strong-default, #282828);
+  color: var(--object-inverse, #ffffff);
+}
+.mi-icon-button--primary:hover { background-color: var(--surface-strong-hover, #191919); }
+.mi-icon-button--primary:active { background-color: var(--surface-strong-active, #000000); }
+/* variant: secondary（枠あり） */
+.mi-icon-button--secondary { border-color: var(--border-strong, rgba(0, 0, 0, 0.84)); }
+/* variant: tertiary（弱い枠） */
+.mi-icon-button--tertiary { border-color: var(--border-semi-strong-default, rgba(0, 0, 0, 0.2)); }
+/* secondary / tertiary / ghost の hover・active（icon-button は 7% / 10%） */
+.mi-icon-button--secondary:hover,
+.mi-icon-button--tertiary:hover,
+.mi-icon-button--ghost:hover,
+.mi-icon-button:not([class*="--primary"]):not([class*="--secondary"]):not([class*="--tertiary"]):hover {
+  background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07));
+}
+.mi-icon-button--secondary:active,
+.mi-icon-button--tertiary:active,
+.mi-icon-button--ghost:active,
+.mi-icon-button:not([class*="--primary"]):not([class*="--secondary"]):not([class*="--tertiary"]):active {
+  background-color: var(--surface-overlay-active, rgba(0, 0, 0, 0.1));
+}
+/* selected（secondary / tertiary / ghost） */
+.mi-icon-button--secondary.mi-icon-button--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+  border-color: var(--border-selected, #3f69f2);
+}
+.mi-icon-button--tertiary.mi-icon-button--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+  border-color: var(--border-regular, rgba(0, 0, 0, 0.1));
+}
+.mi-icon-button--ghost.mi-icon-button--selected {
+  background-color: var(--surface-selected-default, #e8edff);
+}
+.mi-icon-button--selected:hover { background-color: var(--surface-selected-hover, #dbe4ff) !important; }
+.mi-icon-button--selected:active { background-color: var(--surface-selected-active, #d5dfff) !important; }
+/* focus / disabled */
+.mi-icon-button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-icon-button:disabled,
+.mi-icon-button[aria-disabled="true"] {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.mi-icon-button--primary:disabled { background-color: var(--surface-semi-strong-disabled, rgba(0, 0, 0, 0.07)); }
+.mi-icon-button--secondary:disabled,
+.mi-icon-button--tertiary:disabled { background-color: transparent; border-color: var(--border-disabled, rgba(0, 0, 0, 0.07)); }
+.mi-icon-button--ghost:disabled { background-color: transparent; border-color: transparent; }
+
+/* ============================================================================
+ * icon-color（多色のステータスアイコン。mitsubachi-ui 公式実装 icon-color 由来）
+ * ----------------------------------------------------------------------------
+ *   <span class="mi-icon-color mi-icon-color--information" role="img" aria-label="情報"></span>
+ * inline-notification / banner / error-text の先頭アイコンに使う。
+ * 多色のため mask ではなく background-image（色は固定）。
+ * ========================================================================== */
+.mi-icon-color {
+  display: inline-block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.mi-icon-color--error {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Crect x=%226%22 y=%226%22 width=%2212%22 height=%2212%22 fill=%22white%22/%3E%3Cpath d=%22M21.28 7.845L16.15 2.715C16.01 2.575 15.82 2.495 15.62 2.495H8.37C8.17 2.495 7.98 2.575 7.84 2.715L2.72 7.845C2.58 7.985 2.5 8.175 2.5 8.375V15.625C2.5 15.825 2.58 16.015 2.72 16.155L7.85 21.285C7.99 21.425 8.18 21.505 8.38 21.505H15.63C15.83 21.505 16.02 21.425 16.16 21.285L21.29 16.155C21.43 16.015 21.51 15.825 21.51 15.625V8.375C21.51 8.175 21.43 7.985 21.29 7.845H21.28ZM16.81 15.745L15.75 16.805L12 13.055L8.25 16.805L7.19 15.745L10.94 11.995L7.19 8.245L8.25 7.185L12 10.935L15.75 7.185L16.81 8.245L13.06 11.995L16.81 15.745Z%22 fill=%22%23C92812%22/%3E%3C/svg%3E");
+}
+.mi-icon-color--information {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Crect x=%226%22 y=%225%22 width=%2212%22 height=%2214%22 fill=%22white%22/%3E%3Cpath d=%22M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM12.75 16.86H11.25V10.36H12.75V16.86ZM12.83 8.86H11.17V7.14H12.83V8.86Z%22 fill=%22%23315CE8%22/%3E%3C/svg%3E");
+}
+.mi-icon-color--success {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Crect x=%226%22 y=%225%22 width=%2212%22 height=%2214%22 fill=%22white%22/%3E%3Cpath d=%22M12 2.02002C6.49 2.02002 2 6.51002 2 12.02C2 17.53 6.49 22.02 12 22.02C17.51 22.02 22 17.53 22 12.02C22 6.51002 17.52 2.02002 12 2.02002ZM10.83 15.5L7.22 11.9L8.28 10.84L10.83 13.38L15.73 8.49002L16.79 9.55002L10.83 15.49V15.5Z%22 fill=%22%2300783C%22/%3E%3C/svg%3E");
+}
+.mi-icon-color--warning {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Crect x=%2210%22 y=%228%22 width=%224%22 height=%2211%22 fill=%22black%22 fill-opacity=%220.84%22/%3E%3Cpath d=%22M21.92 19.3601L12.66 3.3201C12.39 2.8601 11.63 2.8601 11.36 3.3201L2.1 19.3601C1.97 19.5901 1.97 19.8801 2.1 20.1101C2.23 20.3401 2.48 20.4901 2.75 20.4901H21.27C21.54 20.4901 21.79 20.3501 21.92 20.1101C22.05 19.8801 22.05 19.5901 21.92 19.3601ZM11.25 8.6601H12.75V14.6601H11.25V8.6601ZM12.83 17.8601H11.17V16.1401H12.83V17.8601Z%22 fill=%22%23F0C800%22/%3E%3C/svg%3E");
+}
+
+/* ============================================================================
+ * error-text / text-field-unit（mitsubachi-ui 公式実装由来）
+ * ----------------------------------------------------------------------------
+ * フォーム項目の組み立て:
+ *   <div class="mi-text-field-unit">
+ *     <div class="mi-label-unit">…（ラベル・必須・補足）</div>
+ *     <input class="mi-text-field mi-text-field--error" aria-invalid="true" aria-describedby="e1">
+ *     <p class="mi-error-text" id="e1">
+ *       <span class="mi-icon-color mi-icon-color--error" aria-hidden="true"></span>
+ *       メールアドレスの形式が正しくありません
+ *     </p>
+ *   </div>
+ * ========================================================================== */
+.mi-text-field-unit { display: block; }
+.mi-text-field-unit > .mi-label-unit { margin-bottom: var(--space-8, 8px); }
+.mi-error-text {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 2px);
+  margin: 0;
+  padding-top: var(--space-8, 8px);
+  color: var(--text-error, #c92812);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+}
+.mi-error-text > .mi-icon-color { width: 21px; height: 21px; }
+
+/* ============================================================================
+ * snackbar-viewport（snackbar の画面隅スタック。mitsubachi-ui 公式実装由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-snackbar-viewport">
+ *     <div class="mi-snackbar" role="status">…</div>
+ *   </div>
+ * desktop: 右上（inset 16px）に縦積み（gap 16px）。phone(〜720px): 下中央。
+ * ========================================================================== */
+.mi-snackbar-viewport {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16, 16px);
+  align-items: flex-end;
+  position: fixed;
+  top: var(--space-16, 16px);
+  right: var(--space-16, 16px);
+  z-index: 2000;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.mi-snackbar-viewport > .mi-snackbar { pointer-events: auto; }
+@media (max-width: 720px) {
+  .mi-snackbar-viewport {
+    align-items: center;
+    top: auto;
+    right: auto;
+    bottom: var(--space-12, 12px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================================
+ * link-tag（クリックで関連コンテンツへ遷移するタグ。Figma node 5416-7917 由来）
+ * ----------------------------------------------------------------------------
+ *   <a class="mi-link-tag" href="#">半導体</a>
+ * size: --x-small(18px/文字10) / --small(22px/文字11) / 既定 medium(24px/文字12)
+ * 色の意味分けは持たない（意味分けが必要なら read-only-tag）。
+ * ========================================================================== */
+.mi-link-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 24px;
+  padding: var(--space-2, 2px) var(--space-12, 12px);
+  border: none;
+  border-radius: var(--border-radius-full, 9999px);
+  background-color: var(--surface-semi-strong-default, #ededed);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: 0.12px;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mi-link-tag:hover { background-color: var(--surface-semi-strong-hover, #e5e5e5); }
+.mi-link-tag:active { background-color: var(--surface-semi-strong-active, #dfdfdf); }
+.mi-link-tag:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-link-tag--small { min-height: 22px; font-size: 11px; letter-spacing: 0.11px; }
+.mi-link-tag--x-small { min-height: 18px; padding: 1px 6px; font-size: var(--font-size-label-2x-small, 10px); letter-spacing: 0.1px; }
+
+/* ============================================================================
+ * avatar-group（アバターの重ね表示。Figma node 4822-682 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-avatar-group">
+ *     <span class="mi-avatar mi-avatar--blue">TA</span>
+ *     <span class="mi-avatar mi-avatar--violet">HY</span>…（最大5人）
+ *   </div>
+ * 重なりはアバター径の 1/4（24px→-6 / 32px→-8 / 40px→-10 / 80px→-20 / 96px→-24）。
+ * 重ねるときだけ白い境界線（large 以下 1px / x-large 以上 2px）。左が最前面。
+ * サイズはアバター側と同じ修飾子をグループに付ける（--small / 既定 / --large / --x-large / --2x-large）。
+ * ========================================================================== */
+.mi-avatar-group {
+  display: flex;
+  isolation: isolate;
+  --_overlap: -8px; /* medium 32px */
+  --_ring: 1px;
+}
+.mi-avatar-group > .mi-avatar {
+  position: relative;
+  box-sizing: content-box;
+  border: var(--_ring) solid var(--border-inverse, #ffffff);
+}
+.mi-avatar-group > .mi-avatar:not(:first-child) { margin-left: var(--_overlap); }
+/* 左が最前面（最大5人） */
+.mi-avatar-group > .mi-avatar:nth-child(1) { z-index: 5; }
+.mi-avatar-group > .mi-avatar:nth-child(2) { z-index: 4; }
+.mi-avatar-group > .mi-avatar:nth-child(3) { z-index: 3; }
+.mi-avatar-group > .mi-avatar:nth-child(4) { z-index: 2; }
+.mi-avatar-group > .mi-avatar:nth-child(5) { z-index: 1; }
+.mi-avatar-group--small { --_overlap: -6px; }
+.mi-avatar-group--large { --_overlap: -10px; }
+.mi-avatar-group--x-large { --_overlap: -20px; --_ring: 2px; }
+.mi-avatar-group--2x-large { --_overlap: -24px; --_ring: 2px; }
+
+/* ============================================================================
+ * report-heading（読み物コンテンツの見出し h1〜h6。Figma node 9494-1555 由来）
+ * ----------------------------------------------------------------------------
+ *   <h2 class="mi-report-heading mi-report-heading--2">セクション見出し</h2>
+ * level: --1(32px通常) / --2(25px太字・下線) / --3(20px太字・左に赤線) /
+ *        --4(18px太字) / --5(16px太字) / --6(16px太字・弱色)
+ * 右端にアクションを置く場合は flex の余白側に配置（gap 16px）。
+ * ========================================================================== */
+.mi-report-heading {
+  margin: 0;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-report-heading--1 {
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: 32px;
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: -0.64px; /* headline 25px〜 = -2% */
+}
+.mi-report-heading--2 {
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: 25px;
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: -0.5px;
+  border-bottom: 1px solid var(--border-regular, rgba(0, 0, 0, 0.1));
+  padding-bottom: var(--space-8, 8px);
+}
+.mi-report-heading--3 {
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: 20px;
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: -0.2px; /* headline 20px = -1% */
+  border-left: 2px solid var(--palette-regular-red, #f72a48);
+  padding-left: var(--space-8, 8px);
+}
+.mi-report-heading--4 {
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: var(--font-size-headline-small, 18px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.18px;
+}
+.mi-report-heading--5 {
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: var(--font-size-label-large, 16px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.16px;
+}
+.mi-report-heading--6 {
+  font-weight: var(--typography-font-weight-bold, 700);
+  font-size: var(--font-size-label-large, 16px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.16px;
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+
+/* ============================================================================
+ * sub-menu-item（サブメニューを開くメニュー項目。Figma node 8376-4959 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-menu" role="menu">
+ *     <div class="mi-menu-item mi-menu-item--sub" role="menuitem" aria-haspopup="menu">
+ *       エクスポート
+ *       <span class="mi-icon mi-icon--chevron-right-small" style="width:20px;height:20px;" aria-hidden="true"></span>
+ *     </div>
+ *   </div>
+ * 右端に chevron-right-small（20px）固定。hover/active はオーバーレイ系。
+ * ========================================================================== */
+.mi-menu-item--sub { padding-right: var(--space-12, 12px); }
+.mi-menu-item--sub:hover { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
+.mi-menu-item--sub:active { background-color: var(--surface-overlay-active, rgba(0, 0, 0, 0.1)); }
+.mi-menu-item--sub > .mi-icon { flex: none; width: 20px; height: 20px; }
+
+/* ============================================================================
+ * icon 追加（chevron-down-small。公式 icons.ts）
+ * ========================================================================== */
+.mi-icon--chevron-down-small {
+  --mi-icon-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.01 16.01L6.01 10.75L7 9.62L12.01 14.01L17.02 9.62L18.01 10.75L12.01 16.01Z'/%3E%3C/svg%3E");
+  -webkit-mask-image: var(--mi-icon-img);
+  mask-image: var(--mi-icon-img);
+}
+
+/* ============================================================================
+ * menu-button（メニューを開くボタン。Figma node 8301-3447 由来）
+ * ----------------------------------------------------------------------------
+ *   <button class="mi-button mi-button--secondary mi-button--large mi-button--menu">
+ *     エクスポート
+ *     <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+ *   </button>
+ * neutral-button と同体系（variant: primary / secondary / ghost）で、
+ * 右パディングが 8px に詰まり、末尾に chevron-down-small が固定で付く。
+ * secondary / ghost の hover・active はオーバーレイ 7% / 10%（Figma 由来）。
+ * ========================================================================== */
+.mi-button--menu {
+  padding-right: var(--space-8, 8px);
+}
+.mi-button--menu > .mi-icon { flex: none; width: 20px; height: 20px; }
+.mi-button--menu.mi-button--secondary:hover,
+.mi-button--menu.mi-button--ghost:hover {
+  background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07));
+}
+.mi-button--menu.mi-button--secondary:active,
+.mi-button--menu.mi-button--ghost:active {
+  background-color: var(--surface-overlay-active, rgba(0, 0, 0, 0.1));
+}
+
+/* ============================================================================
+ * input-chip（入力済み値のチップ。×で削除。Figma node 5815-12862 由来）
+ * ----------------------------------------------------------------------------
+ *   <span class="mi-input-chip">
+ *     三和電機
+ *     <button class="mi-input-chip__remove" aria-label="三和電機を削除">
+ *       <span class="mi-icon mi-icon--cross" aria-hidden="true"></span>
+ *     </button>
+ *   </span>
+ *   <div class="mi-input-chip-group">…（折り返しあり。横スクロール禁止）</div>
+ * phone は .mi-input-chip--phone（高さ32px）。
+ * ========================================================================== */
+.mi-input-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 2px);
+  box-sizing: border-box;
+  min-height: 28px;
+  max-width: 100%;
+  padding: var(--space-2, 2px) var(--space-4, 4px) var(--space-2, 2px) var(--space-12, 12px);
+  border-radius: var(--border-radius-full, 9999px);
+  background-color: var(--surface-selected-default, #e8edff);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.12px;
+}
+.mi-input-chip > :first-child:not(button) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mi-input-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: var(--space-2, 2px);
+  border: none;
+  border-radius: var(--border-radius-full, 9999px);
+  background: transparent;
+  color: var(--object-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+}
+.mi-input-chip__remove:hover { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
+.mi-input-chip__remove > .mi-icon { width: 18px; height: 18px; }
+.mi-input-chip--phone { min-height: 32px; }
+.mi-input-chip-group {
+  display: flex;
+  flex-wrap: wrap; /* 親幅を超えたら折り返す（横スクロール禁止） */
+  align-items: center;
+  gap: var(--space-4, 4px);
+}
+
+/* ============================================================================
+ * radio-button-card（カード型ラジオ。Figma node 9333-1828 由来）
+ * ----------------------------------------------------------------------------
+ *   <label class="mi-radio-card">
+ *     <input type="radio" name="plan" class="mi-radio">
+ *     <span class="mi-radio-card__body">
+ *       <span class="mi-radio-card__label">スタンダード</span>
+ *       <span class="mi-radio-card__support">月額 ¥10,000・基本機能のみ</span>
+ *     </span>
+ *   </label>
+ *   <div class="mi-radio-card-group">…（横並び時は各カード等幅・折り返し原則禁止）</div>
+ * ========================================================================== */
+.mi-radio-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12, 12px);
+  box-sizing: border-box;
+  padding: var(--space-12, 12px);
+  background-color: var(--surface-regular-default, #ffffff);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  border-radius: var(--border-radius-large, 8px);
+  cursor: pointer;
+}
+.mi-radio-card:hover {
+  background-color: var(--surface-regular-hover, #f5f5f5);
+}
+/* 選択中（:has 対応ブラウザ）。面が selected・枠が弱まる */
+.mi-radio-card:has(.mi-radio:checked) {
+  background-color: var(--surface-selected-default, #e8edff);
+  border-color: var(--border-regular, rgba(0, 0, 0, 0.1));
+}
+.mi-radio-card:has(.mi-radio:disabled) {
+  cursor: not-allowed;
+  background-color: var(--surface-regular-disabled, rgba(0, 0, 0, 0.03));
+}
+.mi-radio-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 4px);
+  min-width: 0;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+}
+.mi-radio-card__label {
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.14px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-radio-card__support {
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-tight, 1.3);
+  letter-spacing: 0.24px; /* text = 2% */
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+/* group: 横並びは各カード等幅（gap 8px）。縦並びは .mi-radio-card-group--vertical */
+.mi-radio-card-group {
+  display: flex;
+  gap: var(--space-8, 8px);
+}
+.mi-radio-card-group > .mi-radio-card { flex: 1 1 0; }
+.mi-radio-card-group--vertical { flex-direction: column; }
+.mi-radio-card-group--vertical > .mi-radio-card { flex: none; }
+
+/* ============================================================================
+ * suggestion（検索候補リスト。Figma node 7685-7082 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-suggestion" role="listbox">
+ *     <div class="mi-suggestion__category">最近の検索</div>
+ *     <div class="mi-suggestion-item" role="option">
+ *       <span class="mi-icon mi-icon--search" aria-hidden="true"></span> 三和電機
+ *     </div>
+ *   </div>
+ * search-box の直下（間隔 4px）に重ねて表示する。位置決めはモック側。
+ * ========================================================================== */
+.mi-suggestion {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: var(--space-8, 8px) 0;
+  background-color: var(--zabuton-regular, #ffffff);
+  border-radius: var(--border-radius-medium, 6px);
+  box-shadow: var(--banner-shadow, 0 8px 8px rgba(0, 0, 0, 0.13), 0 0 3px rgba(0, 0, 0, 0.1));
+  font-family: var(--typography-font-family, Arial, sans-serif);
+}
+.mi-suggestion__category {
+  padding: var(--space-8, 8px) var(--space-8, 8px) var(--space-4, 4px);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.12px;
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+.mi-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4, 4px);
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: var(--space-4, 4px) var(--space-12, 12px) var(--space-4, 4px) var(--space-8, 8px);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.14px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  cursor: pointer;
+  overflow-wrap: anywhere; /* 長い候補は省略せず折り返す */
+}
+.mi-suggestion-item:hover { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
+.mi-suggestion-item:active { background-color: var(--surface-overlay-active, rgba(0, 0, 0, 0.1)); }
+.mi-suggestion-item > .mi-icon { flex: none; width: 20px; height: 20px; }
+/* 候補なし（empty）は 48px の案内行 */
+.mi-suggestion__empty {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: var(--space-4, 4px) var(--space-12, 12px) var(--space-4, 4px) var(--space-8, 8px);
+  font-size: var(--font-size-label-medium, 14px);
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+
+/* ============================================================================
+ * 選択肢グループのレイアウトヘルパー（radio-button-text-group / checkbox-text-group /
+ * 各 -unit。Figma の radio-button ページ（1-182 配下）の配置値由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-choice-group">…（radio-label / checkbox-label を横並び）</div>
+ *   <div class="mi-choice-group mi-choice-group--vertical">…（縦並び）</div>
+ *   <div class="mi-choice-group-unit">
+ *     <div class="mi-label-unit">…</div>
+ *     <div class="mi-choice-group">…</div>
+ *   </div>
+ * 横並び: 項目間 16px・折り返し可（項目の途中での折り返しは禁止）。縦並び: 4px。
+ * ラベル（label-unit）と選択肢の間は 8px。
+ * ========================================================================== */
+.mi-choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-4, 4px) var(--space-16, 16px);
+}
+.mi-choice-group > * { white-space: nowrap; }
+.mi-choice-group--vertical {
+  flex-direction: column;
+  gap: var(--space-4, 4px);
+}
+.mi-choice-group--vertical > * { white-space: normal; }
+.mi-choice-group-unit > .mi-label-unit { margin-bottom: var(--space-8, 8px); }

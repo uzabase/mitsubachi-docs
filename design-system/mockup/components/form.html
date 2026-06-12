@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — text-field / search-box</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 24px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .col { display: flex; flex-direction: column; gap: 16px; max-width: 420px; }
+    .field-label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+    .field-error { font-size: 12px; color: var(--text-error, #c92812); margin: 4px 0 0; }
+  </style>
+</head>
+<body>
+  <h1>text-field / search-box — mockup kit 見本</h1>
+
+  <h2>text-field（ラベル上・エラーメッセージ下: text-field.md）</h2>
+  <div class="col">
+    <div>
+      <label class="field-label" for="tf-1">企業名</label>
+      <input class="mi-text-field" id="tf-1" type="text" placeholder="例: 三和電機">
+    </div>
+    <div class="mi-text-field-unit">
+      <div class="mi-label-unit">
+        <span class="mi-label-unit__label">メールアドレス <span class="mi-label-unit__required">必須</span></span>
+      </div>
+      <input class="mi-text-field mi-text-field--error" id="tf-2" type="text" value="invalid@"
+             aria-invalid="true" aria-describedby="tf-2-error">
+      <p class="mi-error-text" id="tf-2-error">
+        <span class="mi-icon-color mi-icon-color--error" aria-hidden="true"></span>
+        メールアドレスの形式が正しくありません
+      </p>
+    </div>
+    <div>
+      <label class="field-label" for="tf-3">disabled</label>
+      <input class="mi-text-field" id="tf-3" type="text" placeholder="入力できません" disabled>
+    </div>
+  </div>
+
+  <h2>search-box（primary: 画面/テーブル全体の検索）</h2>
+  <div class="col">
+    <label class="mi-search-box mi-search-box--primary">
+      <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
+      <input class="mi-search-box__input" type="search" placeholder="企業名・業界名で検索">
+    </label>
+  </div>
+
+  <h2>search-box（secondary: フォーム内の検索補助）</h2>
+  <div class="col">
+    <label class="mi-search-box mi-search-box--secondary">
+      <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
+      <input class="mi-search-box__input" type="search" placeholder="候補を絞り込む">
+    </label>
+  </div>
+
+  <h2>checkbox（checked / 未選択 / 中間 / disabled）</h2>
+  <div class="col" style="gap: 4px;">
+    <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox" checked> 売上高</label>
+    <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox"> 営業利益率</label>
+    <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox mi-checkbox--indeterminate"> 一部選択（中間状態）</label>
+    <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox" disabled> 時価総額（選択不可）</label>
+  </div>
+
+  <h2>radio-button</h2>
+  <div class="col" style="gap: 4px;">
+    <label class="mi-radio-label"><input type="radio" name="period" class="mi-radio" checked> 過去1週間</label>
+    <label class="mi-radio-label"><input type="radio" name="period" class="mi-radio"> 過去1ヶ月</label>
+    <label class="mi-radio-label"><input type="radio" name="period" class="mi-radio" disabled> 過去3ヶ月（選択不可）</label>
+  </div>
+
+  <h2>segmented-control（選択中は check アイコン付き）</h2>
+  <div class="mi-segmented-control" role="radiogroup">
+    <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">
+      <span class="mi-icon mi-icon--check" style="width:18px;height:18px;" aria-hidden="true"></span>表
+    </button>
+    <button class="mi-segment" role="radio" aria-checked="false">グラフ</button>
+    <button class="mi-segment" role="radio" aria-checked="false">マップ</button>
+  </div>
+
+  <h2>switch（ラベルは左側に置く。desktop 40×24 / ON時はノブに check）</h2>
+  <div class="col" style="flex-direction: row; align-items: center; gap: 24px;">
+    <label style="display:inline-flex; align-items:center; gap:8px; font-size:14px;">
+      通知 <input type="checkbox" class="mi-switch" role="switch" checked>
+    </label>
+    <input type="checkbox" class="mi-switch" role="switch" aria-label="OFF">
+    <input type="checkbox" class="mi-switch" role="switch" disabled aria-label="変更不可">
+    <input type="checkbox" class="mi-switch mi-switch--phone" role="switch" checked aria-label="phoneサイズ">
+  </div>
+
+  <h2>text-area（min-height 58px / border 0.2 / 文字14px）</h2>
+  <div class="col">
+    <textarea class="mi-text-area" rows="3" placeholder="コメントを入力してください"></textarea>
+  </div>
+
+  <h2>select-box（高さ40px / 文字14px / chevron-down）</h2>
+  <div class="col" style="max-width: 216px;">
+    <select class="mi-select">
+      <option>選択してください</option>
+      <option>電気機器</option>
+      <option>半導体</option>
+    </select>
+  </div>
+
+  <h2>input-chip（入力済み値。×で削除。group は折り返し）</h2>
+  <div class="mi-input-chip-group" style="max-width: 420px;">
+    <span class="mi-input-chip">三和電機
+      <button class="mi-input-chip__remove" aria-label="三和電機を削除"><span class="mi-icon mi-icon--cross" aria-hidden="true"></span></button>
+    </span>
+    <span class="mi-input-chip">ヒバリ半導体
+      <button class="mi-input-chip__remove" aria-label="ヒバリ半導体を削除"><span class="mi-icon mi-icon--cross" aria-hidden="true"></span></button>
+    </span>
+    <span class="mi-input-chip">あけぼの家電とても長い正式名称株式会社
+      <button class="mi-input-chip__remove" aria-label="削除"><span class="mi-icon mi-icon--cross" aria-hidden="true"></span></button>
+    </span>
+  </div>
+
+  <h2>radio-button-card（補足つきカード型ラジオ。横並びは等幅）</h2>
+  <div class="mi-radio-card-group" style="max-width: 640px;">
+    <label class="mi-radio-card">
+      <input type="radio" name="plan" class="mi-radio" checked>
+      <span class="mi-radio-card__body">
+        <span class="mi-radio-card__label">スタンダード</span>
+        <span class="mi-radio-card__support">基本機能のみ</span>
+      </span>
+    </label>
+    <label class="mi-radio-card">
+      <input type="radio" name="plan" class="mi-radio">
+      <span class="mi-radio-card__body">
+        <span class="mi-radio-card__label">プロフェッショナル</span>
+        <span class="mi-radio-card__support">AI要約・エクスポート付き</span>
+      </span>
+    </label>
+  </div>
+
+  <h2>suggestion（search-box の直下に表示する候補リスト）</h2>
+  <div style="max-width: 420px;">
+    <label class="mi-search-box mi-search-box--primary">
+      <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
+      <input class="mi-search-box__input" type="search" value="三和">
+    </label>
+    <div class="mi-suggestion" role="listbox" style="margin-top: 4px;">
+      <div class="mi-suggestion__category">企業</div>
+      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和電機</div>
+      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和精密工業</div>
+      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和商事</div>
+    </div>
+  </div>
+
+  <h2>label-unit（ラベル＋必須＋補足）と組み合わせ</h2>
+  <div class="col">
+    <div class="mi-label-unit">
+      <span class="mi-label-unit__label">企業名 <span class="mi-label-unit__required">必須</span></span>
+      <span class="mi-label-unit__support">正式名称で入力してください</span>
+      <input class="mi-text-field" type="text" placeholder="例: 三和電機">
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — avatar / loading / その他表示系</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <link rel="stylesheet" href="../mitsubachi-logos.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 24px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <h1>avatar / loading / その他表示系 — mockup kit 見本</h1>
+
+  <h2>avatar（サイズ: small / medium / large / x-large / 2x-large）</h2>
+  <div class="row">
+    <span class="mi-avatar mi-avatar--small mi-avatar--blue">TS</span>
+    <span class="mi-avatar mi-avatar--blue">TS</span>
+    <span class="mi-avatar mi-avatar--large mi-avatar--blue">TS</span>
+    <span class="mi-avatar mi-avatar--x-large mi-avatar--blue">TS</span>
+    <span class="mi-avatar mi-avatar--2x-large mi-avatar--blue">TS</span>
+  </div>
+
+  <h2>avatar（パレット7色 + inactive）</h2>
+  <div class="row">
+    <span class="mi-avatar mi-avatar--plum">PL</span>
+    <span class="mi-avatar mi-avatar--violet">VI</span>
+    <span class="mi-avatar mi-avatar--blue">BL</span>
+    <span class="mi-avatar mi-avatar--viridian">VD</span>
+    <span class="mi-avatar mi-avatar--green">GR</span>
+    <span class="mi-avatar mi-avatar--brown">BR</span>
+    <span class="mi-avatar mi-avatar--red">RD</span>
+    <span class="mi-avatar mi-avatar--blue mi-avatar--inactive">IN</span>
+  </div>
+
+  <h2>loading（normal / ai、サイズ各種）</h2>
+  <div class="row">
+    <span class="mi-loading mi-loading--medium" role="status" aria-label="読み込み中"></span>
+    <span class="mi-loading" role="status" aria-label="読み込み中"></span>
+    <span class="mi-loading mi-loading--2x-large" role="status" aria-label="読み込み中"></span>
+    <span class="mi-loading mi-loading--4x-large" role="status" aria-label="読み込み中"></span>
+    <span class="mi-loading mi-loading--2x-large mi-loading--ai" role="status" aria-label="AI実行中"></span>
+    <span class="mi-loading mi-loading--4x-large mi-loading--ai" role="status" aria-label="AI実行中"></span>
+  </div>
+
+  <h2>floating-button（AIグラデーションリング）</h2>
+  <div class="row">
+    <button class="mi-floating-button" aria-label="AIに質問する">
+      <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <h2>avatar-group（重なりは径の1/4・白い境界線・最大5人・左が最前面）</h2>
+  <div class="row">
+    <div class="mi-avatar-group mi-avatar-group--small">
+      <span class="mi-avatar mi-avatar--small mi-avatar--plum">TA</span>
+      <span class="mi-avatar mi-avatar--small mi-avatar--violet">HY</span>
+      <span class="mi-avatar mi-avatar--small mi-avatar--green">JT</span>
+    </div>
+    <div class="mi-avatar-group">
+      <span class="mi-avatar mi-avatar--plum">TA</span>
+      <span class="mi-avatar mi-avatar--violet">HY</span>
+      <span class="mi-avatar mi-avatar--green">JT</span>
+      <span class="mi-avatar mi-avatar--brown">IS</span>
+      <span class="mi-avatar mi-avatar--red">MW</span>
+    </div>
+    <div class="mi-avatar-group mi-avatar-group--large">
+      <span class="mi-avatar mi-avatar--large mi-avatar--plum">TA</span>
+      <span class="mi-avatar mi-avatar--large mi-avatar--violet">HY</span>
+      <span class="mi-avatar mi-avatar--large mi-avatar--green">JT</span>
+    </div>
+  </div>
+
+  <h2>link-tag（クリック可能なタグ。x-small / small / medium）</h2>
+  <div class="row">
+    <a class="mi-link-tag mi-link-tag--x-small" href="#">半導体</a>
+    <a class="mi-link-tag mi-link-tag--small" href="#">半導体</a>
+    <a class="mi-link-tag" href="#">半導体</a>
+    <a class="mi-link-tag" href="#">電気機器</a>
+  </div>
+
+  <h2>report-heading（読み物の見出し h1〜h6）</h2>
+  <div style="display:flex; flex-direction:column; gap:16px; max-width:520px;">
+    <h1 class="mi-report-heading mi-report-heading--1">h1: 業界レポート</h1>
+    <h2 class="mi-report-heading mi-report-heading--2">h2: 市場動向</h2>
+    <h3 class="mi-report-heading mi-report-heading--3">h3: 国内市場の概況</h3>
+    <h4 class="mi-report-heading mi-report-heading--4">h4: セグメント別の動き</h4>
+    <h5 class="mi-report-heading mi-report-heading--5">h5: 主要プレイヤー</h5>
+    <h6 class="mi-report-heading mi-report-heading--6">h6: 補足事項</h6>
+  </div>
+
+  <h2>breadcrumb（リンク項目は通常色＋hover面 / リンク無し項目は弱い色）</h2>
+  <nav class="mi-breadcrumb" aria-label="パンくず">
+    <a class="mi-breadcrumb__item" href="#">企業リスト</a>
+    <span class="mi-icon mi-icon--chevron-right-small mi-breadcrumb__sep" aria-hidden="true"></span>
+    <a class="mi-breadcrumb__item" href="#">電気機器</a>
+    <span class="mi-icon mi-icon--chevron-right-small mi-breadcrumb__sep" aria-hidden="true"></span>
+    <span class="mi-breadcrumb__item mi-breadcrumb__item--no-link" aria-current="page">三和電機</span>
+  </nav>
+
+  <h2>logo（公式SVG。mitsubachi-logos.css を追加読み込み）</h2>
+  <div class="row" style="align-items: center;">
+    <span class="mi-logo mi-logo--speeda-ja" role="img" aria-label="Speeda"></span>
+    <span class="mi-logo mi-logo--speeda-en" role="img" aria-label="Speeda"></span>
+    <span class="mi-logo mi-logo--uzabase" role="img" aria-label="Uzabase"></span>
+  </div>
+
+  <h2>pagination（icon-button ＋ ページ番号 select-box）</h2>
+  <nav class="mi-pagination" aria-label="ページ送り" style="max-width: 400px; justify-content: flex-start;">
+    <button class="mi-icon-button mi-icon-button--ghost" aria-label="前のページ" disabled>
+      <span class="mi-icon mi-icon--chevron-left" aria-hidden="true"></span>
+    </button>
+    <span class="mi-pagination__page">
+      <select class="mi-select mi-pagination__select" aria-label="ページ番号">
+        <option>1</option><option>2</option><option>3</option>
+      </select>
+      / 3
+    </span>
+    <button class="mi-icon-button mi-icon-button--ghost" aria-label="次のページ">
+      <span class="mi-icon mi-icon--chevron-right" aria-hidden="true"></span>
+    </button>
+  </nav>
+</body>
+</html>

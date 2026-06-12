@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — neutral-button</title>
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body {
+      margin: 0;
+      padding: 32px;
+      background: #ffffff;
+      font-family: Arial, "Hiragino Sans", Meiryo, sans-serif;
+      color: rgba(0, 0, 0, 0.84);
+    }
+    h1 { font-size: 20px; margin: 0 0 24px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0, 0, 0, 0.55); font-weight: 700; }
+    .row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+    .label-col { width: 88px; font-size: 12px; color: rgba(0, 0, 0, 0.55); }
+    .note { font-size: 12px; color: rgba(0, 0, 0, 0.55); margin: 4px 0 0; }
+  </style>
+</head>
+<body>
+  <h1>neutral-button — mockup kit 見本</h1>
+
+  <h2>variant × size（default）</h2>
+  <div class="row">
+    <span class="label-col">medium</span>
+    <button class="mi-button mi-button--primary mi-button--medium">primary</button>
+    <button class="mi-button mi-button--secondary mi-button--medium">secondary</button>
+    <button class="mi-button mi-button--tertiary mi-button--medium">tertiary</button>
+    <button class="mi-button mi-button--ghost mi-button--medium">ghost</button>
+    <button class="mi-button mi-button--plane mi-button--medium">plane</button>
+  </div>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--primary mi-button--large">primary</button>
+    <button class="mi-button mi-button--secondary mi-button--large">secondary</button>
+    <button class="mi-button mi-button--tertiary mi-button--large">tertiary</button>
+    <button class="mi-button mi-button--ghost mi-button--large">ghost</button>
+    <button class="mi-button mi-button--plane mi-button--large">plane</button>
+  </div>
+  <div class="row">
+    <span class="label-col">x-large</span>
+    <button class="mi-button mi-button--primary mi-button--x-large">primary</button>
+    <button class="mi-button mi-button--secondary mi-button--x-large">secondary</button>
+    <button class="mi-button mi-button--tertiary mi-button--x-large">tertiary</button>
+    <button class="mi-button mi-button--ghost mi-button--x-large">ghost</button>
+    <button class="mi-button mi-button--plane mi-button--x-large">plane</button>
+  </div>
+
+  <h2>danger-button（破壊的操作。.mi-button--danger を併用）</h2>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--danger mi-button--primary mi-button--large">削除する</button>
+    <button class="mi-button mi-button--danger mi-button--secondary mi-button--large">リセットする</button>
+    <button class="mi-button mi-button--danger mi-button--ghost mi-button--large">クリア</button>
+  </div>
+
+  <h2>menu-button（メニューを開く。右が8pxに詰まり chevron-down-small 固定）</h2>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--primary mi-button--large mi-button--menu">
+      新規作成
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <button class="mi-button mi-button--secondary mi-button--large mi-button--menu">
+      エクスポート
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <button class="mi-button mi-button--ghost mi-button--large mi-button--menu">
+      並び替え
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <h2>icon-button（アイコンのみ。必ず aria-label + tooltip を併用）</h2>
+  <div class="row">
+    <span class="label-col">variant</span>
+    <button class="mi-icon-button mi-icon-button--primary" aria-label="検索"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--secondary" aria-label="検索"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--tertiary" aria-label="検索"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--ghost" aria-label="閉じる"><span class="mi-icon mi-icon--cross" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--ghost mi-icon-button--selected" aria-label="選択中"><span class="mi-icon mi-icon--check" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--ghost" aria-label="無効" disabled><span class="mi-icon mi-icon--cross" aria-hidden="true"></span></button>
+  </div>
+  <div class="row">
+    <span class="label-col">size</span>
+    <button class="mi-icon-button mi-icon-button--tertiary mi-icon-button--small" aria-label="小"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--tertiary" aria-label="中"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--tertiary mi-icon-button--large" aria-label="大"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+  </div>
+
+  <h2>selected（secondary / tertiary / ghost）</h2>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--secondary mi-button--large mi-button--selected">secondary</button>
+    <button class="mi-button mi-button--tertiary mi-button--large mi-button--selected">tertiary</button>
+    <button class="mi-button mi-button--ghost mi-button--large mi-button--selected">ghost</button>
+  </div>
+
+  <h2>disabled</h2>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--primary mi-button--large" disabled>primary</button>
+    <button class="mi-button mi-button--secondary mi-button--large" disabled>secondary</button>
+    <button class="mi-button mi-button--tertiary mi-button--large" disabled>tertiary</button>
+  </div>
+
+  <h2>アイコン付き（テキストと併用）</h2>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--primary mi-button--large">
+      <span class="mi-button__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      次へ進む
+    </button>
+    <button class="mi-button mi-button--secondary mi-button--large">
+      <span class="mi-button__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M11 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      戻る
+    </button>
+  </div>
+
+  <h2>配置ルール（neutral-button.md: primary を右、secondary を左、間隔 8px）</h2>
+  <div class="row" style="gap: 8px;">
+    <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
+    <button class="mi-button mi-button--primary mi-button--large">保存する</button>
+  </div>
+  <p class="note">focus リングはキーボードの Tab で確認できます（:focus-visible）。</p>
+
+  <h2>ai-button（= primary / secondary ＋ magic-fill アイコン固定。公式アイコンの .mi-icon--magic-fill を使用）</h2>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--primary mi-button--large">
+      <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+      AIで要約する
+    </button>
+    <button class="mi-button mi-button--secondary mi-button--large">
+      <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+      再生成する
+    </button>
+  </div>
+
+  <h2>read-only-tag（.mi-tag）</h2>
+  <div class="row">
+    <span class="mi-tag mi-tag--neutral">中立</span>
+    <span class="mi-tag mi-tag--information">情報</span>
+    <span class="mi-tag mi-tag--positive">増収</span>
+    <span class="mi-tag mi-tag--negative">減益</span>
+  </div>
+
+  <h2>table（.mi-table）</h2>
+  <table class="mi-table" style="max-width: 520px;">
+    <thead>
+      <tr><th>企業名</th><th>業種</th><th class="mi-table__num">売上高</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>三和電機</td><td><span class="mi-tag mi-tag--neutral">総合電機</span></td><td class="mi-table__num">12.4 兆円</td></tr>
+      <tr aria-selected="true"><td>ヒバリ半導体</td><td><span class="mi-tag mi-tag--information">半導体</span></td><td class="mi-table__num">6.8 兆円</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

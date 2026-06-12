@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speeda — 企業分析ダッシュボード（mitsubachi-ui mockup）</title>
+
+  <!--
+    mitsubachi-ui mockup kit を読み込む（AGENTS.md / mockup/README.md の手順）。
+    必ず tokens.css（値）→ mitsubachi-mockup.css（構造）の順。
+    ボタンはこの kit の .mi-button クラスをそのまま使い、自作しない。
+  -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+
+  <style>
+    /* ========================================================================
+     * このページ固有のレイアウト用 CSS。
+     * 値はすべて tokens.css の var(--token) を参照し、生の値はハードコードしない
+     * （foundations/prohibited.md「トークン外のカラーコードを直接指定しない」に準拠）。
+     * 背景色のフォールバック値は foundations/layout.md に明記された値のみを使用。
+     * ボタンは一切ここで定義しない（kit の .mi-button を使う）。
+     * ====================================================================== */
+
+    :root {
+      /* layout.md に明記されている2つの背景色（汎用レイアウト②）。
+         tokens.css に未収録のため、layout.md の記法どおり名前付きフォールバックで持つ。 */
+      --background-regular: #ffffff;
+      --zabuton-semi-strong: #f8f8f8;
+      /* AIサマリーの面（zabuton: 状態変化のない独立した面）にも semi-strong を使う */
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      /* タイポグラフィトークン（tokens.css）。font-family・色はトークン参照 */
+      font-family: var(--typography-font-family, Arial, "Hiragino Sans", Meiryo, sans-serif);
+      color: var(--text-regular, rgba(0, 0, 0, 0.84));
+      /* コンテンツエリアの基盤色（layout.md: コンテンツエリア = background-regular） */
+      background: var(--background-regular, #ffffff);
+      line-height: var(--line-height-label, 1.5);
+    }
+
+    /* --- ページ全体のラッパ（1カラム構成 = layout.md 汎用レイアウト②） --- */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      /* spacing トークン（dimension-scale）。tokens.css の --space-16 を基準に */
+      padding: 0 var(--space-16, 16px);
+    }
+
+    /* ====================================================================
+     * ページヘッダー（タイトル + 右側アクション群）
+     * layout.md: ページタイトル部はコンテンツエリア（白背景）。区切り線なし。
+     * ================================================================== */
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-16, 16px);
+      flex-wrap: wrap;
+      /* 余白は dimension-scale 由来のトークンで（マジックナンバー禁止: spacing.md） */
+      padding: var(--space-16, 16px) 0 var(--space-12, 12px);
+    }
+    .page-header__title {
+      /* headline 相当の大見出し。font-scale の値（typography.md）。
+         headline 25-32px は letter-spacing -2%（typography.md）。 */
+      margin: 0;
+      font-size: 28px;
+      font-weight: var(--typography-font-weight-bold, 700);
+      line-height: 1.3; /* typography.md: 大きいサイズ 20px〜 は 130% */
+      letter-spacing: -0.56px; /* -2% */
+      color: var(--text-regular, rgba(0, 0, 0, 0.84));
+    }
+    .page-header__subtitle {
+      margin: var(--space-4, 4px) 0 0;
+      font-size: var(--font-size-label-medium, 14px);
+      color: rgba(0, 0, 0, 0.55); /* text/weak 相当。トークン未収録のため近似 */
+    }
+    /* ボタン群: neutral-button.md「primary を右・secondary を左・間隔 8px」 */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px; /* button/index.md の共通ルール: ボタン間隔 8px（固定仕様値） */
+      flex-wrap: wrap;
+    }
+
+    /* ====================================================================
+     * セクション共通
+     * ================================================================== */
+    .section { margin-bottom: var(--space-16, 16px); }
+    .section + .section { margin-top: 8px; }
+    .section__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-12, 12px);
+      margin-bottom: var(--space-12, 12px);
+    }
+    .section__title {
+      margin: 0;
+      font-size: var(--font-size-label-large, 16px);
+      font-weight: var(--typography-font-weight-bold, 700);
+      letter-spacing: 0.16px; /* label/headline 16px = +1%（typography.md） */
+      color: var(--text-regular, rgba(0, 0, 0, 0.84));
+    }
+
+    /* ====================================================================
+     * AIサマリー
+     * principles.md（AI機能）:「グラデーションは面でなく線で、1画面の1〜2割に抑える」
+     * → 面塗りはせず、上端の細い線 1本だけにグラデーションを使う。
+     * 面は zabuton（状態変化のない独立した面）= zabuton-semi-strong。
+     * border-radius.md: カード類は large/x-large の角丸 → 8px。
+     * ================================================================== */
+    .ai-summary {
+      position: relative;
+      background: var(--zabuton-semi-strong, #f8f8f8);
+      border-radius: 8px; /* border-radius.md: カード類 = 8px（dimension-scale 最大） */
+      padding: var(--space-16, 16px);
+      overflow: hidden;
+    }
+    /* グラデーションは「線」でのみ使用（principles.md AI機能 Do）。
+       色は ui-primitive の有彩色（blue=選択/情報, red=ブランド）レンジに限定。 */
+    .ai-summary::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #3f69f2, #b13bd6, #e60012);
+    }
+    .ai-summary__head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4, 4px);
+      margin-bottom: var(--space-12, 12px);
+    }
+    .ai-summary__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4, 4px);
+      font-size: var(--font-size-label-small, 12px);
+      font-weight: var(--typography-font-weight-bold, 700);
+      letter-spacing: 0.12px;
+      color: var(--text-selected, #315ce8); /* 情報/選択を表す blue 系（color.md: blue=情報） */
+    }
+    .ai-summary__badge svg { width: 16px; height: 16px; display: block; }
+    .ai-summary__time {
+      margin-left: auto;
+      font-size: var(--font-size-label-small, 12px);
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .ai-summary__body {
+      margin: 0;
+      /* 読み物テキスト = text。typography.md: 読み物 14/16px は line-height 175%、
+         letter-spacing 2% */
+      font-size: var(--font-size-label-medium, 14px);
+      line-height: 1.75;
+      letter-spacing: 0.28px; /* 2% */
+      color: var(--text-regular, rgba(0, 0, 0, 0.84));
+    }
+    .ai-summary__body strong { font-weight: var(--typography-font-weight-bold, 700); }
+    .ai-summary__actions {
+      display: flex;
+      gap: 8px;
+      margin-top: var(--space-16, 16px);
+      flex-wrap: wrap;
+    }
+
+    /* ====================================================================
+     * KPI カード（3〜4枚）
+     * zabuton（独立した面）。border-radius 8px（カード類）。
+     * 数値は label、増減は color.md の positive(green)/negative(tomato) を意味で使う。
+     * ================================================================== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-12, 12px);
+    }
+    .kpi-card {
+      background: var(--zabuton-semi-strong, #f8f8f8);
+      border-radius: 8px;
+      padding: var(--space-16, 16px);
+    }
+    .kpi-card__label {
+      margin: 0 0 var(--space-4, 4px);
+      font-size: var(--font-size-label-small, 12px);
+      letter-spacing: 0.12px;
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .kpi-card__value {
+      margin: 0;
+      font-size: 28px;
+      font-weight: var(--typography-font-weight-bold, 700);
+      line-height: 1.3;
+      letter-spacing: -0.56px;
+      color: var(--text-regular, rgba(0, 0, 0, 0.84));
+    }
+    .kpi-card__value small {
+      font-size: var(--font-size-label-medium, 14px);
+      font-weight: var(--typography-font-weight-normal, 400);
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .kpi-card__delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: var(--space-4, 4px);
+      font-size: var(--font-size-label-small, 12px);
+      font-weight: var(--typography-font-weight-bold, 700);
+      letter-spacing: 0.12px;
+    }
+    /* color.md: positive=売上増加などポジティブ=green, negative=ネガティブ=tomato。
+       ui-primitive の green / tomato レンジから意味に沿って使用。 */
+    .kpi-card__delta--positive { color: var(--text-positive, #00783c); }   /* green（positive） */
+    .kpi-card__delta--negative { color: var(--text-negative, #c92812); }   /* tomato（negative） */
+
+    /* ====================================================================
+     * 企業リスト テーブル（table.md）
+     * <table> + <th scope="col">。ヘッダーは label。行 hover でハイライト。
+     * ================================================================== */
+    .table-wrap {
+      border: 1px solid var(--border-disabled, rgba(0, 0, 0, 0.07));
+      border-radius: 8px;
+      overflow: hidden; /* 角丸を行にも効かせる */
+    }
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: var(--space-12, 12px) var(--space-16, 16px);
+      background: var(--zabuton-semi-strong, #f8f8f8);
+      flex-wrap: wrap;
+    }
+    .table-toolbar__count {
+      font-size: var(--font-size-label-small, 12px);
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .table-toolbar__spacer { flex: 1; }
+    /* テーブルは kit の .mi-table を使用。数値列だけページ側で右寄せ指定 */
+    .mi-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .company-name {
+      font-weight: var(--typography-font-weight-bold, 700);
+      color: var(--text-regular, rgba(0, 0, 0, 0.84));
+    }
+    .company-meta {
+      font-size: var(--font-size-label-small, 12px);
+      color: rgba(0, 0, 0, 0.55);
+    }
+    /* read-only-tag は kit の .mi-tag を使用（このページでは定義しない） */
+    .delta-pos { color: var(--text-positive, #00783c); font-weight: 700; }
+    .delta-neg { color: var(--text-negative, #c92812); font-weight: 700; }
+
+    .table-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: var(--space-12, 12px) var(--space-16, 16px);
+      background: var(--background-regular, #ffffff);
+      border-top: 1px solid var(--border-disabled, rgba(0, 0, 0, 0.07));
+    }
+
+    .page-foot {
+      padding: var(--space-16, 16px) 0 40px;
+    }
+
+    @media (max-width: 880px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <!-- ============================================================
+         ページヘッダー: タイトル + 右側アクション群
+         ボタンは kit の .mi-button をそのまま使用。
+         neutral-button.md: primary は右・secondary/tertiary は左、間隔 8px、primary は1画面1つ。
+         ここでの primary は「保存する」。エクスポート/絞り込みは tertiary。
+         ============================================================ -->
+    <header class="page-header">
+      <div>
+        <h1 class="page-header__title">企業分析ダッシュボード</h1>
+        <p class="page-header__subtitle">電気機器セクター・主要15社 / 最終更新 2026年6月8日</p>
+      </div>
+
+      <div class="header-actions">
+        <!-- 補助アクション = tertiary（neutral-button.md: 補助的な操作） -->
+        <button class="mi-button mi-button--tertiary mi-button--large">
+          <span class="mi-button__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 5h18M6 12h12M10 19h4" stroke-linecap="round"/>
+            </svg>
+          </span>
+          絞り込み
+        </button>
+        <button class="mi-button mi-button--tertiary mi-button--large">
+          <span class="mi-button__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          エクスポート
+        </button>
+        <!-- 主要アクション = primary（1画面に1つ・最も右） -->
+        <button class="mi-button mi-button--primary mi-button--large">
+          <span class="mi-button__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 4h11l3 3v13H5z" stroke-linejoin="round"/>
+              <path d="M8 4v5h7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          保存する
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         AIサマリー
+         principles.md（AI機能）に従い、グラデーションは上端の「線」1本のみ。
+         面は zabuton（状態変化のない独立面）。
+         本文は text（読み物 → line-height 175%）。
+         AI実行ボタンは本来 ai-button（magic-fill 固定アイコン）が正だが、
+         現状の mockup kit は neutral-button のみ対応のため、
+         kit の .mi-button（secondary）で代替し、magic-fill 風アイコンを添える。
+         ============================================================ -->
+    <section class="section" aria-labelledby="ai-summary-title">
+      <div class="ai-summary">
+        <div class="ai-summary__head">
+          <span class="ai-summary__badge" id="ai-summary-title">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M11 2l1.6 4.2L17 8l-4.4 1.8L11 14l-1.6-4.2L5 8l4.4-1.8L11 2zM18 13l.9 2.3L21 16l-2.1.9L18 19l-.9-2.1L15 16l2.1-.7L18 13z"/>
+            </svg>
+            AIサマリー
+          </span>
+          <span class="ai-summary__time">2026/06/08 09:12 生成</span>
+        </div>
+
+        <p class="ai-summary__body">
+          対象15社の直近四半期は、<strong>売上高の中央値が前年同期比 +6.2%</strong> と堅調に推移しています。
+          半導体関連3社が全体を牽引する一方、家電セグメント中心の2社は為替影響で営業利益率が
+          <strong>1.8pt 低下</strong>しました。営業キャッシュフローはセクター全体で改善傾向にあり、
+          設備投資の積み増しが今後の利益率を圧迫する可能性に留意が必要です。
+        </p>
+
+        <div class="ai-summary__actions">
+          <!-- ai-button = neutral-button(secondary) + magic-fill アイコン。これが正しい AI実行ボタンの形 -->
+          <button class="mi-button mi-button--secondary mi-button--medium">
+            <span class="mi-button__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11 2l1.6 4.2L17 8l-4.4 1.8L11 14l-1.6-4.2L5 8l4.4-1.8L11 2z"/>
+              </svg>
+            </span>
+            再生成する
+          </button>
+          <button class="mi-button mi-button--ghost mi-button--medium">全文を見る</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         主要指標（KPI）カード × 4
+         増減色は color.md の positive(green) / negative(tomato) を意味どおりに使用。
+         ============================================================ -->
+    <section class="section" aria-label="主要指標">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <p class="kpi-card__label">合計売上高</p>
+          <p class="kpi-card__value">42.8<small> 兆円</small></p>
+          <span class="kpi-card__delta kpi-card__delta--positive">▲ +6.2% YoY</span>
+        </div>
+        <div class="kpi-card">
+          <p class="kpi-card__label">平均営業利益率</p>
+          <p class="kpi-card__value">9.4<small> %</small></p>
+          <span class="kpi-card__delta kpi-card__delta--negative">▼ -1.8pt YoY</span>
+        </div>
+        <div class="kpi-card">
+          <p class="kpi-card__label">時価総額（合計）</p>
+          <p class="kpi-card__value">88.1<small> 兆円</small></p>
+          <span class="kpi-card__delta kpi-card__delta--positive">▲ +11.5% YoY</span>
+        </div>
+        <div class="kpi-card">
+          <p class="kpi-card__label">対象企業数</p>
+          <p class="kpi-card__value">15<small> 社</small></p>
+          <span class="kpi-card__delta">前回比 変更なし</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         企業リスト テーブル（table.md）
+         上部にツールバー（絞り込み等）、下部にページネーション。
+         th は scope="col"。行 hover でハイライト。
+         ============================================================ -->
+    <section class="section" aria-labelledby="company-list-title">
+      <div class="section__head">
+        <h2 class="section__title" id="company-list-title">企業リスト</h2>
+      </div>
+
+      <div class="table-wrap">
+        <!-- table.md: テーブル上部にフィルター/検索を配置できる -->
+        <div class="table-toolbar">
+          <button class="mi-button mi-button--tertiary mi-button--medium mi-button--selected">電気機器</button>
+          <button class="mi-button mi-button--tertiary mi-button--medium">半導体</button>
+          <button class="mi-button mi-button--tertiary mi-button--medium">家電</button>
+          <span class="table-toolbar__spacer"></span>
+          <span class="table-toolbar__count">15件中 1–5件を表示</span>
+          <button class="mi-button mi-button--tertiary mi-button--medium">絞り込み</button>
+        </div>
+
+        <table class="mi-table">
+          <thead>
+            <tr>
+              <th scope="col">企業名</th>
+              <th scope="col">業種</th>
+              <th scope="col" class="num">売上高</th>
+              <th scope="col" class="num">営業利益率</th>
+              <th scope="col" class="num">前年比</th>
+              <th scope="col">アクション</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="company-name">三和電機</div>
+                <div class="company-meta">東証プライム / 6502</div>
+              </td>
+              <td><span class="mi-tag mi-tag--neutral">総合電機</span></td>
+              <td class="num">12.4 兆円</td>
+              <td class="num">11.2%</td>
+              <td class="num"><span class="delta-pos">+8.1%</span></td>
+              <td><button class="mi-button mi-button--tertiary mi-button--medium">詳細を見る</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="company-name">ヒバリ半導体</div>
+                <div class="company-meta">東証プライム / 6981</div>
+              </td>
+              <td><span class="mi-tag mi-tag--neutral">半導体</span></td>
+              <td class="num">6.8 兆円</td>
+              <td class="num">22.5%</td>
+              <td class="num"><span class="delta-pos">+18.9%</span></td>
+              <td><button class="mi-button mi-button--tertiary mi-button--medium">詳細を見る</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="company-name">あけぼの家電</div>
+                <div class="company-meta">東証プライム / 6753</div>
+              </td>
+              <td><span class="mi-tag mi-tag--neutral">家電</span></td>
+              <td class="num">4.1 兆円</td>
+              <td class="num">5.3%</td>
+              <td class="num"><span class="delta-neg">-3.4%</span></td>
+              <td><button class="mi-button mi-button--tertiary mi-button--medium">詳細を見る</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="company-name">コスモス精密</div>
+                <div class="company-meta">東証プライム / 6841</div>
+              </td>
+              <td><span class="mi-tag mi-tag--neutral">計測機器</span></td>
+              <td class="num">2.2 兆円</td>
+              <td class="num">14.7%</td>
+              <td class="num"><span class="delta-pos">+6.0%</span></td>
+              <td><button class="mi-button mi-button--tertiary mi-button--medium">詳細を見る</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="company-name">みどり通信機</div>
+                <div class="company-meta">東証スタンダード / 6779</div>
+              </td>
+              <td><span class="mi-tag mi-tag--neutral">通信機器</span></td>
+              <td class="num">0.9 兆円</td>
+              <td class="num">7.8%</td>
+              <td class="num"><span class="delta-neg">-0.6%</span></td>
+              <td><button class="mi-button mi-button--tertiary mi-button--medium">詳細を見る</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- table.md: ページネーションはテーブル下部。
+             ここでは neutral-button(plain) を簡易ページャとして配置。 -->
+        <div class="table-footer">
+          <button class="mi-button mi-button--plain mi-button--medium" disabled>前へ</button>
+          <button class="mi-button mi-button--plain mi-button--medium">次へ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         画面下部のフォーム的アクション
+         neutral-button.md の配置ルール: secondary を左(キャンセル)、primary を右(保存する)、間隔 8px。
+         primary は既にヘッダーで使用済みのため、ここでは tertiary を主アクションに使い
+         「1画面に primary は1つ」原則を守る。
+         ============================================================ -->
+    <section class="section page-foot">
+      <div style="display:flex; justify-content:flex-end; gap:8px;">
+        <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
+        <button class="mi-button mi-button--tertiary mi-button--large">この条件を保存</button>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
