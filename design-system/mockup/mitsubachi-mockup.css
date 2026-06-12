@@ -341,13 +341,20 @@
 }
 
 /* ============================================================================
- * table（データテーブル）
+ * table（データテーブル。ヘッダーは Figma table-header-cell node 6055-17160 由来）
  * ----------------------------------------------------------------------------
  *   <table class="mi-table"> <thead><tr><th>…</th></tr></thead>
  *     <tbody><tr><td>…</td><td class="mi-table__num">…</td></tr></tbody> </table>
- * - ヘッダーは label（弱い文字色）。行 hover でハイライト。選択行は tr[aria-selected="true"]。
+ * - 既定は grid view（ヘッダー＝グレー面・通常色文字・全周罫線）。
+ *   list view は .mi-table--list（ヘッダー＝白・弱色文字・上下線のみ）。
+ * - ソート可能な列: <th aria-sort="ascending" class="mi-table__th--sorted">
+ *     名前 <span class="mi-icon mi-icon--arrow-up-small"…>（アイコンは icons.css）
+ *   ソート中はラベルとアイコンが selected 色になる。
+ * - ボディ（table-body-cell node 6055-17729 由来）: セルは 14px・padding 8×12px・
+ *   min-h 40px・罫線 0.2。grid は縦罫線あり / --list は横罫線のみ。
+ *   行 hover は #f5f5f5、選択行（tr[aria-selected="true"]）は #e8edff（hover #dbe4ff）。
+ *   行見出しセルは <th class="mi-table__row-header">（太字）。セル内リンクは text/link 色。
  * - 数値列は td/th に .mi-table__num（右寄せ）。
- * 注: table は Figma node 未取得のため、既存トークンと table.md の規約に基づく構築。
  * ========================================================================== */
 .mi-table {
   width: 100%;
@@ -359,27 +366,83 @@
 }
 .mi-table thead th {
   text-align: left;
+  height: 40px;
+  box-sizing: border-box;
   font-size: var(--font-size-label-small, 12px);
   font-weight: var(--typography-font-weight-bold, 700);
+  line-height: var(--line-height-label, 1.5);
   letter-spacing: 0.12px;
-  color: var(--text-weak, rgba(0, 0, 0, 0.55));
-  padding: var(--space-12, 12px) var(--space-16, 16px);
-  border-bottom: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  background-color: var(--surface-semi-strong-default, #ededed);
+  padding: var(--space-8, 8px) var(--space-12, 12px);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
   white-space: nowrap;
 }
-.mi-table tbody td {
-  padding: var(--space-12, 12px) var(--space-16, 16px);
-  border-bottom: 1px solid var(--border-disabled, rgba(0, 0, 0, 0.07));
+/* ソート可能なヘッダー（hover で面が濃くなる） */
+.mi-table thead th[aria-sort]:hover {
+  background-color: var(--surface-semi-strong-hover, #e5e5e5);
+  cursor: pointer;
+}
+/* ソート適用中はラベル・アイコンが selected 色 */
+.mi-table__th--sorted,
+.mi-table thead th[aria-sort="ascending"],
+.mi-table thead th[aria-sort="descending"] {
+  color: var(--text-selected, #315ce8);
+}
+.mi-table thead th > .mi-icon {
+  width: 18px;
+  height: 18px;
   vertical-align: middle;
+  margin-left: var(--space-2, 2px);
 }
-.mi-table tbody tr:last-child td {
-  border-bottom: none;
+/* list view（シンプルな1〜2列）: 白ヘッダー・弱色文字・上下線のみ */
+.mi-table--list thead th {
+  background-color: var(--surface-regular-default, #ffffff);
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+  border-left: none;
+  border-right: none;
 }
-.mi-table tbody tr:hover {
-  background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07));
+.mi-table--list thead th[aria-sort]:hover {
+  background-color: var(--surface-regular-hover, #f5f5f5);
 }
-.mi-table tbody tr[aria-selected="true"] {
+.mi-table tbody td,
+.mi-table tbody th {
+  height: 40px;
+  box-sizing: border-box;
+  padding: var(--space-8, 8px) var(--space-12, 12px);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  vertical-align: middle;
+  background-color: var(--surface-regular-default, #ffffff);
+}
+/* 行見出しセル（content-type=header。太字・左寄せ） */
+.mi-table__row-header {
+  text-align: left;
+  font-weight: var(--typography-font-weight-bold, 700);
+}
+/* セル内のリンク */
+.mi-table tbody a {
+  color: var(--text-link, #315ce8);
+  text-decoration: none;
+}
+.mi-table tbody a:hover { text-decoration: underline; }
+/* list view: ボディも横罫線のみ */
+.mi-table--list tbody td,
+.mi-table--list tbody th {
+  border-left: none;
+  border-right: none;
+}
+/* 行 hover / 選択行 */
+.mi-table tbody tr:hover td,
+.mi-table tbody tr:hover th {
+  background-color: var(--surface-regular-hover, #f5f5f5);
+}
+.mi-table tbody tr[aria-selected="true"] td,
+.mi-table tbody tr[aria-selected="true"] th {
   background-color: var(--surface-selected-default, #e8edff);
+}
+.mi-table tbody tr[aria-selected="true"]:hover td,
+.mi-table tbody tr[aria-selected="true"]:hover th {
+  background-color: var(--surface-selected-hover, #dbe4ff);
 }
 .mi-table__num {
   text-align: right;
@@ -2452,3 +2515,162 @@ a.mi-breadcrumb__item:focus-visible {
 }
 .mi-choice-group--vertical > * { white-space: normal; }
 .mi-choice-group-unit > .mi-label-unit { margin-bottom: var(--space-8, 8px); }
+
+/* ============================================================================
+ * timeline（時系列表示。Figma timeline-item node 6931-5682 由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-timeline">
+ *     <div class="mi-timeline-item mi-timeline-item--emphasized">
+ *       <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+ *       <div class="mi-timeline-item__content">2024年4月 プロジェクト開始</div>
+ *     </div>
+ *     <div class="mi-timeline-item">…</div>
+ *   </div>
+ * 最後の項目は縦線が消える。--emphasized は強調したい出来事
+ * （最重要・文脈の起点・現在地）に使う。行間を広げたい場合は --loose。
+ * ========================================================================== */
+.mi-timeline {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+}
+.mi-timeline-item {
+  display: flex;
+  gap: var(--space-4, 4px);
+  align-items: stretch;
+}
+.mi-timeline-item__flow {
+  flex: none;
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 7px;
+}
+.mi-timeline-item__dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--palette-neutral, rgba(0, 0, 0, 0.2));
+}
+.mi-timeline-item--emphasized .mi-timeline-item__dot {
+  background-color: var(--object-emphasized, #315ce8);
+}
+/* ドットから下に伸びる縦線（最後の項目では消える） */
+.mi-timeline-item__flow::after {
+  content: "";
+  flex: 1;
+  width: 1px;
+  background-color: var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+}
+.mi-timeline-item:last-child .mi-timeline-item__flow::after { display: none; }
+.mi-timeline-item__content {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: var(--space-16, 16px);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.14px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-timeline-item--loose .mi-timeline-item__content { padding-bottom: var(--space-32, 32px); }
+.mi-timeline-item:last-child .mi-timeline-item__content { padding-bottom: 0; }
+
+/* ============================================================================
+ * ai-chat（AIとの対話 UI。Figma node 10808-18281 のパーツ由来）
+ * ----------------------------------------------------------------------------
+ *   <div class="mi-ai-chat">
+ *     <div class="mi-ai-chat__messages" role="log" aria-live="polite">
+ *       <div class="mi-ai-chat__user-message">競合3社の売上を比較して</div>
+ *       <div class="mi-ai-chat__answer">（AI回答。地の文＋既存コンポーネントを自由に置くスロット）</div>
+ *       <span class="mi-loading mi-loading--ai" role="status" aria-label="生成中"></span>
+ *     </div>
+ *     <div class="mi-ai-chat__input">
+ *       <textarea class="mi-ai-chat__input-field" rows="1" placeholder="AIに質問する"></textarea>
+ *       <button class="mi-icon-button mi-icon-button--primary" aria-label="送信">…</button>
+ *     </div>
+ *     <p class="mi-ai-chat__disclaimer">AIの回答は不正確な場合があります</p>
+ *   </div>
+ * ユーザー発言＝右寄せのグレーバブル / AI回答＝装飾なしの地の文（スロット）。
+ * floating で使う場合は外側を .mi-card--outlined 等で包み画面隅に固定（モック側）。
+ * 注: 全体フレームの node は MCP タイムアウトのため、コンテナの余白は近似。
+ * ========================================================================== */
+.mi-ai-chat {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-regular-default, #ffffff);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+}
+.mi-ai-chat__messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16, 16px);
+  padding: var(--space-16, 16px);
+}
+/* ユーザー発言（右寄せ・左に40pxの逃げ・グレーバブル） */
+.mi-ai-chat__user-message {
+  align-self: flex-end;
+  max-width: calc(100% - 40px);
+  padding: var(--space-8, 8px) var(--space-16, 16px);
+  background-color: var(--surface-semi-strong-default, #ededed);
+  border-radius: var(--border-radius-medium, 6px);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: 1.75; /* 読み物 = 175% */
+  letter-spacing: 0.28px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  overflow-wrap: anywhere;
+}
+/* AI回答（装飾なしの地の文。中に既存コンポーネントを自由に置ける） */
+.mi-ai-chat__answer {
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: 1.75;
+  letter-spacing: 0.28px;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  overflow-wrap: anywhere;
+}
+/* 入力欄（白面・枠 0.2・radius 4px） */
+.mi-ai-chat__input {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-8, 8px);
+  margin: 0 var(--space-16, 16px);
+  padding: var(--space-8, 8px);
+  background-color: var(--surface-regular-default, #ffffff);
+  border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
+  border-radius: var(--border-radius-small, 4px);
+  box-sizing: border-box;
+}
+.mi-ai-chat__input:focus-within {
+  box-shadow:
+    0 0 0 2px var(--surface-regular-default, #ffffff),
+    0 0 0 4px var(--focus-ring-regular, #191919);
+}
+.mi-ai-chat__input-field {
+  flex: 1;
+  min-width: 0;
+  min-height: 32px;
+  border: none;
+  background: transparent;
+  outline: none;
+  resize: none;
+  padding: var(--space-4, 4px) var(--space-8, 8px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: var(--line-height-label, 1.5);
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-ai-chat__input-field::placeholder { color: var(--text-weak, rgba(0, 0, 0, 0.54)); }
+/* 免責（10px・弱色・中央） */
+.mi-ai-chat__disclaimer {
+  margin: 0;
+  padding: var(--space-4, 4px) var(--space-16, 16px) var(--space-8, 8px);
+  font-size: var(--font-size-label-2x-small, 10px);
+  line-height: var(--line-height-label, 1.5);
+  letter-spacing: 0.1px;
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+  text-align: center;
+}

@@ -104,6 +104,38 @@
     <span class="mi-breadcrumb__item mi-breadcrumb__item--no-link" aria-current="page">三和電機</span>
   </nav>
 
+  <h2>timeline（最後の項目は線が消える。--emphasized は強調）</h2>
+  <div class="mi-timeline" style="max-width: 420px;">
+    <div class="mi-timeline-item mi-timeline-item--emphasized">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content"><strong>2024年4月</strong> プロジェクト開始</div>
+    </div>
+    <div class="mi-timeline-item">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content">2024年7月 ベータ版リリース</div>
+    </div>
+    <div class="mi-timeline-item">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content">2024年10月 正式リリース</div>
+    </div>
+  </div>
+
+  <h2>ai-chat（ユーザー発言＝右寄せバブル / AI回答＝地の文）</h2>
+  <div class="mi-ai-chat mi-card--outlined" style="max-width: 480px; border-radius: 8px;">
+    <div class="mi-ai-chat__messages" role="log" aria-live="polite" style="max-height: 280px;">
+      <div class="mi-ai-chat__user-message">競合3社の売上を比較して</div>
+      <div class="mi-ai-chat__answer">直近四半期の売上高は、三和電機が12.4兆円で最も大きく、ヒバリ半導体（6.8兆円）、あけぼの家電（4.1兆円）と続きます。</div>
+      <span class="mi-loading mi-loading--ai mi-loading--2x-large" role="status" aria-label="生成中"></span>
+    </div>
+    <div class="mi-ai-chat__input">
+      <textarea class="mi-ai-chat__input-field" rows="1" placeholder="AIに質問する"></textarea>
+      <button class="mi-icon-button mi-icon-button--primary" aria-label="送信">
+        <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+      </button>
+    </div>
+    <p class="mi-ai-chat__disclaimer">AIの回答は不正確な場合があります</p>
+  </div>
+
   <h2>logo（公式SVG。mitsubachi-logos.css を追加読み込み）</h2>
   <div class="row" style="align-items: center;">
     <span class="mi-logo mi-logo--speeda-ja" role="img" aria-label="Speeda"></span>

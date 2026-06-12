@@ -105,6 +105,8 @@
   --palette-semi-strong-red: #d30030; /* notification-badge の背景 */
   --palette-regular-red: #f72a48; /* report-heading h3 の縦線・floating-button */
   --border-inverse: #ffffff; /* avatar-group の境界線 */
+  --palette-neutral: rgba(0, 0, 0, 0.2); /* timeline の通常ドット */
+  --object-emphasized: #315ce8; /* timeline の強調ドット */
 
   /* --- focus-ring（フォーカス枠） --- */
   --focus-ring-regular: #191919;

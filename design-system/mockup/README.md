@@ -47,7 +47,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **danger-button**（`.mi-button--danger` ＋ variant 併用）— primary / secondary / tertiary / ghost（公式実装由来）
 - [x] **ai-button** — neutral-button の primary / secondary に公式 magic-fill アイコン（`.mi-icon--magic-fill`）を付けたもの（専用色トークンは無い。AI実行操作に限定）
 - [x] **read-only-tag**（`.mi-tag`）— variant: neutral / information / positive / negative
-- [x] **table**（`.mi-table`）— ヘッダー / セル / 行 hover / 選択行（`aria-selected`）/ 数値列（`.mi-table__num`）
+- [x] **table**（`.mi-table`）— grid view（グレーヘッダー・縦横罫線）/ `--list`（白・横罫線のみ）＋ソート状態・行見出し（`__row-header`）・セル内リンク・行 hover / 選択行（Figma table-header-cell `6055-17160`・table-body-cell `6055-17729` 由来）
 - [x] **notification-badge**（`.mi-badge`）— 数値 / `--dot`、右上重ね配置の `.mi-badge-anchor`
 - [x] **text-field**（`.mi-text-field`）— default / hover / focus / error / disabled（mitsubachi-ui 公式実装由来）
 - [x] **search-box**（`.mi-search-box`）— variant: primary / secondary（mitsubachi-ui 公式実装由来）
@@ -89,8 +89,9 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **radio-button-card**（`.mi-radio-card` + `-group`）— 補足つきカード型ラジオ。選択中は selected 面＋弱枠（Figma node `9333-1828` 由来）
 - [x] **suggestion**（`.mi-suggestion` + `__category` + `-item` + `__empty`）— 検索候補リスト（Figma node `7685-7082` 由来）
 - [x] **選択肢グループ**（`.mi-choice-group` / `--vertical` / `-unit`）— radio-button-text-group・checkbox-text-group・各 unit のレイアウト（横16px / 縦4px / ラベルと8px。Figma 配置値由来）
-- [ ] 残り: timeline（Figma node `6931-5681`）, ai-chat（`9336-8319`）, logo/symbol（md に Figma URL なし・要調査）
-  （mitsubachi-ui 公式実装にあるコンポーネントは**全て移植済み**。上記3つ以外の Figma コンポーネントも移植済み）
+- [x] **timeline**（`.mi-timeline` + `-item` + `__flow/__dot/__content`）— ドット10px＋縦線、`--emphasized`（青ドット）/ `--loose`（Figma node `6931-5682` 由来）
+- [x] **ai-chat**（`.mi-ai-chat` + `__messages/__user-message/__answer/__input/__disclaimer`）— ユーザー発言は右寄せグレーバブル、AI回答は地の文スロット（Figma node `10808-18281` のパーツ由来。全体フレームはタイムアウトのためコンテナ余白は近似）
+**ドキュメント（components/ の md）にあるコンポーネントは全てカバー済み。**
 
 > **Figma 取得のコツ**: md の Figma URL が「ページ」を指している場合、`get_design_context` は失敗する（nothing selected エラー）。その場合は `get_metadata` でページ内のコンポーネントセット node を特定してから `get_design_context` を呼ぶ。
 
@@ -99,7 +100,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 ## 既知の制約
 
 - variant 名は公式実装・md に合わせ **`plane`**（Figma のプロパティ表記は plain。互換のため `--plain` も同じ見た目になる）。
-- **table** は Figma のページが巨大で MCP がタイムアウトするため取得不可。既存トークンと `table.md` の規約に基づく構築（padding 等は妥当な近似。`table-body-cell` という component_set の存在は確認済み）。
+- **table** はページ全体の MCP 取得はタイムアウトするが、コンポーネント単位の node を直接指定すれば取得できる（header / body-cell とも取得済みで **Figma 由来**）。checkbox 列・slot 型セルなど一部の content-type は未実装。
 - **card** は専用の Figma コンポーネントが無いことを検索で確認済み。zabuton / outlined のみで**影は付けない**（elevation.md: 影は「操作で出現・消える要素」専用）。
 - **filter-chip** の selected 時 check アイコンは公式 icons.ts の `check`（24px グリッド）を流用しており、Figma の `check-small` よりグリフがやや大きい**近似**。
 - ボタンの `loading` 状態は `.mi-loading` スピナーを組み合わせて表現できるが、ボタン側の loading レイアウトは未実装。
