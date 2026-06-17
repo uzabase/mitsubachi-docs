@@ -17,6 +17,8 @@ Speeda のシンボルマークのみを表示するコンポーネントです�
 
 <!-- TODO: コンポーネントのnode-idを確認 -->
 
+> mockup kit には symbol 単体のクラスは無い（ロゴ系は `mockup/mitsubachi-logos.css` の `.mi-logo--*`）。
+
 ## バリアントプロパティ
 
 | プロパティ | 値 | 説明 |

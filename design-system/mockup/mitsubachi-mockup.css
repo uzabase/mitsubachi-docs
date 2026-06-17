@@ -793,19 +793,25 @@
 }
 
 /* ============================================================================
- * layout（画面の骨格。汎用①は Figma node 11395-2402 由来）
+ * layout（汎用レイアウト = Speeda app shell。2カラム・サイドナビ240px・ヘッダー60px）
+ * 「詳細レイアウト」Figma node 11461-12912（page-title無し）/ 11461-13900（page-title有り）由来。
+ * ※ ざっくり版（11395-2402=ヘッダー56px / 11395-2427=1カラム）は簡易表現であり、正値は詳細レイアウト側。
  * ----------------------------------------------------------------------------
- * 汎用レイアウト①（2カラム）:
+ * 汎用レイアウト①（page-title 無し。header → contents 直結）:
  *   <div class="mi-layout">
- *     <nav class="mi-layout__sidenav">…（ロゴ + サイドナビ）</nav>
+ *     <nav class="mi-layout__sidenav">
+ *       <div class="mi-layout__sidenav-header">…ロゴ + 折りたたみ icon-button…</div>
+ *       <div class="mi-layout__sidenav-body">…side-navigation-item / -category…</div>
+ *       <div class="mi-layout__sidenav-footer">…お知らせ / よくある質問…</div>
+ *     </nav>
  *     <div class="mi-layout__content">
  *       <header class="mi-layout__header">…</header>
- *       <div class="mi-layout__page-title"><h1 class="mi-layout__page-title-text">ページ名</h1> <div>アクション</div></div>
  *       <main class="mi-layout__contents">…</main>
  *     </div>
  *   </div>
- * 汎用レイアウト②（1カラム）:
- *   <header class="mi-header">…</header> ＋ コンテンツ（背景は background-regular）
+ * 汎用レイアウト②（page-title 有り）: ①の header と main の間に
+ *   <div class="mi-layout__page-title"><h1 class="mi-layout__page-title-text">ページ名</h1> <div>アクション</div></div>
+ * （参考）1カラム（サイドナビ無し）: <header class="mi-header">…</header> ＋ コンテンツ
  * ========================================================================== */
 .mi-layout {
   display: flex;
@@ -817,7 +823,38 @@
   width: var(--layout-sidenav-width, 240px);
   position: sticky;
   top: 0;
+  display: flex;
+  flex-direction: column;
   background-color: var(--zabuton-semi-strong, #f8f8f8);
+  box-sizing: border-box;
+}
+/* サイドナビ内部区画（ヘッダー=ロゴ+折りたたみ / body / 最下部固定 footer） */
+.mi-layout__sidenav-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8, 8px);
+  min-height: var(--layout-header-min-height, 56px);
+  padding: var(--space-8, 8px);
+  box-sizing: border-box;
+}
+/* サイドナビ header のロゴは Figma sp-logo 実寸 147×20（=20px高）。logos.css 既定の26pxを上書き */
+.mi-layout__sidenav-header .mi-logo {
+  height: var(--sidenav-logo-height, 20px);
+}
+.mi-layout__sidenav-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--space-8, 8px);
+  box-sizing: border-box;
+}
+.mi-layout__sidenav-footer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-8, 8px);
   box-sizing: border-box;
 }
 .mi-layout__content {
@@ -865,6 +902,88 @@
 }
 .mi-header {
   background-color: var(--zabuton-semi-strong, #f8f8f8);
+}
+
+/* ============================================================================
+ * side-navigation-item / -category（サイドナビの項目・グループ見出し）
+ * Figma component: side-navigation-item 10664:24442 / side-navigation-category 10360:4591
+ * （app-shell 11461-12912 由来。item は min-h 32px・選択時は overlay 面でハイライト）
+ * ----------------------------------------------------------------------------
+ *   <nav class="mi-layout__sidenav-body">
+ *     <div class="mi-sidenav-group">
+ *       <a class="mi-sidenav-item mi-sidenav-item--selected">
+ *         <span class="mi-icon mi-icon--search mi-sidenav-item__icon"></span>
+ *         <span class="mi-sidenav-item__label">企業検索</span>
+ *       </a>
+ *     </div>
+ *     <div class="mi-sidenav-group">
+ *       <div class="mi-sidenav-category">カテゴリ</div>
+ *       <a class="mi-sidenav-item"><span class="mi-sidenav-item__label">項目</span></a>
+ *     </div>
+ *   </nav>
+ * ========================================================================== */
+.mi-sidenav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8, 8px);
+  min-height: var(--sidenav-item-min-height, 32px);
+  padding: var(--space-4, 4px) var(--sidenav-item-padding-x, 6px);
+  border-radius: var(--border-radius-medium, 6px);
+  background-color: transparent;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+/* hover はこの Figma ノードに無く、系で最も薄い overlay 0.04 を流用＝近似 */
+.mi-sidenav-item:hover {
+  background-color: var(--button-overlay-hover, rgba(0, 0, 0, 0.04));
+}
+.mi-sidenav-item--selected,
+.mi-sidenav-item[aria-current="page"] {
+  background-color: var(--surface-overlay-current, rgba(0, 0, 0, 0.07));
+}
+.mi-sidenav-item--disabled,
+.mi-sidenav-item[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+/* 先頭アイコン（任意。20px。.mi-icon と併用） */
+.mi-sidenav-item__icon {
+  flex: none;
+  width: var(--sidenav-item-icon-size, 20px);
+  height: var(--sidenav-item-icon-size, 20px);
+}
+.mi-sidenav-item__label {
+  flex: 1 1 0;
+  min-width: 0;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-medium, 14px);
+  line-height: 1.5;
+  letter-spacing: 0.14px; /* label 14px = +1% */
+  color: inherit;
+}
+/* グループ見出し（弱色 12px） */
+.mi-sidenav-category {
+  display: flex;
+  align-items: center;
+  padding: var(--sidenav-item-padding-x, 6px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: 1.3;
+  letter-spacing: 0.12px; /* label 12px = +1% */
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+  box-sizing: border-box;
+}
+/* 項目グループ。グループ間は 24px（Figma: primary 終端 y96 → secondary y120） */
+.mi-sidenav-group {
+  display: flex;
+  flex-direction: column;
+}
+.mi-sidenav-group + .mi-sidenav-group {
+  margin-top: var(--space-24, 24px);
 }
 
 /* ============================================================================

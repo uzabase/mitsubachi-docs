@@ -19,6 +19,8 @@ menu（複数の操作や遷移先をリスト形式で提示するコンポー�
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8301-3447
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-button--menu`（+ variant 併用） を使う（自作しない）。
+
 ## バリアントプロパティ
 
 | プロパティ | 値 | 説明 |

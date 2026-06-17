@@ -17,6 +17,8 @@ search-box は、ユーザーが必要な情報を素早く見つけるための
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5789-1881
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-search-box` を使う（自作しない）。
+
 ## バリアントプロパティ
 | プロパティ | 値 |
 |---|---|

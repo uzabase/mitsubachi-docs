@@ -17,6 +17,8 @@ Speeda ロゴ（テキスト＋シンボル）を表示するコンポーネン�
 
 <!-- TODO: コンポーネントのnode-idを確認 -->
 
+> mockup で再現する場合は `mockup/mitsubachi-logos.css` を追加読み込みして `.mi-logo--speeda-ja/--speeda-en/--speeda-zh/--speeda-ai-agent` を使う（自作しない）。
+
 ## バリアントプロパティ
 
 | プロパティ | 値 | 説明 |

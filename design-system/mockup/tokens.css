@@ -190,11 +190,16 @@
   --select-min-height: 40px;
   /* text-area（Figma 182-4766。size=medium） */
   --text-area-min-height: 58px;
-  /* layout 汎用①（Figma 11395-2402） */
+  /* layout 汎用レイアウト（= 詳細レイアウト/Speeda app shell。Figma 11461-12912=page-title無し / 11461-13900=page-title有り） */
   --layout-sidenav-width: 240px;
-  --layout-header-min-height: 56px;
+  --layout-header-min-height: 60px; /* 詳細レイアウトの正値。ざっくり版 11395-2402 の56pxは簡易表現 */
   --layout-page-title-min-height: 64px;
   --font-size-headline-medium: 22px; /* ページタイトル */
+  /* side-navigation-item / -category（Figma component 10664:24442 / 10360:4591） */
+  --sidenav-item-min-height: 32px;
+  --sidenav-item-padding-x: 6px; /* Figma spacing-small(6px) */
+  --sidenav-item-icon-size: 20px;
+  --sidenav-logo-height: 20px; /* Figma sp-logo 実寸 147×20。logos.css 既定26pxを上書き */
   /* filter-chip（Figma 10771-20108） */
   --chip-min-height-desktop: 24px;
   --chip-min-height-phone: 28px;

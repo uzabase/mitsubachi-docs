@@ -2,6 +2,8 @@
 
 コンテンツを切り替えるナビゲーションコンポーネント群。
 
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-page-tab` / `.mi-section-tab` を使う（自作しない）。
+
 ## 使い分け
 
 | コンポーネント | 用途 |

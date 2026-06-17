@@ -2,6 +2,8 @@
 
 ユーザーや組織を視覚的に識別するためのコンポーネント群。
 
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-avatar` / `.mi-avatar-group` を使う（自作しない）。
+
 ## 使い分け
 
 | コンポーネント | 用途 |

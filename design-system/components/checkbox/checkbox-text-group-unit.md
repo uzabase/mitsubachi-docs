@@ -17,6 +17,8 @@ checkbox-text-group-unitは、[label-unit](../label-unit.md)（ラベル・必�
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5276-5517
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-choice-group-unit` を使う（自作しない）。
+
 ## バリアントプロパティ
 
 | プロパティ | 値 | 説明 |

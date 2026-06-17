@@ -54,7 +54,10 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **page-tab**（`.mi-page-tab`）— 下線インジケーター式。selected / hover / focus / disabled（Figma node `5634-1167` 由来）
 - [x] **section-tab**（`.mi-section-tab`）— desktop / phone（`--phone`）。selected は青ボーダー＋青太字（Figma node `5634-1269` 由来）
 - [x] **card**（`.mi-card`）— zabuton 面 / `--outlined`。影なし（elevation.md 準拠。専用 Figma コンポーネントが無いことは検索で確認済みの規約ベース構成パーツ）
-- [x] **layout**（`.mi-layout` + header / page-title / contents、`.mi-header`）— サイドナビ240px・ヘッダー56px・ページタイトル64px（汎用①は Figma node `11395-2402` 由来）
+- [x] **layout（汎用レイアウト = Speeda app shell）**（`.mi-layout` + `.mi-layout__sidenav`(-header/-body/-footer) / `__content` / `__header` / `__page-title` / `__contents`）— 2カラム・サイドナビ240px・**ヘッダー60px**。サイドナビ内は header(ロゴ+折りたたみ icon-button=`side-left`) / body(`side-navigation-item`・`-category`) / 最下部固定 footer(お知らせ=`bell` / よくある質問=`question-circle`)。アイコンは `mitsubachi-icons.css` を追加読み込み。**page-title 行の有無で2バリアント**: **①** page-title 無し（header → contents 直結。Figma node `11461-12912`）/ **②** page-title 有り（header → `__page-title`(64px) → contents。Figma node `11461-13900`）。両者は同じ骨格・サイドナビで page-title 行だけが差分。（サイドナビ詳細は `11461-14147`。ざっくり版 `11395-2402`(ヘッダー56px) / `11395-2427`(1カラム) は簡易表現で、正値は詳細レイアウト側）
+- [x] **（参考）1カラム**（`.mi-header`）— サイドナビ無しのヘッダー+コンテンツ（背景は zabuton-semi-strong / background-regular）。上記2つの汎用レイアウトとは別の簡易パターン
+- [x] **side-navigation-item**（`.mi-sidenav-item` + `__icon` + `__label`、`--selected`）— min-h 32px・選択時は `surface/overlay-current` 面・任意先頭アイコン20px（Figma component `10664:24442` 由来。hover は系の最小 overlay 0.04 を流用＝近似）
+- [x] **side-navigation-category**（`.mi-sidenav-category`、`.mi-sidenav-group`）— サイドナビのグループ見出し（弱色12px）とグループ区切り（24px）。（Figma component `10360:4591` 由来）
 - [x] **checkbox**（`.mi-checkbox` + `.mi-checkbox-label`）— checked / 中間 / disabled（公式実装由来）
 - [x] **radio-button**（`.mi-radio` + `.mi-radio-label`）—（公式実装由来）
 - [x] **switch**（`.mi-switch`）— desktop 40×24 / `--phone` 56×32。ON時はノブに check（Figma node `9925-6684` 由来）
@@ -73,12 +76,12 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **loading**（`.mi-loading`）— normal / `--ai`、6サイズ（公式実装由来）
 - [x] **breadcrumb**（`.mi-breadcrumb`）— リンク項目は通常色＋hover面 / リンク無し項目は弱色。desktop 12px / `--phone` 14px（Figma node `9926-7237` 由来）
 - [x] **pagination**（`.mi-pagination`）— icon-button（chevron）＋ページ番号 select-box（64px）＋「/ 総数」（Figma node `8910-6776` 由来）
-- [x] **icon**（`.mi-icon`）— 本体によく使う7種（magic / magic-fill / search / check / chevron-down / chevron-right / cross）。**全97種は `mitsubachi-icons.css` を追加読み込み**（一覧は `components/icons.html`）
+- [x] **icon**（`.mi-icon`）— 本体に内蔵する10種（magic / magic-fill / search / check / cross / chevron-down / chevron-down-small / chevron-right / chevron-right-small / chevron-left）。**これ以外（home / bell / side-left / question-circle など全97種）は `mitsubachi-icons.css` を追加読み込み**（一覧は `components/icons.html`。基底クラス `.mi-icon` は本体側にあり必ず併用）
 - [x] **icon-button**（`.mi-icon-button`）— size: `--small`(24) / 既定(32) / `--large`(40)、variant: `--primary/--secondary/--tertiary/--ghost` + `--selected`（公式実装由来）
 - [x] **icon-color**（`.mi-icon-color--error/information/success/warning`）— 多色のステータスアイコン（公式実装由来。通知系の先頭アイコンに使う）
 - [x] **text-field-unit / error-text**（`.mi-text-field-unit` / `.mi-error-text`）— ラベル＋フィールド＋エラーの組み立て（公式実装由来）
 - [x] **snackbar-viewport**（`.mi-snackbar-viewport`）— snackbar の画面隅スタック。desktop 右上 / phone 下中央（公式実装由来）
-- [x] **logo**（`.mi-logo--speeda-ja/speeda-en/speeda-zh/uzabase`）— 公式 SVG。`mitsubachi-logos.css` を追加読み込み
+- [x] **logo**（`.mi-logo--speeda-ja/speeda-en/speeda-zh/uzabase/speeda-ai-agent`）— 公式 SVG。`mitsubachi-logos.css` を追加読み込み（`speeda-ai-agent` は別 Figma ファイル `3abXEj4vbUt5UUf37Ld2Cn` node `1:709` 由来。symbol付き・ライト背景用）
 - [x] **filter-chip**（`.mi-chip` + `.mi-chip-group`）— selected / hover / active / focus / disabled、viewport: desktop / `--phone`（Figma node `10771-20108` 由来）
 - [x] **link-tag**（`.mi-link-tag`）— クリック可能なタグ。x-small / small / medium（Figma node `5416-7917` 由来）
 - [x] **avatar-group**（`.mi-avatar-group`）— 重なりは径の1/4・白い境界線・最大5人（Figma node `4822-682` 由来）
@@ -91,11 +94,11 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **選択肢グループ**（`.mi-choice-group` / `--vertical` / `-unit`）— radio-button-text-group・checkbox-text-group・各 unit のレイアウト（横16px / 縦4px / ラベルと8px。Figma 配置値由来）
 - [x] **timeline**（`.mi-timeline` + `-item` + `__flow/__dot/__content`）— ドット10px＋縦線、`--emphasized`（青ドット）/ `--loose`（Figma node `6931-5682` 由来）
 - [x] **ai-chat**（`.mi-ai-chat` + `__messages/__user-message/__answer/__input/__disclaimer`）— ユーザー発言は右寄せグレーバブル、AI回答は地の文スロット（Figma node `10808-18281` のパーツ由来。全体フレームはタイムアウトのためコンテナ余白は近似）
-**ドキュメント（components/ の md）にあるコンポーネントは全てカバー済み。**
+**ドキュメント（components/ の md）にあるコンポーネントは全てカバー済み。** なお **side-navigation-item / -category と汎用レイアウト（app shell）は components/ に md が無い net-new**（Figma の詳細レイアウト `11461-12912` / `11461-13900` から kit に先行収録）。
 
 > **Figma 取得のコツ**: md の Figma URL が「ページ」を指している場合、`get_design_context` は失敗する（nothing selected エラー）。その場合は `get_metadata` でページ内のコンポーネントセット node を特定してから `get_design_context` を呼ぶ。
 
-見本: `components/button.html`（button / ai-button / tag / table）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / layout）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）、`test-output/dashboard-v2.html`（複合画面の実例）
+見本: `components/button.html`（button / ai-button / tag / table）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）、`test-output/dashboard-v2.html`（複合画面の実例）
 
 ## 既知の制約
 

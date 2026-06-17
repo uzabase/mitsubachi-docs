@@ -18,6 +18,8 @@ link-tag は、コンテンツの属性や分類を簡潔に示すためのコ�
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5416-7917
 
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-link-tag` を使う（自作しない）。
+
 ## バリアントプロパティ
 
 | プロパティ | 値 | 説明 |

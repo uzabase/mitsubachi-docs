@@ -16,6 +16,8 @@ Uzabase のロゴを表示するコンポーネントです。フッターなど
 
 <!-- TODO: コンポーネントのnode-idを確認 -->
 
+> mockup で再現する場合は `mockup/mitsubachi-logos.css` を追加読み込みして `.mi-logo--uzabase` を使う（自作しない）。
+
 ## バリアントプロパティ
 
 | プロパティ | 値 | 説明 |

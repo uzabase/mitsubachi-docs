@@ -5,6 +5,8 @@
 ## Figma
 - https://www.figma.com/design/0TyVfKpH9I54YV21lcOLeQ/Iconography?node-id=0-1&t=QkVMCef1Qcm5klSE-1
 
+> mockup で再現する場合は `.mi-icon`（基底）+ `.mi-icon--*` を使う。本体内蔵は10種で、それ以外は `mockup/mitsubachi-icons.css` を追加読み込みする（自作しない）。
+
 ## SVG の取得元
 - [icons.ts](https://github.com/uzabase/mitsubachi-ui/blob/main/src/components/icon/icons.ts) - 各アイコンの SVG パスデータ
 

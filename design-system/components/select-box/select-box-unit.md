@@ -19,6 +19,8 @@ select-box-unit は、ラベル（label-unit）と選択入力欄（select-box�
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8257-5204
 
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-select` + `.mi-label-unit` を使う（自作しない）。
+
 ## バリアントプロパティ
 
 | プロパティ | 値 | 説明 |
