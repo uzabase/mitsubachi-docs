@@ -16,7 +16,7 @@ pagination（ページネーション）は、大量のデータやコンテン�
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8909-6683
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-pagination` を使う（自作しない）。
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-pagination` を使う（自作しない）。スマートフォン向け（中央寄せ）には `.mi-pagination--phone` を付ける。
 
 ## バリアントプロパティ
 | プロパティ | 値 |

@@ -47,7 +47,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **danger-button**（`.mi-button--danger` ＋ variant 併用）— primary / secondary / tertiary / ghost（公式実装由来）
 - [x] **ai-button** — neutral-button の primary / secondary に公式 magic-fill アイコン（`.mi-icon--magic-fill`）を付けたもの（専用色トークンは無い。AI実行操作に限定）
 - [x] **read-only-tag**（`.mi-tag`）— variant: neutral / information / positive / negative
-- [x] **table**（`.mi-table`）— grid view（グレーヘッダー・縦横罫線）/ `--list`（白・横罫線のみ）＋ソート状態・行見出し（`__row-header`）・セル内リンク・行 hover / 選択行（Figma table-header-cell `6055-17160`・table-body-cell `6055-17729` 由来）
+- [x] **table**（`.mi-table`）— grid view（グレーヘッダー・縦横罫線）/ `--list`（白・横罫線のみ）＋ソート状態・行見出し（`__row-header`）・数値列（`__num`）・**checkbox 列（`__check`・行選択）**・**アクション列（`__actions`・icon-button）**・セル内リンク・行 hover / 選択行（content-type=text/number/header/checkbox/icon-button/slot, content-state=filled/empty まで Figma table-header-cell `6055-17160`・table-body-cell `6055-17729` で確認・収録）
 - [x] **notification-badge**（`.mi-badge`）— 数値 / `--dot`、右上重ね配置の `.mi-badge-anchor`
 - [x] **text-field**（`.mi-text-field`）— default / hover / focus / error / disabled（mitsubachi-ui 公式実装由来）
 - [x] **search-box**（`.mi-search-box`）— variant: primary / secondary（mitsubachi-ui 公式実装由来）
@@ -96,6 +96,22 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **ai-chat**（`.mi-ai-chat` + `__messages/__user-message/__answer/__input/__disclaimer`）— ユーザー発言は右寄せグレーバブル、AI回答は地の文スロット（Figma node `10808-18281` のパーツ由来。全体フレームはタイムアウトのためコンテナ余白は近似）
 **ドキュメント（components/ の md）にあるコンポーネントは全てカバー済み。** なお **side-navigation-item / -category と汎用レイアウト（app shell）は components/ に md が無い net-new**（Figma の詳細レイアウト `11461-12912` / `11461-13900` から kit に先行収録）。
 
+## 変種の追加（size / viewport=phone / loading / variant個別。Figma 由来。2026-06-18）
+
+Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」しか写していなかった**変種（コンポーネント内部の軸）**を追加。コンポーネント単位の差分（global-search 系など）とは別レイヤー。
+
+- **size**（Figma に複数 size があるもの）
+  - **text-field** — 既定=large(48px/16px) ＋ `--medium`(40px/14px)
+  - **text-area** — 既定=medium(58px/14px) ＋ `--large`(64px/16px)
+  - **select-box** — 既定=medium(40px) ＋ `--small`(32px)
+  - **snackbar** — 既定=medium(min-h 56px) ＋ `--small`(hug・padding 8px)
+- **viewport=phone**（`--phone` を併用。主に文字 14→16px・アイコン 20→22px のタッチ最適化）: **text-field / text-area / select-box / search-box / segmented-control（`--phone` は容器側）/ pagination / banner / inline-notification / dialog / report-heading（h1=25px太字・h6=14px のみ差）/ radio-button-card / menu-item**。（従来からある breadcrumb / chip / input-chip / section-tab / switch に加わる）
+- **loading**（ボタン全系統）— `.mi-button--loading` ＋ 中に `<span class="mi-loading">`。loading 中は variant 色に依らず disabled 相当の面＋通常文字色（danger 含む）。スピナーは large/x-large=20px・medium=18px。
+- **variant個別** — `.mi-menu-item--danger`（危険メニュー項目・赤文字）/ `.mi-inline-notification--secondary`（グレー面固定・補足扱いの小さめ）/ `.mi-select--secondary`（枠なし・auto幅）/ `.mi-segment--icon`（アイコンのみセグメント）
+
+> ※ **search-box** は Figma に size バリアントが無く単一サイズ（追加は `--phone` のみ）。**global-search 系・avatar の icon variant** は「コンポーネント単位の差分」側で別途管理（未収録）。
+> 見本: `test-output/variant-additions-check.html`（全追加変種を一覧）。
+
 > **Figma 取得のコツ**: md の Figma URL が「ページ」を指している場合、`get_design_context` は失敗する（nothing selected エラー）。その場合は `get_metadata` でページ内のコンポーネントセット node を特定してから `get_design_context` を呼ぶ。
 
 見本: `components/button.html`（button / ai-button / tag / table）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）、`test-output/dashboard-v2.html`（複合画面の実例）
@@ -103,10 +119,10 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 ## 既知の制約
 
 - variant 名は公式実装・md に合わせ **`plane`**（Figma のプロパティ表記は plain。互換のため `--plain` も同じ見た目になる）。
-- **table** はページ全体の MCP 取得はタイムアウトするが、コンポーネント単位の node を直接指定すれば取得できる（header / body-cell とも取得済みで **Figma 由来**）。checkbox 列・slot 型セルなど一部の content-type は未実装。
+- **table** はページ全体の MCP 取得はタイムアウトするが、コンポーネント単位の node を直接指定すれば取得できる（header `6055-17160` / body-cell `6055-17729` とも取得済みで **Figma 由来**）。content-type は text/number/header/checkbox/icon-button/slot を確認し、checkbox 列（`__check`）・アクション列（`__actions`）を実装済み（2026-06-18）。空セル（content-state=empty）はプレースホルダ記号を持たず素の `<td></td>`、slot セルは td に任意要素を直接置いて表現する。
 - **card** は専用の Figma コンポーネントが無いことを検索で確認済み。zabuton / outlined のみで**影は付けない**（elevation.md: 影は「操作で出現・消える要素」専用）。
 - **filter-chip** の selected 時 check アイコンは公式 icons.ts の `check`（24px グリッド）を流用しており、Figma の `check-small` よりグリフがやや大きい**近似**。
-- ボタンの `loading` 状態は `.mi-loading` スピナーを組み合わせて表現できるが、ボタン側の loading レイアウトは未実装。
+- ボタンの `loading` 状態は `.mi-button--loading`（中に `.mi-loading` スピナーを置く）で実装済み（2026-06-18）。スピナーの色は公式が画像アセットのため `.mi-loading`（object-regular）で近似。
 
 ## 位置づけ（思想との両立）
 

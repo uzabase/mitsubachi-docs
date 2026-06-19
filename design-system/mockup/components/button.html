@@ -60,7 +60,22 @@
     <button class="mi-button mi-button--danger mi-button--ghost mi-button--large">クリア</button>
   </div>
 
-  <h2>menu-button（メニューを開く。右が8pxに詰まり chevron-down-small 固定）</h2>
+  <h2>menu-button（メニューを開く。右が8pxに詰まり末尾に chevron-down-small。size 連動で chevron は 18/20/22px）</h2>
+  <div class="row">
+    <span class="label-col">medium</span>
+    <button class="mi-button mi-button--primary mi-button--medium mi-button--menu">
+      新規作成
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <button class="mi-button mi-button--secondary mi-button--medium mi-button--menu">
+      エクスポート
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <button class="mi-button mi-button--ghost mi-button--medium mi-button--menu">
+      並び替え
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+  </div>
   <div class="row">
     <span class="label-col">large</span>
     <button class="mi-button mi-button--primary mi-button--large mi-button--menu">
@@ -72,6 +87,21 @@
       <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
     </button>
     <button class="mi-button mi-button--ghost mi-button--large mi-button--menu">
+      並び替え
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="row">
+    <span class="label-col">x-large</span>
+    <button class="mi-button mi-button--primary mi-button--x-large mi-button--menu">
+      新規作成
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <button class="mi-button mi-button--secondary mi-button--x-large mi-button--menu">
+      エクスポート
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <button class="mi-button mi-button--ghost mi-button--x-large mi-button--menu">
       並び替え
       <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
     </button>
@@ -108,6 +138,18 @@
     <button class="mi-button mi-button--primary mi-button--large" disabled>primary</button>
     <button class="mi-button mi-button--secondary mi-button--large" disabled>secondary</button>
     <button class="mi-button mi-button--tertiary mi-button--large" disabled>tertiary</button>
+  </div>
+
+  <h2>loading（.mi-button--loading ＋ 中に .mi-loading。全 variant 共通で disabled 相当の面＋通常文字）</h2>
+  <div class="row">
+    <span class="label-col">large</span>
+    <button class="mi-button mi-button--primary mi-button--large mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>保存中…</button>
+    <button class="mi-button mi-button--secondary mi-button--large mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>処理中…</button>
+    <button class="mi-button mi-button--danger mi-button--primary mi-button--large mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>削除中…</button>
+  </div>
+  <div class="row">
+    <span class="label-col">medium</span>
+    <button class="mi-button mi-button--primary mi-button--medium mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>送信中</button>
   </div>
 
   <h2>アイコン付き（テキストと併用）</h2>
@@ -159,14 +201,31 @@
     <span class="mi-tag mi-tag--negative">減益</span>
   </div>
 
-  <h2>table（.mi-table）</h2>
-  <table class="mi-table" style="max-width: 520px;">
+  <h2>table（.mi-table。checkbox列 __check / アクション列 __actions / 空セル / 選択行）</h2>
+  <table class="mi-table" style="max-width: 560px;">
     <thead>
-      <tr><th>企業名</th><th>業種</th><th class="mi-table__num">売上高</th></tr>
+      <tr>
+        <th class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="全選択"></th>
+        <th>企業名</th><th>業種</th><th class="mi-table__num">売上高</th>
+        <th class="mi-table__actions"></th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td>三和電機</td><td><span class="mi-tag mi-tag--neutral">総合電機</span></td><td class="mi-table__num">12.4 兆円</td></tr>
-      <tr aria-selected="true"><td>ヒバリ半導体</td><td><span class="mi-tag mi-tag--information">半導体</span></td><td class="mi-table__num">6.8 兆円</td></tr>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="三和電機を選択"></td>
+        <td>三和電機</td><td><span class="mi-tag mi-tag--neutral">総合電機</span></td><td class="mi-table__num">12.4 兆円</td>
+        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+      </tr>
+      <tr aria-selected="true">
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" checked aria-label="ヒバリ半導体を選択"></td>
+        <td>ヒバリ半導体</td><td><span class="mi-tag mi-tag--information">半導体</span></td><td class="mi-table__num">6.8 兆円</td>
+        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+      </tr>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="あけぼの家電を選択"></td>
+        <td>あけぼの家電</td><td><span class="mi-tag mi-tag--neutral">家電</span></td><td class="mi-table__num"></td>
+        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+      </tr>
     </tbody>
   </table>
 </body>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>変種追加の検証 - mitsubachi mockup kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../mitsubachi-mockup.css">
+<link rel="stylesheet" href="../mitsubachi-icons.css">
+<style>
+  body { font-family: Arial, "Hiragino Sans", sans-serif; margin: 0; padding: 24px; background: #fff; color: rgba(0,0,0,0.84); }
+  h2 { font-size: 18px; border-bottom: 2px solid #282828; padding-bottom: 4px; margin: 32px 0 12px; }
+  h3 { font-size: 13px; color: rgba(0,0,0,0.54); margin: 16px 0 6px; font-weight: 700; }
+  .row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin-bottom: 8px; }
+  .cell { display: flex; flex-direction: column; gap: 4px; }
+  .tag { font-size: 11px; color: rgba(0,0,0,0.54); }
+  .box { width: 280px; }
+</style>
+</head>
+<body>
+<h1 style="font-size:22px;">変種追加の検証（size / viewport=phone / loading / variant個別）</h1>
+
+<h2>テーマC: ボタン loading（全系統）</h2>
+<div class="row">
+  <div class="cell"><span class="tag">primary large</span>
+    <button class="mi-button mi-button--primary mi-button--large mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>保存中…</button></div>
+  <div class="cell"><span class="tag">secondary large</span>
+    <button class="mi-button mi-button--secondary mi-button--large mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>処理中…</button></div>
+  <div class="cell"><span class="tag">medium</span>
+    <button class="mi-button mi-button--primary mi-button--medium mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>送信中</button></div>
+  <div class="cell"><span class="tag">danger primary large</span>
+    <button class="mi-button mi-button--danger mi-button--primary mi-button--large mi-button--loading" aria-busy="true"><span class="mi-loading" aria-hidden="true"></span>削除中…</button></div>
+  <div class="cell"><span class="tag">（比較）通常 primary large</span>
+    <button class="mi-button mi-button--primary mi-button--large">保存する</button></div>
+</div>
+
+<h2>テーマA: size（入力系 + snackbar）</h2>
+<h3>text-field（既定=large 48px / --medium 40px / --phone 文字16px）</h3>
+<div class="row">
+  <div class="cell box"><span class="tag">既定（large・48px・16px）</span><input class="mi-text-field" value="標準サイズ"></div>
+  <div class="cell box"><span class="tag">--medium（40px・14px）</span><input class="mi-text-field mi-text-field--medium" value="medium"></div>
+  <div class="cell box"><span class="tag">--medium --phone（40px・16px）</span><input class="mi-text-field mi-text-field--medium mi-text-field--phone" value="phone"></div>
+</div>
+<h3>text-area（既定=medium 58px / --large 64px / --phone）</h3>
+<div class="row">
+  <div class="cell box"><span class="tag">既定（medium・58px・14px）</span><textarea class="mi-text-area">medium</textarea></div>
+  <div class="cell box"><span class="tag">--large（64px・16px）</span><textarea class="mi-text-area mi-text-area--large">large</textarea></div>
+  <div class="cell box"><span class="tag">--phone（64px・16px）</span><textarea class="mi-text-area mi-text-area--phone">phone</textarea></div>
+</div>
+<h3>select-box（既定=medium 40px / --small 32px / --phone chevron22 / --secondary）</h3>
+<div class="row">
+  <div class="cell box"><span class="tag">既定（primary・medium・40px）</span><select class="mi-select"><option>標準</option></select></div>
+  <div class="cell"><span class="tag">--small（32px）</span><select class="mi-select mi-select--small mi-select--secondary"><option>small/secondary</option></select></div>
+  <div class="cell box"><span class="tag">--phone（16px・chevron22）</span><select class="mi-select mi-select--phone"><option>phone</option></select></div>
+  <div class="cell"><span class="tag">--secondary（枠なし・auto幅）</span><select class="mi-select mi-select--secondary"><option>secondary</option></select></div>
+</div>
+<h3>snackbar（既定=medium 56px / --small hug）</h3>
+<div class="row">
+  <div class="cell"><span class="tag">既定（medium）</span>
+    <div class="mi-snackbar" role="status"><span class="mi-icon mi-icon--check mi-snackbar__icon" aria-hidden="true"></span><p class="mi-snackbar__text">保存しました（medium）</p></div></div>
+  <div class="cell"><span class="tag">--small</span>
+    <div class="mi-snackbar mi-snackbar--small" role="status"><span class="mi-icon mi-icon--check mi-snackbar__icon" aria-hidden="true"></span><p class="mi-snackbar__text">完了（small）</p></div></div>
+</div>
+
+<h2>テーマB: viewport=phone</h2>
+<h3>search-box（--phone: 文字16・icon22）</h3>
+<div class="row">
+  <div class="cell box"><span class="tag">既定</span><label class="mi-search-box mi-search-box--primary"><span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span><input class="mi-search-box__input" type="search" placeholder="企業名で検索"></label></div>
+  <div class="cell box"><span class="tag">--phone</span><label class="mi-search-box mi-search-box--primary mi-search-box--phone"><span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span><input class="mi-search-box__input" type="search" placeholder="企業名で検索"></label></div>
+</div>
+<h3>segmented-control（--phone: 36px/14px、variant=icon）</h3>
+<div class="row">
+  <div class="cell"><span class="tag">既定（desktop 32px）</span>
+    <div class="mi-segmented-control" role="radiogroup">
+      <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">表</button>
+      <button class="mi-segment" role="radio">グラフ</button></div></div>
+  <div class="cell"><span class="tag">--phone（36px）</span>
+    <div class="mi-segmented-control mi-segmented-control--phone" role="radiogroup">
+      <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">表</button>
+      <button class="mi-segment" role="radio">グラフ</button></div></div>
+  <div class="cell"><span class="tag">variant=icon</span>
+    <div class="mi-segmented-control" role="radiogroup">
+      <button class="mi-segment mi-segment--icon mi-segment--selected" role="radio" aria-checked="true"><span class="mi-icon mi-icon--check" aria-hidden="true"></span></button>
+      <button class="mi-segment mi-segment--icon" role="radio"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button></div></div>
+</div>
+<h3>pagination（--phone: 中央寄せ・16px）</h3>
+<div class="row">
+  <nav class="mi-pagination mi-pagination--phone" aria-label="ページ送り" style="width:280px;">
+    <button class="mi-icon-button mi-icon-button--ghost" aria-label="前のページ" disabled><span class="mi-icon mi-icon--chevron-left" aria-hidden="true"></span></button>
+    <span class="mi-pagination__page"><select class="mi-select mi-pagination__select" aria-label="ページ番号"><option>1</option></select> / 3</span>
+    <button class="mi-icon-button mi-icon-button--ghost" aria-label="次のページ"><span class="mi-icon mi-icon--chevron-right" aria-hidden="true"></span></button>
+  </nav>
+</div>
+<h3>inline-notification（--phone: padding12、--secondary: グレー小）</h3>
+<div class="row">
+  <div class="cell box"><span class="tag">既定（information）</span>
+    <div class="mi-inline-notification mi-inline-notification--information" role="status"><span class="mi-icon mi-icon--magic mi-inline-notification__icon" aria-hidden="true"></span><div>お知らせの本文です</div></div></div>
+  <div class="cell box"><span class="tag">--phone</span>
+    <div class="mi-inline-notification mi-inline-notification--information mi-inline-notification--phone" role="status"><span class="mi-icon mi-icon--magic mi-inline-notification__icon" aria-hidden="true"></span><div>お知らせの本文です</div></div></div>
+  <div class="cell box"><span class="tag">--secondary</span>
+    <div class="mi-inline-notification mi-inline-notification--information mi-inline-notification--secondary" role="status"><span class="mi-icon mi-icon--magic mi-inline-notification__icon" aria-hidden="true"></span><div>補足の小さめ通知</div></div></div>
+</div>
+<h3>banner（--phone: 全幅）</h3>
+<div class="row" style="display:block;">
+  <div class="mi-banner mi-banner--information mi-banner--phone" role="status">
+    <span class="mi-icon mi-icon--magic mi-banner__icon" aria-hidden="true"></span>
+    <div class="mi-banner__content"><p class="mi-banner__title">メンテナンスのお知らせ</p><p class="mi-banner__text">phone は全幅で表示</p></div>
+  </div>
+</div>
+<h3>report-heading（--phone: h1=25px太字 / h6=14px）</h3>
+<div class="row" style="display:block;">
+  <span class="tag">desktop h1（32px通常）</span><h1 class="mi-report-heading mi-report-heading--1">見出しレベル1</h1>
+  <span class="tag">--phone h1（25px太字）</span><h1 class="mi-report-heading mi-report-heading--1 mi-report-heading--phone">見出しレベル1</h1>
+  <span class="tag">--phone h6（14px）</span><h6 class="mi-report-heading mi-report-heading--6 mi-report-heading--phone">見出しレベル6</h6>
+</div>
+<h3>radio-button-card（--phone: ラベル16px）/ dialog（--phone）</h3>
+<div class="row">
+  <label class="mi-radio-card mi-radio-card--phone" style="width:260px;">
+    <input type="radio" name="plan" class="mi-radio" checked>
+    <span class="mi-radio-card__body"><span class="mi-radio-card__label">スタンダード（phone 16px）</span><span class="mi-radio-card__support">月額 ¥10,000</span></span>
+  </label>
+</div>
+<div class="row" style="display:block;">
+  <div class="mi-dialog mi-dialog--phone" role="dialog" aria-modal="true" style="max-width:400px;">
+    <div class="mi-dialog__header"><h2 class="mi-dialog__title">確認（phone）</h2></div>
+    <div class="mi-dialog__body">phone は本文16px・フッターに区切り線が付きます。</div>
+    <div class="mi-dialog__footer"><button class="mi-button mi-button--secondary mi-button--large">キャンセル</button><button class="mi-button mi-button--primary mi-button--large">OK</button></div>
+  </div>
+</div>
+
+<h2>テーマD: variant個別</h2>
+<h3>menu（variant=danger / --phone）</h3>
+<div class="row">
+  <div class="mi-menu" role="menu">
+    <div class="mi-menu-item" role="menuitem">複製</div>
+    <div class="mi-menu-item" role="menuitem">名前を変更</div>
+    <div class="mi-menu-item mi-menu-item--danger" role="menuitem">削除する</div>
+  </div>
+  <div class="mi-menu" role="menu">
+    <div class="mi-menu-item mi-menu-item--phone" role="menuitem">phone 項目（40px）</div>
+    <div class="mi-menu-item mi-menu-item--phone mi-menu-item--danger" role="menuitem">削除する</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -21,7 +21,7 @@
 <body>
   <h1>dialog / menu / 通知系 — mockup kit 見本</h1>
 
-  <h2>dialog（small。実際は画面全体に fixed 表示）</h2>
+  <h2>dialog（small。実際は画面全体に fixed 表示。--phone は本文16px＋フッター区切り線）</h2>
   <div class="dialog-demo">
     <div class="mi-dialog-backdrop">
       <div class="mi-dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-t">
@@ -34,8 +34,18 @@
       </div>
     </div>
   </div>
+  <div class="dialog-demo" style="margin-top:12px;">
+    <div class="mi-dialog mi-dialog--phone" role="dialog" aria-modal="true" aria-labelledby="dlg-tp" style="max-width:400px;">
+      <div class="mi-dialog__header"><h2 class="mi-dialog__title" id="dlg-tp" style="margin:0;color:rgba(0,0,0,0.84);">--phone</h2></div>
+      <div class="mi-dialog__body">phone では本文が16pxになり、フッターに区切り線が付きます。</div>
+      <div class="mi-dialog__footer">
+        <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
+        <button class="mi-button mi-button--primary mi-button--large">OK</button>
+      </div>
+    </div>
+  </div>
 
-  <h2>menu（選択中は check アイコン）</h2>
+  <h2>menu（選択中は check / --danger 赤文字 / --phone 高さ40px）</h2>
   <div class="mi-menu" role="menu">
     <div class="mi-menu-item" role="menuitem">CSVでエクスポート</div>
     <div class="mi-menu-item mi-menu-item--selected" role="menuitem">
@@ -48,15 +58,24 @@
       <span class="mi-icon mi-icon--chevron-right-small" aria-hidden="true"></span>
     </div>
     <div class="mi-menu-item mi-menu-item--disabled" role="menuitem" aria-disabled="true">画像でエクスポート</div>
+    <div class="mi-menu-item mi-menu-item--danger" role="menuitem">この検索条件を削除</div>
+  </div>
+  <div class="mi-menu" role="menu" style="margin-top:12px;">
+    <div class="mi-menu-item mi-menu-item--phone" role="menuitem">--phone（高さ40px・文字16px）</div>
+    <div class="mi-menu-item mi-menu-item--phone mi-menu-item--danger" role="menuitem">削除する</div>
   </div>
 
   <h2>tooltip（位置決めはモック側）</h2>
   <span class="mi-tooltip" role="tooltip">クリックすると詳細レポートを開きます</span>
 
-  <h2>snackbar（成功フィードバック。実際は画面隅に固定表示）</h2>
+  <h2>snackbar（成功フィードバック。実際は画面隅に固定表示。既定=medium / --small）</h2>
   <div class="mi-snackbar" role="status">
     <span class="mi-icon mi-icon--check mi-snackbar__icon" aria-hidden="true"></span>
     <p class="mi-snackbar__text">検索条件を保存しました</p>
+  </div>
+  <div class="mi-snackbar mi-snackbar--small" role="status" style="margin-top:8px;">
+    <span class="mi-icon mi-icon--check mi-snackbar__icon" aria-hidden="true"></span>
+    <p class="mi-snackbar__text">--small（hug・padding 8px）</p>
   </div>
 
   <h2>icon-color（公式の多色ステータスアイコン）</h2>
@@ -67,7 +86,7 @@
     <span class="mi-icon-color mi-icon-color--error" role="img" aria-label="エラー"></span>
   </div>
 
-  <h2>inline-notification（4タイプ。アイコンは icon-color）</h2>
+  <h2>inline-notification（4タイプ / --secondary グレー小 / --phone）</h2>
   <div class="col">
     <div class="mi-inline-notification mi-inline-notification--information" role="status">
       <span class="mi-icon-color mi-icon-color--information mi-inline-notification__icon" aria-hidden="true"></span>
@@ -84,6 +103,14 @@
     <div class="mi-inline-notification mi-inline-notification--error" role="alert">
       <span class="mi-icon-color mi-icon-color--error mi-inline-notification__icon" aria-hidden="true"></span>
       <div>データの取得に失敗しました。時間をおいて再度お試しください</div>
+    </div>
+    <div class="mi-inline-notification mi-inline-notification--information mi-inline-notification--secondary" role="status">
+      <span class="mi-icon-color mi-icon-color--information mi-inline-notification__icon" aria-hidden="true"></span>
+      <div>--secondary（グレー面・補足扱いの小さめ表示）</div>
+    </div>
+    <div class="mi-inline-notification mi-inline-notification--information mi-inline-notification--phone" role="status">
+      <span class="mi-icon-color mi-icon-color--information mi-inline-notification__icon" aria-hidden="true"></span>
+      <div>--phone（padding 12px・gap 4px）</div>
     </div>
   </div>
 
@@ -104,6 +131,16 @@
       <div class="mi-banner__content">
         <p class="mi-banner__title">一部データの更新が遅延しています</p>
         <p class="mi-banner__text">最新の財務データの反映に時間がかかっています。</p>
+      </div>
+      <button class="mi-banner__close" aria-label="閉じる">
+        <span class="mi-icon mi-icon--cross" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="mi-banner mi-banner--information mi-banner--phone" role="status">
+      <span class="mi-icon-color mi-icon-color--information mi-banner__icon" aria-hidden="true"></span>
+      <div class="mi-banner__content">
+        <p class="mi-banner__title">--phone（全幅で表示）</p>
+        <p class="mi-banner__text">phone では親幅いっぱいに広がります。</p>
       </div>
       <button class="mi-banner__close" aria-label="閉じる">
         <span class="mi-icon mi-icon--cross" aria-hidden="true"></span>

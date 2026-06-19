@@ -20,7 +20,7 @@ select-box は、あらかじめ定められた選択肢の中から単一の値
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8257-5204
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-select` を使う（自作しない）。
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-select` を使う（自作しない）。枠なし・auto 幅の補助的な見た目には `.mi-select--secondary`、size は既定が medium で小さくする場合は `.mi-select--small`、タッチ操作向けには `.mi-select--phone` を付ける。
 
 ## バリアントプロパティ
 
@@ -37,6 +37,7 @@ select-box は、あらかじめ定められた選択肢の中から単一の値
 ### Size（サイズ）
 - `medium`：標準サイズです
 - `large`：やや大きなサイズです。タッチ操作が主なモバイル向けや、視覚的な存在感を高めたい場面に適しています
+- ※Figma 実体の size は small / medium です（kit のクラスは `.mi-select`＝medium、`.mi-select--small`＝small に対応します）
 
 ### State（状態）
 - `default`：通常の選択待ち状態です

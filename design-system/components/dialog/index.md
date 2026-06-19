@@ -2,7 +2,7 @@
 
 ユーザーの注意を引き、確認や入力を求めるモーダルウィンドウ。
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-dialog`（+ `.mi-dialog-backdrop`） を使う（自作しない）。
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-dialog`（+ `.mi-dialog-backdrop`）を使う（自作しない）。スマートフォン向け（本文を大きめにし、フッターに区切り線を入れる）には `.mi-dialog--phone` を付ける。
 
 ## 使い分け
 

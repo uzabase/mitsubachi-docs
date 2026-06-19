@@ -20,7 +20,7 @@ banner は、ユーザーに対して一定の情報量を持つ通知や補足�
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5607-6066
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-banner--*` を使う（自作しない）。
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-banner--*` を使う（自作しない）。スマートフォン向け（全幅）には `.mi-banner--phone` を付ける。
 
 ## バリアントプロパティ
 | プロパティ | 値 |

@@ -6,7 +6,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=6055-16930
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-table`（list 表示は `--list`） を使う（自作しない）。
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-table`（list 表示は `--list`） を使う（自作しない）。セルの種類は th/td に付ける: 数値列 `.mi-table__num`（右寄せ）/ 行見出し `.mi-table__row-header`（太字）/ 行選択の checkbox 列 `.mi-table__check`（中に `.mi-checkbox`）/ 行アクションの icon-button 列 `.mi-table__actions`。空セルは素の `<td></td>`、任意要素のセル（slot）は td に直接置く。
 
 ## 使い分け
 
@@ -22,6 +22,17 @@
 | **Table Header** | 列の見出しを表示するヘッダー行 |
 | **Table Row** | データを表示する各行 |
 | **Table Cell** | 各セル |
+
+### セルの種類（content-type）
+| 種類 | 説明 | kit |
+|------|------|-----|
+| **text** | 文字（リンクにもできる） | `<td>`（リンクは中に `<a>`） |
+| **number** | 数値（右寄せ・等幅数字） | `.mi-table__num` |
+| **header** | 行見出し（太字） | `.mi-table__row-header`（`<th scope="row">`） |
+| **checkbox** | 行選択（ヘッダー＝全選択 / 行＝選択） | `.mi-table__check`（中に `.mi-checkbox`） |
+| **icon-button** | 行アクション（kebab 等） | `.mi-table__actions`（中に icon-button） |
+| **slot** | 任意要素（tag・link-tag・icon 等） | `<td>` に直接置く |
+| **empty** | 値が無いセル | 素の `<td></td>`（プレースホルダ記号は無し） |
 
 ### 状態
 | state | 説明 |

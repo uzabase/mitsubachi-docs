@@ -40,13 +40,25 @@
       <label class="field-label" for="tf-3">disabled</label>
       <input class="mi-text-field" id="tf-3" type="text" placeholder="入力できません" disabled>
     </div>
+    <div>
+      <label class="field-label" for="tf-4">--medium（やや小さい 40px / 文字14px。既定は large 48px）</label>
+      <input class="mi-text-field mi-text-field--medium" id="tf-4" type="text" placeholder="medium サイズ">
+    </div>
+    <div>
+      <label class="field-label" for="tf-5">--medium --phone（タッチ操作向け・文字16px）</label>
+      <input class="mi-text-field mi-text-field--medium mi-text-field--phone" id="tf-5" type="text" placeholder="phone">
+    </div>
   </div>
 
-  <h2>search-box（primary: 画面/テーブル全体の検索）</h2>
+  <h2>search-box（primary: 画面/テーブル全体の検索。size は無く単一サイズ）</h2>
   <div class="col">
     <label class="mi-search-box mi-search-box--primary">
       <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
       <input class="mi-search-box__input" type="search" placeholder="企業名・業界名で検索">
+    </label>
+    <label class="mi-search-box mi-search-box--primary mi-search-box--phone">
+      <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
+      <input class="mi-search-box__input" type="search" placeholder="--phone（文字16px・アイコン22px）">
     </label>
   </div>
 
@@ -73,13 +85,27 @@
     <label class="mi-radio-label"><input type="radio" name="period" class="mi-radio" disabled> 過去3ヶ月（選択不可）</label>
   </div>
 
-  <h2>segmented-control（選択中は check アイコン付き）</h2>
+  <h2>segmented-control（選択中は check アイコン付き / --phone 36px / variant=icon）</h2>
   <div class="mi-segmented-control" role="radiogroup">
     <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">
       <span class="mi-icon mi-icon--check" style="width:18px;height:18px;" aria-hidden="true"></span>表
     </button>
     <button class="mi-segment" role="radio" aria-checked="false">グラフ</button>
     <button class="mi-segment" role="radio" aria-checked="false">マップ</button>
+  </div>
+  <div class="mi-segmented-control mi-segmented-control--phone" role="radiogroup" style="margin-top:12px;">
+    <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">
+      <span class="mi-icon mi-icon--check" style="width:18px;height:18px;" aria-hidden="true"></span>表
+    </button>
+    <button class="mi-segment" role="radio" aria-checked="false">グラフ</button>
+  </div>
+  <div class="mi-segmented-control" role="radiogroup" style="margin-top:12px;">
+    <button class="mi-segment mi-segment--icon mi-segment--selected" role="radio" aria-checked="true" aria-label="表示">
+      <span class="mi-icon mi-icon--check" aria-hidden="true"></span>
+    </button>
+    <button class="mi-segment mi-segment--icon" role="radio" aria-checked="false" aria-label="検索">
+      <span class="mi-icon mi-icon--search" aria-hidden="true"></span>
+    </button>
   </div>
 
   <h2>switch（ラベルは左側に置く。desktop 40×24 / ON時はノブに check）</h2>
@@ -92,17 +118,25 @@
     <input type="checkbox" class="mi-switch mi-switch--phone" role="switch" checked aria-label="phoneサイズ">
   </div>
 
-  <h2>text-area（min-height 58px / border 0.2 / 文字14px）</h2>
+  <h2>text-area（既定=medium 58px / --large 64px / --phone）</h2>
   <div class="col">
-    <textarea class="mi-text-area" rows="3" placeholder="コメントを入力してください"></textarea>
+    <textarea class="mi-text-area" rows="3" placeholder="既定（medium・58px・14px）"></textarea>
+    <textarea class="mi-text-area mi-text-area--large" rows="3" placeholder="--large（64px・16px）"></textarea>
+    <textarea class="mi-text-area mi-text-area--phone" rows="3" placeholder="--phone（64px・16px）"></textarea>
   </div>
 
-  <h2>select-box（高さ40px / 文字14px / chevron-down）</h2>
+  <h2>select-box（既定=medium 40px / --small 32px / --secondary 枠なし / --phone）</h2>
   <div class="col" style="max-width: 216px;">
     <select class="mi-select">
-      <option>選択してください</option>
+      <option>選択してください（medium）</option>
       <option>電気機器</option>
       <option>半導体</option>
+    </select>
+    <select class="mi-select mi-select--small mi-select--secondary">
+      <option>--small --secondary（32px・auto幅）</option>
+    </select>
+    <select class="mi-select mi-select--phone">
+      <option>--phone（文字16px・chevron22）</option>
     </select>
   </div>
 
@@ -119,7 +153,7 @@
     </span>
   </div>
 
-  <h2>radio-button-card（補足つきカード型ラジオ。横並びは等幅）</h2>
+  <h2>radio-button-card（補足つきカード型ラジオ。横並びは等幅 / --phone はラベル16px）</h2>
   <div class="mi-radio-card-group" style="max-width: 640px;">
     <label class="mi-radio-card">
       <input type="radio" name="plan" class="mi-radio" checked>
@@ -133,6 +167,15 @@
       <span class="mi-radio-card__body">
         <span class="mi-radio-card__label">プロフェッショナル</span>
         <span class="mi-radio-card__support">AI要約・エクスポート付き</span>
+      </span>
+    </label>
+  </div>
+  <div class="mi-radio-card-group" style="max-width: 640px; margin-top: 12px;">
+    <label class="mi-radio-card mi-radio-card--phone">
+      <input type="radio" name="plan-phone" class="mi-radio" checked>
+      <span class="mi-radio-card__body">
+        <span class="mi-radio-card__label">--phone（ラベル16px）</span>
+        <span class="mi-radio-card__support">タッチ操作向け</span>
       </span>
     </label>
   </div>

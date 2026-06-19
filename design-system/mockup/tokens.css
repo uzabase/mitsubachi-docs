@@ -280,4 +280,24 @@
     rgb(247, 42, 72) 95%,
     rgb(42, 42, 247) 100%
   );
+
+  /* ====== size / viewport=phone / loading バリアント追加（Figma 由来。取得日 2026-06-18） ======
+   * 入力系は Figma に size（medium/large 等）と viewport=desktop/phone がある。
+   * phone は主に font-size 14→16px・先頭/末尾アイコン 20→22px の拡大。
+   * ボタンは全 variant に state=loading（スピナー＋テキスト併存）がある。 */
+  /* text-field: 既定=large(48px/16px)。medium=40px/14px を追加 */
+  --text-field-height-medium: 40px;
+  /* text-area: 既定=medium(58px/14px)。large=64px/16px を追加（phone も min-height 64px） */
+  --text-area-min-height-large: 64px;
+  /* select-box: 既定=medium(40px)。small=32px（variant=secondary・auto幅）を追加 */
+  --select-min-height-small: 32px;
+  /* 入力系 phone の先頭/末尾アイコン拡大（select chevron / search icon: 20→22px） */
+  --input-icon-size-phone: 22px;
+  /* segmented-control: desktop 32px / phone 36px（文字 12→14px） */
+  --segment-min-height-desktop: 32px;
+  --segment-min-height-phone: 36px;
+  /* menu-item（action/select/link）: desktop 32px / phone 40px（文字 14→16px） */
+  --menu-item-min-height-phone: 40px;
+  /* report-heading phone: h1=25px(bold) / h6=14px（h2〜h5 は desktop と同じ） */
+  --report-heading-1-font-phone: 25px;
 }

@@ -27,6 +27,7 @@
  *   .mi-button--danger              … danger-button（primary/secondary/tertiary/ghost と併用）
  *   .mi-button--medium|large|x-large                    … size
  *   .mi-button--selected            … 選択状態（secondary / tertiary / ghost のみ）
+ *   .mi-button--loading             … 処理中（中に <span class="mi-loading"> を置く。全 variant 共通）
  *   :disabled / [aria-disabled=true] / .mi-button--disabled … 非活性
  *
  * 【注意】
@@ -289,6 +290,34 @@
   border-color: transparent;
 }
 
+/* ===== loading（処理中。Figma は全 variant に state=loading を持つ＝スピナー＋テキスト併存）
+ * 使い方: .mi-button--loading を付け、テキストの前に <span class="mi-loading"></span> を置く。
+ *   <button class="mi-button mi-button--primary mi-button--large mi-button--loading" aria-busy="true">
+ *     <span class="mi-loading" aria-hidden="true"></span>保存中…
+ *   </button>
+ * loading 中は variant の色に依らず disabled 相当の面＋通常文字色になる（Figma 由来）。
+ * スピナーは large/x-large=20px / medium=18px。色は公式が画像アセットのため
+ * .mi-loading（object-regular）で近似。 ===== */
+.mi-button--loading {
+  pointer-events: none;
+  cursor: default;
+  background-color: var(--surface-semi-strong-disabled, rgba(0, 0, 0, 0.07));
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  border-color: transparent;
+}
+/* danger も loading 中は disabled 相当の面（variant 色より優先するため specificity を揃える） */
+.mi-button--danger.mi-button--loading {
+  background-color: var(--surface-semi-strong-disabled, rgba(0, 0, 0, 0.07));
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  border-color: transparent;
+}
+.mi-button--loading > .mi-loading {
+  --_size: 20px; /* large / x-large */
+}
+.mi-button--medium.mi-button--loading > .mi-loading {
+  --_size: 18px;
+}
+
 /* ============================================================================
  * ai-button（AI実行ボタン）
  * ----------------------------------------------------------------------------
@@ -355,6 +384,10 @@
  *   行 hover は #f5f5f5、選択行（tr[aria-selected="true"]）は #e8edff（hover #dbe4ff）。
  *   行見出しセルは <th class="mi-table__row-header">（太字）。セル内リンクは text/link 色。
  * - 数値列は td/th に .mi-table__num（右寄せ）。
+ * - 行選択の checkbox 列は th/td に .mi-table__check（40px・中央。中に .mi-checkbox）。
+ *   行アクションの icon-button 列は .mi-table__actions（48px・中央。中に icon-button）。
+ *   空セルは素の <td></td>、任意要素のセル（slot）は td に直接置く（content-type=text/number/
+ *   header/checkbox/icon-button/slot, content-state=filled/empty を Figma 6055-17729 で確認）。
  * ========================================================================== */
 .mi-table {
   width: 100%;
@@ -448,6 +481,30 @@
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+/* checkbox 列（content-type=checkbox。ヘッダー=全選択 / ボディ=行選択。幅40px・中央寄せ。
+ * 中に <input type="checkbox" class="mi-checkbox"> を置く。Figma node 6055-17224 / 6055-18250 由来） */
+.mi-table th.mi-table__check,
+.mi-table td.mi-table__check {
+  width: 40px;
+  padding-left: var(--space-8, 8px);
+  padding-right: var(--space-8, 8px);
+  text-align: center;
+  vertical-align: middle;
+}
+.mi-table .mi-table__check > .mi-checkbox { vertical-align: middle; }
+/* アクション列（content-type=icon-button。行操作の icon-button。幅48px・中央寄せ。
+ * ヘッダーは空が既定。中に icon-button（ghost 推奨）を置く。Figma node 7959-5040 / 7073-8853 由来） */
+.mi-table th.mi-table__actions,
+.mi-table td.mi-table__actions {
+  width: 48px;
+  padding-left: var(--space-4, 4px);
+  padding-right: var(--space-4, 4px);
+  text-align: center;
+  vertical-align: middle;
+}
+.mi-table .mi-table__actions > .mi-icon-button { vertical-align: middle; }
+/* 空セル（content-state=empty）はプレースホルダ記号を持たず素の空セル（<td></td>）で表現する。
+ * slot セル（content-type=slot）は td に任意コンテンツ（tag / link-tag / icon 等）をそのまま入れる。 */
 
 /* ============================================================================
  * icon（mitsubachi-ui 公式アイコンセットの一部）
@@ -573,6 +630,20 @@
 .mi-text-field:disabled::placeholder {
   color: var(--text-disabled, rgba(0, 0, 0, 0.35));
 }
+/* size: 既定=large(48px/16px)。--medium=40px/14px、--large は明示用（既定と同値）。
+ * Figma text-field は size=medium/large の2サイズ（node 3-325）。 */
+.mi-text-field--medium {
+  height: var(--text-field-height-medium, 40px);
+  font-size: var(--font-size-label-medium, 14px);
+}
+.mi-text-field--large {
+  height: var(--text-field-height, 48px);
+  font-size: var(--font-size-label-large, 16px);
+}
+/* viewport=phone（文字 16px・タッチ最適化。Figma viewport=phone 由来。height は size に従う） */
+.mi-text-field--phone {
+  font-size: var(--font-size-label-large, 16px);
+}
 
 /* ============================================================================
  * search-box（検索専用入力）
@@ -633,6 +704,15 @@
 }
 .mi-search-box__input::placeholder {
   color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+/* viewport=phone（入力文字 16px・search アイコン 22px。Figma viewport=phone 由来。
+ * search-box は size バリアントを持たず単一サイズ＝高さ 40px のまま） */
+.mi-search-box--phone .mi-search-box__input {
+  font-size: var(--font-size-label-large, 16px);
+}
+.mi-search-box--phone .mi-search-box__icon {
+  width: var(--input-icon-size-phone, 22px);
+  height: var(--input-icon-size-phone, 22px);
 }
 
 /* ============================================================================
@@ -1272,7 +1352,7 @@
   justify-content: center;
   gap: var(--space-4, 4px);
   box-sizing: border-box;
-  min-height: 32px;
+  min-height: var(--segment-min-height-desktop, 32px);
   min-width: 56px;
   padding: var(--space-4, 4px) var(--space-12, 12px);
   border: 1px solid var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
@@ -1327,6 +1407,18 @@
   border-color: var(--border-disabled, rgba(0, 0, 0, 0.07));
   cursor: not-allowed;
 }
+/* viewport=phone（高さ 36px・文字 14px。Figma viewport=phone 由来） */
+.mi-segmented-control--phone .mi-segment {
+  min-height: var(--segment-min-height-phone, 36px);
+  font-size: var(--font-size-label-medium, 14px);
+}
+/* variant=icon（アイコンのみのセグメント。横 padding を詰め min-width 48px。Figma variant=icon 由来） */
+.mi-segment--icon {
+  min-width: 48px;
+  padding-left: var(--space-8, 8px);
+  padding-right: var(--space-8, 8px);
+}
+.mi-segment--icon > .mi-icon { width: 18px; height: 18px; }
 
 /* ============================================================================
  * text-area（複数行テキスト入力。Figma node 182-4766 由来）
@@ -1372,6 +1464,16 @@
   color: var(--text-disabled, rgba(0, 0, 0, 0.35));
   border-color: var(--border-disabled, rgba(0, 0, 0, 0.07));
   cursor: not-allowed;
+}
+/* size: 既定=medium(58px/14px)。--large=64px/16px。Figma text-area は size=medium/large（node 3-326） */
+.mi-text-area--large {
+  min-height: var(--text-area-min-height-large, 64px);
+  font-size: var(--font-size-label-large, 16px);
+}
+/* viewport=phone（min-height 64px・文字 16px。Figma viewport=phone 由来） */
+.mi-text-area--phone {
+  min-height: var(--text-area-min-height-large, 64px);
+  font-size: var(--font-size-label-large, 16px);
 }
 
 /* ============================================================================
@@ -1422,6 +1524,27 @@
   color: var(--text-disabled, rgba(0, 0, 0, 0.35));
   border-color: var(--border-disabled, rgba(0, 0, 0, 0.07));
   cursor: not-allowed;
+}
+/* variant: 既定=primary（白面・枠あり・全幅）。--secondary は面/枠なし・auto幅（フォーム内の軽量配置）。
+ * Figma select-box は variant=primary/secondary（node 8257-5204）。 */
+.mi-select--secondary {
+  width: auto;
+  background-color: transparent;
+  border-color: transparent;
+  padding-right: 28px;
+}
+.mi-select--secondary:hover:not(:disabled) {
+  background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07));
+  border-color: transparent;
+}
+/* size: 既定=medium(40px)。--small=32px（secondary・auto幅向き）。Figma size=small/medium */
+.mi-select--small {
+  min-height: var(--select-min-height-small, 32px);
+}
+/* viewport=phone（文字 16px・chevron 22px。Figma viewport=phone 由来） */
+.mi-select--phone {
+  font-size: var(--font-size-label-large, 16px);
+  background-size: var(--input-icon-size-phone, 22px) var(--input-icon-size-phone, 22px);
 }
 
 /* ============================================================================
@@ -1496,6 +1619,13 @@
   gap: var(--space-8, 8px);
   padding: var(--space-16, 16px) var(--space-24, 24px) var(--space-16, 16px) var(--space-16, 16px);
 }
+/* viewport=phone（本文 16px・フッターに区切り線。Figma viewport=phone 由来） */
+.mi-dialog--phone .mi-dialog__body {
+  font-size: var(--font-size-label-large, 16px);
+}
+.mi-dialog--phone .mi-dialog__footer {
+  border-top: 1px solid var(--border-regular, rgba(0, 0, 0, 0.1));
+}
 
 /* ============================================================================
  * menu（mitsubachi-ui 公式実装 control-menu/*.css 由来）
@@ -1539,6 +1669,16 @@
   background-color: transparent;
   cursor: not-allowed;
   pointer-events: none;
+}
+/* variant=danger（削除など破壊的なメニュー項目。差分は文字色のみ＝danger。hover 背景は通常と同じ。
+ * Figma action-menu-item variant=danger 由来） */
+.mi-menu-item--danger {
+  color: var(--text-danger, #c92812);
+}
+/* viewport=phone（高さ 40px・文字 16px。Figma viewport=phone 由来） */
+.mi-menu-item--phone {
+  min-height: var(--menu-item-min-height-phone, 40px);
+  font-size: var(--font-size-label-large, 16px);
 }
 
 /* ============================================================================
@@ -1600,6 +1740,13 @@
   letter-spacing: 0.02em;
   color: var(--text-regular, rgba(0, 0, 0, 0.84));
 }
+/* size: 既定=medium(min-h 56px・幅 280〜400px)。--small は hug（min 解除）・padding 8px。
+ * Figma snackbar は size=small/medium（node 5607-6067）。 */
+.mi-snackbar--small {
+  min-height: 0;
+  min-width: 0;
+  padding: var(--space-8, 8px);
+}
 
 /* ============================================================================
  * inline-notification（mitsubachi-ui 公式実装由来）
@@ -1634,6 +1781,26 @@
 .mi-inline-notification--error .mi-inline-notification__icon { color: var(--object-error, #c92812); }
 .mi-inline-notification--information .mi-inline-notification__icon { color: var(--text-information, #315ce8); }
 .mi-inline-notification--success .mi-inline-notification__icon { color: var(--object-positive, #00783c); }
+/* variant=secondary（グレー面固定・補足扱いの小さめ表示。status 色に依らず surface/semi-strong。
+ * 文字 weak 12px・padding 8px・gap 4px・アイコン 18px。Figma variant=secondary 由来） */
+.mi-inline-notification--secondary {
+  background-color: var(--surface-semi-strong-default, #ededed);
+  gap: var(--space-4, 4px);
+  padding: var(--space-8, 8px);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: var(--line-height-tight, 1.3);
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+.mi-inline-notification--secondary .mi-inline-notification__icon {
+  min-width: 18px;
+  width: 18px;
+  height: 18px;
+}
+/* viewport=phone（padding 12px・gap 4px。文字は 14px のまま。Figma viewport=phone 由来） */
+.mi-inline-notification--phone {
+  padding: var(--space-12, 12px);
+  gap: var(--space-4, 4px);
+}
 
 /* ============================================================================
  * banner（重要な横断通知のオーバーレイ。Figma node 5702-2824 由来）
@@ -1697,6 +1864,11 @@
   font-size: var(--font-size-label-medium, 14px);
   line-height: var(--line-height-label, 1.5);
   letter-spacing: 0.28px; /* text = 2% */
+}
+/* viewport=phone（全幅で表示。Figma 上の desktop との差は幅/折り返しのみで文字サイズは同じ。
+ * Figma viewport=phone 由来） */
+.mi-banner--phone {
+  width: 100%;
 }
 .mi-banner__close {
   flex: none;
@@ -1974,6 +2146,13 @@ a.mi-breadcrumb__item:focus-visible {
   white-space: nowrap;
 }
 .mi-pagination__select { width: 64px; }
+/* viewport=phone（中央寄せ・ページ番号 16px。Figma viewport=phone 由来） */
+.mi-pagination--phone {
+  justify-content: center;
+}
+.mi-pagination--phone .mi-pagination__page {
+  font-size: var(--font-size-label-large, 16px);
+}
 
 /* ============================================================================
  * filter-chip（絞り込み条件のトグル切り替え。components/chip/filter-chip.md）
@@ -2382,6 +2561,16 @@ a.mi-breadcrumb__item:focus-visible {
   letter-spacing: 0.16px;
   color: var(--text-weak, rgba(0, 0, 0, 0.54));
 }
+/* viewport=phone（h1=25px太字・h6=14px。h2〜h5 は desktop と同じ。Figma viewport=phone 由来） */
+.mi-report-heading--phone.mi-report-heading--1 {
+  font-size: var(--report-heading-1-font-phone, 25px);
+  font-weight: var(--typography-font-weight-bold, 700);
+  letter-spacing: -0.5px;
+}
+.mi-report-heading--phone.mi-report-heading--6 {
+  font-size: var(--font-size-label-medium, 14px);
+  letter-spacing: 0.14px;
+}
 
 /* ============================================================================
  * sub-menu-item（サブメニューを開くメニュー項目。Figma node 8376-4959 由来）
@@ -2421,8 +2610,15 @@ a.mi-breadcrumb__item:focus-visible {
  * ========================================================================== */
 .mi-button--menu {
   padding-right: var(--space-8, 8px);
+  gap: var(--space-2, 2px); /* 既定 size=medium はラベル↔chevron 2px */
 }
-.mi-button--menu > .mi-icon { flex: none; width: 20px; height: 20px; }
+/* chevron はボタン size に追従（Figma: medium 18 / large 20 / x-large 22px）。
+ * 既定（size 未指定）は medium 相当 = 18px。 */
+.mi-button--menu > .mi-icon { flex: none; width: 18px; height: 18px; }
+.mi-button--menu.mi-button--large,
+.mi-button--menu.mi-button--x-large { gap: var(--space-4, 4px); }
+.mi-button--menu.mi-button--large > .mi-icon { width: 20px; height: 20px; }
+.mi-button--menu.mi-button--x-large > .mi-icon { width: 22px; height: 22px; }
 .mi-button--menu.mi-button--secondary:hover,
 .mi-button--menu.mi-button--ghost:hover {
   background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07));
@@ -2552,6 +2748,10 @@ a.mi-breadcrumb__item:focus-visible {
 .mi-radio-card-group > .mi-radio-card { flex: 1 1 0; }
 .mi-radio-card-group--vertical { flex-direction: column; }
 .mi-radio-card-group--vertical > .mi-radio-card { flex: none; }
+/* viewport=phone（ラベル 16px。高さは内容に追従。Figma viewport=phone 由来） */
+.mi-radio-card--phone .mi-radio-card__label {
+  font-size: var(--font-size-label-large, 16px);
+}
 
 /* ============================================================================
  * suggestion（検索候補リスト。Figma node 7685-7082 由来）
