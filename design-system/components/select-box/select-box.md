@@ -20,7 +20,7 @@ select-box は、あらかじめ定められた選択肢の中から単一の値
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8257-5204
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-select` を使う（自作しない）。枠なし・auto 幅の補助的な見た目には `.mi-select--secondary`、size は既定が medium で小さくする場合は `.mi-select--small`、タッチ操作向けには `.mi-select--phone` を付ける。
+> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-select` を使う（自作しない）。枠なし・auto 幅の補助的な見た目には `.mi-select--secondary`、size は既定が medium で小さくする場合は `.mi-select--small`、タッチ操作向けには `.mi-select--phone` を付ける。`.mi-select` はネイティブ `<select>` なので、クリックで開く選択肢メニュー（active 状態）を再現する場合は `.mi-menu` ＋ select-menu-item（選択中は `.mi-menu-item--selected` ＋ check）で組む（位置決めはモック側）。
 
 ## バリアントプロパティ
 

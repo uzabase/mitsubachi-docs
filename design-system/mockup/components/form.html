@@ -140,6 +140,20 @@
     </select>
   </div>
 
+  <h2>select-box の展開メニュー（クリック後に出る選択肢。.mi-menu ＋ select-menu-item。選択中はチェック）</h2>
+  <p style="font-size:12px;color:rgba(0,0,0,0.54);margin:0 0 8px;">トリガー（閉じた状態）は上の <code>.mi-select</code>。クリックで開くメニューはこの部品で組む（位置決めはモック側）。</p>
+  <div class="col" style="max-width: 216px;">
+    <div class="mi-menu" role="listbox" aria-label="業種を選択">
+      <div class="mi-menu-item mi-menu-item--selected" role="option" aria-selected="true">
+        電気機器
+        <span class="mi-icon mi-icon--check" style="width:24px;height:24px;" aria-hidden="true"></span>
+      </div>
+      <div class="mi-menu-item" role="option">半導体</div>
+      <div class="mi-menu-item" role="option">自動車</div>
+      <div class="mi-menu-item mi-menu-item--disabled" role="option" aria-disabled="true">医薬品（選択不可）</div>
+    </div>
+  </div>
+
   <h2>input-chip（入力済み値。×で削除。group は折り返し）</h2>
   <div class="mi-input-chip-group" style="max-width: 420px;">
     <span class="mi-input-chip">三和電機
