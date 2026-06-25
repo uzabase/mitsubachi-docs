@@ -193,6 +193,8 @@ document.querySelectorAll('[data-suggestion-for]').forEach(input => {
 ```
 
 - **table の一番左の列（先頭セル）を、指示が無い限り header セル（content-type=`header`）にしない。** 既定では `table-body-cell` の `text`（通常の body セル）で表示する。左端を行見出し（header）にするのは、ユーザーが明示的に指示した場合のみ。
+- **Figma URL から再現する際、指定のアイコンが kit のアイコンセット（`mitsubachi-icons.css` の全97種）に無い場合は、最も意味の近いアイコンで代替して表示する。** アイコンを自作したりセット外から持ち込んだりしない（[prohibited.md](../foundations/prohibited.md)「アイコン・画像」）。代替したことが分かるよう、該当箇所にコメントを残す。
+- **アイコンは原則 outline（線）スタイルを既定で使い、fill（塗り）スタイルは使わない。** 例外として、コンポーネント定義側で fill が固定されているもの（AI 操作を示す `magic-fill` を持つ ai-button など）は、その定義に従って fill を使う。
 
 ## 既知の制約
 
