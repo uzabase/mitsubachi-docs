@@ -1950,6 +1950,12 @@
   gap: var(--space-4, 4px);
   font-family: var(--typography-font-family, Arial, sans-serif);
 }
+/* ラベル＋必須バッジを横並びにする行（Figma "Label Text"：flex・gap8・中央揃え） */
+.mi-label-unit__label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8, 8px);
+}
 .mi-label-unit__label {
   font-weight: var(--typography-font-weight-bold, 700);
   font-size: var(--font-size-label-medium, 14px);
@@ -1958,12 +1964,20 @@
 .mi-label-unit__support {
   font-weight: var(--typography-font-weight-normal, 400);
   font-size: var(--font-size-label-small, 12px);
+  line-height: 1.3;
   color: var(--text-weak, rgba(0, 0, 0, 0.54));
 }
+/* 必須バッジ（Figma _required：surface/required 面・text/required・11px・角丸4px・6/2px） */
 .mi-label-unit__required {
-  font-weight: var(--typography-font-weight-normal, 400);
-  font-size: var(--font-size-label-small, 12px);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-6, 6px);
+  border-radius: var(--border-radius-small, 4px);
+  background-color: var(--surface-required, #ffedeb);
   color: var(--text-required, #c92812);
+  font-weight: var(--typography-font-weight-normal, 400);
+  font-size: var(--font-size-label-x-small, 11px);
+  line-height: 1.3;
 }
 
 /* ============================================================================
