@@ -1,14 +1,19 @@
 # tab
 
-コンテンツを切り替えるナビゲーションコンポーネント群。
+tabは、複数のコンテンツを切り替えて表示するためのナビゲーションコンポーネントです。用途とスコープの違いにより、2種類が用意されています。
 
 > mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-page-tab` / `.mi-section-tab` を使う（自作しない）。
 
 ## 使い分け
 
-| コンポーネント | 用途 |
-|---|---|
-| [page-tab](./page-tab.md) | ページ全体の表示内容を切り替えるタブ |
-| [section-tab](./section-tab.md) | ページ内の特定セクションの表示内容を切り替えるタブ |
-| [page-tab-group](./page-tab-group.md) | 複数のpage-tabをまとめて管理するコンテナ |
-| [section-tab-group](./section-tab-group.md) | 複数のsection-tabをまとめて管理するコンテナ |
+| コンポーネント | 概要 | 切り替えスコープ |
+|---|---|---|
+| [page-tab](./page-tab.md) | ページ全体の表示内容を切り替えるタブ | ページレベル（画面全体の文脈が変わる） |
+| [section-tab](./section-tab.md) | ページ内の特定セクションの表示内容を切り替えるタブ | セクションレベル（ページ構造を維持したまま） |
+| [page-tab-group](./page-tab-group.md) | 複数のpage-tabをまとめて管理するコンテナ | ページレベル |
+| [section-tab-group](./section-tab-group.md) | 複数のsection-tabをまとめて管理するコンテナ | セクションレベル |
+
+## 使い分けの考え方
+
+- ページ全体で情報の文脈が切り替わる場合（例：グローバル検索結果のカテゴリ切り替え、マイスピーダのページ間移動）→ [page-tab](./page-tab.md) を使用
+- ページの一部セクション内でのみ情報が切り替わる場合（例：企業詳細ページ内の財務データ切り替え、国・地域別データの切り替え）→ [section-tab](./section-tab.md) を使用

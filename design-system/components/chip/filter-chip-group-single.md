@@ -2,16 +2,20 @@
 
 複数の選択肢から常にいずれか1つの条件のみを選択できる filter-chip のグループコンポーネントです。選択を切り替えると前の選択は自動的に解除され、ラジオボタンのように1つの条件に絞った絞り込みを実現します。
 
-## いつ使うか
+## 使いどころと選び方
 
+### 使うべきシーン
 - 「すべて」「タイプA」「タイプB」など、排他的な選択肢から1つだけ絞り込むとき
 - 常にいずれかの条件が選択されていることを保証したいとき
 
-## いつ使わないか
-
+### 使わないほうがよいシーン
 - 複数の条件を同時に選択したい場合 → [filter-chip-group-multiple](./filter-chip-group-multiple.md) を使用する
 - 選択肢が1つしかない場合
 - ページやセクションを切り替えるナビゲーションには tab を使用する
+
+### 他コンポーネントとの違い・使い分け
+- **[filter-chip-group-multiple](./filter-chip-group-multiple.md)**：複数の条件を同時に選択できます。排他的な選択が必要な場合は filter-chip-group-single を使います。
+- **tab**：ページやセクションを切り替えるナビゲーションに使用します。絞り込み操作には filter-chip-group-single を使用します。
 
 ## Figma
 
@@ -20,17 +24,24 @@
 
 > mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-chip-group` を使う（自作しない）。
 
-## バリアントプロパティ
+## 構成とルール
 
-| プロパティ | 値 |
-|---|---|
-| viewport | desktop / phone |
-| size | medium |
+### バリエーション・状態
 
-## コンテンツルール
+#### viewport
+- `desktop`：デスクトップ向けのサイズで表示します。
+- `phone`：スマートフォン向けのサイズで表示します。
 
+#### size
+- `medium`：現在使用できるサイズは medium のみです。
+
+### コンテンツルール
 - [filter-chip](./filter-chip.md) を子要素(slot)として受け取る
 - 子要素の [filter-chip](./filter-chip.md) は横並び(折り返しあり)に配置される
+
+## 振る舞い
+- グループ内の filter-chip を選択すると、それまで選択されていた filter-chip の選択が自動的に解除されます。
+- 常にいずれか1つの filter-chip が選択された状態を維持します。
 
 ## Do
 

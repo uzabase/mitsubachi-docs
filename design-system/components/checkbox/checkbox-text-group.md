@@ -2,16 +2,18 @@
 
 checkbox-text-groupは、複数の [checkbox-text](./checkbox-text.md)（チェックボックスとラベルの組み合わせ）を一つのグループとしてまとめるコンポーネントです。複数の選択肢を水平方向（horizontal）または垂直方向（vertical）に並べて表示します。
 
-## いつ使うか
+## 使いどころと選び方
 
+### 使うべきシーン
 - 複数のcheckbox-textを流れに沿って並べたい場合。
 - フォーム内で複数選択をまとめてグループ化する場合。
 - エラー状態の表示が必要な入力グループに使用します。
 
-## いつ使わないか
-
+### 使わないほうがよいシーン
 - ラベル（入力内容の説明）や入力必須表示が必要な場合は、[checkbox-text-group-unit](./checkbox-text-group-unit.md) を使います。
-- [checkbox-text-group-unit](./checkbox-text-group-unit.md) との違い：checkbox-text-groupは選択肢のグループのみです。[label-unit](../label-unit.md)（ラベル・必須表示・補足テキスト）を含めたセットとして使う場合はcheckbox-text-group-unitを使います。
+
+### 他コンポーネントとの違い・使い分け
+- **[checkbox-text-group-unit](./checkbox-text-group-unit.md) との違い**：checkbox-text-groupは選択肢のグループのみです。[label-unit](../label-unit.md)（ラベル・必須表示・補足テキスト）を含めたセットとして使う場合はcheckbox-text-group-unitを使います。
 
 ## Figma
 
@@ -20,27 +22,26 @@ checkbox-text-groupは、複数の [checkbox-text](./checkbox-text.md)（チェ�
 
 > mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-choice-group`（縦並びは `--vertical`） を使う（自作しない）。
 
-## バリアントプロパティ
+## 構成とルール
 
-| プロパティ | 値 | 説明 |
-|---|---|---|
-| direction | horizontal / vertical | 配置方向 |
-| state | default / error | グループの状態 |
+### バリエーション・状態
 
-## variant の使い分け
+#### direction（配置方向）
+- `horizontal`：水平方向に並びます。コンテナの幅に応じて折り返しが発生します。
+- `vertical`：垂直方向に一列で並びます。
 
-### direction（配置方向）
+#### state（グループの状態）
+- `default`：通常の状態。
+- `error`：エラー状態。グループの下部に helper-text（ユーザーの理解や判断をサポートするエラーメッセージ）を表示します。
 
-| 値 | 使いどころ |
-|---|---|
-| **horizontal** | 水平方向に並びます。コンテナの幅に応じて折り返しが発生します。 |
-| **vertical** | 垂直方向に一列で並びます。 |
-
-## コンテンツルール
-
+### コンテンツルール
 - グループ内のcheckbox-textは複数配置できます。
 - **水平方向では**、checkbox-text内のラベル文字列の折り返しは禁止です。checkbox-textを一かたまりとして折り返すのは許可されます。
 - **垂直方向では**、checkbox-text内のラベル文字列の折り返しが許可されます。
+
+## 振る舞い
+- グループ内の個々のcheckbox-textはそれぞれ独立してクリック・タップに反応します。
+- `error` 状態時には、helper-textにエラー内容を表示します。
 
 ## Do
 

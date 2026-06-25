@@ -2,16 +2,18 @@
 
 radio-button-card-group-unit は、[label-unit](../label-unit.md)（ラベル・補足テキスト・必須表示）と [radio-button-card-group](./radio-button-card-group.md) を組み合わせたコンポーネントです。フォームにおける「ラベル付きのカード型ラジオボタングループ」として機能し、ユーザーが「何を選ぶのか」を明確に理解した上で選択できるようにします。
 
-## いつ使うか
+## 使いどころと選び方
 
+### 使うべきシーン
 - フォーム内でラベルとカード型ラジオボタングループをセットで表示する場合。
 - 選択肢に「必須」を表示したい場合。
 - 選択内容に関する補足説明が必要な場合。
 
-## いつ使わないか
-
+### 使わないほうがよいシーン
 - ラベルが不要でグループだけを表示する場合は [radio-button-card-group](./radio-button-card-group.md) を使います。
-- [radio-button-text-group-unit](./radio-button-text-group-unit.md) との違い：内容の補足情報（サポートテキスト）が必要な場合は radio-button-card-group-unit を使います。ラベルのみで充分な場合は radio-button-text-group-unit を使います。
+
+### 他コンポーネントとの違い・使い分け
+- **[radio-button-text-group-unit](./radio-button-text-group-unit.md) との違い**：内容の補足情報（サポートテキスト）が必要な場合は radio-button-card-group-unit を使います。ラベルのみで充分な場合は radio-button-text-group-unit を使います。
 
 ## Figma
 
@@ -19,34 +21,33 @@ radio-button-card-group-unit は、[label-unit](../label-unit.md)（ラベル・
 
 > mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-radio-card-group`（+ `.mi-label-unit`） を使う（自作しない）。
 
-## バリアントプロパティ
+## 構成とルール
 
-| プロパティ | 値 | 説明 |
-|---|---|---|
-| direction | horizontal / vertical | 配置方向 |
-| viewport | desktop / phone | 表示環境 |
+radio-button-card-group-unit は `direction` と `viewport` の組み合わせでレイアウトが決まります。
 
-## variant の使い分け
+### バリエーション・状態
 
-### direction（配置方向）
-
-| 値 | 使いどころ |
+| プロパティ | 値 |
 |---|---|
-| **horizontal** | 選択肢を横並びに表示します。 |
-| **vertical** | 選択肢を縦並びに表示します。 |
+| direction | `horizontal` / `vertical` |
+| viewport | `desktop` / `phone` |
 
-### viewport（表示環境）
+#### direction（配置方向）
+- `horizontal`：選択肢を横並びに表示します。
+- `vertical`：選択肢を縦並びに表示します。
 
-| 値 | 使いどころ |
-|---|---|
-| **desktop** | デスクトップ向けの表示。 |
-| **phone** | スマートフォン向けの表示。カード内のテキストサイズがやや大きくなります。 |
+#### viewport（表示環境）
+- `desktop`：デスクトップ向けの表示。
+- `phone`：スマートフォン向けの表示。カード内のテキストサイズがやや大きくなります。
 
-## コンテンツルール
-
+### コンテンツルール
 - [label-unit](../label-unit.md) のラベルテキストは、選択肢の内容（何を選ぶか）が導かれる簡潔な表現にします。
 - [label-unit](../label-unit.md) の補足テキスト（support text）は必要な場合のみ表示します。入力内容の補足説明や制約を簡潔に述べます。
 - 選択必須な場合は required を true に設定し、「必須」バッジを表示します。
+
+## 振る舞い
+- [label-unit](../label-unit.md) と [radio-button-card-group](./radio-button-card-group.md) が一体となってレイアウトされます。
+- [radio-button-card-group](./radio-button-card-group.md) の振る舞い（排他的選択、選択状態の視覚変化、エラー表示）は radio-button-card-group の仕様に従います。
 
 ## Do
 
@@ -56,3 +57,9 @@ radio-button-card-group-unit は、[label-unit](../label-unit.md)（ラベル・
 ## Don't
 
 - ラベルが不要な場面で使わない → [radio-button-card-group](./radio-button-card-group.md) を使う
+
+## 役割と目的
+radio-button-card-group-unit は、label-unit（ラベル・補足テキスト・必須表示）と [radio-button-card-group](./radio-button-card-group.md) を組み合わせたコンポーネントです。
+- フォームにおける「ラベル付きのカード型ラジオボタングループ」として機能します。
+- ユーザーが「何を選ぶのか」を明確に理解した上で選択できるよう、ラベルとカード型ラジオボタングループをセットにします。
+- 必要に応じて、補足テキストや「必須」表示をラベルに付与できます。

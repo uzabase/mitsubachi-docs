@@ -116,6 +116,84 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 
 見本: `components/button.html`（button / ai-button / tag / table）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）、`test-output/dashboard-v2.html`（複合画面の実例）
 
+## メニューの実装パターン（重要）
+
+`select-box` / `icon-button` / `menu-button` などの「クリックで一覧を開く」UIは、**ネイティブの `<select>`・`<details>` を使わない**（ブラウザ/OSの独自UIが出てデザインが当たらない）。トリガー（`.mi-select` 等）＝閉じた状態の見た目、展開リスト＝ `.mi-menu` + `.mi-menu-item` で構成する。
+
+`.mi-menu` は **CSSのみで振る舞い（開閉・外側クリックで閉じる・ESC・位置決め）は含まれない**ため、下記の最小JSを必ず添える（振る舞いの仕様は [components/menu/index.md](../components/menu/index.md) の「振る舞い」を正とする）。
+
+```html
+<!-- トリガー：select-box / icon-button / menu-button のいずれか（閉じた状態の見た目だけ） -->
+<button class="mi-select" data-menu-trigger="menu-1" aria-haspopup="menu" aria-expanded="false">
+  選択してください
+</button>
+
+<!-- 展開リスト = menu コンポーネント（初期は hidden） -->
+<div class="mi-menu" id="menu-1" role="menu" hidden>
+  <button class="mi-menu-item" role="menuitem">オプション A</button>
+  <button class="mi-menu-item" role="menuitem">オプション B</button>
+</div>
+```
+
+```js
+// 開閉・外側クリックで閉じる・ESC・再クリックで閉じる（menu/index.md の振る舞い準拠）
+document.querySelectorAll('[data-menu-trigger]').forEach(trigger => {
+  const menu = document.getElementById(trigger.dataset.menuTrigger);
+  const toggle = open => {
+    menu.hidden = !open;
+    trigger.setAttribute('aria-expanded', String(open));
+  };
+  trigger.addEventListener('click', e => { e.stopPropagation(); toggle(menu.hidden); });
+  document.addEventListener('click', e => { if (!menu.contains(e.target)) toggle(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+});
+```
+
+- 選択状態（チェックマーク）を持つ項目は `select-menu-item`、アクション実行は `action-menu-item`、遷移は `link-menu-item` を使い分ける（[components/menu/index.md](../components/menu/index.md)）。
+- 表示位置は「基本は下・右、エリアが無いときだけ上・左」（menu/index.md）。簡易プロトタイプでは下・右固定でもよい。
+
+## プロトタイプ運用ルール（デザインシステムの定義ではない）
+
+> ここに書くのは mitsubachi の正式仕様ではなく、プロトタイプ生成時にそう振る舞わせたい取り決め。
+> `components/` の md（DS定義）には書かず、生成アセット層であるこの README で管理する。
+
+- **search-box に 1 文字以上入力したら、必ず [suggestion](../components/suggestion.md) をセットで表示する。** 一致候補が無いときも `content-state=empty`（「一致する候補が見つかりません」）を出す。入力が空・クリア時は閉じる。
+  - `.mi-search-box` / `.mi-suggestion` は CSS のみで挙動を持たないため、下記の最小JSを添える（構造は上の「メニューの実装パターン」と同型）。
+
+```html
+<div class="mi-search-box">
+  <input type="text" data-suggestion-for="sg-1" placeholder="キーワードで検索">
+</div>
+<div class="mi-suggestion" id="sg-1" hidden>
+  <button class="mi-suggestion-item">候補 A</button>
+  <button class="mi-suggestion-item">候補 B</button>
+  <div class="mi-suggestion__empty" hidden>一致する候補が見つかりません</div>
+</div>
+```
+
+```js
+// 1文字以上の入力で必ず表示・候補ゼロは empty・空/外側クリック/ESC で閉じる
+document.querySelectorAll('[data-suggestion-for]').forEach(input => {
+  const box = document.getElementById(input.dataset.suggestionFor);
+  const items = [...box.querySelectorAll('.mi-suggestion-item')];
+  const empty = box.querySelector('.mi-suggestion__empty');
+  const render = () => {
+    const q = input.value.trim().toLowerCase();
+    if (q.length < 1) { box.hidden = true; return; }   // 空なら閉じる
+    box.hidden = false;                                  // 1文字以上は必ず表示
+    let hit = 0;
+    items.forEach(i => { const m = i.textContent.toLowerCase().includes(q); i.hidden = !m; hit += m; });
+    if (empty) empty.hidden = hit > 0;                   // 候補ゼロなら empty
+  };
+  input.addEventListener('input', render);
+  document.addEventListener('click', e => { if (!box.contains(e.target) && e.target !== input) box.hidden = true; });
+  input.addEventListener('keydown', e => { if (e.key === 'Escape') box.hidden = true; });
+  items.forEach(i => i.addEventListener('click', () => { input.value = i.textContent; box.hidden = true; }));
+});
+```
+
+- **table の一番左の列（先頭セル）を、指示が無い限り header セル（content-type=`header`）にしない。** 既定では `table-body-cell` の `text`（通常の body セル）で表示する。左端を行見出し（header）にするのは、ユーザーが明示的に指示した場合のみ。
+
 ## 既知の制約
 
 - variant 名は公式実装・md に合わせ **`plane`**（Figma のプロパティ表記は plain。互換のため `--plain` も同じ見た目になる）。
