@@ -1658,6 +1658,14 @@
   justify-content: space-between;
   column-gap: var(--space-8, 8px);
   box-sizing: border-box;
+  /* <button> で使う前提のためネイティブ装飾をリセット */
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  text-align: left;
   min-height: 32px;
   padding: var(--space-4, 4px) var(--space-12, 12px) var(--space-4, 4px) var(--space-16, 16px);
   font-family: var(--typography-font-family, Arial, sans-serif);
