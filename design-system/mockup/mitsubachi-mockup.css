@@ -180,13 +180,17 @@
   padding-left: var(--space-4, 4px);
   padding-right: var(--space-4, 4px);
 }
+/* hover/active は ghost と同じニュートラルオーバーレイ（Figma が正）。
+ * 旧 Storybook 実装(button.styles.ts)は plane を青(49 92 232 /8%・12%)にしており、
+ * kit はそれを写していたが Storybook 側のドリフトと判明。Figma に合わせて修正。
+ * 文字色の青(--button-plane-text)は plane の identity なので維持。 */
 .mi-button--plane:hover,
 .mi-button--plain:hover {
-  background-color: var(--button-plane-hover, rgba(49, 92, 232, 0.08));
+  background-color: var(--button-overlay-hover, rgba(0, 0, 0, 0.04));
 }
 .mi-button--plane:active,
 .mi-button--plain:active {
-  background-color: var(--button-plane-active, rgba(49, 92, 232, 0.12));
+  background-color: var(--button-overlay-active, rgba(0, 0, 0, 0.07));
 }
 
 /* ===== selected（トグル ON。公式実装どおり variant ごとに異なる） ===== */
@@ -1506,12 +1510,15 @@
   line-height: var(--line-height-label, 1.5);
   letter-spacing: 0.14px;
   color: var(--text-regular, rgba(0, 0, 0, 0.84));
+  text-align: left; /* 文字は左寄せ（Figma 8257-8339）。<select> は既定で左だが、
+                       README のメニュー実装パターンで <button class="mi-select"> を
+                       トリガーに使う際、ボタン既定の text-align:center を打ち消すため明示。 */
   cursor: pointer;
-  /* chevron-down（公式 icons.ts。object/regular 相当） */
+  /* chevron-down-small（Figma は 20px。右端 8px・テキストとの間隔 4px） */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23454545'%3E%3Cpath d='M12 17L3.03 8.97998L4.03 7.85999L12 14.99L19.45 8.37999L20.45 9.49999L12 17Z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 8px center;
-  background-size: 16px 16px;
+  background-size: 20px 20px;
 }
 .mi-select:hover:not(:disabled) {
   border-color: var(--border-semi-strong-hover, rgba(0, 0, 0, 0.35));
@@ -2342,17 +2349,25 @@ a.mi-breadcrumb__item:focus-visible {
 .mi-icon-button:not([class*="--primary"]):not([class*="--secondary"]):not([class*="--tertiary"]):active {
   background-color: var(--surface-overlay-active, rgba(0, 0, 0, 0.1));
 }
-/* selected（secondary / tertiary / ghost） */
+/* selected（secondary / tertiary / ghost）。
+ * アイコン色は object-selected（#315ce8 青）＝Figma 5831-6556（selected=true）由来。
+ * 旧 Storybook 実装はここを object-regular のままにしておりドリフトしていた（本物は Figma）。
+ * 面は全 variant 共通で surface-selected-default、枠だけ variant ごとに異なる
+ *   secondary=border-selected(青) / tertiary=border-regular / ghost=枠なし。
+ * primary には selected 状態が無い（Figma に存在しない）。 */
 .mi-icon-button--secondary.mi-icon-button--selected {
   background-color: var(--surface-selected-default, #e8edff);
   border-color: var(--border-selected, #3f69f2);
+  color: var(--object-selected, #315ce8);
 }
 .mi-icon-button--tertiary.mi-icon-button--selected {
   background-color: var(--surface-selected-default, #e8edff);
   border-color: var(--border-regular, rgba(0, 0, 0, 0.1));
+  color: var(--object-selected, #315ce8);
 }
 .mi-icon-button--ghost.mi-icon-button--selected {
   background-color: var(--surface-selected-default, #e8edff);
+  color: var(--object-selected, #315ce8);
 }
 .mi-icon-button--selected:hover { background-color: var(--surface-selected-hover, #dbe4ff) !important; }
 .mi-icon-button--selected:active { background-color: var(--surface-selected-active, #d5dfff) !important; }
