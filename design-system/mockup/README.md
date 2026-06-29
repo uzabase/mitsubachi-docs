@@ -53,7 +53,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **search-box**（`.mi-search-box`）— variant: primary / secondary（mitsubachi-ui 公式実装由来）
 - [x] **page-tab**（`.mi-page-tab`）— 下線インジケーター式。selected / hover / focus / disabled（Figma node `5634-1167` 由来）
 - [x] **section-tab**（`.mi-section-tab`）— desktop / phone（`--phone`）。selected は青ボーダー＋青太字（Figma node `5634-1269` 由来）
-- [x] **card**（`.mi-card`）— zabuton 面 / `--outlined`。影なし（elevation.md 準拠。専用 Figma コンポーネントが無いことは検索で確認済みの規約ベース構成パーツ）
+- [x] **card**（`.mi-card`）— zabuton 面 / `--outlined`。影なし（elevation.md 準拠。専用 Figma コンポーネントが無いことは検索で確認済みの規約ベース構成パーツ）。**領域を囲んで区切る用途はグレー塗りの `.mi-card` でなく白＋border の `.mi-card--outlined` を使う**（後述「プロトタイプ運用ルール」の面の選び方）
 - [x] **layout（汎用レイアウト = Speeda app shell）**（`.mi-layout` + `.mi-layout__sidenav`(-header/-body/-footer) / `__content` / `__header` / `__page-title` / `__contents`）— 2カラム・サイドナビ240px・**ヘッダー60px**。サイドナビ内は header(ロゴ+折りたたみ icon-button=`side-left`) / body(`side-navigation-item`・`-category`) / 最下部固定 footer(お知らせ=`bell` / よくある質問=`question-circle`)。アイコンは `mitsubachi-icons.css` を追加読み込み。**page-title 行の有無で2バリアント**: **①** page-title 無し（header → contents 直結。Figma node `11461-12912`）/ **②** page-title 有り（header → `__page-title`(64px) → contents。Figma node `11461-13900`）。両者は同じ骨格・サイドナビで page-title 行だけが差分。（サイドナビ詳細は `11461-14147`。ざっくり版 `11395-2402`(ヘッダー56px) / `11395-2427`(1カラム) は簡易表現で、正値は詳細レイアウト側）
 - [x] **（参考）1カラム**（`.mi-header`）— サイドナビ無しのヘッダー+コンテンツ（背景は zabuton-semi-strong / background-regular）。上記2つの汎用レイアウトとは別の簡易パターン
 - [x] **side-navigation-item**（`.mi-sidenav-item` + `__icon` + `__label`、`--selected`）— min-h 32px・選択時は `surface/overlay-current` 面・任意先頭アイコン20px（Figma component `10664:24442` 由来。hover は系の最小 overlay 0.04 を流用＝近似）
@@ -122,13 +122,26 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 
 `.mi-menu` は **CSSのみで振る舞い（開閉・外側クリックで閉じる・ESC・位置決め）は含まれない**ため、下記の最小JSを必ず添える（振る舞いの仕様は [components/menu/index.md](../components/menu/index.md) の「振る舞い」を正とする）。
 
-```html
-<!-- トリガー：select-box / icon-button / menu-button のいずれか（閉じた状態の見た目だけ） -->
-<button class="mi-select" data-menu-trigger="menu-1" aria-haspopup="menu" aria-expanded="false">
-  選択してください
-</button>
+### 閉じる条件（menu/index.md の「振る舞い」より。これ以外で閉じない）
 
-<!-- 展開リスト = menu コンポーネント（初期は hidden） -->
+メニューが閉じるのは次のときだけ。**これ以外の操作では閉じない**。
+
+- メニューの**外側**をクリックした
+- **ESC** キーを押した
+- **トリガー**を再クリックした
+- メニュー内の**項目**をクリックした
+- **別のメニュー（トリガー）を開いた** → 先に開いていたメニューは閉じる。**＝同時に開くメニューは常に1つだけ**
+
+> - **マウスがメニューから外れただけ（mouseleave / hover 解除）では閉じない。** クリック誘発のメニューを hover 外しで閉じると、誤操作・タッチ非対応・到達不能（マウスを項目へ運ぶ途中で消える）の原因になる。閉じるのは上記の明示操作のみ。
+> - **スクロールしても閉じない**（menu/index.md）。fixed 配置で画面に対して固定したメニュー（行アクション等）は、スクロール時に**閉じずに位置を追従**させる。
+
+### 最小JS（複数メニューを1つのコントローラで管理し「同時に1つだけ開く」を保証）
+
+> 旧版は各トリガーを独立にバインドし、かつトリガークリックで `stopPropagation` していたため、**先に開いたメニューが閉じず複数同時に開く**不具合があった。下記のように開く前に必ず他を閉じる共有コントローラにする。
+
+```html
+<!-- トリガー（複数可）：select-box / icon-button / menu-button。data-menu-trigger に対応 menu の id -->
+<button class="mi-select" data-menu-trigger="menu-1" aria-haspopup="menu" aria-expanded="false">選択してください</button>
 <div class="mi-menu" id="menu-1" role="menu" hidden>
   <button class="mi-menu-item" role="menuitem">オプション A</button>
   <button class="mi-menu-item" role="menuitem">オプション B</button>
@@ -136,27 +149,41 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 ```
 
 ```js
-// 開閉・外側クリックで閉じる・ESC・再クリックで閉じる（menu/index.md の振る舞い準拠）
-document.querySelectorAll('[data-menu-trigger]').forEach(trigger => {
-  const menu = document.getElementById(trigger.dataset.menuTrigger);
-  const toggle = open => {
-    menu.hidden = !open;
-    trigger.setAttribute('aria-expanded', String(open));
-  };
-  trigger.addEventListener('click', e => { e.stopPropagation(); toggle(menu.hidden); });
-  document.addEventListener('click', e => { if (!menu.contains(e.target)) toggle(false); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+// 全メニュー共有コントローラ（同時に開くのは1つ・外側クリック/ESC/再クリック/項目クリックで閉じる）
+const triggers = [...document.querySelectorAll('[data-menu-trigger]')];
+const pairs = triggers.map(t => ({ trigger: t, menu: document.getElementById(t.dataset.menuTrigger) }));
+
+function closeAllMenus() {
+  pairs.forEach(p => { p.menu.hidden = true; p.trigger.setAttribute('aria-expanded', 'false'); });
+}
+pairs.forEach(({ trigger, menu }) => {
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const willOpen = menu.hidden;
+    closeAllMenus();                       // ★ 開く前に他のメニューを必ず閉じる（同時に1つだけ）
+    if (willOpen) { menu.hidden = false; trigger.setAttribute('aria-expanded', 'true'); }
+  });
+  menu.addEventListener('click', e => { if (e.target.closest('.mi-menu-item')) closeAllMenus(); }); // 項目クリックで閉じる
 });
+document.addEventListener('click', e => {
+  const inside = pairs.some(p => p.menu.contains(e.target) || p.trigger.contains(e.target));
+  if (!inside) closeAllMenus();            // 外側クリックで閉じる
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllMenus(); }); // ESC で閉じる
 ```
 
 - 選択状態（チェックマーク）を持つ項目は `select-menu-item`、アクション実行は `action-menu-item`、遷移は `link-menu-item` を使い分ける（[components/menu/index.md](../components/menu/index.md)）。
 - 表示位置は「基本は下・右、エリアが無いときだけ上・左」（menu/index.md）。簡易プロトタイプでは下・右固定でもよい。
+- **先頭アイコン付きの `action-menu-item`（[action-menu-item.md](../components/menu/action-menu-item.md) の Show icon、Figma `8376-4715`）は「アイコン20px(shrink) + ラベル(flex:1)・gap 8px の左寄せ」。** kit の `.mi-menu-item` は trailing アイコン（check / chevron）前提で `justify-content: space-between` のため、先頭アイコン+ラベルだと両端に分離する。**先頭アイコンを持つメニューは項目側を `justify-content: flex-start` に上書きし、先頭アイコンを `flex:none; 20px` にする**（モック側の1行 CSS で対応）。
+- **テーブル行などで複数アクションを出す場合は、アイコンをアクションの数だけ横並びにせず、`icon-button`（`kebab-menu` アイコン）+ `menu` の1つにまとめる。** 破壊的操作（削除等）は `.mi-menu-item--danger`。
 
 ## プロトタイプ運用ルール（デザインシステムの定義ではない）
 
 > ここに書くのは mitsubachi の正式仕様ではなく、プロトタイプ生成時にそう振る舞わせたい取り決め。
 > `components/` の md（DS定義）には書かず、生成アセット層であるこの README で管理する。
 
+- **領域を囲んで区切るときは、白背景（`surface/regular-default` ＝ `zabuton/regular`）＋ `border/regular` のヘアライン枠を基本にする。** グレーの塗り面（`zabuton/semi-strong` などの塗り）で領域を囲まない（ミツバチらしい表現ではない）。グレー面（`zabuton` 系の塗り）は、ヘッダー帯やサムネイル下地など「面そのものに役割がある」用途に限り、区切り・グルーピング目的では枠線で表現する。
+  - 実装: mockup kit では `.mi-card`（既定＝`zabuton/semi-strong` 塗り）でなく **`.mi-card--outlined`**（白＋`border/regular`）を使う。色トークンの体系は [foundations/color.md](../foundations/color.md) の Surface ルールを参照。
 - **search-box に 1 文字以上入力したら、必ず [suggestion](../components/suggestion.md) をセットで表示する。** 一致候補が無いときも `content-state=empty`（「一致する候補が見つかりません」）を出す。入力が空・クリア時は閉じる。
   - `.mi-search-box` / `.mi-suggestion` は CSS のみで挙動を持たないため、下記の最小JSを添える（構造は上の「メニューの実装パターン」と同型）。
 
