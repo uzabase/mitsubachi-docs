@@ -34,6 +34,17 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 
 クラスの一覧は `mitsubachi-mockup.css` 冒頭のコメントを参照。
 
+## プロトタイプ実装の必須ルール（mi-* コンポーネント）
+
+- 実装前に該当コンポーネントの `components/<name>/<name>.md` を必ず読む。
+  キットCSS(`mitsubachi-mockup.css`)の基本例だけで判断しない（見た目の元であって構成・状態の正ではない）。
+- **select-box**: ネイティブ `<select>` 禁止。`<button class="mi-select">` をトリガーにし、
+  選択肢は `.mi-menu` + `.mi-menu-item` で構成（選択中は `.mi-menu-item--selected` + check）。
+  ※開閉の最小JS・閉じる条件は後述「[メニューの実装パターン（重要）](#メニューの実装パターン重要)」を正とする。
+- **icon-button の選択状態**: `.mi-icon-button--selected` を付与する（surface-selected 面 +
+  border-selected + object-selected 色）。アイコン glyph の差し替えだけで済ませない。
+- selected/error 等の状態は独自の色替えでなく DS の modifier クラスで当て、preview で実測検証する。
+
 ## 値の正・鮮度
 
 - **値の正は常に Figma。** 優先順位は `Figma MCP > mitsubachi-token > このスナップショット`。
@@ -130,14 +141,16 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 - **ESC** キーを押した
 - **トリガー**を再クリックした
 - メニュー内の**項目**をクリックした
-- **別のメニュー（トリガー）を開いた** → 先に開いていたメニューは閉じる。**＝同時に開くメニューは常に1つだけ**
+- **別のメニュー、または検索候補（suggestion）など別のポップオーバーを開いた** → 先に開いていたものは閉じる。**＝クリック/入力で開く重なりUI（メニュー・suggestion 等）は、画面で同時に開くのは常に1つだけ**
 
 > - **マウスがメニューから外れただけ（mouseleave / hover 解除）では閉じない。** クリック誘発のメニューを hover 外しで閉じると、誤操作・タッチ非対応・到達不能（マウスを項目へ運ぶ途中で消える）の原因になる。閉じるのは上記の明示操作のみ。
 > - **スクロールしても閉じない**（menu/index.md）。fixed 配置で画面に対して固定したメニュー（行アクション等）は、スクロール時に**閉じずに位置を追従**させる。
 
-### 最小JS（複数メニューを1つのコントローラで管理し「同時に1つだけ開く」を保証）
+### 最小JS（メニュー・suggestion を1つの共有コントローラで管理し「同時に1つだけ開く」を保証）
 
-> 旧版は各トリガーを独立にバインドし、かつトリガークリックで `stopPropagation` していたため、**先に開いたメニューが閉じず複数同時に開く**不具合があった。下記のように開く前に必ず他を閉じる共有コントローラにする。
+> 旧版は各トリガーを独立にバインドし、かつトリガークリックで `stopPropagation` していたため、**先に開いたメニューが閉じず複数同時に開く**不具合があった。
+> さらに、メニューと suggestion が別々のハンドラで管理されていると **「片方を開いても、もう片方の開いているものが閉じない」**（例: メニューを開いても開きっぱなしの検索候補が残る）。
+> **開く重なりUI（メニュー・suggestion 等）を1つの共有コントローラ（`popovers` レジストリ）にまとめ、何かを開くときは必ず他を全部閉じる**。これで「クリック/入力で開いたら他は閉じる・同時に開くのは常に1つ」を系統をまたいで保証する。
 
 ```html
 <!-- トリガー（複数可）：select-box / icon-button / menu-button。data-menu-trigger に対応 menu の id -->
@@ -149,27 +162,37 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 ```
 
 ```js
-// 全メニュー共有コントローラ（同時に開くのは1つ・外側クリック/ESC/再クリック/項目クリックで閉じる）
-const triggers = [...document.querySelectorAll('[data-menu-trigger]')];
-const pairs = triggers.map(t => ({ trigger: t, menu: document.getElementById(t.dataset.menuTrigger) }));
-
-function closeAllMenus() {
-  pairs.forEach(p => { p.menu.hidden = true; p.trigger.setAttribute('aria-expanded', 'false'); });
+// 全ポップオーバー共有コントローラ。メニューも suggestion もこの popovers レジストリに登録する。
+// 何かを開くときは必ず他を全部閉じる → 画面で同時に開くのは常に1つだけ。
+const popovers = [];  // 各要素: { el, trigger, isOpen(), close() }
+function registerPopover(p) { popovers.push(p); return p; }
+function closeAllPopovers(except) {                       // ★ except 以外の開いているものを全部閉じる
+  popovers.forEach(p => { if (p !== except) p.close(); });
 }
-pairs.forEach(({ trigger, menu }) => {
+
+// --- メニュー（select-box / icon-button / menu-button のトリガー）を登録 ---
+document.querySelectorAll('[data-menu-trigger]').forEach(trigger => {
+  const menu = document.getElementById(trigger.dataset.menuTrigger);
+  const p = registerPopover({
+    el: menu, trigger,
+    isOpen: () => !menu.hidden,
+    close() { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); },
+  });
   trigger.addEventListener('click', e => {
     e.stopPropagation();
-    const willOpen = menu.hidden;
-    closeAllMenus();                       // ★ 開く前に他のメニューを必ず閉じる（同時に1つだけ）
+    const willOpen = !p.isOpen();
+    closeAllPopovers();                    // ★ 何を開くときも、まず他を全部閉じる（メニューも suggestion も）
     if (willOpen) { menu.hidden = false; trigger.setAttribute('aria-expanded', 'true'); }
   });
-  menu.addEventListener('click', e => { if (e.target.closest('.mi-menu-item')) closeAllMenus(); }); // 項目クリックで閉じる
+  menu.addEventListener('click', e => { if (e.target.closest('.mi-menu-item')) p.close(); }); // 項目クリックで閉じる
 });
+
+// 外側クリック / ESC は全ポップオーバー共通（メニュー・suggestion をまとめて閉じる）
 document.addEventListener('click', e => {
-  const inside = pairs.some(p => p.menu.contains(e.target) || p.trigger.contains(e.target));
-  if (!inside) closeAllMenus();            // 外側クリックで閉じる
+  const inside = popovers.some(p => p.el.contains(e.target) || (p.trigger && p.trigger.contains(e.target)));
+  if (!inside) closeAllPopovers();
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllMenus(); }); // ESC で閉じる
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllPopovers(); });
 ```
 
 - 選択状態（チェックマーク）を持つ項目は `select-menu-item`、アクション実行は `action-menu-item`、遷移は `link-menu-item` を使い分ける（[components/menu/index.md](../components/menu/index.md)）。
@@ -185,7 +208,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllMenu
 - **領域を囲んで区切るときは、白背景（`surface/regular-default` ＝ `zabuton/regular`）＋ `border/regular` のヘアライン枠を基本にする。** グレーの塗り面（`zabuton/semi-strong` などの塗り）で領域を囲まない（ミツバチらしい表現ではない）。グレー面（`zabuton` 系の塗り）は、ヘッダー帯やサムネイル下地など「面そのものに役割がある」用途に限り、区切り・グルーピング目的では枠線で表現する。
   - 実装: mockup kit では `.mi-card`（既定＝`zabuton/semi-strong` 塗り）でなく **`.mi-card--outlined`**（白＋`border/regular`）を使う。色トークンの体系は [foundations/color.md](../foundations/color.md) の Surface ルールを参照。
 - **search-box に 1 文字以上入力したら、必ず [suggestion](../components/suggestion.md) をセットで表示する。** 一致候補が無いときも `content-state=empty`（「一致する候補が見つかりません」）を出す。入力が空・クリア時は閉じる。
-  - `.mi-search-box` / `.mi-suggestion` は CSS のみで挙動を持たないため、下記の最小JSを添える（構造は上の「メニューの実装パターン」と同型）。
+  - `.mi-search-box` / `.mi-suggestion` は CSS のみで挙動を持たないため、下記の最小JSを添える。**上の「メニューの実装パターン」の共有コントローラ（`registerPopover` / `closeAllPopovers` と外側クリック/ESC のグローバル処理）を前提とし、suggestion もそこに登録する**（メニューを開けば候補は閉じ、候補を出せばメニューは閉じる）。suggestion 単体のページでも、その共有コントローラ部分を必ず併せて入れる。
 
 ```html
 <div class="mi-search-box">
@@ -199,22 +222,27 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllMenu
 ```
 
 ```js
-// 1文字以上の入力で必ず表示・候補ゼロは empty・空/外側クリック/ESC で閉じる
+// 上の共有コントローラ（popovers / registerPopover / closeAllPopovers と外側クリック・ESC）を前提とする。
+// 1文字以上の入力で必ず表示・候補ゼロは empty・空で閉じる。外側クリック/ESC は共有コントローラが処理。
 document.querySelectorAll('[data-suggestion-for]').forEach(input => {
   const box = document.getElementById(input.dataset.suggestionFor);
   const items = [...box.querySelectorAll('.mi-suggestion-item')];
   const empty = box.querySelector('.mi-suggestion__empty');
+  const p = registerPopover({                            // ★ suggestion も同じレジストリに登録
+    el: box, trigger: input,
+    isOpen: () => !box.hidden,
+    close() { box.hidden = true; },
+  });
   const render = () => {
     const q = input.value.trim().toLowerCase();
-    if (q.length < 1) { box.hidden = true; return; }   // 空なら閉じる
-    box.hidden = false;                                  // 1文字以上は必ず表示
+    if (q.length < 1) { box.hidden = true; return; }     // 空なら閉じる
+    closeAllPopovers(p);                                  // ★ 候補を出すとき、他のポップオーバー（メニュー等）は閉じる
+    box.hidden = false;                                   // 1文字以上は必ず表示
     let hit = 0;
     items.forEach(i => { const m = i.textContent.toLowerCase().includes(q); i.hidden = !m; hit += m; });
-    if (empty) empty.hidden = hit > 0;                   // 候補ゼロなら empty
+    if (empty) empty.hidden = hit > 0;                    // 候補ゼロなら empty
   };
   input.addEventListener('input', render);
-  document.addEventListener('click', e => { if (!box.contains(e.target) && e.target !== input) box.hidden = true; });
-  input.addEventListener('keydown', e => { if (e.key === 'Escape') box.hidden = true; });
   items.forEach(i => i.addEventListener('click', () => { input.value = i.textContent; box.hidden = true; }));
 });
 ```
@@ -222,6 +250,7 @@ document.querySelectorAll('[data-suggestion-for]').forEach(input => {
 - **table の一番左の列（先頭セル）を、指示が無い限り header セル（content-type=`header`）にしない。** 既定では `table-body-cell` の `text`（通常の body セル）で表示する。左端を行見出し（header）にするのは、ユーザーが明示的に指示した場合のみ。
 - **Figma URL から再現する際、指定のアイコンが kit のアイコンセット（`mitsubachi-icons.css` の全97種）に無い場合は、最も意味の近いアイコンで代替して表示する。** アイコンを自作したりセット外から持ち込んだりしない（[prohibited.md](../foundations/prohibited.md)「アイコン・画像」）。代替したことが分かるよう、該当箇所にコメントを残す。
 - **アイコンは原則 outline（線）スタイルを既定で使い、fill（塗り）スタイルは使わない。** 例外として、コンポーネント定義側で fill が固定されているもの（AI 操作を示す `magic-fill` を持つ ai-button など）は、その定義に従って fill を使う。
+- **ユーザーが DS 外の色やコンポーネント定義に無い仕様を指定したときは、[prohibited.md](../foundations/prohibited.md) の「DS外を指定されたときの応答プロトコル」に従う**（①DS内で最も近い代替を提案 → ②必要なら「DS外」と明示＋注記コメント付きで暫定適用 → ③勝手に恒久採用しない）。
 
 ## 既知の制約
 
