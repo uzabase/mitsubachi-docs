@@ -2,7 +2,7 @@
 
 あらかじめ定められた選択肢の中から単一の値を選択するためのコンポーネント群。
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-select` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-select` を使う（自作しない）。
 
 ## 使い分け
 

@@ -22,8 +22,8 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 2. コンポーネントを自作せず、`.mi-*` クラスを当てて組み立てる。
 
 ```html
-<link rel="stylesheet" href="design-system/mockup/tokens.css">
-<link rel="stylesheet" href="design-system/mockup/mitsubachi-mockup.css">
+<link rel="stylesheet" href="design-system/mockup-kit/tokens.css">
+<link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-mockup.css">
 
 <!-- primary を右・secondary を左、間隔 8px（neutral-button.md の配置ルール） -->
 <div style="display:flex; gap:8px;">
@@ -110,11 +110,11 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 - **variant個別** — `.mi-menu-item--danger`（危険メニュー項目・赤文字）/ `.mi-inline-notification--secondary`（グレー面固定・補足扱いの小さめ）/ `.mi-select--secondary`（枠なし・auto幅）/ `.mi-segment--icon`（アイコンのみセグメント）
 
 > ※ **search-box** は Figma に size バリアントが無く単一サイズ（追加は `--phone` のみ）。**global-search 系・avatar の icon variant** は「コンポーネント単位の差分」側で別途管理（未収録）。
-> 見本: `test-output/variant-additions-check.html`（全追加変種を一覧）。
+> 見本: 追加変種は各 `components/*.html`（button / form / feedback / display）に収録済み。
 
 > **Figma 取得のコツ**: md の Figma URL が「ページ」を指している場合、`get_design_context` は失敗する（nothing selected エラー）。その場合は `get_metadata` でページ内のコンポーネントセット node を特定してから `get_design_context` を呼ぶ。
 
-見本: `components/button.html`（button / ai-button / tag / table）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）、`test-output/dashboard-v2.html`（複合画面の実例）
+見本: `components/button.html`（button / ai-button / tag）、`components/table.html`（table: grid / list ビュー・ソート状態・全 content-type）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）、`components/example-dashboard.html`（複合画面の実例。kit だけでダッシュボードを組んだお手本）
 
 ## 既知の制約
 

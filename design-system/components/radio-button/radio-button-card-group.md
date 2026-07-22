@@ -18,7 +18,7 @@ radio-button-card-group は、複数の [radio-button-card](./radio-button-card.
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=1-182
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-radio-card-group` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-radio-card-group` を使う（自作しない）。
 
 ## バリアントプロパティ
 

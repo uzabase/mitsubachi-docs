@@ -16,7 +16,7 @@ report-headingは、レポートや記事などの読み物コンテンツにお
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=9479-1540
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-report-heading--1`〜`--6` を使う（自作しない）。スマートフォン向けには `.mi-report-heading--phone` を併用する（level 1 と level 6 のみ desktop と差があり、それ以外は同じ）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-report-heading--1`〜`--6` を使う（自作しない）。スマートフォン向けには `.mi-report-heading--phone` を併用する（level 1 と level 6 のみ desktop と差があり、それ以外は同じ）。
 
 ## バリアントプロパティ
 | プロパティ | 値 |

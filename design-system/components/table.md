@@ -6,7 +6,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=6055-16930
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-table`（list 表示は `--list`） を使う（自作しない）。セルの種類は th/td に付ける: 数値列 `.mi-table__num`（右寄せ）/ 行見出し `.mi-table__row-header`（太字）/ 行選択の checkbox 列 `.mi-table__check`（中に `.mi-checkbox`）/ 行アクションの icon-button 列 `.mi-table__actions`。空セルは素の `<td></td>`、任意要素のセル（slot）は td に直接置く。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-table`（list 表示は `--list`） を使う（自作しない）。セルの種類は th/td に付ける: 数値列 `.mi-table__num`（右寄せ）/ 行見出し `.mi-table__row-header`（太字）/ 行選択の checkbox 列 `.mi-table__check`（中に `.mi-checkbox`）/ 行アクションの icon-button 列 `.mi-table__actions`。空セルは素の `<td></td>`、任意要素のセル（slot）は td に直接置く。
 
 ## 使い分け
 

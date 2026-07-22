@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — table</title>
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順。ソートアイコンに icons.css を追加読み込み -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <link rel="stylesheet" href="../mitsubachi-icons.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body {
+      margin: 0;
+      padding: 32px;
+      background: #ffffff;
+      font-family: Arial, "Hiragino Sans", Meiryo, sans-serif;
+      color: rgba(0, 0, 0, 0.84);
+    }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0, 0, 0, 0.55); font-weight: 700; }
+    .lead { font-size: 13px; color: rgba(0, 0, 0, 0.55); margin: 0 0 24px; line-height: 1.6; max-width: 900px; }
+    .note { font-size: 12px; color: rgba(0, 0, 0, 0.55); margin: 8px 0 0; line-height: 1.6; }
+    .scroll { overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>table — mockup kit 見本</h1>
+  <p class="lead">
+    データを行と列で構造化するテーブル。<code>.mi-table</code> が本体、<code>.mi-table--list</code> でリストビュー。
+    行 hover は <code>tr:hover</code>（行全体がハイライト）、選択行は <code>tr[aria-selected="true"]</code>、
+    ソート可能ヘッダーは <code>&lt;th aria-sort="ascending|descending"&gt;</code> でラベル・アイコンが selected 色になる。
+    セルの種類は th/td のクラスで表す（数値 <code>__num</code> / 行見出し <code>__row-header</code> / 選択 <code>__check</code> / 行操作 <code>__actions</code>）。
+  </p>
+
+  <!-- ============================================================= -->
+  <h2>グリッドビュー（既定。グレーヘッダー・全周罫線。全 content-type 網羅）</h2>
+  <p class="note">
+    content-type: <b>checkbox</b>(__check・全選択/行選択) / <b>header</b>(__row-header・行見出し=太字) /
+    <b>text</b>(素の td・リンク可) / <b>slot</b>(td に .mi-tag 等を直接) / <b>number</b>(__num・右寄せ等幅) /
+    <b>empty</b>(素の空 td・記号なし) / <b>icon-button</b>(__actions)。2 行目は選択行（<code>aria-selected="true"</code> ＋ checkbox チェック）。
+  </p>
+  <div class="scroll">
+  <table class="mi-table" style="min-width: 860px;">
+    <thead>
+      <tr>
+        <th class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="全選択"></th>
+        <th scope="col">企業名</th>
+        <th scope="col">業種</th>
+        <th scope="col" class="mi-table__num" aria-sort="descending">売上高<span class="mi-icon mi-icon--arrow-down-small" aria-hidden="true"></span></th>
+        <th scope="col" class="mi-table__num">前年比</th>
+        <th scope="col">概要</th>
+        <th scope="col">更新日</th>
+        <th scope="col" class="mi-table__actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="つばめ自動車を選択"></td>
+        <th scope="row" class="mi-table__row-header">つばめ自動車</th>
+        <td><span class="mi-tag mi-tag--positive">自動車</span></td>
+        <td class="mi-table__num">21.0 兆円</td>
+        <td class="mi-table__num">+0.5%</td>
+        <td style="min-width: 220px;">主力の完成車に加え、車載電池と MaaS 事業を国内外で展開。次期 EV プラットフォームへの投資を継続中。</td>
+        <td>2025/03/31</td>
+        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+      </tr>
+      <tr aria-selected="true">
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" checked aria-label="ヒバリ半導体を選択"></td>
+        <th scope="row" class="mi-table__row-header">ヒバリ半導体</th>
+        <td><span class="mi-tag mi-tag--information">半導体</span></td>
+        <td class="mi-table__num">12.4 兆円</td>
+        <td class="mi-table__num">+8.1%</td>
+        <td style="min-width: 220px;">車載・産業向けのパワー半導体が伸長。<a href="#">詳細レポートを見る</a>（セル内リンクは text/link 色）。</td>
+        <td>2025/03/31</td>
+        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+      </tr>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="三和電機を選択"></td>
+        <th scope="row" class="mi-table__row-header">三和電機</th>
+        <td><span class="mi-tag mi-tag--neutral">総合電機</span></td>
+        <td class="mi-table__num">6.8 兆円</td>
+        <td class="mi-table__num">+3.2%</td>
+        <td style="min-width: 220px;">重電からデジタルソリューションまで幅広く展開する総合電機メーカー。</td>
+        <td>2025/03/31</td>
+        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+      </tr>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="あけぼの家電を選択"></td>
+        <th scope="row" class="mi-table__row-header">あけぼの家電</th>
+        <td><span class="mi-tag mi-tag--neutral">家電</span></td>
+        <td class="mi-table__num"></td>
+        <td class="mi-table__num">-1.4%</td>
+        <td style="min-width: 220px;">生活家電が中心。売上高は決算待ちのため空セル（content-state=empty）で表現。</td>
+        <td>2025/02/28</td>
+        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============================================================= -->
+  <h2>ソート状態（ヘッダー。適用中はラベル・アイコンが selected 色 / hover で面が濃くなる）</h2>
+  <p class="note">ソート可能な列は <code>aria-sort</code> を付ける。未ソートは <code>arrow-up-down</code>、昇順は <code>arrow-up-small</code>、降順は <code>arrow-down-small</code>。マウスを乗せるとヘッダー面が濃くなる。</p>
+  <table class="mi-table" style="max-width: 560px;">
+    <thead>
+      <tr>
+        <th scope="col" class="mi-table__num" aria-sort="none">未ソート<span class="mi-icon mi-icon--arrow-up-down" aria-hidden="true"></span></th>
+        <th scope="col" class="mi-table__num" aria-sort="ascending">昇順<span class="mi-icon mi-icon--arrow-up-small" aria-hidden="true"></span></th>
+        <th scope="col" class="mi-table__num" aria-sort="descending">降順<span class="mi-icon mi-icon--arrow-down-small" aria-hidden="true"></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="mi-table__num">100</td><td class="mi-table__num">1</td><td class="mi-table__num">3</td></tr>
+      <tr><td class="mi-table__num">200</td><td class="mi-table__num">2</td><td class="mi-table__num">2</td></tr>
+      <tr><td class="mi-table__num">300</td><td class="mi-table__num">3</td><td class="mi-table__num">1</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================= -->
+  <h2>リストビュー（.mi-table--list。白ヘッダー・弱色文字・上下線のみ。シンプルな 1〜2 列向け）</h2>
+  <p class="note">グリッドビューより罫線を抑えた表現。ヘッダーは白面・弱色、ボディは横罫線のみ。項目一覧・key-value 表示に向く。</p>
+  <table class="mi-table mi-table--list" style="max-width: 420px;">
+    <thead>
+      <tr><th scope="col">項目</th><th scope="col">値</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row" class="mi-table__row-header">従業員数</th><td class="mi-table__num">12,400 人</td></tr>
+      <tr><th scope="row" class="mi-table__row-header">設立</th><td class="mi-table__num">1948 年</td></tr>
+      <tr><th scope="row" class="mi-table__row-header">本社</th><td>東京都千代田区</td></tr>
+      <tr><th scope="row" class="mi-table__row-header">上場市場</th><td>東証プライム</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================= -->
+  <h2>状態（default / hover / selected）</h2>
+  <p class="note">default＝通常行 / hover＝マウスを乗せると行全体が <code>#f5f5f5</code>（下表の行にカーソルを合わせて確認）/ selected＝<code>tr[aria-selected="true"]</code> で <code>#e8edff</code>（選択行に hover すると <code>#dbe4ff</code>）。</p>
+  <table class="mi-table" style="max-width: 480px;">
+    <thead>
+      <tr><th scope="col">企業名</th><th scope="col">状態</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row" class="mi-table__row-header">三和電機</th><td>default（通常）</td></tr>
+      <tr><th scope="row" class="mi-table__row-header">ヒバリ半導体</th><td>hover（マウスを乗せてください）</td></tr>
+      <tr aria-selected="true"><th scope="row" class="mi-table__row-header">つばめ自動車</th><td>selected（選択行）</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

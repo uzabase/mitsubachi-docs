@@ -7,7 +7,7 @@
  * 色は currentColor に追従（mask 方式）。
  * よく使う7種（magic, magic-fill, search, check, chevron-down/right, cross）は
  * 本体にも含まれるため、このファイルは残り全てを使いたいときに追加読み込みする:
- *   <link rel="stylesheet" href="design-system/mockup/mitsubachi-icons.css">
+ *   <link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-icons.css">
  * 取得元: https://github.com/uzabase/mitsubachi-ui （取得日 2026-06-11）
  * このファイルは機械生成。手編集しない。
  * ========================================================================== */

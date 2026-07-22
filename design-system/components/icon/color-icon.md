@@ -16,7 +16,7 @@
 
 - コンポーネント: https://www.figma.com/design/0TyVfKpH9I54YV21lcOLeQ/Iconography?node-id=891-1242
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-icon-color--error/--information/--success/--warning` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-icon-color--error/--information/--success/--warning` を使う（自作しない）。
 
 ## バリアントプロパティ
 

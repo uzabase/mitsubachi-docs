@@ -17,7 +17,7 @@ checkbox-textは、[checkbox](./checkbox.md)（選択ボックス）と選択肢
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=178-267
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-checkbox` + `.mi-checkbox-label` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-checkbox` + `.mi-checkbox-label` を使う（自作しない）。
 
 ## バリアントプロパティ
 

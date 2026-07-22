@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mitsubachi-ui mockup kit — neutral-button</title>
+  <title>mitsubachi-ui mockup kit — button / ai-button / tag</title>
   <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../mitsubachi-mockup.css">
@@ -24,7 +24,7 @@
   </style>
 </head>
 <body>
-  <h1>neutral-button — mockup kit 見本</h1>
+  <h1>button / ai-button / tag — mockup kit 見本</h1>
 
   <h2>variant × size（default）</h2>
   <div class="row">
@@ -200,33 +200,5 @@
     <span class="mi-tag mi-tag--positive">増収</span>
     <span class="mi-tag mi-tag--negative">減益</span>
   </div>
-
-  <h2>table（.mi-table。checkbox列 __check / アクション列 __actions / 空セル / 選択行）</h2>
-  <table class="mi-table" style="max-width: 560px;">
-    <thead>
-      <tr>
-        <th class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="全選択"></th>
-        <th>企業名</th><th>業種</th><th class="mi-table__num">売上高</th>
-        <th class="mi-table__actions"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="三和電機を選択"></td>
-        <td>三和電機</td><td><span class="mi-tag mi-tag--neutral">総合電機</span></td><td class="mi-table__num">12.4 兆円</td>
-        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
-      </tr>
-      <tr aria-selected="true">
-        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" checked aria-label="ヒバリ半導体を選択"></td>
-        <td>ヒバリ半導体</td><td><span class="mi-tag mi-tag--information">半導体</span></td><td class="mi-table__num">6.8 兆円</td>
-        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
-      </tr>
-      <tr>
-        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="あけぼの家電を選択"></td>
-        <td>あけぼの家電</td><td><span class="mi-tag mi-tag--neutral">家電</span></td><td class="mi-table__num"></td>
-        <td class="mi-table__actions"><button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" aria-label="行の操作"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
-      </tr>
-    </tbody>
-  </table>
 </body>
 </html>

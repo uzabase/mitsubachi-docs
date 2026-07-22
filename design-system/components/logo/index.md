@@ -2,7 +2,7 @@
 
 Speeda および関連ブランドのロゴを表示するコンポーネント群。
 
-> mockup で再現する場合は `mockup/mitsubachi-logos.css` を追加読み込みして `.mi-logo--*` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-logos.css` を追加読み込みして `.mi-logo--*` を使う（自作しない）。
 
 ## 使い分け
 

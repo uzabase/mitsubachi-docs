@@ -19,7 +19,7 @@ menu（複数の操作や遷移先をリスト形式で提示するコンポー�
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8301-3447
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-button--menu`（+ variant 併用） を使う（自作しない）。size は neutral-button と同じ `.mi-button--medium/--large/--x-large`（既定=medium）。末尾の chevron は size に追従（medium 18 / large 20 / x-large 22px）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-button--menu`（+ variant 併用） を使う（自作しない）。size は neutral-button と同じ `.mi-button--medium/--large/--x-large`（既定=medium）。末尾の chevron は size に追従（medium 18 / large 20 / x-large 22px）。
 
 ## バリアントプロパティ
 

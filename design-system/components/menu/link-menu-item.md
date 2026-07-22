@@ -16,7 +16,7 @@ link-menu-item は、クリックすると別ページへ遷移するメニュ�
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8376-4985
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-menu-item`（`<a>` で実装） を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-menu-item`（`<a>` で実装） を使う（自作しない）。
 
 ## バリアントプロパティ
 

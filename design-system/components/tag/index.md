@@ -2,7 +2,7 @@
 
 情報にラベルを付けて分類・識別するためのコンポーネント群。
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-tag`（クリック可能は `.mi-link-tag`） を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-tag`（クリック可能は `.mi-link-tag`） を使う（自作しない）。
 
 ## 使い分け
 

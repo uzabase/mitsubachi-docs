@@ -2,7 +2,7 @@
 
 複数の選択肢から1つだけを選ぶためのコンポーネント群。
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-radio` + `.mi-radio-label`（カード型は `.mi-radio-card`） を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-radio` + `.mi-radio-label`（カード型は `.mi-radio-card`） を使う（自作しない）。
 
 ## 使い分け
 

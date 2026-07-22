@@ -24,7 +24,7 @@ section-tab（セクションタブ）は、ページ内の特定セクション
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5634-1269
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-section-tab` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-section-tab` を使う（自作しない）。
 
 ## バリアントプロパティ
 

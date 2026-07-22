@@ -16,7 +16,7 @@ read-only-tag は、情報の分類や属性、状態を示すための表示専
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5646-1874
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-tag` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-tag` を使う（自作しない）。
 
 ## バリアントプロパティ
 

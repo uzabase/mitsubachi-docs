@@ -22,7 +22,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=178-3446
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-button--primary/--secondary/--tertiary/--ghost/--plane` を使う（自作しない）。処理中（loading）を示す場合は全 variant 共通で `.mi-button--loading` を付け、中に `<span class="mi-loading">` を置く。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-button--primary/--secondary/--tertiary/--ghost/--plane` を使う（自作しない）。処理中（loading）を示す場合は全 variant 共通で `.mi-button--loading` を付け、中に `<span class="mi-loading">` を置く。
 
 ## バリアントプロパティ
 

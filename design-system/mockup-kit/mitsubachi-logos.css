@@ -4,7 +4,7 @@
  * mitsubachi-ui 公式実装（src/components/logo/）の SVG をそのまま移植。
  *   <span class="mi-logo mi-logo--speeda-ja" role="img" aria-label="Speeda"></span>
  * 容量が大きいため kit 本体とは分離。ロゴが必要なモックでのみ読み込む:
- *   <link rel="stylesheet" href="design-system/mockup/mitsubachi-logos.css">
+ *   <link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-logos.css">
  * 取得元: https://github.com/uzabase/mitsubachi-ui （取得日 2026-06-11）
  * ========================================================================== */
 .mi-logo {

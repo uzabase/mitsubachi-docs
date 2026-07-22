@@ -18,7 +18,7 @@ radio-button-text-group-unit は、[label-unit](../label-unit.md)（ラベル・
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=1-182
 
-> mockup で再現する場合は `mockup/mitsubachi-mockup.css` の `.mi-choice-group-unit` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-choice-group-unit` を使う（自作しない）。
 
 ## バリアントプロパティ
 
