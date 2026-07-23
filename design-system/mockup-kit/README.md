@@ -114,7 +114,7 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 
 > **Figma 取得のコツ**: md の Figma URL が「ページ」を指している場合、`get_design_context` は失敗する（nothing selected エラー）。その場合は `get_metadata` でページ内のコンポーネントセット node を特定してから `get_design_context` を呼ぶ。
 
-見本: `components/button.html`（button / ai-button / tag）、`components/table.html`（table: grid / list ビュー・ソート状態・全 content-type）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）、`components/example-dashboard.html`（複合画面の実例。kit だけでダッシュボードを組んだお手本）
+見本: `components/button.html`（button / ai-button / tag）、`components/table.html`（table: grid / list ビュー・ソート状態・全 content-type）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）
 
 ## 既知の制約
 
