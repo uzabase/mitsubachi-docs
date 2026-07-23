@@ -17,7 +17,8 @@
  *   loading / breadcrumb / pagination /
  *   icon(magic, magic-fill, search, check, chevron-down/right, cross) /
  *   icon-color(error, information, success, warning)
- * - ロゴ（speeda-ja/en/zh, uzabase）は別ファイル mitsubachi-logos.css（任意読み込み）
+ * - ロゴ（speeda / speeda-text / speeda-zh / speeda-ai-agent / speeda-expert-research
+ *   各 -inverse, uzabase）は別ファイル mitsubachi-logos.css（任意読み込み）
  * - アイコン全97種は別ファイル mitsubachi-icons.css（任意読み込み。一覧は
  *   components/icons.html。本体には頻出7種のみ同梱）
  *
@@ -2266,7 +2267,9 @@ a.mi-breadcrumb__item:focus-visible {
  *     <span class="mi-icon mi-icon--cross" aria-hidden="true"></span>
  *   </button>
  * size: --small(24/icon18) / 既定 medium(32/icon20) / --large(40/icon22)
- * variant: --primary / --secondary / --tertiary / --ghost、選択は --selected
+ * variant: --primary / --secondary / --tertiary / --ghost。
+ * 選択は variant に --selected を併用（secondary / tertiary / ghost のみ。
+ * primary に selected は無く、--selected 単独では効かない）
  * 意味が伝わるよう必ず aria-label と tooltip を併用する（icon-button.md）。
  * ========================================================================== */
 .mi-icon-button {

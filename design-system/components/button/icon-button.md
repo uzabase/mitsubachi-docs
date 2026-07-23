@@ -19,7 +19,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=5831-6556
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-icon-button` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-icon-button` を使う（自作しない）。variant は `--primary/--secondary/--tertiary/--ghost`、size は `--small`（既定は medium、大きくする場合は `--large`）。選択状態は variant クラスに `--selected` を**併用**する（`--secondary/--tertiary/--ghost` のみ。primary に selected は無く、`--selected` 単独では効かない）。
 
 ## バリアントプロパティ
 

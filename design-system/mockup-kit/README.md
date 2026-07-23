@@ -14,12 +14,15 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 | `mitsubachi-mockup.css` | `.mi-*` クラス本体。**値は tokens.css の `var(--token)` を参照**し、生の値を持たない。 |
 | `mitsubachi-icons.css` | 公式アイコンセット**全97種**（`.mi-icon--<名前>`）。容量が大きいため分離。アイコンを多用するモックで追加読み込み。 |
 | `mitsubachi-logos.css` | Speeda / Uzabase の公式ロゴ SVG（容量が大きいため分離。ロゴが必要なモックでのみ追加読み込み）。 |
+| `CHEATSHEET.md` | **AI が最初に読む1枚**。全クラスの当て方・間違えやすい併用規則のまとめ。 |
+| `templates/starter.html` | 新規モックの雛形（CSS 読み込み順＋ app shell 骨格）。コピーして使う。 |
 | `components/*.html` | 各コンポーネントの利用例（見本）。ブラウザで開くと見た目を確認できる。 |
 
 ## 使い方（mockup を作るとき）
 
-1. 2つの CSS をこの順で読み込む（tokens.css → mitsubachi-mockup.css）。
-2. コンポーネントを自作せず、`.mi-*` クラスを当てて組み立てる。
+1. まず [CHEATSHEET.md](./CHEATSHEET.md) を読む（全クラス・併用規則の1枚まとめ）。
+2. 新規モックは `templates/starter.html` をコピーする（2つの CSS を tokens.css → mitsubachi-mockup.css の順で読み込み済み）。
+3. コンポーネントを自作せず、`.mi-*` クラスを当てて組み立てる。
 
 ```html
 <link rel="stylesheet" href="design-system/mockup-kit/tokens.css">
@@ -43,7 +46,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 
 ## 対応コンポーネント
 
-- [x] **neutral-button** — variant: primary / secondary / tertiary / ghost / plane（`--plain` は別名）、size: medium / large / x-large、状態: default / hover / active / focus / disabled / selected（色・状態は mitsubachi-ui 公式実装 button.styles.ts 由来）
+- [x] **neutral-button** — variant: primary / secondary / tertiary / ghost / plane（`--plain` は別名）、size: medium / large / x-large、状態: default / hover / active / focus / disabled / selected（selected は `--secondary/--tertiary/--ghost` に `--selected` を併用。単独では効かない）（色・状態は mitsubachi-ui 公式実装 button.styles.ts 由来）
 - [x] **danger-button**（`.mi-button--danger` ＋ variant 併用）— primary / secondary / tertiary / ghost（公式実装由来）
 - [x] **ai-button** — neutral-button の primary / secondary に公式 magic-fill アイコン（`.mi-icon--magic-fill`）を付けたもの（専用色トークンは無い。AI実行操作に限定）
 - [x] **read-only-tag**（`.mi-tag`）— variant: neutral / information / positive / negative
@@ -77,11 +80,11 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **breadcrumb**（`.mi-breadcrumb`）— リンク項目は通常色＋hover面 / リンク無し項目は弱色。desktop 12px / `--phone` 14px（Figma node `9926-7237` 由来）
 - [x] **pagination**（`.mi-pagination`）— icon-button（chevron）＋ページ番号 select-box（64px）＋「/ 総数」（Figma node `8910-6776` 由来）
 - [x] **icon**（`.mi-icon`）— 本体に内蔵する10種（magic / magic-fill / search / check / cross / chevron-down / chevron-down-small / chevron-right / chevron-right-small / chevron-left）。**これ以外（home / bell / side-left / question-circle など全97種）は `mitsubachi-icons.css` を追加読み込み**（一覧は `components/icons.html`。基底クラス `.mi-icon` は本体側にあり必ず併用）
-- [x] **icon-button**（`.mi-icon-button`）— size: `--small`(24) / 既定(32) / `--large`(40)、variant: `--primary/--secondary/--tertiary/--ghost` + `--selected`（公式実装由来）
+- [x] **icon-button**（`.mi-icon-button`）— size: `--small`(24) / 既定(32) / `--large`(40)、variant: `--primary/--secondary/--tertiary/--ghost`。選択中は variant に `--selected` を併用（secondary/tertiary/ghost のみ。単独では効かない）（公式実装由来）
 - [x] **icon-color**（`.mi-icon-color--error/information/success/warning`）— 多色のステータスアイコン（公式実装由来。通知系の先頭アイコンに使う）
 - [x] **text-field-unit / error-text**（`.mi-text-field-unit` / `.mi-error-text`）— ラベル＋フィールド＋エラーの組み立て（公式実装由来）
 - [x] **snackbar-viewport**（`.mi-snackbar-viewport`）— snackbar の画面隅スタック。desktop 右上 / phone 下中央（公式実装由来）
-- [x] **logo**（`.mi-logo--speeda-ja/speeda-en/speeda-zh/uzabase/speeda-ai-agent`）— 公式 SVG。`mitsubachi-logos.css` を追加読み込み（`speeda-ai-agent` は別 Figma ファイル `3abXEj4vbUt5UUf37Ld2Cn` node `1:709` 由来。symbol付き・ライト背景用）
+- [x] **logo**（`.mi-logo--speeda`(symbol付き・既定) / `--speeda-text`(テキストのみ) / `--speeda-zh` / `--speeda-ai-agent` / `--speeda-expert-research`、各 `-inverse`=暗背景用、`--uzabase`）— `mitsubachi-logos.css` を追加読み込み（一覧は `components/logos.html`。Speeda 系は Figma Logo ファイル `3abXEj4vbUt5UUf37Ld2Cn` sp-logo frame `1:13` の最新ブランド由来・2026-07-23 取得。**旧 `--speeda-ja`（カタカナ）/ 旧 `--speeda-en` は廃止**。uzabase のみ公式実装由来）
 - [x] **filter-chip**（`.mi-chip` + `.mi-chip-group`）— selected / hover / active / focus / disabled、viewport: desktop / `--phone`（Figma node `10771-20108` 由来）
 - [x] **link-tag**（`.mi-link-tag`）— クリック可能なタグ。x-small / small / medium（Figma node `5416-7917` 由来）
 - [x] **avatar-group**（`.mi-avatar-group`）— 重なりは径の1/4・白い境界線・最大5人（Figma node `4822-682` 由来）
@@ -128,7 +131,7 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 - `components/suggestion.html` — search-box ＋ category / item / empty
 
 **② まとめ見本（フラットな部品。クラスを当てるだけでよいもの。目視確認用）**
-- `components/button.html`（button / ai-button / tag）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/feedback.html`（通知系: tooltip / snackbar / icon-color / inline-notification / banner）、`components/display.html`（avatar / card / loading 等）、`components/icons.html`（アイコン一覧）
+- `components/button.html`（button / ai-button / tag）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/feedback.html`（通知系: tooltip / snackbar / icon-color / inline-notification / banner）、`components/display.html`（avatar / card / loading 等）、`components/icons.html`（アイコン一覧）、`components/logos.html`（ロゴ一覧）
 
 ## 既知の制約
 

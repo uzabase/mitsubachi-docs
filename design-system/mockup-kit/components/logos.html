@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — logos 全種（11）</title>
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <link rel="stylesheet" href="../mitsubachi-logos.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    p.note { font-size: 12px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 8px; max-width: 1000px; }
+    .cell { display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid rgba(0,0,0,0.07); border-radius: 6px; }
+    .cell--dark { background: #1a1a2e; border-color: #1a1a2e; }
+    .cell .mi-logo { flex: none; }
+    .cell code { font-size: 11px; color: rgba(0,0,0,0.55); overflow-wrap: anywhere; }
+    .cell--dark code { color: rgba(255,255,255,0.6); }
+  </style>
+</head>
+<body>
+  <h1>logos — 公式ロゴ全11種</h1>
+  <p class="note">
+    mitsubachi-logos.css を追加読み込みして使う（容量が大きいため kit 本体と分離）。色や形は改変しない。
+    <code>&lt;span class="mi-logo mi-logo--speeda" role="img" aria-label="Speeda"&gt;&lt;/span&gt;</code> のように
+    <code>role="img"</code> ＋ <code>aria-label</code> を付ける。高さは可変（比率は維持される。既定26px・zh のみ20px）。
+    Speeda 系は Figma Logo ファイルの最新ブランド（2026-07-23 取得）。<b>旧 <code>--speeda-ja</code> / 旧 <code>--speeda-en</code> は廃止</b>（日本語・英語とも <code>--speeda</code> を使う）。
+  </p>
+
+  <h2>ライト背景用（通常）</h2>
+  <div class="grid">
+    <div class="cell"><span class="mi-logo mi-logo--speeda" role="img" aria-label="Speeda"></span><code>speeda（symbol付き・既定）</code></div>
+    <div class="cell"><span class="mi-logo mi-logo--speeda-text" role="img" aria-label="Speeda"></span><code>speeda-text（テキストのみ）</code></div>
+    <div class="cell"><span class="mi-logo mi-logo--speeda-zh" role="img" aria-label="Speeda"></span><code>speeda-zh</code></div>
+    <div class="cell"><span class="mi-logo mi-logo--speeda-ai-agent" role="img" aria-label="Speeda AI Agent"></span><code>speeda-ai-agent</code></div>
+    <div class="cell"><span class="mi-logo mi-logo--speeda-expert-research" role="img" aria-label="Speeda Expert Research"></span><code>speeda-expert-research</code></div>
+    <div class="cell"><span class="mi-logo mi-logo--uzabase" role="img" aria-label="Uzabase"></span><code>uzabase</code></div>
+  </div>
+
+  <h2>暗背景用（-inverse。白抜き）</h2>
+  <div class="grid">
+    <div class="cell cell--dark"><span class="mi-logo mi-logo--speeda-inverse" role="img" aria-label="Speeda"></span><code>speeda-inverse</code></div>
+    <div class="cell cell--dark"><span class="mi-logo mi-logo--speeda-text-inverse" role="img" aria-label="Speeda"></span><code>speeda-text-inverse</code></div>
+    <div class="cell cell--dark"><span class="mi-logo mi-logo--speeda-zh-inverse" role="img" aria-label="Speeda"></span><code>speeda-zh-inverse</code></div>
+    <div class="cell cell--dark"><span class="mi-logo mi-logo--speeda-ai-agent-inverse" role="img" aria-label="Speeda AI Agent"></span><code>speeda-ai-agent-inverse</code></div>
+    <div class="cell cell--dark"><span class="mi-logo mi-logo--speeda-expert-research-inverse" role="img" aria-label="Speeda Expert Research"></span><code>speeda-expert-research-inverse</code></div>
+  </div>
+
+  <h2>使いどころの注記</h2>
+  <p class="note">
+    <code>speeda-ai-agent</code> はサイドナビのヘッダーで使用（layout.html 参照。サイドナビ内では高さ20pxに縮む＝`.mi-layout__sidenav-header .mi-logo` で上書き済み）。
+    symbol 単体のクラスは無い（logo/symbol.md 参照）。uzabase のみ公式実装（mitsubachi-ui）由来で、他は Figma Logo ファイル（3abXEj4vbUt5UUf37Ld2Cn の sp-logo frame 1:13）由来。
+  </p>
+</body>
+</html>

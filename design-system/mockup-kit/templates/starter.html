@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>（画面名）— Speeda mockup</title>
+  <!-- ============================================================
+       mockup kit スターターテンプレート
+       - このファイルをコピーして中身を組み立てる（骨格は変えない）
+       - コンポーネントは自作せず .mi-* クラスを当てる（CHEATSHEET.md 参照）
+       - 構造が深いもの（table/layout/dialog/menu/ai-chat/timeline/suggestion）は
+         components/ の同名見本 HTML を読んで構造を踏襲する
+       ============================================================ -->
+  <!-- kit の読み込み（この順。パスは設置場所に合わせて調整） -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <!-- サイドナビのアイコン・ロゴに必要。アイコン／ロゴを使わない画面なら削ってよい -->
+  <link rel="stylesheet" href="../mitsubachi-icons.css">
+  <link rel="stylesheet" href="../mitsubachi-logos.css">
+  <style>
+    /* モック側で書いてよいのは「配置」だけ（余白・グリッド・並び）。
+       色・角丸・文字サイズ・影などの「見た目」は書かない＝ kit のクラスが持っている */
+    body { margin: 0; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; }
+  </style>
+</head>
+<body>
+  <!-- 汎用レイアウト = Speeda app shell（詳細: components/layout.html）
+       1カラムの画面なら .mi-layout ごと削除して .mi-header ＋ コンテンツにする -->
+  <div class="mi-layout">
+    <nav class="mi-layout__sidenav">
+      <div class="mi-layout__sidenav-header">
+        <span class="mi-logo mi-logo--speeda-ai-agent" role="img" aria-label="Speeda AI Agent"></span>
+        <button class="mi-icon-button mi-icon-button--ghost" aria-label="サイドナビを折りたたむ">
+          <span class="mi-icon mi-icon--side-left"></span>
+        </button>
+      </div>
+      <div class="mi-layout__sidenav-body">
+        <div class="mi-sidenav-group">
+          <!-- 選択中の項目に --selected -->
+          <a class="mi-sidenav-item mi-sidenav-item--selected"><span class="mi-icon mi-icon--home mi-sidenav-item__icon"></span><span class="mi-sidenav-item__label">ホーム</span></a>
+          <a class="mi-sidenav-item"><span class="mi-icon mi-icon--search mi-sidenav-item__icon"></span><span class="mi-sidenav-item__label">（ナビ項目）</span></a>
+        </div>
+        <div class="mi-sidenav-group">
+          <div class="mi-sidenav-category">（グループ見出し）</div>
+          <a class="mi-sidenav-item"><span class="mi-sidenav-item__label">（項目）</span></a>
+        </div>
+      </div>
+      <div class="mi-layout__sidenav-footer">
+        <a class="mi-sidenav-item"><span class="mi-icon mi-icon--bell mi-sidenav-item__icon"></span><span class="mi-sidenav-item__label">お知らせ</span></a>
+        <a class="mi-sidenav-item"><span class="mi-icon mi-icon--question-circle mi-sidenav-item__icon"></span><span class="mi-sidenav-item__label">よくある質問</span></a>
+      </div>
+    </nav>
+    <div class="mi-layout__content">
+      <header class="mi-layout__header">
+        <span style="font-weight:700; margin:0 auto;">（ヘッダー中央のテキスト）</span>
+        <button class="mi-button mi-button--secondary mi-button--medium">（ヘッダー右のアクション）</button>
+      </header>
+      <!-- page-title 行が不要な画面（レイアウト①）はこの div ごと削除 -->
+      <div class="mi-layout__page-title">
+        <h1 class="mi-layout__page-title-text">（ページタイトル）</h1>
+        <button class="mi-button mi-button--primary mi-button--medium">（主アクション）</button>
+      </div>
+      <main class="mi-layout__contents">
+        <!-- ここに画面の中身を組む。
+             - ボタン配置: primary は右・1画面1つ・間隔8px
+             - KPI カード等は .mi-card（影を付けない）
+             - 一覧は .mi-table（先に components/table.html を読む） -->
+      </main>
+    </div>
+  </div>
+</body>
+</html>

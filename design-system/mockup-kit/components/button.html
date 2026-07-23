@@ -124,13 +124,20 @@
     <button class="mi-icon-button mi-icon-button--tertiary mi-icon-button--large" aria-label="大"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
   </div>
 
-  <h2>selected（secondary / tertiary / ghost）</h2>
+  <h2>selected（secondary / tertiary / ghost のみ。variant クラスに --selected を併用する）</h2>
   <div class="row">
     <span class="label-col">large</span>
     <button class="mi-button mi-button--secondary mi-button--large mi-button--selected">secondary</button>
     <button class="mi-button mi-button--tertiary mi-button--large mi-button--selected">tertiary</button>
     <button class="mi-button mi-button--ghost mi-button--large mi-button--selected">ghost</button>
   </div>
+  <div class="row">
+    <span class="label-col">icon-button</span>
+    <button class="mi-icon-button mi-icon-button--secondary mi-icon-button--selected" aria-label="検索（選択中）"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--tertiary mi-icon-button--selected" aria-label="検索（選択中）"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+    <button class="mi-icon-button mi-icon-button--ghost mi-icon-button--selected" aria-label="検索（選択中）"><span class="mi-icon mi-icon--search" aria-hidden="true"></span></button>
+  </div>
+  <p class="note">`--selected` は単独では効かない（variant クラスとの併用が必須）。primary / plane に selected は無い。</p>
 
   <h2>disabled</h2>
   <div class="row">

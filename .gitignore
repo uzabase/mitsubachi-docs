@@ -1,2 +1,5 @@
 # Claude Code のローカル個人設定（permission の自動許可などがセッションごとに追記されるため追跡しない）
 .claude/settings.local.json
+
+# macOS
+.DS_Store
