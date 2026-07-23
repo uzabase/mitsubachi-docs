@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — suggestion</title>
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .lead { font-size: 13px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; max-width: 720px; }
+  </style>
+</head>
+<body>
+  <h1>suggestion — mockup kit 見本</h1>
+  <p class="lead">
+    search-box の直下に表示する検索候補リスト。<code>.mi-suggestion</code>（容器。<code>role="listbox"</code>）の中に
+    <code>__category</code>（カテゴリ見出し）と <code>.mi-suggestion-item</code>（候補。<code>role="option"</code>、先頭に search アイコン）を並べる。
+    該当なしは <code>__empty</code>。位置決め（search-box への追従）はモック側。
+  </p>
+
+  <h2>基本形（search-box ＋ 直下に候補リスト）</h2>
+  <div style="max-width: 420px;">
+    <label class="mi-search-box mi-search-box--primary">
+      <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
+      <input class="mi-search-box__input" type="search" value="三和">
+    </label>
+    <div class="mi-suggestion" role="listbox" style="margin-top: 4px;">
+      <div class="mi-suggestion__category">企業</div>
+      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和電機</div>
+      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和精密工業</div>
+      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和商事</div>
+    </div>
+  </div>
+
+  <h2>該当なし（__empty）</h2>
+  <div class="mi-suggestion" role="listbox" style="max-width: 420px;">
+    <div class="mi-suggestion__empty">該当する候補がありません</div>
+  </div>
+</body>
+</html>

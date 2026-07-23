@@ -2,7 +2,7 @@
 
 ドロップダウンで表示されるアクションや選択肢のリスト。
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-menu` + `.mi-menu-item` を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-menu` + `.mi-menu-item` を使う（自作しない）。 組む前に見本 `mockup-kit/components/menu.html` を読んでマークアップ構造を踏襲する。
 
 ## 使い分け
 

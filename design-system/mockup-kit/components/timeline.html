@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — timeline</title>
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .lead { font-size: 13px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; max-width: 720px; }
+  </style>
+</head>
+<body>
+  <h1>timeline — mockup kit 見本</h1>
+  <p class="lead">
+    <code>.mi-timeline</code>（容器）の中に <code>.mi-timeline-item</code> を並べる。各 item は
+    <code>__flow</code>（左のドット10px＋縦線。中に <code>__dot</code>）と <code>__content</code>（右の本文）の2カラム。
+    最後の item は縦線が自動で消える。強調は item に <code>--emphasized</code>（青ドット）、間隔を広げるなら容器に <code>--loose</code>。
+  </p>
+
+  <h2>基本形（--emphasized ＋ 通常2件。最後の項目は線が消える）</h2>
+  <div class="mi-timeline" style="max-width: 420px;">
+    <div class="mi-timeline-item mi-timeline-item--emphasized">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content"><strong>2024年4月</strong> プロジェクト開始</div>
+    </div>
+    <div class="mi-timeline-item">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content">2024年7月 ベータ版リリース</div>
+    </div>
+    <div class="mi-timeline-item">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content">2024年10月 正式リリース</div>
+    </div>
+  </div>
+</body>
+</html>

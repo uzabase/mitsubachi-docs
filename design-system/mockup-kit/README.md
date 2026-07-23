@@ -114,7 +114,21 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 
 > **Figma 取得のコツ**: md の Figma URL が「ページ」を指している場合、`get_design_context` は失敗する（nothing selected エラー）。その場合は `get_metadata` でページ内のコンポーネントセット node を特定してから `get_design_context` を呼ぶ。
 
-見本: `components/button.html`（button / ai-button / tag）、`components/table.html`（table: grid / list ビュー・ソート状態・全 content-type）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/card-layout.html`（card / 汎用レイアウト①②（app shell）+ サイドナビ。logos.css・icons.css も読み込む）、`components/feedback.html`（dialog / menu / 通知系）、`components/display.html`（avatar / loading 等）
+## 見本（components/*.html）
+
+見本は2種類に分かれる。
+
+**① 単独見本（構造が深いコンポーネント。組む前に必ず読んでマークアップ構造を踏襲する）**
+- `components/table.html` — grid / list ビュー・ソート状態・全 content-type・状態
+- `components/layout.html` — 汎用レイアウト①②（app shell）＋サイドナビ（logos.css・icons.css も読み込む）
+- `components/dialog.html` — backdrop ＋ header / body / footer・--phone
+- `components/menu.html` — action-menu / select-box の展開メニュー / --sub・--danger・--phone
+- `components/ai-chat.html` — messages ＋ input ＋ disclaimer の3部構成
+- `components/timeline.html` — item の flow / dot / content 構造
+- `components/suggestion.html` — search-box ＋ category / item / empty
+
+**② まとめ見本（フラットな部品。クラスを当てるだけでよいもの。目視確認用）**
+- `components/button.html`（button / ai-button / tag）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/feedback.html`（通知系: tooltip / snackbar / icon-color / inline-notification / banner）、`components/display.html`（avatar / card / loading 等）、`components/icons.html`（アイコン一覧）
 
 ## 既知の制約
 

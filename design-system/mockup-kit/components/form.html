@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mitsubachi-ui mockup kit — text-field / search-box</title>
+  <title>mitsubachi-ui mockup kit — 入力系（text-field / select-box / checkbox ほか）</title>
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../mitsubachi-mockup.css">
   <style>
@@ -17,7 +17,7 @@
   </style>
 </head>
 <body>
-  <h1>text-field / search-box — mockup kit 見本</h1>
+  <h1>入力系（text-field / select-box / checkbox ほか）— mockup kit 見本</h1>
 
   <h2>text-field（ラベル上・エラーメッセージ下: text-field.md）</h2>
   <div class="col">
@@ -140,19 +140,7 @@
     </select>
   </div>
 
-  <h2>select-box の展開メニュー（クリック後に出る選択肢。.mi-menu ＋ select-menu-item。選択中はチェック）</h2>
-  <p style="font-size:12px;color:rgba(0,0,0,0.54);margin:0 0 8px;">トリガー（閉じた状態）は上の <code>.mi-select</code>。クリックで開くメニューはこの部品で組む（位置決めはモック側）。</p>
-  <div class="col" style="max-width: 216px;">
-    <div class="mi-menu" role="listbox" aria-label="業種を選択">
-      <div class="mi-menu-item mi-menu-item--selected" role="option" aria-selected="true">
-        電気機器
-        <span class="mi-icon mi-icon--check" style="width:24px;height:24px;" aria-hidden="true"></span>
-      </div>
-      <div class="mi-menu-item" role="option">半導体</div>
-      <div class="mi-menu-item" role="option">自動車</div>
-      <div class="mi-menu-item mi-menu-item--disabled" role="option" aria-disabled="true">医薬品（選択不可）</div>
-    </div>
-  </div>
+  <p style="font-size:12px;color:rgba(0,0,0,0.54);margin:8px 0 0;">クリック後に開く展開メニューの見本は <code>menu.html</code>（.mi-menu ＋ select-menu-item）を参照。</p>
 
   <h2>input-chip（入力済み値。×で削除。group は折り返し）</h2>
   <div class="mi-input-chip-group" style="max-width: 420px;">
@@ -192,20 +180,6 @@
         <span class="mi-radio-card__support">タッチ操作向け</span>
       </span>
     </label>
-  </div>
-
-  <h2>suggestion（search-box の直下に表示する候補リスト）</h2>
-  <div style="max-width: 420px;">
-    <label class="mi-search-box mi-search-box--primary">
-      <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
-      <input class="mi-search-box__input" type="search" value="三和">
-    </label>
-    <div class="mi-suggestion" role="listbox" style="margin-top: 4px;">
-      <div class="mi-suggestion__category">企業</div>
-      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和電機</div>
-      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和精密工業</div>
-      <div class="mi-suggestion-item" role="option"><span class="mi-icon mi-icon--search" aria-hidden="true"></span>三和商事</div>
-    </div>
   </div>
 
   <h2>label-unit（ラベル＋必須＋補足）と組み合わせ</h2>

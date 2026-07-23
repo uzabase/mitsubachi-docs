@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mitsubachi-ui mockup kit — card / layout</title>
+  <title>mitsubachi-ui mockup kit — layout（汎用レイアウト = Speeda app shell）</title>
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../mitsubachi-mockup.css">
   <link rel="stylesheet" href="../mitsubachi-logos.css">
@@ -14,9 +14,6 @@
     .demo-pad { padding: 32px; }
     h1 { font-size: 20px; margin: 0 0 24px; }
     h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 720px; }
-    .card-title { margin: 0 0 4px; font-size: 12px; color: var(--text-weak, rgba(0,0,0,0.54)); }
-    .card-value { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.3; }
     .layout-demo { height: 240px; border: 1px dashed rgba(0,0,0,0.2); overflow: hidden; max-width: 720px; }
     .layout-demo .mi-layout { min-height: 100%; }
     .demo-note { padding: 12px; font-size: 12px; color: var(--text-weak, rgba(0,0,0,0.54)); }
@@ -24,21 +21,9 @@
 </head>
 <body>
   <div class="demo-pad">
-    <h1>card / layout — mockup kit 見本</h1>
+    <h1>layout（汎用レイアウト = Speeda app shell）— mockup kit 見本</h1>
 
-    <h2>mi-card（zabuton 面 / outlined。影は付けない＝elevation.md）</h2>
-    <div class="grid">
-      <div class="mi-card">
-        <p class="card-title">合計売上高（既定: zabuton）</p>
-        <p class="card-value">42.8<span style="font-size:14px; font-weight:400;"> 兆円</span></p>
-      </div>
-      <div class="mi-card mi-card--outlined">
-        <p class="card-title">平均営業利益率（outlined）</p>
-        <p class="card-value">9.4<span style="font-size:14px; font-weight:400;"> %</span></p>
-      </div>
-    </div>
-
-    <p class="demo-note" style="padding:0 0 4px;">汎用レイアウト = Speeda app shell（2カラム・サイドナビ240px・ヘッダー60px）。page-title 行の有無で①②に分かれる。</p>
+    <p class="demo-note" style="padding:0 0 4px;">汎用レイアウト = Speeda app shell（2カラム・サイドナビ240px・ヘッダー60px）。page-title 行の有無で①②に分かれる。サイドナビのアイコンとロゴに mitsubachi-icons.css / mitsubachi-logos.css の追加読み込みが必要。</p>
 
     <h2>汎用レイアウト①（page-title 無し。header → contents 直結。Figma 11461-12912）</h2>
     <div class="layout-demo" style="height: 480px;">

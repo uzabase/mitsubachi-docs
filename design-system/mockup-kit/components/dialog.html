@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — dialog</title>
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .lead { font-size: 13px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; max-width: 720px; }
+    /* dialog をページ内に埋め込んで見せるための枠（実際は fixed オーバーレイ） */
+    .dialog-demo { position: relative; height: 360px; overflow: hidden; border: 1px dashed rgba(0,0,0,0.2); max-width: 720px; }
+    .dialog-demo .mi-dialog-backdrop { position: absolute; }
+  </style>
+</head>
+<body>
+  <h1>dialog — mockup kit 見本</h1>
+  <p class="lead">
+    <code>.mi-dialog-backdrop</code>（全画面の半透明幕）の中に <code>.mi-dialog</code> を置き、
+    中は <code>__header</code>（タイトル）→ <code>__body</code>（本文）→ <code>__footer</code>（ボタン群: secondary 左・primary 右・間隔8px）の3部構成。
+    <code>role="dialog" aria-modal="true" aria-labelledby</code> を付ける。実際は画面全体に fixed 表示（この見本は枠内に埋め込み）。
+  </p>
+
+  <h2>基本形（backdrop ＋ header / body / footer）</h2>
+  <div class="dialog-demo">
+    <div class="mi-dialog-backdrop">
+      <div class="mi-dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-t">
+        <div class="mi-dialog__header"><h2 class="mi-dialog__title" id="dlg-t" style="margin:0;color:rgba(0,0,0,0.84);">この条件を保存しますか？</h2></div>
+        <div class="mi-dialog__body">保存した条件は「マイ検索条件」からいつでも呼び出せます。条件名は後から変更できます。</div>
+        <div class="mi-dialog__footer">
+          <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
+          <button class="mi-button mi-button--primary mi-button--large">保存する</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>--phone（本文16px＋フッター区切り線）</h2>
+  <div class="dialog-demo">
+    <div class="mi-dialog mi-dialog--phone" role="dialog" aria-modal="true" aria-labelledby="dlg-tp" style="max-width:400px;">
+      <div class="mi-dialog__header"><h2 class="mi-dialog__title" id="dlg-tp" style="margin:0;color:rgba(0,0,0,0.84);">--phone</h2></div>
+      <div class="mi-dialog__body">phone では本文が16pxになり、フッターに区切り線が付きます。</div>
+      <div class="mi-dialog__footer">
+        <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
+        <button class="mi-button mi-button--primary mi-button--large">OK</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

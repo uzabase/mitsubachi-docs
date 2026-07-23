@@ -6,7 +6,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=6931-5681
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-timeline`（+ `-item`/`__flow`/`__dot`/`__content`） を使う（自作しない）。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-timeline`（+ `-item`/`__flow`/`__dot`/`__content`） を使う（自作しない）。 組む前に見本 `mockup-kit/components/timeline.html` を読んでマークアップ構造を踏襲する。
 
 ## 使い分け
 

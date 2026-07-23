@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — ai-chat</title>
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .lead { font-size: 13px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; max-width: 720px; }
+  </style>
+</head>
+<body>
+  <h1>ai-chat — mockup kit 見本</h1>
+  <p class="lead">
+    <code>.mi-ai-chat</code> の中は <code>__messages</code>（履歴。<code>role="log" aria-live="polite"</code>）→
+    <code>__input</code>（textarea ＋ 送信 icon-button）→ <code>__disclaimer</code>（免責）の3部構成。
+    履歴の中はユーザー発言 <code>__user-message</code>（右寄せグレーバブル）と AI 回答 <code>__answer</code>（地の文）を並べ、
+    生成中は <code>.mi-loading--ai</code> を置く。
+  </p>
+
+  <h2>基本形（messages ＋ input ＋ disclaimer。card--outlined で包むフローティング近似）</h2>
+  <div class="mi-ai-chat mi-card--outlined" style="max-width: 480px; border-radius: 8px;">
+    <div class="mi-ai-chat__messages" role="log" aria-live="polite" style="max-height: 280px;">
+      <div class="mi-ai-chat__user-message">競合3社の売上を比較して</div>
+      <div class="mi-ai-chat__answer">直近四半期の売上高は、三和電機が12.4兆円で最も大きく、ヒバリ半導体（6.8兆円）、あけぼの家電（4.1兆円）と続きます。</div>
+      <span class="mi-loading mi-loading--ai mi-loading--2x-large" role="status" aria-label="生成中"></span>
+    </div>
+    <div class="mi-ai-chat__input">
+      <textarea class="mi-ai-chat__input-field" rows="1" placeholder="AIに質問する"></textarea>
+      <button class="mi-icon-button mi-icon-button--primary" aria-label="送信">
+        <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+      </button>
+    </div>
+    <p class="mi-ai-chat__disclaimer">AIの回答は不正確な場合があります</p>
+  </div>
+</body>
+</html>

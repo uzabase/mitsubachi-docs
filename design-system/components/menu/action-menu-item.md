@@ -17,7 +17,7 @@ action-menu-item は、クリックするとアクション（コマンド）を
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8376-4715
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-menu-item` を使う（自作しない）。削除など破壊的操作を赤文字で示す場合は `.mi-menu-item--danger`、スマートフォン向けには `.mi-menu-item--phone` を付ける。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-menu-item` を使う（自作しない）。削除など破壊的操作を赤文字で示す場合は `.mi-menu-item--danger`、スマートフォン向けには `.mi-menu-item--phone` を付ける。 組む前に見本 `mockup-kit/components/menu.html` を読んでマークアップ構造を踏襲する。
 
 ## バリアントプロパティ
 

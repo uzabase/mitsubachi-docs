@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mitsubachi-ui mockup kit — dialog / menu / 通知系</title>
+  <title>mitsubachi-ui mockup kit — 通知系（tooltip / snackbar / icon-color / inline-notification / banner）</title>
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../mitsubachi-mockup.css">
   <style>
@@ -13,57 +13,10 @@
     h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
     .col { display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
     .row { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
-    /* dialog をページ内に埋め込んで見せるための枠（実際は fixed オーバーレイ） */
-    .dialog-demo { position: relative; height: 360px; overflow: hidden; border: 1px dashed rgba(0,0,0,0.2); max-width: 720px; }
-    .dialog-demo .mi-dialog-backdrop { position: absolute; }
   </style>
 </head>
 <body>
-  <h1>dialog / menu / 通知系 — mockup kit 見本</h1>
-
-  <h2>dialog（small。実際は画面全体に fixed 表示。--phone は本文16px＋フッター区切り線）</h2>
-  <div class="dialog-demo">
-    <div class="mi-dialog-backdrop">
-      <div class="mi-dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-t">
-        <div class="mi-dialog__header"><h2 class="mi-dialog__title" id="dlg-t" style="margin:0;color:rgba(0,0,0,0.84);">この条件を保存しますか？</h2></div>
-        <div class="mi-dialog__body">保存した条件は「マイ検索条件」からいつでも呼び出せます。条件名は後から変更できます。</div>
-        <div class="mi-dialog__footer">
-          <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
-          <button class="mi-button mi-button--primary mi-button--large">保存する</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="dialog-demo" style="margin-top:12px;">
-    <div class="mi-dialog mi-dialog--phone" role="dialog" aria-modal="true" aria-labelledby="dlg-tp" style="max-width:400px;">
-      <div class="mi-dialog__header"><h2 class="mi-dialog__title" id="dlg-tp" style="margin:0;color:rgba(0,0,0,0.84);">--phone</h2></div>
-      <div class="mi-dialog__body">phone では本文が16pxになり、フッターに区切り線が付きます。</div>
-      <div class="mi-dialog__footer">
-        <button class="mi-button mi-button--secondary mi-button--large">キャンセル</button>
-        <button class="mi-button mi-button--primary mi-button--large">OK</button>
-      </div>
-    </div>
-  </div>
-
-  <h2>menu（選択中は check / --danger 赤文字 / --phone 高さ40px）</h2>
-  <div class="mi-menu" role="menu">
-    <div class="mi-menu-item" role="menuitem">CSVでエクスポート</div>
-    <div class="mi-menu-item mi-menu-item--selected" role="menuitem">
-      Excelでエクスポート
-      <span class="mi-icon mi-icon--check" style="width:24px;height:24px;" aria-hidden="true"></span>
-    </div>
-    <div class="mi-menu-item" role="menuitem">PDFでエクスポート</div>
-    <div class="mi-menu-item mi-menu-item--sub" role="menuitem" aria-haspopup="menu">
-      その他の形式
-      <span class="mi-icon mi-icon--chevron-right-small" aria-hidden="true"></span>
-    </div>
-    <div class="mi-menu-item mi-menu-item--disabled" role="menuitem" aria-disabled="true">画像でエクスポート</div>
-    <div class="mi-menu-item mi-menu-item--danger" role="menuitem">この検索条件を削除</div>
-  </div>
-  <div class="mi-menu" role="menu" style="margin-top:12px;">
-    <div class="mi-menu-item mi-menu-item--phone" role="menuitem">--phone（高さ40px・文字16px）</div>
-    <div class="mi-menu-item mi-menu-item--phone mi-menu-item--danger" role="menuitem">削除する</div>
-  </div>
+  <h1>通知系（tooltip / snackbar / icon-color / inline-notification / banner）— mockup kit 見本</h1>
 
   <h2>tooltip（位置決めはモック側）</h2>
   <span class="mi-tooltip" role="tooltip">クリックすると詳細レポートを開きます</span>
