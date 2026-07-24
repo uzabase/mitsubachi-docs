@@ -17,7 +17,7 @@ select-menu-item は、選択状態（チェックマーク）を持つメニュ
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8376-4776
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-menu-item`（選択中は `--selected`） を使う（自作しない）。 組む前に見本 `mockup-kit/components/menu.html` を読んでマークアップ構造を踏襲する。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-menu-item`（選択中は `--selected`） を使う（自作しない）。 組む前に見本 `mockup-kit/components/menu.html` を読んでマークアップ構造を踏襲する。**single-select のみ**（新しい項目を選ぶと前の選択は自動解除。menu での複数選択＝multi-select は禁止、複数選択はチェックボックスグループを使う）。任意選択の場合は未選択を表す「指定なし」という選択肢を用意する。
 
 ## バリアントプロパティ
 

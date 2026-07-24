@@ -320,18 +320,100 @@
 }
 
 /* ============================================================================
- * ai-button（AI実行ボタン）
+ * ai-button（AI実行ボタン。mitsubachi-ui 公式 <mi-ai-button> 由来。2026-07-23 刷新）
  * ----------------------------------------------------------------------------
- * 見た目は neutral-button の primary / secondary と「同一」で、先頭に magic-fill
- * アイコン（✦）が固定で付くだけ（Figma 実体が neutral と同色のため専用色トークンは無い）。
- * → 専用クラスは設けず、.mi-button--primary / --secondary に magic-fill アイコンを置く。
- *   <button class="mi-button mi-button--primary mi-button--large">
- *     <span class="mi-button__icon" aria-hidden="true"><svg>…magic-fill…</svg></span>
- *     AIで要約する
+ * 旧仕様（neutral-button ＋ magic-fill）から専用コンポーネントに変わった。
+ * ピル型（radius 9999px）・文字は各サイズで neutral-button より小さい・weight 400。
+ *   <button class="mi-ai-button mi-ai-button--primary">
+ *     <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
+ *     AIで生成
  *   </button>
- * magic-fill アイコンの SVG は components/button.html の「ai-button」例を参照。
+ * variant: --primary（黒面・白文字）/ --secondary（黒枠）/
+ *          --tertiary（紫枠・紫文字）/ --ghost（枠なし・紫文字）… tertiary/ghost は AI 紫
+ * size: 既定 medium(32px/12px) / --large(40px/14px) / --x-large(48px/16px)
+ * アイコンは magic-fill（既定）または magic。サイズは font 連動（1.28em）。
+ * loading は --loading ＋ 中に .mi-loading（disabled 相当の面＋通常文字）。
  * AI実行以外の操作には使わない（neutral-button を使う）。
  * ========================================================================== */
+.mi-ai-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4, 4px);
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 2px 12px;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-small, 12px);
+  font-weight: var(--typography-font-weight-regular, 400);
+  line-height: var(--line-height-label, 1.5);
+  cursor: pointer;
+  background: none;
+}
+.mi-ai-button > .mi-icon { width: 1.28em; height: 1.28em; flex: none; }
+.mi-ai-button--large {
+  min-height: 40px;
+  padding: 2px 16px;
+  font-size: var(--font-size-label-medium, 14px);
+}
+.mi-ai-button--x-large {
+  min-height: 48px;
+  padding: 2px 16px;
+  font-size: var(--font-size-label-large, 16px);
+}
+.mi-ai-button--primary {
+  background-color: var(--surface-strong-default, #282828);
+  color: var(--text-inverse, #ffffff);
+}
+.mi-ai-button--primary:hover { background-color: var(--surface-strong-hover, #191919); }
+.mi-ai-button--primary:active { background-color: var(--surface-strong-active, #000000); }
+.mi-ai-button--secondary {
+  border-color: var(--border-strong, rgba(0, 0, 0, 0.84));
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
+.mi-ai-button--secondary:hover { background-color: var(--surface-overlay-default, rgba(0, 0, 0, 0.04)); }
+.mi-ai-button--secondary:active { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
+/* tertiary / ghost は AI 紫（公式 mi-ai-button.styles 由来の生値。tokens.css に該当トークン無し） */
+.mi-ai-button--tertiary {
+  border-color: var(--ai-border, #7c3aed);
+  color: var(--ai-text, #6d28d9);
+}
+.mi-ai-button--ghost { color: var(--ai-text, #6d28d9); }
+.mi-ai-button--tertiary:hover,
+.mi-ai-button--ghost:hover { background-color: var(--ai-surface-hover, #ede9fe); }
+.mi-ai-button--tertiary:active,
+.mi-ai-button--ghost:active { background-color: var(--ai-surface-active, #ddd6fe); }
+.mi-ai-button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 2px #ffffff, 0 0 0 4px #3f69f2);
+}
+.mi-ai-button:disabled,
+.mi-ai-button--loading {
+  color: var(--text-disabled, rgba(0, 0, 0, 0.35));
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.mi-ai-button--primary:disabled,
+.mi-ai-button--primary.mi-ai-button--loading {
+  background-color: var(--surface-semi-strong-disabled, rgba(0, 0, 0, 0.05));
+}
+.mi-ai-button--secondary:disabled,
+.mi-ai-button--secondary.mi-ai-button--loading {
+  border-color: var(--border-disabled, rgba(0, 0, 0, 0.1));
+  background-color: transparent;
+}
+.mi-ai-button--tertiary:disabled,
+.mi-ai-button--tertiary.mi-ai-button--loading {
+  border-color: var(--border-disabled, rgba(0, 0, 0, 0.1));
+  background-color: transparent;
+}
+.mi-ai-button--ghost:disabled,
+.mi-ai-button--ghost.mi-ai-button--loading { background-color: transparent; }
+/* loading 中は面が disabled 相当・文字は通常色（公式実測: aria-busy）。中に .mi-loading を置く */
+.mi-ai-button--loading { color: var(--text-regular, rgba(0, 0, 0, 0.84)); }
+.mi-ai-button--loading > .mi-loading { --_size: 1.28em; }
 
 /* ============================================================================
  * read-only-tag（表示専用ラベル・クリック不可）
@@ -387,7 +469,8 @@
  * - 数値列は td/th に .mi-table__num（右寄せ）。
  * - 行選択の checkbox 列は th/td に .mi-table__check（40px・中央。中に .mi-checkbox）。
  *   行アクションの icon-button 列は .mi-table__actions（48px・中央。中に icon-button）。
- *   空セルは素の <td></td>、任意要素のセル（slot）は td に直接置く（content-type=text/number/
+ *   値が無いセル（Null）は既定で「–」（en dash）を表示（文言指定があればそれに従う。
+ *   Figma 107-8889「Nullについて」由来）。slot セルは td に直接置く（content-type=text/number/
  *   header/checkbox/icon-button/slot, content-state=filled/empty を Figma 6055-17729 で確認）。
  * ========================================================================== */
 .mi-table {
@@ -504,8 +587,8 @@
   vertical-align: middle;
 }
 .mi-table .mi-table__actions > .mi-icon-button { vertical-align: middle; }
-/* 空セル（content-state=empty）はプレースホルダ記号を持たず素の空セル（<td></td>）で表現する。
- * slot セル（content-type=slot）は td に任意コンテンツ（tag / link-tag / icon 等）をそのまま入れる。 */
+/* 値が無いセル（Null）は既定で「–」（en dash）を表示する（文言指定があればそれに従う。Figma 107-8889 由来。
+ * 旧ルール「素の空セル」は 2026-07-23 に更新）。slot セルは td に任意コンテンツを直接入れる。 */
 
 /* ============================================================================
  * icon（mitsubachi-ui 公式アイコンセットの一部）
@@ -1659,11 +1742,50 @@
   color: var(--text-regular, rgba(0, 0, 0, 0.84));
   cursor: pointer;
 }
+/* menu-item-group（menu 内の項目グループ。グループ間は区切り線。Figma 無題ファイル
+ * 3dqm7vUqafFzdEkdpyqG9U の action-menu-item 96:5570 / 使用例「アカウント」96:5833 由来。
+ * 各グループが上下 8px を持つため、group を使うときは .mi-menu 側の上下 padding は 0 になる） */
+.mi-menu-group {
+  padding: var(--space-8, 8px) 0;
+}
+.mi-menu-group + .mi-menu-group {
+  border-top: 1px solid var(--border-regular, rgba(0, 0, 0, 0.1));
+}
+.mi-menu:has(> .mi-menu-group) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* menu-category（menu-item-group 内のカテゴリ見出し。Figma component 96:984 由来の正値。
+ * 「関連するアイテムをグループ化する見出しラベル」。弱色12px・クリック不可・高さ32px。
+ * 長文は折り返す（省略禁止） */
+.mi-menu-category {
+  padding: var(--space-8, 8px) var(--space-16, 16px);
+  font-family: var(--typography-font-family, Arial, sans-serif);
+  font-size: var(--font-size-label-small, 12px);
+  line-height: 1.3;
+  letter-spacing: 0.12px;
+  color: var(--text-weak, rgba(0, 0, 0, 0.54));
+}
+/* link-menu-item（<a> で実装する項目。下線・リンク色は付けない。disabled 状態は無い） */
+a.mi-menu-item {
+  text-decoration: none;
+  color: var(--text-regular, rgba(0, 0, 0, 0.84));
+}
 .mi-menu-item:hover { background-color: var(--zabuton-semi-strong, #f8f8f8); }
 .mi-menu-item:active { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
-.mi-menu-item--selected { background-color: var(--menu-item-selected, #f0f6ff); }
-.mi-menu-item--selected:hover { background-color: var(--menu-item-selected-hover, #e3efff); }
-.mi-menu-item--selected:active { background-color: var(--menu-item-selected-active, #d4e6ff); }
+/* 項目内のアイコン（selected の check-small / --sub の chevron / open-in-new）は 20px 固定
+ * （Figma select-menu-item 96:5031 実測: icon 枠 20px） */
+.mi-menu-item > .mi-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+/* selected は select-menu-item だけの概念（action-menu-item に selected 状態は無い）。
+ * 面色は Figma select-menu-item 96:5031 正値 = surface/selected-default #e8edff
+ * （旧値 #f0f6ff は公式実装由来だったが Figma を正として 2026-07-23 更新） */
+.mi-menu-item--selected { background-color: var(--surface-selected-default, #e8edff); }
+.mi-menu-item--selected:hover { background-color: var(--surface-selected-hover, #dbe4ff); }
+.mi-menu-item--selected:active { background-color: var(--surface-selected-active, #d5dfff); }
 .mi-menu-item--disabled,
 .mi-menu-item[aria-disabled="true"] {
   color: var(--text-disabled, rgba(0, 0, 0, 0.35));
@@ -2589,7 +2711,7 @@ a.mi-breadcrumb__item:focus-visible {
 .mi-menu-item--sub { padding-right: var(--space-12, 12px); }
 .mi-menu-item--sub:hover { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
 .mi-menu-item--sub:active { background-color: var(--surface-overlay-active, rgba(0, 0, 0, 0.1)); }
-.mi-menu-item--sub > .mi-icon { flex: none; width: 20px; height: 20px; }
+/* アイコンサイズは .mi-menu-item > .mi-icon（menu セクション）の 20px 共通ルールに従う */
 
 /* ============================================================================
  * icon 追加（chevron-down-small。公式 icons.ts）
@@ -2848,8 +2970,11 @@ a.mi-breadcrumb__item:focus-visible {
  *     </div>
  *     <div class="mi-timeline-item">…</div>
  *   </div>
- * 最後の項目は縦線が消える。--emphasized は強調したい出来事
- * （最重要・文脈の起点・現在地）に使う。行間を広げたい場合は --loose。
+ * 位置（first/middle/last）は DOM 順で自動: 2件目以降は dot の上に 7px の接続線が
+ * 付き、線が dot 間で連続する。最後の項目は下線が消え、下余白も 0。
+ * 単独1件（Figma group=false）は容器に1項目だけ置けば線なしになる。
+ * --emphasized（青ドット）は強調したい出来事（最重要・文脈の起点・現在地）に使う。
+ * 1つの timeline 内で複数使用可。行間を広げたい場合は item に --loose（下余白 16→32px）。
  * ========================================================================== */
 .mi-timeline {
   display: flex;
@@ -2867,7 +2992,17 @@ a.mi-breadcrumb__item:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 7px;
+}
+/* dot の上 7px: 先頭は空き、2件目以降は接続線（Figma position=middle/last の上線。線が連続する） */
+.mi-timeline-item__flow::before {
+  content: "";
+  flex: none;
+  width: 1px;
+  height: 7px;
+  background-color: transparent;
+}
+.mi-timeline-item:not(:first-child) .mi-timeline-item__flow::before {
+  background-color: var(--border-semi-strong-default, rgba(0, 0, 0, 0.2));
 }
 .mi-timeline-item__dot {
   flex: none;

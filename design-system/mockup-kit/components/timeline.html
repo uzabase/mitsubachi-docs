@@ -19,11 +19,12 @@
   <h1>timeline — mockup kit 見本</h1>
   <p class="lead">
     <code>.mi-timeline</code>（容器）の中に <code>.mi-timeline-item</code> を並べる。各 item は
-    <code>__flow</code>（左のドット10px＋縦線。中に <code>__dot</code>）と <code>__content</code>（右の本文）の2カラム。
-    最後の item は縦線が自動で消える。強調は item に <code>--emphasized</code>（青ドット）、間隔を広げるなら容器に <code>--loose</code>。
+    <code>__flow</code>（左24px列。dot 10px＋縦線）と <code>__content</code>（右の本文14px）の2カラム（gap 4px）。
+    位置は DOM 順で自動: <b>2件目以降は dot の上に7pxの接続線</b>が付いて線が連続し、最後の item は下線と下余白が消える。
+    強調は item に <code>--emphasized</code>（青ドット #315CE8）、行間を広げるなら item に <code>--loose</code>（下余白 16→32px）。
   </p>
 
-  <h2>基本形（--emphasized ＋ 通常2件。最後の項目は線が消える）</h2>
+  <h2>基本形（--emphasized ＋ 通常2件。線は dot 間で連続し、最後は下線が消える）</h2>
   <div class="mi-timeline" style="max-width: 420px;">
     <div class="mi-timeline-item mi-timeline-item--emphasized">
       <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
@@ -36,6 +37,31 @@
     <div class="mi-timeline-item">
       <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
       <div class="mi-timeline-item__content">2024年10月 正式リリース</div>
+    </div>
+  </div>
+  <p class="note">--emphasized の使いどころ（Figma）: もっとも重要な出来事（契約締結・リリース完了）/ 文脈の起点（プロジェクト開始・方針変更）/ 現在地・現在のステータス（現任・在籍中）。1つの timeline 内で複数使ってよい。</p>
+
+  <h2>item-spacing=loose（--loose。下余白 32px。本文が長いときに）</h2>
+  <div class="mi-timeline" style="max-width: 420px;">
+    <div class="mi-timeline-item mi-timeline-item--loose">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content"><strong>2024年4月</strong> プロジェクト開始。体制の組成とキックオフを実施。</div>
+    </div>
+    <div class="mi-timeline-item mi-timeline-item--loose">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content">2024年7月 ベータ版リリース。50社の先行ユーザーに提供開始。</div>
+    </div>
+    <div class="mi-timeline-item">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content">2024年10月 正式リリース</div>
+    </div>
+  </div>
+
+  <h2>単独1件（Figma group=false。容器に1項目だけ置くと線なしになる）</h2>
+  <div class="mi-timeline" style="max-width: 420px;">
+    <div class="mi-timeline-item">
+      <div class="mi-timeline-item__flow"><span class="mi-timeline-item__dot"></span></div>
+      <div class="mi-timeline-item__content">2025年1月 全社展開</div>
     </div>
   </div>
 </body>

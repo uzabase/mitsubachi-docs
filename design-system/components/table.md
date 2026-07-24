@@ -6,7 +6,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=6055-16930
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-table`（list 表示は `--list`） を使う（自作しない）。セルの種類は th/td に付ける: 数値列 `.mi-table__num`（右寄せ）/ 行見出し `.mi-table__row-header`（太字）/ 行選択の checkbox 列 `.mi-table__check`（中に `.mi-checkbox`）/ 行アクションの icon-button 列 `.mi-table__actions`。空セルは素の `<td></td>`、任意要素のセル（slot）は td に直接置く。 組む前に見本 `mockup-kit/components/table.html` を読んでマークアップ構造を踏襲する。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-table`（list 表示は `--list`） を使う（自作しない）。セルの種類は th/td に付ける: 数値列 `.mi-table__num`（右寄せ）/ 行見出し `.mi-table__row-header`（太字）/ 行選択の checkbox 列 `.mi-table__check`（中に `.mi-checkbox`）/ 行アクションの icon-button 列 `.mi-table__actions`。値が無いセル（Null）は既定で「–」（en dash）を表示する（文言指定があればそれに従う）。任意要素のセル（slot）は td に直接置く。増減つき数値セルは値の下に `.mi-tag--positive/--negative`（矢印アイコン＋ラベル）を縦組みで置く（文字色は変えない）。 組む前に見本 `mockup-kit/components/table.html` を読んでマークアップ構造を踏襲する。
 
 ## 使い分け
 
@@ -32,7 +32,7 @@
 | **checkbox** | 行選択（ヘッダー＝全選択 / 行＝選択） | `.mi-table__check`（中に `.mi-checkbox`） |
 | **icon-button** | 行アクション（kebab 等） | `.mi-table__actions`（中に icon-button） |
 | **slot** | 任意要素（tag・link-tag・icon 等） | `<td>` に直接置く |
-| **empty** | 値が無いセル | 素の `<td></td>`（プレースホルダ記号は無し） |
+| **empty / Null** | 値が無いセル | **既定は「–」（en dash）を表示**。文言の指定があればそれに従う（例: AI Agent の「競合企業を分析する」）（Figma「Nullについて」107-8889 由来） |
 
 ### 状態
 | state | 説明 |
@@ -42,7 +42,10 @@
 | **selected** | 選択された行 |
 
 ## 振る舞い
-- ヘッダーをクリックでソート可能（対応している場合）
+- **ソート**: ソート可能な列はヘッダーの**セル全体をクリック**でトグルする（Default → 昇順 → 降順 → 解除）。「解除」は昇順でも降順でもない状態で、そのときの並び順はテーブル次第（作成順・手動順など）。各状態に tooltip を併用する。ソート機能がない列のヘッダーには hover 等の状態変化を付けない
+- **カラムに対するアクション**: ヘッダーセルから action-menu（`.mi-menu`）を開いて列単位の操作を提供できる（旧 control-menu は非推奨・削除予定）
+- **行 hover**: 任意のセルを hover すると行全体がハイライト。目的は「視線のガイド・情報の読み違い防止・認知負荷の低減」
+- **セル内リンク**: 文字列や数値のリンクは text-link のルールに従う。**セル全体をリンクにはしない**（現状の Speeda では使わない）
 - 行をクリックで選択または詳細へ遷移
 - 横スクロール対応（列が多い場合）
 

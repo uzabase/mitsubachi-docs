@@ -4,34 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mitsubachi-ui mockup kit — menu</title>
-  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順。open-in-new に icons.css を追加読み込み -->
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <link rel="stylesheet" href="../mitsubachi-icons.css">
   <style>
     /* このページ自体の体裁（kit とは無関係） */
     body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
     h1 { font-size: 20px; margin: 0 0 8px; }
     h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
-    .lead { font-size: 13px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; max-width: 720px; }
-    .note { font-size: 12px; color: rgba(0,0,0,0.55); margin: 8px 0 0; line-height: 1.6; }
+    .lead { font-size: 13px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; max-width: 760px; }
+    .note { font-size: 12px; color: rgba(0,0,0,0.55); margin: 8px 0 0; line-height: 1.6; max-width: 760px; }
+    .row { display: flex; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
   </style>
 </head>
 <body>
   <h1>menu — mockup kit 見本</h1>
   <p class="lead">
     <code>.mi-menu</code>（容器）＋<code>.mi-menu-item</code>（項目）で組む。位置決め（どこに出すか）はモック側。
-    項目の変種: 選択中 <code>--selected</code>（右に check アイコン）/ サブメニュー <code>--sub</code>（右に chevron-right-small 固定）/
-    無効 <code>--disabled</code> / 危険 <code>--danger</code>（赤文字）/ phone <code>--phone</code>（高さ40px・文字16px）。
-    用途で role を使い分ける: アクションメニュー=<code>role="menu"/"menuitem"</code>、select-box の展開=<code>role="listbox"/"option"</code>。
+    項目は3種: <b>action</b>（操作を実行。<code>role="menu"/"menuitem"</code>）/ <b>link</b>（<code>&lt;a&gt;</code> で遷移）/
+    <b>select</b>（値を選択。<code>role="listbox"/"option"</code>）。
+    項目の変種: 選択中 <code>--selected</code>（<b>select-menu-item のみ</b>。右に check-small 20px）/ サブメニュー <code>--sub</code>（右に chevron-right-small）/
+    無効 <code>--disabled</code>（action と select のみ。link には無い）/ 危険 <code>--danger</code>（赤文字）/ phone <code>--phone</code>（高さ40px・文字16px）。
+    区切りは <code>.mi-menu-group</code>。ラベルが長い場合は<b>折り返す（省略・truncate は禁止）</b>。原則1行で済む幅・文言を検討する。
   </p>
 
-  <h2>action-menu（role="menu"。選択中は check / --sub / --disabled / --danger）</h2>
+  <h2>action-menu（role="menu"。--sub / --disabled / --danger。※action-menu-item に selected 状態は無い）</h2>
   <div class="mi-menu" role="menu">
     <div class="mi-menu-item" role="menuitem">CSVでエクスポート</div>
-    <div class="mi-menu-item mi-menu-item--selected" role="menuitem">
-      Excelでエクスポート
-      <span class="mi-icon mi-icon--check" style="width:24px;height:24px;" aria-hidden="true"></span>
-    </div>
+    <div class="mi-menu-item" role="menuitem">Excelでエクスポート</div>
     <div class="mi-menu-item" role="menuitem">PDFでエクスポート</div>
     <div class="mi-menu-item mi-menu-item--sub" role="menuitem" aria-haspopup="menu">
       その他の形式
@@ -40,23 +41,179 @@
     <div class="mi-menu-item mi-menu-item--disabled" role="menuitem" aria-disabled="true">画像でエクスポート</div>
     <div class="mi-menu-item mi-menu-item--danger" role="menuitem">この検索条件を削除</div>
   </div>
+  <p class="note">`--danger` は「データの削除や取り消し困難な変更など、不可逆的または重大な結果を伴う操作」にだけ使う（Figma の破壊的アクションルール）。</p>
 
-  <h2>select-box の展開メニュー（role="listbox" ＋ select-menu-item。選択中はチェック）</h2>
-  <p class="note">トリガー（閉じた状態）は <code>.mi-select</code>（見本は form.html）。クリックで開くメニューはこの部品で組む。<code>.mi-select</code> はネイティブ <code>&lt;select&gt;</code> のため、開いた状態を mitsubachi スタイルで見せるにはこちらを使う。</p>
-  <div class="mi-menu" role="listbox" aria-label="業種を選択" style="max-width: 216px;">
-    <div class="mi-menu-item mi-menu-item--selected" role="option" aria-selected="true">
-      電気機器
-      <span class="mi-icon mi-icon--check" style="width:24px;height:24px;" aria-hidden="true"></span>
+  <h2>menu-item-group（.mi-menu-group。グループ間に区切り線。破壊的操作は最後のグループに分ける）</h2>
+  <div class="mi-menu" role="menu" style="min-width: 264px;">
+    <div class="mi-menu-group">
+      <div class="mi-menu-item" role="menuitem">名前を変更</div>
     </div>
-    <div class="mi-menu-item" role="option">半導体</div>
-    <div class="mi-menu-item" role="option">自動車</div>
-    <div class="mi-menu-item mi-menu-item--disabled" role="option" aria-disabled="true">医薬品（選択不可）</div>
+    <div class="mi-menu-group">
+      <div class="mi-menu-item" role="menuitem">複製する</div>
+      <div class="mi-menu-item mi-menu-item--danger" role="menuitem">削除する</div>
+    </div>
   </div>
+
+  <h2>menu-category（.mi-menu-category。group 内のカテゴリ見出し。弱色12px・クリック不可）</h2>
+  <div class="mi-menu" role="menu" style="min-width: 216px;">
+    <div class="mi-menu-group">
+      <div class="mi-menu-category">エクスポート</div>
+      <div class="mi-menu-item" role="menuitem">CSVでエクスポート</div>
+      <div class="mi-menu-item" role="menuitem">Excelでエクスポート</div>
+    </div>
+    <div class="mi-menu-group">
+      <div class="mi-menu-category">共有</div>
+      <div class="mi-menu-item" role="menuitem">リンクをコピー</div>
+    </div>
+  </div>
+
+  <h2>表示位置・高さ・幅（配置ルール）</h2>
+  <div class="mi-menu" role="menu" style="min-width: 216px; max-height: 152px; overflow-y: auto;">
+    <div class="mi-menu-item" role="menuitem">項目 1</div>
+    <div class="mi-menu-item" role="menuitem">項目 2</div>
+    <div class="mi-menu-item" role="menuitem">項目 3</div>
+    <div class="mi-menu-item" role="menuitem">項目 4</div>
+    <div class="mi-menu-item" role="menuitem">項目 5</div>
+    <div class="mi-menu-item" role="menuitem">項目 6</div>
+    <div class="mi-menu-item" role="menuitem">項目 7</div>
+  </div>
+  <p class="note">
+    <b>表示位置</b>: トリガー（menu-button / icon-button / select-box 等）を基準に「下・左揃え」がデフォルト。トリガーの画面上の位置に応じて「下・右揃え」「上・左揃え」「上・右揃え」のいずれかにする。<b>トリガーの横に出すのは Don't</b>（上下いずれかに出す）。<br>
+    <b>高さ</b>: ブラウザのページ端から16pxを確保し、入りきらない場合はスクロールバーを表示（上の見本は max-height ＋ overflow-y で再現）。<br>
+    <b>幅</b>: 内容に応じて指定する。幅を広げると同じ文字量でも理解しやすくなる（Do）。ただし短くてもわかりやすいラベルにする工夫も大事。<br>
+    <b>開閉</b>: トリガーのクリックで開き、メニュー外側のクリック or ESC キーで閉じる。
+  </p>
+
+  <h2>link-menu（項目が &lt;a&gt; のメニュー。リンクに disabled は無い。新規タブは open-in-new アイコン）</h2>
+  <div class="mi-menu" role="menu" style="max-width: 240px;">
+    <a class="mi-menu-item" role="menuitem" href="#">ダッシュボードへ</a>
+    <a class="mi-menu-item" role="menuitem" href="#">企業検索へ</a>
+    <a class="mi-menu-item" role="menuitem" href="#" target="_blank" rel="noopener">
+      ヘルプセンター
+      <span class="mi-icon mi-icon--open-in-new" style="width:18px;height:18px;" aria-hidden="true"></span>
+    </a>
+    <a class="mi-menu-item" role="menuitem" href="#">とても長いラベルのリンクは省略せず折り返して表示する</a>
+  </div>
+  <p class="note">link-menu-item は <code>&lt;a&gt;</code> で実装するため<b> disabled 状態が存在しない</b>。新規タブ（target="_blank"）で開くリンクには <code>open-in-new</code> アイコン（icons.css）を右に置いて視覚的に伝える。</p>
+
+  <h2>select-box の展開メニュー（role="listbox" ＋ select-menu-item。選択中はチェック。single-select のみ）</h2>
+  <div class="row">
+    <div>
+      <div class="mi-menu" role="listbox" aria-label="業種を選択" style="min-width: 216px;">
+        <div class="mi-menu-item mi-menu-item--selected" role="option" aria-selected="true">
+          電気機器
+          <span class="mi-icon mi-icon--check-small" aria-hidden="true"></span>
+        </div>
+        <div class="mi-menu-item" role="option">半導体</div>
+        <div class="mi-menu-item" role="option">自動車</div>
+        <div class="mi-menu-item mi-menu-item--disabled" role="option" aria-disabled="true">医薬品（選択不可）</div>
+      </div>
+    </div>
+    <div>
+      <div class="mi-menu" role="listbox" aria-label="期間を選択" style="min-width: 216px;">
+        <div class="mi-menu-item mi-menu-item--selected" role="option" aria-selected="true">
+          指定なし
+          <span class="mi-icon mi-icon--check-small" aria-hidden="true"></span>
+        </div>
+        <div class="mi-menu-item" role="option">過去1週間</div>
+        <div class="mi-menu-item" role="option">過去1ヶ月</div>
+      </div>
+      <p class="note" style="max-width:260px;">任意選択の場合は、未選択状態を表す<b>「指定なし」という選択肢</b>を用意する（右の例）。</p>
+    </div>
+  </div>
+  <p class="note">
+    トリガー（閉じた状態）は <code>.mi-select</code>（見本は form.html）。<code>.mi-select</code> はネイティブ <code>&lt;select&gt;</code> のため、開いた状態はこの部品で組む。
+    選択は <b>single-select のみ</b>: 新しい項目を選ぶと前の選択は自動解除される。<b>menu での複数選択（multi-select）は禁止</b>（Figma 2026/6/12 追記: 実装しない・考慮しない。複数選択はチェックボックスグループを使う）。
+  </p>
+
+  <h2>sub-menu の配置（親 menu の右側にぴったり・上端は親項目に揃える。右にスペースが無ければ左でもよい）</h2>
+  <div class="row" style="gap: 0; align-items: flex-start;">
+    <div class="mi-menu" role="menu">
+      <div class="mi-menu-item" role="menuitem">CSVでエクスポート</div>
+      <div class="mi-menu-item mi-menu-item--sub" role="menuitem" aria-haspopup="menu" aria-expanded="true" style="background-color: var(--zabuton-semi-strong, #f8f8f8);">
+        その他の形式
+        <span class="mi-icon mi-icon--chevron-right-small" aria-hidden="true"></span>
+      </div>
+      <div class="mi-menu-item" role="menuitem">PDFでエクスポート</div>
+    </div>
+    <div class="mi-menu" role="menu" style="margin-top: 40px;">
+      <div class="mi-menu-item" role="menuitem">PNG形式</div>
+      <div class="mi-menu-item" role="menuitem">SVG形式</div>
+    </div>
+  </div>
+  <p class="note">sub-menu は親項目の hover で開き、hover を外すと閉じる（タッチデバイスは Tap で開閉・メニュー外の Tap で全て閉じる）。sub-menu の上端は親項目に揃える（この見本では静的に margin で再現）。下にスペースが無いときは上に伸ばしてよい。</p>
 
   <h2>--phone（高さ40px・文字16px）</h2>
   <div class="mi-menu" role="menu">
     <div class="mi-menu-item mi-menu-item--phone" role="menuitem">--phone（高さ40px・文字16px）</div>
     <div class="mi-menu-item mi-menu-item--phone mi-menu-item--danger" role="menuitem">削除する</div>
   </div>
+
+  <h2>使用例①: menu-button から開く（資料自動作成）</h2>
+  <div style="max-width: 192px;">
+    <button class="mi-button mi-button--secondary mi-button--medium mi-button--menu">
+      資料自動作成
+      <span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <div class="mi-menu" role="menu" style="margin-top: 4px; min-width: 192px;">
+      <div class="mi-menu-item" role="menuitem">サマリー資料</div>
+      <div class="mi-menu-item" role="menuitem">比較資料</div>
+      <div class="mi-menu-item" role="menuitem">業界レポート</div>
+      <div class="mi-menu-item" role="menuitem">財務ハイライト</div>
+    </div>
+  </div>
+
+  <h2>使用例②: icon-button（kebab）から開く（もっと見る）</h2>
+  <div style="max-width: 144px;">
+    <button class="mi-icon-button mi-icon-button--ghost" aria-label="もっと見る"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+    <div class="mi-menu" role="menu" style="margin-top: 4px; min-width: 144px;">
+      <div class="mi-menu-group">
+        <div class="mi-menu-item" role="menuitem">編集する</div>
+        <div class="mi-menu-item" role="menuitem">複製する</div>
+      </div>
+      <div class="mi-menu-group">
+        <div class="mi-menu-item mi-menu-item--danger" role="menuitem">削除する</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>使用例③: アカウントメニュー（avatar から開く。link / sub / action をグループで混在）</h2>
+  <div style="max-width: 280px;">
+    <div style="display:flex; justify-content:flex-end;">
+      <button class="mi-avatar mi-avatar--medium" aria-label="アカウントメニューを開く" style="border:none; cursor:pointer;">白</button>
+    </div>
+    <div class="mi-menu" role="menu" style="margin-top: 4px; min-width: 280px;">
+      <div class="mi-menu-group">
+        <a class="mi-menu-item" role="menuitem" href="#" style="min-height:50px;">
+          <span style="display:flex; flex-direction:column; gap:2px;">
+            白須 貴之
+            <span style="font-size:12px; color:var(--text-weak, rgba(0,0,0,0.54));">takayuki@example.com</span>
+          </span>
+        </a>
+      </div>
+      <div class="mi-menu-group">
+        <a class="mi-menu-item" role="menuitem" href="#">アカウント設定</a>
+        <a class="mi-menu-item" role="menuitem" href="#">通知設定</a>
+      </div>
+      <div class="mi-menu-group">
+        <a class="mi-menu-item" role="menuitem" href="#">利用プラン</a>
+        <div class="mi-menu-item mi-menu-item--sub" role="menuitem" aria-haspopup="menu">
+          言語
+          <span class="mi-icon mi-icon--chevron-right-small" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="mi-menu-group">
+        <a class="mi-menu-item" role="menuitem" href="#" target="_blank" rel="noopener">
+          ヘルプセンター
+          <span class="mi-icon mi-icon--open-in-new" style="width:18px;height:18px;" aria-hidden="true"></span>
+        </a>
+        <a class="mi-menu-item" role="menuitem" href="#">利用規約</a>
+      </div>
+      <div class="mi-menu-group">
+        <div class="mi-menu-item" role="menuitem">ログアウト</div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Figma 使用例「アカウント」の構成: 先頭グループにユーザー情報（2行）、中間は link / sub の混在グループ、<b>最後のグループに action を分離</b>する。</p>
 </body>
 </html>

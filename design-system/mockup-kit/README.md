@@ -16,6 +16,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 | `mitsubachi-logos.css` | Speeda / Uzabase の公式ロゴ SVG（容量が大きいため分離。ロゴが必要なモックでのみ追加読み込み）。 |
 | `CHEATSHEET.md` | **AI が最初に読む1枚**。全クラスの当て方・間違えやすい併用規則のまとめ。 |
 | `templates/starter.html` | 新規モックの雛形（CSS 読み込み順＋ app shell 骨格）。コピーして使う。 |
+| `templates/error-403/404/500.html` | エラーページ（公式 pages/403・404・500 由来）。**そのまま使える**。ボタンの「{ページ名}」と遷移先だけ差し替える。 |
 | `components/*.html` | 各コンポーネントの利用例（見本）。ブラウザで開くと見た目を確認できる。 |
 
 ## 使い方（mockup を作るとき）
@@ -48,7 +49,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 
 - [x] **neutral-button** — variant: primary / secondary / tertiary / ghost / plane（`--plain` は別名）、size: medium / large / x-large、状態: default / hover / active / focus / disabled / selected（selected は `--secondary/--tertiary/--ghost` に `--selected` を併用。単独では効かない）（色・状態は mitsubachi-ui 公式実装 button.styles.ts 由来）
 - [x] **danger-button**（`.mi-button--danger` ＋ variant 併用）— primary / secondary / tertiary / ghost（公式実装由来）
-- [x] **ai-button** — neutral-button の primary / secondary に公式 magic-fill アイコン（`.mi-icon--magic-fill`）を付けたもの（専用色トークンは無い。AI実行操作に限定）
+- [x] **ai-button**（`.mi-ai-button`）— 公式 `<mi-ai-button>` 準拠のピル型（radius 9999px・weight 400）。variant: `--primary`(黒面)/`--secondary`(黒枠)/`--tertiary`(AI紫枠)/`--ghost`(AI紫文字)、size: 既定 medium(32px/12px)/`--large`(40px/14px)/`--x-large`(48px/16px)、disabled/`--loading`。アイコンは magic-fill か magic（font 連動 1.28em）。**2026-07-23 刷新: 旧「neutral-button＋magic-fill」表現は廃止**（AI実行操作に限定）
 - [x] **read-only-tag**（`.mi-tag`）— variant: neutral / information / positive / negative
 - [x] **table**（`.mi-table`）— grid view（グレーヘッダー・縦横罫線）/ `--list`（白・横罫線のみ）＋ソート状態・行見出し（`__row-header`）・数値列（`__num`）・**checkbox 列（`__check`・行選択）**・**アクション列（`__actions`・icon-button）**・セル内リンク・行 hover / 選択行（content-type=text/number/header/checkbox/icon-button/slot, content-state=filled/empty まで Figma table-header-cell `6055-17160`・table-body-cell `6055-17729` で確認・収録）
 - [x] **notification-badge**（`.mi-badge`）— 数値 / `--dot`、右上重ね配置の `.mi-badge-anchor`
@@ -68,7 +69,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 - [x] **text-area**（`.mi-text-area`）— min-height 58px / error / disabled（Figma node `182-4766` 由来）
 - [x] **select-box**（`.mi-select`）— 高さ40px / 文字14px（Figma node `8257-8293` 由来）
 - [x] **dialog**（`.mi-dialog-backdrop` / `.mi-dialog` + header/body/footer）— small/medium/large（公式実装由来）
-- [x] **menu**（`.mi-menu` + `.mi-menu-item`）—（公式実装由来）
+- [x] **menu**（`.mi-menu` + `.mi-menu-item`）— 項目3種（action / link=`<a>` / select=listbox）、グループ区切り `.mi-menu-group`、group 内見出し `.mi-menu-category`、`--selected/--sub/--disabled/--danger/--phone`。select は single-select のみ（multi-select 禁止）、link に disabled 無し・新規タブは open-in-new アイコン。表示位置=トリガー基準「下・左揃え」既定／高さ=ページ端16px確保・超えたらスクロール／外側クリック or ESC で閉じる（公式実装＋Figma 無題ファイル `3dqm7vUqafFzdEkdpyqG9U` の menu 全6ページ由来） 
 - [x] **tooltip**（`.mi-tooltip`）—（公式実装由来。位置決めはモック側）
 - [x] **snackbar**（`.mi-snackbar`）—（公式実装由来）
 - [x] **inline-notification**（`.mi-inline-notification--error/information/success/warning`）—（公式実装由来）
@@ -125,7 +126,7 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 - `components/table.html` — grid / list ビュー・ソート状態・全 content-type・状態
 - `components/layout.html` — 汎用レイアウト①②（app shell）＋サイドナビ（logos.css・icons.css も読み込む）
 - `components/dialog.html` — backdrop ＋ header / body / footer・--phone
-- `components/menu.html` — action-menu / select-box の展開メニュー / --sub・--danger・--phone
+- `components/menu.html` — action / link / select の3種・グループ区切り（`.mi-menu-group`）・sub-menu の配置・トリガー使用例（menu-button / kebab / avatar）・--danger・--phone
 - `components/ai-chat.html` — messages ＋ input ＋ disclaimer の3部構成
 - `components/timeline.html` — item の flow / dot / content 構造
 - `components/suggestion.html` — search-box ＋ category / item / empty

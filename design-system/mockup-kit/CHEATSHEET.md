@@ -29,13 +29,13 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 |---|---|
 | `--selected` は**単独では効かない** | `.mi-button--secondary.mi-button--selected` のように `--secondary/--tertiary/--ghost` と併用。`.mi-icon-button--selected` も同様。primary / plane に selected は無い |
 | danger-button は独立クラスではない | `.mi-button--danger` ＋ variant（`--primary` 等）を**併用** |
-| ai-button は専用クラスではない | `.mi-button--primary`（or `--secondary`）＋ 先頭に `<span class="mi-icon mi-icon--magic-fill">` |
+| ai-button は `.mi-button` ではない | 専用クラス `.mi-ai-button`（ピル型）＋ variant を併用。中に magic-fill アイコン。**旧「`.mi-button`＋magic-fill」表現は廃止（2026-07-23）** |
 | loading は中身が必要 | `.mi-button--loading` ＋ 中に `<span class="mi-loading"></span>` |
 | menu-button は chevron を内包 | `.mi-button--menu` ＋ variant 併用、末尾に `<span class="mi-icon mi-icon--chevron-down-small">` |
 | `.mi-select` はネイティブ `<select>` | 開いた選択肢メニューは `.mi-menu`（role="listbox"）で組む → 見本 `components/menu.html` |
 | icon-button は必ず `aria-label` | アイコンだけでは意味が伝わらないため。tooltip 併用推奨 |
 | アイコンは内蔵10種以外 icons.css が必要 | 内蔵: magic / magic-fill / search / check / cross / chevron-down(-small) / chevron-right(-small) / chevron-left。それ以外（home / bell 等97種）は icons.css |
-| 空セル・影・プレースホルダを発明しない | table の空セルは素の `<td></td>`。card に影は付けない |
+| Null 表示・影を発明しない | table の値が無いセルは**「–」（en dash）が既定**（文言指定があればそれに従う）。card に影は付けない |
 
 ## ボタン系
 
@@ -43,7 +43,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 |---|---|---|
 | neutral-button | `.mi-button` | variant: `--primary/--secondary/--tertiary/--ghost/--plane` を必ず1つ、size: `--medium/--large/--x-large` を必ず1つ。配置: primary は右・1画面1つ、間隔8px |
 | danger-button | `.mi-button--danger` | variant 併用（primary/secondary/tertiary/ghost） |
-| ai-button | （専用クラス無し） | `--primary/--secondary` ＋ magic-fill アイコン。AI実行操作限定 |
+| ai-button | `.mi-ai-button` | ピル型。variant: `--primary/--secondary/--tertiary(AI紫)/--ghost(AI紫)` 必ず1つ、size: 既定 medium(32px)/`--large`/`--x-large`。中に magic-fill（or magic）アイコン。AI実行操作限定 |
 | menu-button | `.mi-button--menu` | variant 併用。chevron-down-small 内包（サイズ連動18/20/22px） |
 | icon-button | `.mi-icon-button` | variant: `--primary/--secondary/--tertiary/--ghost`、size: `--small`(24)/既定(32)/`--large`(40)。`--selected` は variant 併用 |
 | floating-button | `.mi-floating-button` | AIグラデーションリング |
@@ -76,7 +76,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 | section-tab | `.mi-section-tab` | セクション内の切替。`--phone` |
 | breadcrumb | `.mi-breadcrumb` | `--phone`（12→14px） |
 | pagination | `.mi-pagination` | chevron の icon-button ＋ ページ番号 select ＋「/ 総数」。`--phone` |
-| menu | `.mi-menu` ＋ `.mi-menu-item` | **→ 見本 `components/menu.html` を読む**（--selected/--sub/--disabled/--danger/--phone、role の使い分け） |
+| menu | `.mi-menu` ＋ `.mi-menu-item` | **→ 見本 `components/menu.html` を読む**（action/link/select の3種・`.mi-menu-group` 区切り・`.mi-menu-category` 見出し・--selected/--sub/--disabled/--danger/--phone）。select は single のみ・**selected は select-menu-item だけ**（action に selected は無い。check-small 20px）・link に disabled 無し・長文は折り返し（省略禁止）。表示位置は「下・左揃え」既定 |
 | notification-badge | `.mi-badge` | 数値 / `--dot`。右上重ねは `.mi-badge-anchor` で包む |
 
 ## 表示系
@@ -113,3 +113,4 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 | 汎用レイアウト（app shell） | `.mi-layout` | **→ 見本 `components/layout.html` を読む**（2カラム・サイドナビ240px・ヘッダー60px。page-title 有無で2バリアント。icons.css＋logos.css 必要） |
 | side-navigation-item | `.mi-sidenav-item` | `__icon`/`__label`、`--selected`。グループは `.mi-sidenav-group`、見出し `.mi-sidenav-category` |
 | 1カラム（参考） | `.mi-header` | サイドナビ無しの簡易パターン |
+| エラーページ（403/404/500） | （テンプレート） | `templates/error-403.html / error-404.html / error-500.html` を**そのまま使う**（ボタンの「{ページ名}」と遷移先だけ差し替え。自作しない） |

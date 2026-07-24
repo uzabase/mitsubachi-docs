@@ -6,7 +6,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=6931-5681
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-timeline`（+ `-item`/`__flow`/`__dot`/`__content`） を使う（自作しない）。 組む前に見本 `mockup-kit/components/timeline.html` を読んでマークアップ構造を踏襲する。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-timeline`（+ `-item`/`__flow`/`__dot`/`__content`） を使う（自作しない）。位置（先頭/中間/最後）は DOM 順で自動＝線は dot 間で連続し最後だけ下線が消える。強調は `-item--emphasized`（青ドット。最重要・文脈の起点・現在地）、行間拡張は `-item--loose`。 組む前に見本 `mockup-kit/components/timeline.html` を読んでマークアップ構造を踏襲する。
 
 ## 使い分け
 
