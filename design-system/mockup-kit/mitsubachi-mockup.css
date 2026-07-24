@@ -328,8 +328,8 @@
  *     <span class="mi-icon mi-icon--magic-fill" aria-hidden="true"></span>
  *     AIで生成
  *   </button>
- * variant: --primary（黒面・白文字）/ --secondary（黒枠）/
- *          --tertiary（紫枠・紫文字）/ --ghost（枠なし・紫文字）… tertiary/ghost は AI 紫
+ * variant: --primary（黒面・白文字）/ --secondary（黒枠）の2種のみ
+ *（内部CSSには紫系 tertiary/ghost の定義があるが公開 API に無いため kit では収録しない）
  * size: 既定 medium(32px/12px) / --large(40px/14px) / --x-large(48px/16px)
  * アイコンは magic-fill（既定）または magic。サイズは font 連動（1.28em）。
  * loading は --loading ＋ 中に .mi-loading（disabled 相当の面＋通常文字）。
@@ -375,16 +375,6 @@
 }
 .mi-ai-button--secondary:hover { background-color: var(--surface-overlay-default, rgba(0, 0, 0, 0.04)); }
 .mi-ai-button--secondary:active { background-color: var(--surface-overlay-hover, rgba(0, 0, 0, 0.07)); }
-/* tertiary / ghost は AI 紫（公式 mi-ai-button.styles 由来の生値。tokens.css に該当トークン無し） */
-.mi-ai-button--tertiary {
-  border-color: var(--ai-border, #7c3aed);
-  color: var(--ai-text, #6d28d9);
-}
-.mi-ai-button--ghost { color: var(--ai-text, #6d28d9); }
-.mi-ai-button--tertiary:hover,
-.mi-ai-button--ghost:hover { background-color: var(--ai-surface-hover, #ede9fe); }
-.mi-ai-button--tertiary:active,
-.mi-ai-button--ghost:active { background-color: var(--ai-surface-active, #ddd6fe); }
 .mi-ai-button:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring, 0 0 0 2px #ffffff, 0 0 0 4px #3f69f2);
@@ -404,13 +394,6 @@
   border-color: var(--border-disabled, rgba(0, 0, 0, 0.1));
   background-color: transparent;
 }
-.mi-ai-button--tertiary:disabled,
-.mi-ai-button--tertiary.mi-ai-button--loading {
-  border-color: var(--border-disabled, rgba(0, 0, 0, 0.1));
-  background-color: transparent;
-}
-.mi-ai-button--ghost:disabled,
-.mi-ai-button--ghost.mi-ai-button--loading { background-color: transparent; }
 /* loading 中は面が disabled 相当・文字は通常色（公式実測: aria-busy）。中に .mi-loading を置く */
 .mi-ai-button--loading { color: var(--text-regular, rgba(0, 0, 0, 0.84)); }
 .mi-ai-button--loading > .mi-loading { --_size: 1.28em; }

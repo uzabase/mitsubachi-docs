@@ -16,7 +16,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 | `mitsubachi-logos.css` | Speeda / Uzabase の公式ロゴ SVG（容量が大きいため分離。ロゴが必要なモックでのみ追加読み込み）。 |
 | `CHEATSHEET.md` | **AI が最初に読む1枚**。全クラスの当て方・間違えやすい併用規則のまとめ。 |
 | `templates/starter.html` | 新規モックの雛形（CSS 読み込み順＋ app shell 骨格）。コピーして使う。 |
-| `templates/error-403/404/500.html` | エラーページ（公式 pages/403・404・500 由来）。**そのまま使える**。ボタンの「{ページ名}」と遷移先だけ差し替える。 |
+| `templates/error-403.html` / `error-404.html` / `error-500.html` | エラーページ（公式 pages/403・404・500 由来）。**そのまま使える**。ボタンの「{ページ名}」と遷移先だけ差し替える。 |
 | `components/*.html` | 各コンポーネントの利用例（見本）。ブラウザで開くと見た目を確認できる。 |
 
 ## 使い方（mockup を作るとき）
@@ -49,7 +49,7 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 
 - [x] **neutral-button** — variant: primary / secondary / tertiary / ghost / plane（`--plain` は別名）、size: medium / large / x-large、状態: default / hover / active / focus / disabled / selected（selected は `--secondary/--tertiary/--ghost` に `--selected` を併用。単独では効かない）（色・状態は mitsubachi-ui 公式実装 button.styles.ts 由来）
 - [x] **danger-button**（`.mi-button--danger` ＋ variant 併用）— primary / secondary / tertiary / ghost（公式実装由来）
-- [x] **ai-button**（`.mi-ai-button`）— 公式 `<mi-ai-button>` 準拠のピル型（radius 9999px・weight 400）。variant: `--primary`(黒面)/`--secondary`(黒枠)/`--tertiary`(AI紫枠)/`--ghost`(AI紫文字)、size: 既定 medium(32px/12px)/`--large`(40px/14px)/`--x-large`(48px/16px)、disabled/`--loading`。アイコンは magic-fill か magic（font 連動 1.28em）。**2026-07-23 刷新: 旧「neutral-button＋magic-fill」表現は廃止**（AI実行操作に限定）
+- [x] **ai-button**（`.mi-ai-button`）— 公式 `<mi-ai-button>` 準拠のピル型（radius 9999px・weight 400）。variant: `--primary`(黒面)/`--secondary`(黒枠) の2種のみ、size: 既定 medium(32px/12px)/`--large`(40px/14px)/`--x-large`(48px/16px)、disabled/`--loading`。アイコンは magic-fill か magic（font 連動 1.28em）。**2026-07-23 刷新: 旧「neutral-button＋magic-fill」表現は廃止**（AI実行操作に限定）
 - [x] **read-only-tag**（`.mi-tag`）— variant: neutral / information / positive / negative
 - [x] **table**（`.mi-table`）— grid view（グレーヘッダー・縦横罫線）/ `--list`（白・横罫線のみ）＋ソート状態・行見出し（`__row-header`）・数値列（`__num`）・**checkbox 列（`__check`・行選択）**・**アクション列（`__actions`・icon-button）**・セル内リンク・行 hover / 選択行（content-type=text/number/header/checkbox/icon-button/slot, content-state=filled/empty まで Figma table-header-cell `6055-17160`・table-body-cell `6055-17729` で確認・収録）
 - [x] **notification-badge**（`.mi-badge`）— 数値 / `--dot`、右上重ね配置の `.mi-badge-anchor`

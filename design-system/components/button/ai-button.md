@@ -19,7 +19,7 @@ AIによる生成・提案・自動補完など、生成系AIを実行する操�
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8357-5237
 - 各variantの値は Figma MCP（`get_design_context`）で取得
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-ai-button` を使う（自作しない。**2026-07-23 刷新: 旧「`.mi-button` ＋ magic-fill」表現は廃止**）。ピル型。variant は `--primary`（黒面）/`--secondary`（黒枠）/`--tertiary`（AI紫枠）/`--ghost`（AI紫文字）を必ず1つ、size は既定 medium(32px)・`--large`(40px)・`--x-large`(48px)。中に `.mi-icon--magic-fill`（または `--magic`）を置く。loading は `--loading` ＋ 中に `.mi-loading`。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-ai-button` を使う（自作しない。**2026-07-23 刷新: 旧「`.mi-button` ＋ magic-fill」表現は廃止**）。ピル型。variant は `--primary`（黒面）/`--secondary`（黒枠）の2種のみ（必ず1つ）、size は既定 medium(32px)・`--large`(40px)・`--x-large`(48px)。中に `.mi-icon--magic-fill`（または `--magic`）を置く。loading は `--loading` ＋ 中に `.mi-loading`。
 
 ## バリアントプロパティ
 

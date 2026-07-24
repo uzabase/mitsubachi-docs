@@ -43,7 +43,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 |---|---|---|
 | neutral-button | `.mi-button` | variant: `--primary/--secondary/--tertiary/--ghost/--plane` を必ず1つ、size: `--medium/--large/--x-large` を必ず1つ。配置: primary は右・1画面1つ、間隔8px |
 | danger-button | `.mi-button--danger` | variant 併用（primary/secondary/tertiary/ghost） |
-| ai-button | `.mi-ai-button` | ピル型。variant: `--primary/--secondary/--tertiary(AI紫)/--ghost(AI紫)` 必ず1つ、size: 既定 medium(32px)/`--large`/`--x-large`。中に magic-fill（or magic）アイコン。AI実行操作限定 |
+| ai-button | `.mi-ai-button` | ピル型。variant: `--primary/--secondary` を必ず1つ（この2種のみ。tertiary/ghost は無い）、size: 既定 medium(32px)/`--large`/`--x-large`。中に magic-fill（or magic）アイコン。AI実行操作限定 |
 | menu-button | `.mi-button--menu` | variant 併用。chevron-down-small 内包（サイズ連動18/20/22px） |
 | icon-button | `.mi-icon-button` | variant: `--primary/--secondary/--tertiary/--ghost`、size: `--small`(24)/既定(32)/`--large`(40)。`--selected` は variant 併用 |
 | floating-button | `.mi-floating-button` | AIグラデーションリング |
