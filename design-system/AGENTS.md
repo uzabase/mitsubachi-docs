@@ -25,15 +25,16 @@ mitsubachi-ui に基づくモック作成・実装・レビューを行う AI �
 
 | ファイル | 内容 |
 |---|---|
-| `primitive-token.md` | Dimension・Typography のベース値 |
+| `primitive-scale.md` | Dimension・Typography のベース値 |
 | `spacing.md` | 余白トークン（2px〜80px） |
 | `border-radius.md` | 角丸トークン（2px〜8px） |
 | `icon-size.md` | アイコンサイズ（14px〜66px） |
 | `elevation.md` | 影・グラデーション（検討中） |
 | `typography.md` | フォントサイズ・ウェイト |
 | `color.md` | 色の使い分けルール |
-| `principles.md` | 設計原則（一貫性・階層・余白） |
-| `accessibility.md` | アクセシビリティの横断ルール |
+| `principles.md` | 設計原則（印象・トーン・一貫性） |
+| `prohibited.md` | 禁止事項（カラー等の逸脱パターン） |
+| `layout.md` | 汎用レイアウト（2カラムのアプリケーションシェル） |
 
 ## 使い方の3パターン
 

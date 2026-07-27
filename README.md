@@ -65,14 +65,21 @@ AI が読む順序は決まっています。**上から順に辿れば、必要
 ## リポジトリ構成
 
 ```
-design-system/
-├── AGENTS.md        ← AI が最初に読むファイル
-├── CLAUDE.md        ← AGENTS.md への薄いポインタ
-├── README.md        ← ドキュメント集としての概要（人間向け）
-├── foundations/     ← デザインの基盤（10ファイル）
-├── components/      ← 各 UI パーツのルール（75ファイル）
-└── mockup-kit/      ← AI の生成エンジン向けアセット（CSS・見本・雛形）
+├── README.md            ← このファイル（人間向けの導入方法）
+├── AGENTS.md            ← AI 向けの入口ポインタ
+├── CLAUDE.md            ← AGENTS.md への薄いポインタ
+├── tools/
+│   └── check-kit.py     ← kit の整合性チェック（保守用）
+└── design-system/
+    ├── AGENTS.md        ← AI 向けの指示の本体
+    ├── CLAUDE.md        ← AGENTS.md への薄いポインタ
+    ├── README.md        ← ドキュメント集としての概要
+    ├── foundations/     ← デザインの基盤（10ファイル）
+    ├── components/      ← 各 UI パーツのルール（75ファイル）
+    └── mockup-kit/      ← AI の生成エンジン向けアセット（CSS・見本・雛形）
 ```
+
+ルートの `AGENTS.md` / `CLAUDE.md` は、エージェントがリポジトリのルートで起動しても入口を見つけられるようにするためのポインタです。指示の本体は `design-system/AGENTS.md` にあります。
 
 役割は3層に分かれています。
 
@@ -92,7 +99,7 @@ design-system/
 | `mitsubachi-icons.css` | 公式アイコン全97種（容量が大きいため分離・任意読み込み） |
 | `mitsubachi-logos.css` | 公式ロゴ SVG（同上） |
 | `components/*.html` | コンポーネント見本。ブラウザで開いて見た目を確認できる |
-| `templates/` | `starter.html`（新規モックの雛形）、`error-403/404/500.html`（そのまま使えるエラーページ） |
+| `templates/` | `starter.html`（新規モックの雛形）、`error-403.html` / `error-404.html` / `error-500.html`（そのまま使えるエラーページ） |
 
 詳細は [design-system/mockup-kit/README.md](./design-system/mockup-kit/README.md) を参照してください。
 
