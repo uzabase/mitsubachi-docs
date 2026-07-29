@@ -10,8 +10,9 @@
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../mitsubachi-mockup.css">
   <style>
-    /* 公式 pages/500 のページレイアウト（そのまま移植） */
-    body { margin: 0; background: #ffffff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0, 0, 0, 0.84); }
+    /* ds-exception: 公式 pages/500 のページレイアウトをそのまま移植（数字グリフと
+       文言のスタイルは kit にコンポーネントが無い）。この申告以降のルールが免除される */
+    body { margin: 0; background: #ffffff; font-family: var(--typography-font-family, Arial, sans-serif); color: rgba(0, 0, 0, 0.84); }
     .errorPage { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
     .errorPage__content { text-align: center; }
     .errorPage__code { margin: 0; line-height: 1; }
@@ -23,6 +24,7 @@
 <body>
   <div class="errorPage">
     <div class="errorPage__content">
+      <!-- ds-exception: 公式 pages の数字グリフ（アイコンセット外の専用アセット） -->
       <p class="errorPage__code" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" width="214" height="97" viewBox="0 0 214 97" fill="none">
           <path d="M31.56 96.4803C16.32 96.4803 4.56 88.5603 0 76.0803L14.76 71.0403C17.28 78.0003 23.64 82.6803 31.32 82.6803C40.68 82.6803 48.36 76.0803 48.36 65.6403C48.36 53.1603 38.52 47.8803 27.84 47.8803C21.24 47.8803 12.96 49.9203 6.84 52.4403L8.52 2.28027H60.6V16.3203H23.04L22.32 36.9603C25.44 35.8803 29.76 35.5203 33.12 35.5203C51 35.5203 64.8 46.2003 64.8 64.4403C64.8 84.9603 49.68 96.4803 31.56 96.4803Z" fill="#ACACAC"/>

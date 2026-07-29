@@ -1,0 +1,2288 @@
+{
+  "_readme": "mockup kit の機械可読索引。tools/build-kit-index.py が CSS と 見本 HTML から自動生成する（手編集しない）。components[基底クラス] に修飾子・必須の軸/属性/role/子孫・見本・md を持つ。requiredOneOf は「各グループから必ず1つ選ぶ」、compoundOnly は「単独では効かないので併用相手が必要」、tagRules は「そのタグを使うなら allowed のどれかを必ず付ける（＝自作しない）」。",
+  "generatedBy": "tools/build-kit-index.py",
+  "sources": [
+    "mitsubachi-mockup.css",
+    "mitsubachi-icons.css",
+    "mitsubachi-logos.css",
+    "components/*.html",
+    "templates/*.html"
+  ],
+  "css": {
+    "required": [
+      "tokens.css",
+      "mitsubachi-mockup.css"
+    ],
+    "optional": {
+      "mitsubachi-icons.css": "内蔵以外のアイコンを使うとき",
+      "mitsubachi-logos.css": "ロゴを使うとき"
+    },
+    "order": [
+      "tokens.css",
+      "mitsubachi-mockup.css"
+    ],
+    "script": "mitsubachi-mockup.js"
+  },
+  "icons": {
+    "builtin": [
+      "check",
+      "chevron-down",
+      "chevron-down-small",
+      "chevron-left",
+      "chevron-right",
+      "chevron-right-small",
+      "cross",
+      "magic",
+      "magic-fill",
+      "search"
+    ],
+    "extra": [
+      "app",
+      "arrow-down",
+      "arrow-down-small",
+      "arrow-left",
+      "arrow-up",
+      "arrow-up-down",
+      "arrow-up-small",
+      "bell",
+      "bell-fill",
+      "book-ai",
+      "bookmark",
+      "bookmark-fill",
+      "building",
+      "building-add",
+      "building-cancel-fill",
+      "calendar",
+      "calendar-event",
+      "calendar-fill",
+      "chain",
+      "check",
+      "check-small",
+      "chevron-down",
+      "chevron-down-fill",
+      "chevron-down-small",
+      "chevron-left",
+      "chevron-left-small",
+      "chevron-right",
+      "chevron-right-fill",
+      "chevron-right-small",
+      "chevron-up",
+      "chevron-up-small",
+      "clock",
+      "copy",
+      "cross",
+      "cross-small",
+      "double-chevron-right",
+      "download",
+      "drag",
+      "error-fill",
+      "exit",
+      "eye",
+      "eye-slash",
+      "follow",
+      "follow-fill",
+      "follow-list",
+      "follow-list-fill",
+      "gear",
+      "headset",
+      "headset-face",
+      "history",
+      "home",
+      "home-fill",
+      "information",
+      "information-fill",
+      "kebab-menu",
+      "language",
+      "list-close",
+      "list-open",
+      "lock",
+      "lock-fill",
+      "magic",
+      "magic-fill",
+      "mail",
+      "mail-gear",
+      "maximize",
+      "menu",
+      "minimize",
+      "minus",
+      "minus-circle",
+      "minus-circle-fill",
+      "money",
+      "open-in-new",
+      "pencil-square",
+      "person",
+      "person-add",
+      "person-cancel-fill",
+      "person-fill",
+      "person-gear",
+      "plus",
+      "plus-circle",
+      "plus-circle-fill",
+      "plus-small",
+      "question-circle",
+      "refresh",
+      "report",
+      "route",
+      "search",
+      "search-fill",
+      "share",
+      "side-left",
+      "side-right",
+      "stop-fill",
+      "success",
+      "success-fill",
+      "unlock",
+      "unlock-fill",
+      "warning-fill"
+    ]
+  },
+  "logos": [
+    "speeda",
+    "speeda-ai-agent",
+    "speeda-ai-agent-inverse",
+    "speeda-expert-research",
+    "speeda-expert-research-inverse",
+    "speeda-inverse",
+    "speeda-text",
+    "speeda-text-inverse",
+    "speeda-zh",
+    "speeda-zh-inverse",
+    "uzabase"
+  ],
+  "requiresSample": [
+    "mi-ai-chat",
+    "mi-dialog",
+    "mi-layout",
+    "mi-menu",
+    "mi-suggestion",
+    "mi-table",
+    "mi-timeline"
+  ],
+  "tagRules": {
+    "button": {
+      "allowed": [
+        "mi-ai-button",
+        "mi-avatar",
+        "mi-banner__close",
+        "mi-button",
+        "mi-chip",
+        "mi-floating-button",
+        "mi-icon-button",
+        "mi-input-chip__remove",
+        "mi-page-tab",
+        "mi-section-tab",
+        "mi-segment"
+      ],
+      "sampleCount": 135,
+      "severity": "error"
+    },
+    "h3": {
+      "allowed": [
+        "mi-report-heading"
+      ],
+      "sampleCount": 1,
+      "severity": "warn"
+    },
+    "h4": {
+      "allowed": [
+        "mi-report-heading"
+      ],
+      "sampleCount": 1,
+      "severity": "warn"
+    },
+    "h5": {
+      "allowed": [
+        "mi-report-heading"
+      ],
+      "sampleCount": 1,
+      "severity": "warn"
+    },
+    "h6": {
+      "allowed": [
+        "mi-report-heading"
+      ],
+      "sampleCount": 2,
+      "severity": "warn"
+    },
+    "header": {
+      "allowed": [
+        "mi-header",
+        "mi-layout__header"
+      ],
+      "sampleCount": 4,
+      "severity": "warn"
+    },
+    "input[type=checkbox]": {
+      "allowed": [
+        "mi-checkbox",
+        "mi-switch"
+      ],
+      "sampleCount": 18,
+      "severity": "error"
+    },
+    "input[type=radio]": {
+      "allowed": [
+        "mi-radio"
+      ],
+      "sampleCount": 6,
+      "severity": "error"
+    },
+    "input[type=search]": {
+      "allowed": [
+        "mi-search-box__input"
+      ],
+      "sampleCount": 4,
+      "severity": "error"
+    },
+    "input[type=text]": {
+      "allowed": [
+        "mi-text-field"
+      ],
+      "sampleCount": 6,
+      "severity": "error"
+    },
+    "main": {
+      "allowed": [
+        "mi-layout__contents"
+      ],
+      "sampleCount": 3,
+      "severity": "warn"
+    },
+    "nav": {
+      "allowed": [
+        "mi-breadcrumb",
+        "mi-layout__sidenav",
+        "mi-pagination"
+      ],
+      "sampleCount": 6,
+      "severity": "warn"
+    },
+    "select": {
+      "allowed": [
+        "mi-select"
+      ],
+      "sampleCount": 5,
+      "severity": "error"
+    },
+    "table": {
+      "allowed": [
+        "mi-table"
+      ],
+      "sampleCount": 6,
+      "severity": "error"
+    },
+    "textarea": {
+      "allowed": [
+        "mi-ai-chat__input-field",
+        "mi-text-area"
+      ],
+      "sampleCount": 4,
+      "severity": "error"
+    }
+  },
+  "components": {
+    "mi-ai-button": {
+      "modifiers": [
+        "--large",
+        "--loading",
+        "--primary",
+        "--secondary",
+        "--x-large"
+      ],
+      "samples": [
+        "components/button.html"
+      ],
+      "sampleCount": 10,
+      "exclusiveGroups": [
+        [
+          "--primary",
+          "--secondary"
+        ],
+        [
+          "--large",
+          "--loading",
+          "--x-large"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--primary",
+          "--secondary"
+        ]
+      ],
+      "modifierRequiresChild": {
+        "--loading": [
+          "mi-loading"
+        ]
+      },
+      "docs": [
+        "components/button/ai-button.md"
+      ]
+    },
+    "mi-ai-chat": {
+      "modifiers": [],
+      "samples": [
+        "components/ai-chat.html"
+      ],
+      "sampleCount": 1,
+      "requiredParts": [
+        "mi-ai-chat__answer",
+        "mi-ai-chat__disclaimer",
+        "mi-ai-chat__input",
+        "mi-ai-chat__input-field",
+        "mi-ai-chat__messages",
+        "mi-ai-chat__user-message"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/ai-chat.md"
+      ]
+    },
+    "mi-ai-chat__answer": {
+      "modifiers": [],
+      "samples": [
+        "components/ai-chat.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-ai-chat__disclaimer": {
+      "modifiers": [],
+      "samples": [
+        "components/ai-chat.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-ai-chat__input": {
+      "modifiers": [],
+      "samples": [
+        "components/ai-chat.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-ai-chat__input-field": {
+      "modifiers": [],
+      "samples": [
+        "components/ai-chat.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-ai-chat__messages": {
+      "modifiers": [],
+      "samples": [
+        "components/ai-chat.html"
+      ],
+      "sampleCount": 1,
+      "requiredAttrs": [
+        "aria-live",
+        "role"
+      ],
+      "requiredRole": [
+        "log"
+      ],
+      "lowConfidence": true
+    },
+    "mi-ai-chat__user-message": {
+      "modifiers": [],
+      "samples": [
+        "components/ai-chat.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-avatar": {
+      "modifiers": [
+        "--2x-large",
+        "--blue",
+        "--brown",
+        "--green",
+        "--inactive",
+        "--large",
+        "--plum",
+        "--red",
+        "--small",
+        "--violet",
+        "--viridian",
+        "--x-large"
+      ],
+      "samples": [
+        "components/display.html",
+        "components/menu.html"
+      ],
+      "sampleCount": 25,
+      "exclusiveGroups": [
+        [
+          "--blue",
+          "--brown",
+          "--green",
+          "--plum",
+          "--red",
+          "--violet",
+          "--viridian"
+        ],
+        [
+          "--2x-large",
+          "--inactive",
+          "--large",
+          "--small",
+          "--x-large"
+        ]
+      ],
+      "docs": [
+        "components/avatar/avatar.md",
+        "components/avatar/index.md"
+      ]
+    },
+    "mi-avatar-group": {
+      "modifiers": [
+        "--2x-large",
+        "--large",
+        "--small",
+        "--x-large"
+      ],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 3,
+      "exclusiveGroups": [
+        [
+          "--large",
+          "--small"
+        ]
+      ],
+      "docs": [
+        "components/avatar/avatar-group.md",
+        "components/avatar/index.md"
+      ]
+    },
+    "mi-avatar__image": {
+      "modifiers": []
+    },
+    "mi-badge": {
+      "modifiers": [
+        "--dot"
+      ],
+      "samples": [
+        "components/navigation.html"
+      ],
+      "sampleCount": 6,
+      "requiredAttrs": [
+        "aria-label"
+      ],
+      "docs": [
+        "components/badge.md",
+        "components/notification-badge.md"
+      ]
+    },
+    "mi-badge-anchor": {
+      "modifiers": [],
+      "samples": [
+        "components/navigation.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true,
+      "docs": [
+        "components/badge.md",
+        "components/notification-badge.md"
+      ]
+    },
+    "mi-banner": {
+      "modifiers": [
+        "--error",
+        "--information",
+        "--phone",
+        "--success",
+        "--warning"
+      ],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 3,
+      "exclusiveGroups": [
+        [
+          "--error",
+          "--information",
+          "--success",
+          "--warning"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--error",
+          "--information",
+          "--success",
+          "--warning"
+        ]
+      ],
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "alert",
+        "status"
+      ],
+      "requiredParts": [
+        "mi-banner__close",
+        "mi-banner__content",
+        "mi-banner__icon",
+        "mi-banner__text",
+        "mi-banner__title"
+      ]
+    },
+    "mi-banner__close": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 3,
+      "requiredAttrs": [
+        "aria-label"
+      ]
+    },
+    "mi-banner__content": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-banner__icon": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 3,
+      "requiredAttrs": [
+        "aria-hidden"
+      ]
+    },
+    "mi-banner__text": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-banner__title": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-breadcrumb": {
+      "modifiers": [
+        "--phone"
+      ],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 1,
+      "requiredAttrs": [
+        "aria-label"
+      ],
+      "requiredParts": [
+        "mi-breadcrumb__item",
+        "mi-breadcrumb__item--no-link",
+        "mi-breadcrumb__sep"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/breadcrumb.md"
+      ]
+    },
+    "mi-breadcrumb__item": {
+      "modifiers": [
+        "--current",
+        "--no-link"
+      ],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-breadcrumb__sep": {
+      "modifiers": [],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "aria-hidden"
+      ],
+      "lowConfidence": true
+    },
+    "mi-button": {
+      "modifiers": [
+        "--danger",
+        "--disabled",
+        "--ghost",
+        "--large",
+        "--loading",
+        "--medium",
+        "--menu",
+        "--plain",
+        "--plane",
+        "--primary",
+        "--secondary",
+        "--selected",
+        "--tertiary",
+        "--x-large"
+      ],
+      "samples": [
+        "components/button.html",
+        "components/dialog.html",
+        "components/interactive.html",
+        "components/layout.html",
+        "components/menu.html",
+        "components/navigation.html",
+        "templates/error-403.html",
+        "templates/error-404.html",
+        "templates/error-500.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 61,
+      "exclusiveGroups": [
+        [
+          "--large",
+          "--medium",
+          "--x-large"
+        ],
+        [
+          "--ghost",
+          "--plane",
+          "--primary",
+          "--secondary",
+          "--tertiary"
+        ],
+        [
+          "--danger",
+          "--menu",
+          "--selected"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--large",
+          "--medium",
+          "--x-large"
+        ],
+        [
+          "--ghost",
+          "--plane",
+          "--primary",
+          "--secondary",
+          "--tertiary"
+        ]
+      ],
+      "modifierRequiresChild": {
+        "--loading": [
+          "mi-loading"
+        ],
+        "--menu": [
+          "mi-icon",
+          "mi-icon--chevron-down-small"
+        ]
+      },
+      "compoundOnly": {
+        "--selected": [
+          "--ghost",
+          "--secondary",
+          "--tertiary"
+        ]
+      },
+      "docs": [
+        "components/button/ai-button.md"
+      ]
+    },
+    "mi-button__icon": {
+      "modifiers": [],
+      "samples": [
+        "components/button.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "aria-hidden"
+      ],
+      "lowConfidence": true
+    },
+    "mi-card": {
+      "modifiers": [
+        "--outlined"
+      ],
+      "samples": [
+        "components/display.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 4
+    },
+    "mi-checkbox": {
+      "modifiers": [
+        "--indeterminate"
+      ],
+      "samples": [
+        "components/form.html",
+        "components/interactive.html",
+        "components/table.html"
+      ],
+      "sampleCount": 13,
+      "requiredAttrs": [
+        "type"
+      ],
+      "docs": [
+        "components/checkbox/checkbox-text.md",
+        "components/checkbox/checkbox.md",
+        "components/checkbox/index.md",
+        "components/table.md"
+      ]
+    },
+    "mi-checkbox-label": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 5,
+      "docs": [
+        "components/checkbox/checkbox-text.md",
+        "components/checkbox/checkbox.md",
+        "components/checkbox/index.md"
+      ]
+    },
+    "mi-chip": {
+      "modifiers": [
+        "--phone",
+        "--selected"
+      ],
+      "samples": [
+        "components/interactive.html",
+        "components/navigation.html"
+      ],
+      "sampleCount": 9,
+      "requiredAttrs": [
+        "aria-pressed"
+      ],
+      "modifierRequiresChild": {
+        "--selected": [
+          "mi-icon",
+          "mi-icon--check"
+        ]
+      },
+      "docs": [
+        "components/chip/filter-chip.md",
+        "components/chip/index.md"
+      ]
+    },
+    "mi-chip-group": {
+      "modifiers": [],
+      "samples": [
+        "components/interactive.html",
+        "components/navigation.html"
+      ],
+      "sampleCount": 3,
+      "requiredAttrs": [
+        "aria-label",
+        "role"
+      ],
+      "requiredRole": [
+        "group"
+      ],
+      "docs": [
+        "components/chip/filter-chip-group-multiple.md",
+        "components/chip/filter-chip-group-single.md",
+        "components/chip/index.md"
+      ]
+    },
+    "mi-choice-group": {
+      "modifiers": [
+        "--vertical"
+      ],
+      "docs": [
+        "components/checkbox/checkbox-text-group.md",
+        "components/checkbox/index.md",
+        "components/radio-button/radio-button-text-group.md"
+      ]
+    },
+    "mi-choice-group-unit": {
+      "modifiers": [],
+      "docs": [
+        "components/checkbox/checkbox-text-group-unit.md",
+        "components/radio-button/radio-button-text-group-unit.md"
+      ]
+    },
+    "mi-dialog": {
+      "modifiers": [
+        "--large",
+        "--medium",
+        "--phone"
+      ],
+      "samples": [
+        "components/dialog.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 3,
+      "requiredAttrs": [
+        "aria-labelledby",
+        "aria-modal",
+        "role"
+      ],
+      "requiredRole": [
+        "dialog"
+      ],
+      "requiredParts": [
+        "mi-dialog__body",
+        "mi-dialog__footer",
+        "mi-dialog__header",
+        "mi-dialog__title"
+      ],
+      "docs": [
+        "components/dialog/action-dialog.md",
+        "components/dialog/form-dialog.md",
+        "components/dialog/index.md",
+        "components/dialog/information-dialog.md"
+      ]
+    },
+    "mi-dialog-backdrop": {
+      "modifiers": [],
+      "samples": [
+        "components/dialog.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true,
+      "docs": [
+        "components/dialog/action-dialog.md",
+        "components/dialog/form-dialog.md",
+        "components/dialog/index.md",
+        "components/dialog/information-dialog.md"
+      ]
+    },
+    "mi-dialog__body": {
+      "modifiers": [],
+      "samples": [
+        "components/dialog.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-dialog__footer": {
+      "modifiers": [],
+      "samples": [
+        "components/dialog.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-dialog__header": {
+      "modifiers": [],
+      "samples": [
+        "components/dialog.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-dialog__title": {
+      "modifiers": [],
+      "samples": [
+        "components/dialog.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-error-text": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true,
+      "docs": [
+        "components/text-field.md"
+      ]
+    },
+    "mi-floating-button": {
+      "modifiers": [],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 1,
+      "requiredAttrs": [
+        "aria-label"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/button/floating-button.md",
+        "components/button/index.md"
+      ]
+    },
+    "mi-header": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-icon": {
+      "modifiers": [
+        "--app",
+        "--arrow-down",
+        "--arrow-down-small",
+        "--arrow-left",
+        "--arrow-up",
+        "--arrow-up-down",
+        "--arrow-up-small",
+        "--bell",
+        "--bell-fill",
+        "--book-ai",
+        "--bookmark",
+        "--bookmark-fill",
+        "--building",
+        "--building-add",
+        "--building-cancel-fill",
+        "--calendar",
+        "--calendar-event",
+        "--calendar-fill",
+        "--chain",
+        "--check",
+        "--check-small",
+        "--chevron-down",
+        "--chevron-down-fill",
+        "--chevron-down-small",
+        "--chevron-left",
+        "--chevron-left-small",
+        "--chevron-right",
+        "--chevron-right-fill",
+        "--chevron-right-small",
+        "--chevron-up",
+        "--chevron-up-small",
+        "--clock",
+        "--copy",
+        "--cross",
+        "--cross-small",
+        "--double-chevron-right",
+        "--download",
+        "--drag",
+        "--error-fill",
+        "--exit",
+        "--eye",
+        "--eye-slash",
+        "--follow",
+        "--follow-fill",
+        "--follow-list",
+        "--follow-list-fill",
+        "--gear",
+        "--headset",
+        "--headset-face",
+        "--history",
+        "--home",
+        "--home-fill",
+        "--information",
+        "--information-fill",
+        "--kebab-menu",
+        "--language",
+        "--list-close",
+        "--list-open",
+        "--lock",
+        "--lock-fill",
+        "--magic",
+        "--magic-fill",
+        "--mail",
+        "--mail-gear",
+        "--maximize",
+        "--menu",
+        "--minimize",
+        "--minus",
+        "--minus-circle",
+        "--minus-circle-fill",
+        "--money",
+        "--open-in-new",
+        "--pencil-square",
+        "--person",
+        "--person-add",
+        "--person-cancel-fill",
+        "--person-fill",
+        "--person-gear",
+        "--plus",
+        "--plus-circle",
+        "--plus-circle-fill",
+        "--plus-small",
+        "--question-circle",
+        "--refresh",
+        "--report",
+        "--route",
+        "--search",
+        "--search-fill",
+        "--share",
+        "--side-left",
+        "--side-right",
+        "--stop-fill",
+        "--success",
+        "--success-fill",
+        "--unlock",
+        "--unlock-fill",
+        "--warning-fill"
+      ],
+      "samples": [
+        "components/ai-chat.html",
+        "components/button.html",
+        "components/display.html",
+        "components/feedback.html",
+        "components/form.html",
+        "components/icons.html",
+        "components/interactive.html",
+        "components/layout.html",
+        "components/menu.html",
+        "components/navigation.html",
+        "components/suggestion.html",
+        "components/table.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 196,
+      "requiredAnyModifier": true,
+      "docs": [
+        "components/icon/icon.md"
+      ]
+    },
+    "mi-icon-button": {
+      "modifiers": [
+        "--ghost",
+        "--large",
+        "--primary",
+        "--secondary",
+        "--selected",
+        "--small",
+        "--tertiary"
+      ],
+      "samples": [
+        "components/ai-chat.html",
+        "components/button.html",
+        "components/display.html",
+        "components/interactive.html",
+        "components/layout.html",
+        "components/menu.html",
+        "components/table.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 26,
+      "exclusiveGroups": [
+        [
+          "--ghost",
+          "--primary",
+          "--secondary",
+          "--tertiary"
+        ],
+        [
+          "--large",
+          "--selected",
+          "--small"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--ghost",
+          "--primary",
+          "--secondary",
+          "--tertiary"
+        ]
+      ],
+      "requiredAttrs": [
+        "aria-label"
+      ],
+      "modifierRequiresChild": {
+        "--selected": [
+          "mi-icon"
+        ]
+      },
+      "compoundOnly": {
+        "--selected": [
+          "--ghost",
+          "--secondary",
+          "--tertiary"
+        ]
+      },
+      "docs": [
+        "components/button/icon-button.md",
+        "components/button/index.md"
+      ]
+    },
+    "mi-icon-color": {
+      "modifiers": [
+        "--error",
+        "--information",
+        "--success",
+        "--warning"
+      ],
+      "samples": [
+        "components/feedback.html",
+        "components/form.html"
+      ],
+      "sampleCount": 14,
+      "exclusiveGroups": [
+        [
+          "--error",
+          "--information",
+          "--success",
+          "--warning"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--error",
+          "--information",
+          "--success",
+          "--warning"
+        ]
+      ]
+    },
+    "mi-inline-notification": {
+      "modifiers": [
+        "--error",
+        "--information",
+        "--phone",
+        "--secondary",
+        "--success",
+        "--warning"
+      ],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 6,
+      "exclusiveGroups": [
+        [
+          "--error",
+          "--information",
+          "--success",
+          "--warning"
+        ],
+        [
+          "--phone",
+          "--secondary"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--error",
+          "--information",
+          "--success",
+          "--warning"
+        ]
+      ],
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "alert",
+        "status"
+      ],
+      "requiredParts": [
+        "mi-inline-notification__icon"
+      ]
+    },
+    "mi-inline-notification__icon": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 6,
+      "requiredAttrs": [
+        "aria-hidden"
+      ]
+    },
+    "mi-input-chip": {
+      "modifiers": [
+        "--phone"
+      ],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3,
+      "requiredParts": [
+        "mi-input-chip__remove"
+      ],
+      "docs": [
+        "components/chip/index.md",
+        "components/chip/input-chip.md"
+      ]
+    },
+    "mi-input-chip-group": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true,
+      "docs": [
+        "components/chip/input-chip-group.md"
+      ]
+    },
+    "mi-input-chip__remove": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3,
+      "requiredAttrs": [
+        "aria-label"
+      ]
+    },
+    "mi-label-unit": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 2,
+      "requiredParts": [
+        "mi-label-unit__label",
+        "mi-label-unit__required"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/label-unit.md",
+        "components/radio-button/radio-button-card-group-unit.md",
+        "components/select-box/select-box-unit.md"
+      ]
+    },
+    "mi-label-unit__label": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true
+    },
+    "mi-label-unit__required": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true
+    },
+    "mi-label-unit__support": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-layout": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3,
+      "requiredParts": [
+        "mi-layout__content",
+        "mi-layout__contents",
+        "mi-layout__header",
+        "mi-layout__sidenav",
+        "mi-layout__sidenav-body",
+        "mi-layout__sidenav-footer",
+        "mi-layout__sidenav-header"
+      ]
+    },
+    "mi-layout__content": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-layout__contents": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-layout__header": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-layout__page-title": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true
+    },
+    "mi-layout__page-title-text": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true
+    },
+    "mi-layout__sidenav": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-layout__sidenav-body": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-layout__sidenav-footer": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-layout__sidenav-header": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-link-tag": {
+      "modifiers": [
+        "--small",
+        "--x-small"
+      ],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 4,
+      "exclusiveGroups": [
+        [
+          "--small",
+          "--x-small"
+        ]
+      ],
+      "requiredAttrs": [
+        "href"
+      ],
+      "docs": [
+        "components/tag/index.md",
+        "components/tag/link-tag-group.md",
+        "components/tag/link-tag.md"
+      ]
+    },
+    "mi-loading": {
+      "modifiers": [
+        "--2x-large",
+        "--3x-large",
+        "--4x-large",
+        "--ai",
+        "--medium",
+        "--x-large"
+      ],
+      "samples": [
+        "components/ai-chat.html",
+        "components/button.html",
+        "components/display.html"
+      ],
+      "sampleCount": 13,
+      "exclusiveGroups": [
+        [
+          "--ai",
+          "--medium"
+        ],
+        [
+          "--2x-large",
+          "--3x-large",
+          "--4x-large",
+          "--x-large"
+        ]
+      ],
+      "docs": [
+        "components/button/ai-button.md",
+        "components/loading.md"
+      ]
+    },
+    "mi-logo": {
+      "modifiers": [
+        "--speeda",
+        "--speeda-ai-agent",
+        "--speeda-ai-agent-inverse",
+        "--speeda-expert-research",
+        "--speeda-expert-research-inverse",
+        "--speeda-inverse",
+        "--speeda-text",
+        "--speeda-text-inverse",
+        "--speeda-zh",
+        "--speeda-zh-inverse",
+        "--uzabase"
+      ],
+      "samples": [
+        "components/layout.html",
+        "components/logos.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 14,
+      "exclusiveGroups": [
+        [
+          "--speeda",
+          "--speeda-ai-agent",
+          "--speeda-ai-agent-inverse",
+          "--speeda-expert-research",
+          "--speeda-expert-research-inverse",
+          "--speeda-inverse",
+          "--speeda-text",
+          "--speeda-text-inverse",
+          "--speeda-zh",
+          "--speeda-zh-inverse",
+          "--uzabase"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--speeda",
+          "--speeda-ai-agent",
+          "--speeda-ai-agent-inverse",
+          "--speeda-expert-research",
+          "--speeda-expert-research-inverse",
+          "--speeda-inverse",
+          "--speeda-text",
+          "--speeda-text-inverse",
+          "--speeda-zh",
+          "--speeda-zh-inverse",
+          "--uzabase"
+        ]
+      ],
+      "requiredAttrs": [
+        "aria-label",
+        "role"
+      ],
+      "requiredRole": [
+        "img"
+      ]
+    },
+    "mi-menu": {
+      "modifiers": [],
+      "samples": [
+        "components/interactive.html",
+        "components/menu.html"
+      ],
+      "sampleCount": 16,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "listbox",
+        "menu"
+      ],
+      "docs": [
+        "components/menu/index.md",
+        "components/select-box/select-box.md",
+        "components/table.md"
+      ]
+    },
+    "mi-menu-category": {
+      "modifiers": [],
+      "samples": [
+        "components/menu.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true,
+      "docs": [
+        "components/menu/index.md"
+      ]
+    },
+    "mi-menu-group": {
+      "modifiers": [],
+      "samples": [
+        "components/interactive.html",
+        "components/menu.html"
+      ],
+      "sampleCount": 13,
+      "docs": [
+        "components/menu/index.md"
+      ]
+    },
+    "mi-menu-item": {
+      "modifiers": [
+        "--danger",
+        "--disabled",
+        "--phone",
+        "--selected",
+        "--sub"
+      ],
+      "samples": [
+        "components/interactive.html",
+        "components/menu.html"
+      ],
+      "sampleCount": 61,
+      "exclusiveGroups": [
+        [
+          "--danger",
+          "--disabled",
+          "--selected",
+          "--sub"
+        ]
+      ],
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "menuitem",
+        "option"
+      ],
+      "modifierRequiresChild": {
+        "--selected": [
+          "mi-icon--check-small"
+        ],
+        "--sub": [
+          "mi-icon--chevron-right-small"
+        ]
+      },
+      "docs": [
+        "components/menu/action-menu-item.md",
+        "components/menu/index.md",
+        "components/menu/link-menu-item.md",
+        "components/menu/select-menu-item.md"
+      ]
+    },
+    "mi-page-tab": {
+      "modifiers": [
+        "--selected"
+      ],
+      "samples": [
+        "components/interactive.html",
+        "components/navigation.html"
+      ],
+      "sampleCount": 7,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "tab"
+      ],
+      "docs": [
+        "components/tab/index.md",
+        "components/tab/page-tab-group.md",
+        "components/tab/page-tab.md"
+      ]
+    },
+    "mi-page-tab-group": {
+      "modifiers": [],
+      "samples": [
+        "components/interactive.html",
+        "components/navigation.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "tablist"
+      ],
+      "lowConfidence": true
+    },
+    "mi-pagination": {
+      "modifiers": [
+        "--phone"
+      ],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "aria-label"
+      ],
+      "requiredParts": [
+        "mi-pagination__page",
+        "mi-pagination__select"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/pagination.md"
+      ]
+    },
+    "mi-pagination__page": {
+      "modifiers": [],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true
+    },
+    "mi-pagination__select": {
+      "modifiers": [],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "aria-label"
+      ],
+      "lowConfidence": true
+    },
+    "mi-radio": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 6,
+      "requiredAttrs": [
+        "name",
+        "type"
+      ],
+      "docs": [
+        "components/radio-button/index.md"
+      ]
+    },
+    "mi-radio-card": {
+      "modifiers": [
+        "--phone"
+      ],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3,
+      "requiredParts": [
+        "mi-radio-card__body",
+        "mi-radio-card__label",
+        "mi-radio-card__support"
+      ],
+      "docs": [
+        "components/radio-button/index.md",
+        "components/radio-button/radio-button-card.md"
+      ]
+    },
+    "mi-radio-card-group": {
+      "modifiers": [
+        "--vertical"
+      ],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true,
+      "docs": [
+        "components/radio-button/radio-button-card-group-unit.md",
+        "components/radio-button/radio-button-card-group.md"
+      ]
+    },
+    "mi-radio-card__body": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-radio-card__label": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-radio-card__support": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-radio-label": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3,
+      "docs": [
+        "components/radio-button/index.md"
+      ]
+    },
+    "mi-report-heading": {
+      "modifiers": [
+        "--1",
+        "--2",
+        "--3",
+        "--4",
+        "--5",
+        "--6",
+        "--phone"
+      ],
+      "samples": [
+        "components/display.html"
+      ],
+      "sampleCount": 8,
+      "exclusiveGroups": [
+        [
+          "--1",
+          "--2",
+          "--3",
+          "--4",
+          "--5",
+          "--6"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--1",
+          "--2",
+          "--3",
+          "--4",
+          "--5",
+          "--6"
+        ]
+      ]
+    },
+    "mi-search-box": {
+      "modifiers": [
+        "--phone",
+        "--primary",
+        "--secondary"
+      ],
+      "samples": [
+        "components/form.html",
+        "components/suggestion.html"
+      ],
+      "sampleCount": 4,
+      "exclusiveGroups": [
+        [
+          "--primary",
+          "--secondary"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--primary",
+          "--secondary"
+        ]
+      ],
+      "requiredParts": [
+        "mi-search-box__icon",
+        "mi-search-box__input"
+      ],
+      "docs": [
+        "components/search-box.md"
+      ]
+    },
+    "mi-search-box__icon": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html",
+        "components/suggestion.html"
+      ],
+      "sampleCount": 4,
+      "requiredAttrs": [
+        "aria-hidden"
+      ]
+    },
+    "mi-search-box__input": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html",
+        "components/suggestion.html"
+      ],
+      "sampleCount": 4,
+      "requiredAttrs": [
+        "type"
+      ]
+    },
+    "mi-section-tab": {
+      "modifiers": [
+        "--phone",
+        "--selected"
+      ],
+      "samples": [
+        "components/navigation.html"
+      ],
+      "sampleCount": 5,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "tab"
+      ],
+      "docs": [
+        "components/tab/index.md",
+        "components/tab/section-tab-group.md",
+        "components/tab/section-tab.md"
+      ]
+    },
+    "mi-section-tab-group": {
+      "modifiers": [],
+      "samples": [
+        "components/navigation.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "tablist"
+      ],
+      "lowConfidence": true
+    },
+    "mi-segment": {
+      "modifiers": [
+        "--icon",
+        "--selected"
+      ],
+      "samples": [
+        "components/form.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 9,
+      "requiredAttrs": [
+        "aria-checked",
+        "role"
+      ],
+      "requiredRole": [
+        "radio"
+      ],
+      "modifierRequiresChild": {
+        "--icon": [
+          "mi-icon"
+        ],
+        "--selected": [
+          "mi-icon",
+          "mi-icon--check"
+        ]
+      },
+      "docs": [
+        "components/segmented-control.md"
+      ]
+    },
+    "mi-segmented-control": {
+      "modifiers": [
+        "--phone"
+      ],
+      "samples": [
+        "components/form.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 4,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "radiogroup"
+      ],
+      "docs": [
+        "components/segmented-control.md"
+      ]
+    },
+    "mi-select": {
+      "modifiers": [
+        "--error",
+        "--phone",
+        "--secondary",
+        "--small"
+      ],
+      "samples": [
+        "components/display.html",
+        "components/form.html"
+      ],
+      "sampleCount": 5,
+      "exclusiveGroups": [
+        [
+          "--phone",
+          "--small"
+        ]
+      ],
+      "docs": [
+        "components/select-box/index.md",
+        "components/select-box/select-box-unit.md",
+        "components/select-box/select-box.md"
+      ]
+    },
+    "mi-sidenav-category": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 3
+    },
+    "mi-sidenav-group": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 6
+    },
+    "mi-sidenav-item": {
+      "modifiers": [
+        "--disabled",
+        "--selected"
+      ],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 20,
+      "requiredParts": [
+        "mi-sidenav-item__label"
+      ]
+    },
+    "mi-sidenav-item__icon": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 14
+    },
+    "mi-sidenav-item__label": {
+      "modifiers": [],
+      "samples": [
+        "components/layout.html",
+        "templates/starter.html"
+      ],
+      "sampleCount": 20
+    },
+    "mi-snackbar": {
+      "modifiers": [
+        "--small"
+      ],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "status"
+      ],
+      "requiredParts": [
+        "mi-snackbar__icon",
+        "mi-snackbar__text"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/snackbar.md"
+      ]
+    },
+    "mi-snackbar-viewport": {
+      "modifiers": [],
+      "docs": [
+        "components/snackbar.md"
+      ]
+    },
+    "mi-snackbar__icon": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "aria-hidden"
+      ],
+      "lowConfidence": true
+    },
+    "mi-snackbar__text": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 2,
+      "lowConfidence": true
+    },
+    "mi-suggestion": {
+      "modifiers": [],
+      "samples": [
+        "components/suggestion.html"
+      ],
+      "sampleCount": 2,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "listbox"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/suggestion.md"
+      ]
+    },
+    "mi-suggestion-item": {
+      "modifiers": [],
+      "samples": [
+        "components/suggestion.html"
+      ],
+      "sampleCount": 3,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "option"
+      ]
+    },
+    "mi-suggestion__category": {
+      "modifiers": [],
+      "samples": [
+        "components/suggestion.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-suggestion__empty": {
+      "modifiers": [],
+      "samples": [
+        "components/suggestion.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true
+    },
+    "mi-switch": {
+      "modifiers": [
+        "--phone"
+      ],
+      "samples": [
+        "components/form.html",
+        "components/interactive.html"
+      ],
+      "sampleCount": 5,
+      "requiredAttrs": [
+        "role",
+        "type"
+      ],
+      "requiredRole": [
+        "switch"
+      ],
+      "docs": [
+        "components/switch.md"
+      ]
+    },
+    "mi-table": {
+      "modifiers": [
+        "--list"
+      ],
+      "samples": [
+        "components/interactive.html",
+        "components/table.html"
+      ],
+      "sampleCount": 6,
+      "docs": [
+        "components/table.md"
+      ]
+    },
+    "mi-table__actions": {
+      "modifiers": [],
+      "samples": [
+        "components/table.html"
+      ],
+      "sampleCount": 5,
+      "docs": [
+        "components/table.md"
+      ]
+    },
+    "mi-table__check": {
+      "modifiers": [],
+      "samples": [
+        "components/interactive.html",
+        "components/table.html"
+      ],
+      "sampleCount": 9,
+      "docs": [
+        "components/table.md"
+      ]
+    },
+    "mi-table__num": {
+      "modifiers": [],
+      "samples": [
+        "components/interactive.html",
+        "components/table.html"
+      ],
+      "sampleCount": 38,
+      "docs": [
+        "components/table.md"
+      ]
+    },
+    "mi-table__row-header": {
+      "modifiers": [],
+      "samples": [
+        "components/interactive.html",
+        "components/table.html"
+      ],
+      "sampleCount": 16,
+      "requiredAttrs": [
+        "scope"
+      ],
+      "docs": [
+        "components/table.md"
+      ]
+    },
+    "mi-tag": {
+      "modifiers": [
+        "--information",
+        "--negative",
+        "--neutral",
+        "--positive"
+      ],
+      "samples": [
+        "components/button.html",
+        "components/table.html"
+      ],
+      "sampleCount": 10,
+      "exclusiveGroups": [
+        [
+          "--information",
+          "--negative",
+          "--neutral",
+          "--positive"
+        ]
+      ],
+      "requiredOneOf": [
+        [
+          "--information",
+          "--negative",
+          "--neutral",
+          "--positive"
+        ]
+      ],
+      "docs": [
+        "components/tag/index.md",
+        "components/tag/read-only-tag.md"
+      ]
+    },
+    "mi-text-area": {
+      "modifiers": [
+        "--error",
+        "--large",
+        "--phone"
+      ],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 3,
+      "exclusiveGroups": [
+        [
+          "--large",
+          "--phone"
+        ]
+      ],
+      "docs": [
+        "components/text-area.md"
+      ]
+    },
+    "mi-text-field": {
+      "modifiers": [
+        "--error",
+        "--large",
+        "--medium",
+        "--phone"
+      ],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 6,
+      "exclusiveGroups": [
+        [
+          "--error",
+          "--medium"
+        ]
+      ],
+      "requiredAttrs": [
+        "type"
+      ],
+      "docs": [
+        "components/text-field.md"
+      ]
+    },
+    "mi-text-field-unit": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true,
+      "docs": [
+        "components/text-field.md"
+      ]
+    },
+    "mi-timeline": {
+      "modifiers": [],
+      "samples": [
+        "components/timeline.html"
+      ],
+      "sampleCount": 3,
+      "docs": [
+        "components/timeline.md"
+      ]
+    },
+    "mi-timeline-item": {
+      "modifiers": [
+        "--emphasized",
+        "--loose"
+      ],
+      "samples": [
+        "components/timeline.html"
+      ],
+      "sampleCount": 7,
+      "exclusiveGroups": [
+        [
+          "--emphasized",
+          "--loose"
+        ]
+      ],
+      "requiredParts": [
+        "mi-timeline-item__content",
+        "mi-timeline-item__dot",
+        "mi-timeline-item__flow"
+      ]
+    },
+    "mi-timeline-item__content": {
+      "modifiers": [],
+      "samples": [
+        "components/timeline.html"
+      ],
+      "sampleCount": 7
+    },
+    "mi-timeline-item__dot": {
+      "modifiers": [],
+      "samples": [
+        "components/timeline.html"
+      ],
+      "sampleCount": 7
+    },
+    "mi-timeline-item__flow": {
+      "modifiers": [],
+      "samples": [
+        "components/timeline.html"
+      ],
+      "sampleCount": 7
+    },
+    "mi-tooltip": {
+      "modifiers": [],
+      "samples": [
+        "components/feedback.html"
+      ],
+      "sampleCount": 1,
+      "requiredAttrs": [
+        "role"
+      ],
+      "requiredRole": [
+        "tooltip"
+      ],
+      "lowConfidence": true,
+      "docs": [
+        "components/tooltip.md"
+      ]
+    }
+  }
+}

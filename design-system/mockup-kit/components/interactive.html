@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mitsubachi-ui mockup kit — 挙動（mitsubachi-mockup.js）</title>
+  <!-- kit を読み込む: tokens.css（値）→ mitsubachi-mockup.css（構造）の順 -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../mitsubachi-mockup.css">
+  <link rel="stylesheet" href="../mitsubachi-icons.css">
+  <!-- 挙動（触れるモックにする場合だけ追加読み込み。独自 JS は書かない） -->
+  <script src="../mitsubachi-mockup.js" defer></script>
+  <!-- ds-exception-page: 見本カタログのため、説明用の見出し・注釈・デモ枠の
+       スタイルを含む（モックには不要。モックでは箇所ごとに ds-exception を書く） -->
+  <style>
+    /* このページ自体の体裁（kit とは無関係） */
+    body { margin: 0; padding: 32px; background: #fff; font-family: var(--typography-font-family, Arial, sans-serif); color: rgba(0,0,0,0.84); }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    h2 { font-size: 14px; margin: 32px 0 12px; color: rgba(0,0,0,0.55); font-weight: 700; }
+    .lead { font-size: 13px; color: rgba(0,0,0,0.55); margin: 0 0 24px; line-height: 1.6; max-width: 820px; }
+    .note { font-size: 12px; color: rgba(0,0,0,0.55); margin: 8px 0 0; line-height: 1.6; max-width: 820px; }
+    .row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <h1>挙動（mitsubachi-mockup.js）— mockup kit 見本</h1>
+  <p class="lead">
+    「触れるモック」にするための最小の JS。<b>独自の JS を書かず</b>、<code>mitsubachi-mockup.js</code> を読み込んで
+    <code>data-mi-*</code> を宣言するだけで動く。JS は見た目を持たず、kit のクラスと aria 属性を付け外しするだけ。
+    タブ・セグメント・チップ・スイッチ・テーブル（行選択／ソート）は<b>属性なしで自動</b>に動く。
+  </p>
+
+  <h2>メニュー（data-mi-menu="&lt;メニューの id&gt;"。下・左揃えで開き、外側クリック / ESC で閉じる）</h2>
+  <div class="row">
+    <button class="mi-button mi-button--menu mi-button--secondary mi-button--medium" data-mi-menu="menu-export">
+      エクスポート<span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+    <button class="mi-icon-button mi-icon-button--ghost" data-mi-menu="menu-kebab" aria-label="その他の操作">
+      <span class="mi-icon mi-icon--kebab-menu" aria-hidden="true"></span>
+    </button>
+    <button class="mi-button mi-button--menu mi-button--secondary mi-button--medium" data-mi-menu="menu-industry" data-mi-menu-label>
+      電気機器<span class="mi-icon mi-icon--chevron-down-small" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="mi-menu" id="menu-export" role="menu" hidden>
+    <div class="mi-menu-item" role="menuitem">CSVでエクスポート</div>
+    <div class="mi-menu-item" role="menuitem">Excelでエクスポート</div>
+    <div class="mi-menu-item mi-menu-item--disabled" role="menuitem" aria-disabled="true">画像でエクスポート</div>
+  </div>
+  <div class="mi-menu" id="menu-kebab" role="menu" hidden>
+    <div class="mi-menu-group">
+      <div class="mi-menu-item" role="menuitem">名前を変更</div>
+      <div class="mi-menu-item" role="menuitem">複製する</div>
+    </div>
+    <div class="mi-menu-group">
+      <div class="mi-menu-item mi-menu-item--danger" role="menuitem">削除する</div>
+    </div>
+  </div>
+  <div class="mi-menu" id="menu-industry" role="listbox" aria-label="業種を選択" hidden>
+    <div class="mi-menu-item mi-menu-item--selected" role="option" aria-selected="true">
+      電気機器<span class="mi-icon mi-icon--check-small" aria-hidden="true"></span>
+    </div>
+    <div class="mi-menu-item" role="option">半導体</div>
+    <div class="mi-menu-item" role="option">自動車</div>
+  </div>
+  <p class="note">
+    3つ目は <code>role="listbox"</code> の展開メニュー。トリガーに <code>data-mi-menu-label</code> を付けると、選んだ項目のラベルがトリガーに反映される（選択中は <code>--selected</code> ＋ check-small が移動）。
+  </p>
+
+  <h2>ダイアログ（data-mi-dialog-open / data-mi-dialog-close。幕の外側クリック・ESC でも閉じる）</h2>
+  <button class="mi-button mi-button--primary mi-button--large" data-mi-dialog-open="dlg-save">条件を保存する</button>
+  <div class="mi-dialog-backdrop" id="dlg-save" hidden>
+    <div class="mi-dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-save-title">
+      <div class="mi-dialog__header">
+        <!-- ds-exception: dialog__title は見出し要素の既定マージンを打ち消す必要がある -->
+        <h2 class="mi-dialog__title" id="dlg-save-title" style="margin:0;">この条件を保存しますか？</h2>
+      </div>
+      <div class="mi-dialog__body">保存した条件は「マイ検索条件」からいつでも呼び出せます。</div>
+      <div class="mi-dialog__footer">
+        <button class="mi-button mi-button--secondary mi-button--large" data-mi-dialog-close>キャンセル</button>
+        <button class="mi-button mi-button--primary mi-button--large" data-mi-dialog-close data-mi-snackbar="検索条件を保存しました">保存する</button>
+      </div>
+    </div>
+  </div>
+  <p class="note">「保存する」は <code>data-mi-dialog-close</code> と <code>data-mi-snackbar</code> を併記して、閉じた後に snackbar を出している。</p>
+
+  <h2>タブ（自動。data-mi-tab-panel / data-mi-panel でパネルも切り替わる）</h2>
+  <div class="mi-page-tab-group" role="tablist" style="max-width:520px;">
+    <button class="mi-page-tab mi-page-tab--selected" role="tab" aria-selected="true" data-mi-tab-panel="tab-overview">企業概要</button>
+    <button class="mi-page-tab" role="tab" data-mi-tab-panel="tab-finance">財務</button>
+    <button class="mi-page-tab" role="tab" disabled>レポート</button>
+  </div>
+  <div data-mi-panel="tab-overview" style="padding:16px 0;">
+    <div class="mi-card" style="padding:16px; max-width:520px;">企業概要のパネル</div>
+  </div>
+  <div data-mi-panel="tab-finance" style="padding:16px 0;" hidden>
+    <div class="mi-card" style="padding:16px; max-width:520px;">財務のパネル</div>
+  </div>
+
+  <h2>セグメント・チップ・スイッチ（すべて属性なしで自動）</h2>
+  <div class="row">
+    <div class="mi-segmented-control" role="radiogroup" aria-label="表示形式">
+      <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">
+        表<span class="mi-icon mi-icon--check" aria-hidden="true"></span>
+      </button>
+      <button class="mi-segment" role="radio" aria-checked="false">グラフ</button>
+    </div>
+    <div class="mi-chip-group" role="group" aria-label="絞り込み">
+      <button class="mi-chip mi-chip--selected" aria-pressed="true">
+        上場<span class="mi-icon mi-icon--check" aria-hidden="true"></span>
+      </button>
+      <button class="mi-chip" aria-pressed="false">非上場</button>
+    </div>
+    <label class="mi-checkbox-label">
+      <input type="checkbox" class="mi-switch" role="switch" aria-checked="false">
+      週次で通知する
+    </label>
+  </div>
+
+  <h2>テーブル（checkbox 列で行選択・ヘッダーで全選択・列見出しクリックでソート）</h2>
+  <table class="mi-table" style="max-width:640px;">
+    <thead>
+      <tr>
+        <th class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="全選択"></th>
+        <th scope="col">企業名</th>
+        <th scope="col" class="mi-table__num" aria-sort="none">売上高<span class="mi-icon mi-icon--arrow-up-down" aria-hidden="true"></span></th>
+        <th scope="col" class="mi-table__num" aria-sort="none">営業利益率<span class="mi-icon mi-icon--arrow-up-down" aria-hidden="true"></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="つばめ自動車を選択"></td>
+        <th scope="row" class="mi-table__row-header">つばめ自動車</th>
+        <td class="mi-table__num">1,240</td>
+        <td class="mi-table__num">8.2%</td>
+      </tr>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="ヒバリ半導体を選択"></td>
+        <th scope="row" class="mi-table__row-header">ヒバリ半導体</th>
+        <td class="mi-table__num">860</td>
+        <td class="mi-table__num">14.5%</td>
+      </tr>
+      <tr>
+        <td class="mi-table__check"><input type="checkbox" class="mi-checkbox" aria-label="三和電機を選択"></td>
+        <th scope="row" class="mi-table__row-header">三和電機</th>
+        <td class="mi-table__num">2,015</td>
+        <td class="mi-table__num">–</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">ソートは <b>未ソート → 昇順 → 降順 → 解除</b>（table.md の規則）。解除すると元の並び順に戻る。値が無いセル（–）は常に末尾。</p>
+</body>
+</html>

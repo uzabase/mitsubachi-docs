@@ -7,9 +7,11 @@
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../mitsubachi-mockup.css">
   <link rel="stylesheet" href="../mitsubachi-icons.css">
+  <!-- ds-exception-page: 見本カタログのため、説明用の見出し・注釈・デモ枠の
+       スタイルを含む（モックには不要。モックでは箇所ごとに ds-exception を書く） -->
   <style>
     /* このページ自体の体裁（kit とは無関係） */
-    body { margin: 0; padding: 32px; background: #fff; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; color: rgba(0,0,0,0.84); }
+    body { margin: 0; padding: 32px; background: #fff; font-family: var(--typography-font-family, Arial, sans-serif); color: rgba(0,0,0,0.84); }
     h1 { font-size: 20px; margin: 0 0 8px; }
     p.note { font-size: 12px; color: rgba(0,0,0,0.55); margin: 0 0 24px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }

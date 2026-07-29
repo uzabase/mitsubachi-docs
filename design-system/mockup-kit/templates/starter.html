@@ -20,7 +20,7 @@
   <style>
     /* モック側で書いてよいのは「配置」だけ（余白・グリッド・並び）。
        色・角丸・文字サイズ・影などの「見た目」は書かない＝ kit のクラスが持っている */
-    body { margin: 0; font-family: Arial, "Hiragino Sans", Meiryo, sans-serif; }
+    body { margin: 0; font-family: var(--typography-font-family, Arial, sans-serif); }
   </style>
 </head>
 <body>
@@ -52,6 +52,9 @@
     </nav>
     <div class="mi-layout__content">
       <header class="mi-layout__header">
+        <!-- ds-exception: ヘッダー中央テキスト用のクラスが kit に無いため太字を直書き。
+             DS 外の見た目を書くときは、このように直前で申告する（tools/check-mockup.py が
+             未申告の逸脱だけを指摘する）。申告した箇所はレビュー対象として一覧に出る -->
         <span style="font-weight:700; margin:0 auto;">（ヘッダー中央のテキスト）</span>
         <button class="mi-button mi-button--secondary mi-button--medium">（ヘッダー右のアクション）</button>
       </header>

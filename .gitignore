@@ -3,3 +3,7 @@
 
 # macOS
 .DS_Store
+
+# Python（tools/ のスクリプトを相互 import した際に生成される）
+__pycache__/
+*.pyc

@@ -12,16 +12,34 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 <link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-icons.css">
 <!-- ロゴを使うときだけ -->
 <link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-logos.css">
+<!-- 触れるモックにするときだけ（独自 JS は書かない） -->
+<script src="design-system/mockup-kit/mitsubachi-mockup.js" defer></script>
 ```
+
+**`tokens.css` と `mitsubachi-mockup.css` は必ず両方・この順で読み込む。** 2枚揃って初めて `body` のベースフォント（Arial ＋ 和文ゴシック）が効く。片方でも欠けると `.mi-*` を当てていない地の文（見出し・段落・素の `div` / `td`）が**ブラウザ既定の明朝体**で出る。CSS を読み込めない環境（単体 HTML・別プロジェクトへの貼り込み等）では、代わりに `body { font-family: Arial, YakuHanJPs, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, "Noto Sans JP", sans-serif; }` を自分で書く。
 
 新規モックは `templates/starter.html` をコピーして組み立てるのが最短。
 
 ## 鉄則
 
 1. **コンポーネントを自作しない**。`.mi-*` クラスを当てるだけ。
-2. **色・寸法を直書きしない**。見た目は全てクラスが持っている。
+2. **色・寸法を直書きしない**。見た目は全てクラスが持っている（モック側に書いてよいのは配置＝余白・グリッド・並びだけ）。
 3. **構造が深い7種（table / layout / dialog / menu / ai-chat / timeline / suggestion）は、組む前に `components/` の同名見本 HTML を読んで構造を踏襲する**。
-4. 迷ったら該当コンポーネントの md（`../components/`）を読む。
+4. **kit に無い UI（日付選択・アコーディオン・グラフ等）は勝手に作らない**。代替を検討し、それでも作るなら直前に `<!-- ds-exception: 理由 -->` を書いて申告する。
+5. **作り終えたらセルフチェックを実行し、error 0 にする** → `python3 tools/check-mockup.py <ファイル>`
+6. 迷ったら: 何を使うか＝[../component-selection.md](../component-selection.md) / 使い分けの詳細＝該当コンポーネントの md（`../components/`）/ 文言＝[../foundations/writing.md](../foundations/writing.md) / クラスの厳密な仕様＝`kit-index.json`
+
+## 挙動（触れるモックにする）
+
+`mitsubachi-mockup.js` を読み込むと、次が動く。**独自の JS は書かない**（見本: `components/interactive.html`）。
+
+| 動かすもの | 書き方 |
+|---|---|
+| タブ / セグメント / チップ / スイッチ / 表の行選択・ソート | **属性不要**（クラスだけで自動） |
+| メニュー開閉 | トリガーに `data-mi-menu="<メニューの id>"`、`.mi-menu` に `hidden`。listbox なら `data-mi-menu-label` でトリガーに選択値を反映 |
+| ダイアログ開閉 | `data-mi-dialog-open="<id>"` / 閉じる側に `data-mi-dialog-close`（幕の外側クリック・ESC でも閉じる） |
+| snackbar を出す | `data-mi-snackbar="メッセージ"`（他の `data-mi-*` と併記できる） |
+| タブでパネルを切り替える | タブに `data-mi-tab-panel="<id>"` / パネルに `data-mi-panel="<id>"` |
 
 ## ⚠ 間違えやすい規則（要注意リスト）
 

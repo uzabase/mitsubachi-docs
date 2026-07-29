@@ -15,6 +15,8 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 | `mitsubachi-icons.css` | 公式アイコンセット**全97種**（`.mi-icon--<名前>`）。容量が大きいため分離。アイコンを多用するモックで追加読み込み。 |
 | `mitsubachi-logos.css` | Speeda / Uzabase の公式ロゴ SVG（容量が大きいため分離。ロゴが必要なモックでのみ追加読み込み）。 |
 | `CHEATSHEET.md` | **AI が最初に読む1枚**。全クラスの当て方・間違えやすい併用規則のまとめ。 |
+| `kit-index.json` | **機械可読の索引**（自動生成）。必須修飾子・併用規則・必須属性/role/子要素・アイコン名一覧・タグ規則を持つ。CSS 本体を読まずに引ける。`tools/check-mockup.py` の判定根拠でもある。**手編集しない**（`tools/build-kit-index.py` で再生成）。 |
+| `mitsubachi-mockup.js` | **最小の挙動スクリプト**（任意読み込み）。タブ・メニュー・ダイアログ・snackbar・行選択・ソートを `data-mi-*` の宣言で動かす。見た目は持たない。見本 `components/interactive.html`。 |
 | `templates/starter.html` | 新規モックの雛形（CSS 読み込み順＋ app shell 骨格）。コピーして使う。 |
 | `templates/error-403.html` / `error-404.html` / `error-500.html` | エラーページ（公式 pages/403・404・500 由来）。**そのまま使える**。ボタンの「{ページ名}」と遷移先だけ差し替える。 |
 | `components/*.html` | 各コンポーネントの利用例（見本）。ブラウザで開くと見た目を確認できる。 |
@@ -24,6 +26,13 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 1. まず [CHEATSHEET.md](./CHEATSHEET.md) を読む（全クラス・併用規則の1枚まとめ）。
 2. 新規モックは `templates/starter.html` をコピーする（2つの CSS を tokens.css → mitsubachi-mockup.css の順で読み込み済み）。
 3. コンポーネントを自作せず、`.mi-*` クラスを当てて組み立てる。
+4. 作り終えたら**セルフチェックを実行し、error が 0 になるまで直す**。
+
+```bash
+python3 tools/check-mockup.py <作ったファイル.html>
+```
+
+2枚は必ず両方・この順で読み込む（揃って初めて `body` のベースフォントが効く。欠けると地の文がブラウザ既定の明朝体になる）。
 
 ```html
 <link rel="stylesheet" href="design-system/mockup-kit/tokens.css">
@@ -40,11 +49,14 @@ mockup パターン（パッケージ非依存の見た目再現）で mitsubach
 
 ## kit を編集したら（保守者向け）
 
-整合性チェックを実行する。リンク切れ・孤児ファイル・md 導線漏れ・見本の陳腐化（CSS に無いクラスを使っている）・併用必須クラスの文書化漏れを検出する。
+索引を再生成し、整合性チェックを実行する。
 
 ```bash
-python3 tools/check-kit.py
+python3 tools/build-kit-index.py   # kit-index.json を CSS と見本から再生成
+python3 tools/check-kit.py         # 整合性チェック
 ```
+
+`check-kit.py` はリンク切れ・孤児ファイル・md 導線漏れ・見本の陳腐化（CSS に無いクラスを使っている）・併用必須クラスの文書化漏れ・索引の鮮度・見本自身のセルフチェック結果を検出する。
 
 検査ルールは実ファイルから導出しており固定リストを持たないため、kit を拡張してもスクリプトの更新は原則不要。
 
@@ -140,6 +152,9 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
 - `components/ai-chat.html` — messages ＋ input ＋ disclaimer の3部構成
 - `components/timeline.html` — item の flow / dot / content 構造
 - `components/suggestion.html` — search-box ＋ category / item / empty
+
+**①-2 挙動の見本**
+- `components/interactive.html` — `mitsubachi-mockup.js` を読み込んで、タブ・メニュー・ダイアログ・snackbar・表の行選択／ソートを実際に動かす見本。触れるモックを作るときはこれを読む
 
 **② まとめ見本（フラットな部品。クラスを当てるだけでよいもの。目視確認用）**
 - `components/button.html`（button / ai-button / tag）、`components/form.html`（入力系一式）、`components/navigation.html`（tab / filter-chip / badge）、`components/feedback.html`（通知系: tooltip / snackbar / icon-color / inline-notification / banner）、`components/display.html`（avatar / card / loading 等）、`components/icons.html`（アイコン一覧）、`components/logos.html`（ロゴ一覧）

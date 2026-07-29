@@ -10,7 +10,10 @@ kit が変わってもこのスクリプトの更新は原則不要。
 終了コード: 問題なし=0 / 1件以上の指摘=1
 """
 
+import importlib.util
+import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -23,6 +26,7 @@ ENTRY_DOCS = [
     ROOT / "AGENTS.md",
     ROOT / "CLAUDE.md",
     DS / "AGENTS.md",
+    DS / "component-selection.md",
     KIT / "README.md",
     KIT / "CHEATSHEET.md",
 ]
@@ -145,6 +149,45 @@ def check_compound_only_documented():
     )
 
 
+# --- 6) 索引の鮮度: kit-index.json が CSS / 見本の現状と一致しているか ---------
+def check_index_freshness():
+    index_path = KIT / "kit-index.json"
+    issues = []
+    if not index_path.exists():
+        issues.append("kit-index.json が無い（python3 tools/build-kit-index.py を実行）")
+    else:
+        spec = importlib.util.spec_from_file_location(
+            "build_kit_index", ROOT / "tools" / "build-kit-index.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        if json.loads(read(index_path)) != mod.build():
+            issues.append("kit-index.json が古い"
+                          "（python3 tools/build-kit-index.py で再生成する）")
+    report("索引の鮮度", "kit-index.json は CSS・見本と一致", issues)
+
+
+# --- 7) 見本自身のセルフチェック: 見本・テンプレが check-mockup.py を通るか -----
+def check_samples_pass_selfcheck():
+    files = [str(p) for p in sorted(list((KIT / "components").glob("*.html")) +
+                                    list((KIT / "templates").glob("*.html")))]
+    proc = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "check-mockup.py"), *files, "--json"],
+        capture_output=True, text=True)
+    issues = []
+    try:
+        data = json.loads(proc.stdout)
+    except json.JSONDecodeError:
+        issues.append(f"check-mockup.py の実行に失敗（{proc.stderr.strip()[:120]}）")
+        data = {"files": []}
+    for f in data["files"]:
+        for fd in f["findings"]:
+            if fd["severity"] == "error":
+                rel = Path(f["file"]).relative_to(ROOT) if Path(f["file"]).is_absolute() else f["file"]
+                issues.append(f"{rel} L{fd['line']}: {fd['message']}")
+    report("見本のセルフチェック",
+           f"見本・テンプレ {len(files)} 件は check-mockup.py で error 0", issues)
+
+
 def main():
     print(f"mockup kit 整合性チェック（{KIT.relative_to(ROOT)}）\n")
     check_broken_links()
@@ -152,6 +195,8 @@ def main():
     check_md_coverage()
     check_undefined_classes()
     check_compound_only_documented()
+    check_index_freshness()
+    check_samples_pass_selfcheck()
     print()
     if problems:
         print(f"指摘 {len(problems)} 件。上記を修正してください。")
