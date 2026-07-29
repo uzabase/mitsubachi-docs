@@ -60,6 +60,7 @@ error が 0 なら kit のルールに沿っています。検査の中身と `d
 
 - [design-system/AGENTS.md](./design-system/AGENTS.md) — ドキュメントの構成・mockup の作業手順・トークンの取得方法
 - [design-system/mockup-kit/README.md](./design-system/mockup-kit/README.md) — kit に入っているもの・対応コンポーネント・値の正と鮮度
+- [BACKLOG.md](./BACKLOG.md) — 未着手・判断待ちの項目
 
 ## 関連リポジトリ
 
