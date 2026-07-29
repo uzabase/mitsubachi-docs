@@ -55,7 +55,7 @@
 | 項目ごとに情報の塊を見せる | card `.mi-card` | 比較より閲覧が目的のとき。**影は付けない** |
 | 時系列の出来事を見せる | timeline `.mi-timeline` | 見本 `components/timeline.html` |
 | 少数の重要指標を見せる | card ＋ 数値（KPI） | 数値は `.mi-table__num` ではなくカード内に置く |
-| グラフで見せる | **kit に無い** | 表で代替できないか先に検討する。作る場合は申告（→ 5.） |
+| グラフで見せる | グラフ本体は **kit に無い**（配色ルールはある） | 表で代替できないか先に検討する。作る場合は色を `.mi-chart-fill--*` / `.mi-chart-line--*` で当て（[chart-color.md](./foundations/chart-color.md)）、グラフの枠組みは申告して作る（→ 9.） |
 | 読み物・レポートを見せる | report-heading `.mi-report-heading--1〜6` | 通常の見出しとは別物 |
 
 参照: [table](./components/table.md) / [timeline](./components/timeline.md) / [report-heading](./components/report-heading.md) / [elevation](./foundations/elevation.md)

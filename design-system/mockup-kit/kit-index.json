@@ -719,6 +719,57 @@
       ],
       "sampleCount": 4
     },
+    "mi-chart-fill": {
+      "modifiers": [
+        "--",
+        "--blue-100",
+        "--blue-140",
+        "--blue-160",
+        "--blue-25",
+        "--blue-60",
+        "--green-100",
+        "--green-140",
+        "--green-160",
+        "--green-25",
+        "--green-60",
+        "--leaf-100",
+        "--leaf-140",
+        "--leaf-160",
+        "--leaf-25",
+        "--leaf-60",
+        "--lemon-100",
+        "--lemon-140",
+        "--lemon-160",
+        "--lemon-25",
+        "--lemon-60",
+        "--viridian-100",
+        "--viridian-140",
+        "--viridian-160",
+        "--viridian-25",
+        "--viridian-60"
+      ]
+    },
+    "mi-chart-line": {
+      "modifiers": [
+        "--",
+        "--1",
+        "--10",
+        "--11",
+        "--12",
+        "--13",
+        "--14",
+        "--15",
+        "--16",
+        "--2",
+        "--3",
+        "--4",
+        "--5",
+        "--6",
+        "--7",
+        "--8",
+        "--9"
+      ]
+    },
     "mi-checkbox": {
       "modifiers": [
         "--indeterminate"

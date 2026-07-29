@@ -3126,3 +3126,91 @@ a.mi-breadcrumb__item:focus-visible {
   color: var(--text-weak, rgba(0, 0, 0, 0.54));
   text-align: center;
 }
+
+/* ============================================================================
+ * chart — グラフの配色（★暫定。値の出所は Figma ではなく Notion）
+ * ----------------------------------------------------------------------------
+ * 「どの凡例にどの色を割り当てるか」のルールは ../foundations/chart-color.md。
+ * ここは色を当てるためのクラスだけを持つ。値は tokens.css（--chart-*）。
+ *
+ *   棒・円グラフ … .mi-chart-fill--<色相>-<シェード>（background-color と fill の両方を
+ *                  設定するので、div のバーでも SVG の rect/path でも使える）
+ *   折れ線     … .mi-chart-line--<1〜16>（stroke。凡例マーカー用に background-color も
+ *                  設定。9番目以降は破線 stroke-dasharray が自動で付く）
+ *
+ * 基底クラス単独（.mi-chart-fill / .mi-chart-line）は凡例1つのときの既定色になる。
+ * グラフ本体（軸・目盛り・凡例のレイアウト）は kit に無いため、モック側で組む場合は
+ * <!-- ds-exception: 理由 --> を書いて申告する（SVG を直接置くと warn も出る）。
+ * ========================================================================== */
+
+/* --- 棒・円グラフ（面塗り） --- */
+/* 既定 = 凡例1つのときの色（Blue-60） */
+.mi-chart-fill {
+  background-color: var(--chart-blue-60, #8ea8fc);
+  fill: var(--chart-blue-60, #8ea8fc);
+}
+/* blue */
+.mi-chart-fill--blue-25 { background-color: var(--chart-blue-25); fill: var(--chart-blue-25); }
+.mi-chart-fill--blue-60 { background-color: var(--chart-blue-60); fill: var(--chart-blue-60); }
+.mi-chart-fill--blue-100 { background-color: var(--chart-blue-100); fill: var(--chart-blue-100); }
+.mi-chart-fill--blue-140 { background-color: var(--chart-blue-140); fill: var(--chart-blue-140); }
+.mi-chart-fill--blue-160 { background-color: var(--chart-blue-160); fill: var(--chart-blue-160); }
+/* viridian */
+.mi-chart-fill--viridian-25 { background-color: var(--chart-viridian-25); fill: var(--chart-viridian-25); }
+.mi-chart-fill--viridian-60 { background-color: var(--chart-viridian-60); fill: var(--chart-viridian-60); }
+.mi-chart-fill--viridian-100 { background-color: var(--chart-viridian-100); fill: var(--chart-viridian-100); }
+.mi-chart-fill--viridian-140 { background-color: var(--chart-viridian-140); fill: var(--chart-viridian-140); }
+.mi-chart-fill--viridian-160 { background-color: var(--chart-viridian-160); fill: var(--chart-viridian-160); }
+/* green */
+.mi-chart-fill--green-25 { background-color: var(--chart-green-25); fill: var(--chart-green-25); }
+.mi-chart-fill--green-60 { background-color: var(--chart-green-60); fill: var(--chart-green-60); }
+.mi-chart-fill--green-100 { background-color: var(--chart-green-100); fill: var(--chart-green-100); }
+.mi-chart-fill--green-140 { background-color: var(--chart-green-140); fill: var(--chart-green-140); }
+.mi-chart-fill--green-160 { background-color: var(--chart-green-160); fill: var(--chart-green-160); }
+/* leaf */
+.mi-chart-fill--leaf-25 { background-color: var(--chart-leaf-25); fill: var(--chart-leaf-25); }
+.mi-chart-fill--leaf-60 { background-color: var(--chart-leaf-60); fill: var(--chart-leaf-60); }
+.mi-chart-fill--leaf-100 { background-color: var(--chart-leaf-100); fill: var(--chart-leaf-100); }
+.mi-chart-fill--leaf-140 { background-color: var(--chart-leaf-140); fill: var(--chart-leaf-140); }
+.mi-chart-fill--leaf-160 { background-color: var(--chart-leaf-160); fill: var(--chart-leaf-160); }
+/* lemon */
+.mi-chart-fill--lemon-25 { background-color: var(--chart-lemon-25); fill: var(--chart-lemon-25); }
+.mi-chart-fill--lemon-60 { background-color: var(--chart-lemon-60); fill: var(--chart-lemon-60); }
+.mi-chart-fill--lemon-100 { background-color: var(--chart-lemon-100); fill: var(--chart-lemon-100); }
+.mi-chart-fill--lemon-140 { background-color: var(--chart-lemon-140); fill: var(--chart-lemon-140); }
+.mi-chart-fill--lemon-160 { background-color: var(--chart-lemon-160); fill: var(--chart-lemon-160); }
+
+/* --- 折れ線グラフ（線） --- */
+/* 既定 = 1番目の色。凡例マーカーに使うときは background-color が効く */
+.mi-chart-line {
+  stroke: var(--chart-line-1, #12a35b);
+  background-color: var(--chart-line-1, #12a35b);
+  fill: none;
+}
+.mi-chart-line--1 { stroke: var(--chart-line-1); background-color: var(--chart-line-1); }
+.mi-chart-line--2 { stroke: var(--chart-line-2); background-color: var(--chart-line-2); }
+.mi-chart-line--3 { stroke: var(--chart-line-3); background-color: var(--chart-line-3); }
+.mi-chart-line--4 { stroke: var(--chart-line-4); background-color: var(--chart-line-4); }
+.mi-chart-line--5 { stroke: var(--chart-line-5); background-color: var(--chart-line-5); }
+.mi-chart-line--6 { stroke: var(--chart-line-6); background-color: var(--chart-line-6); }
+.mi-chart-line--7 { stroke: var(--chart-line-7); background-color: var(--chart-line-7); }
+.mi-chart-line--8 { stroke: var(--chart-line-8); background-color: var(--chart-line-8); }
+.mi-chart-line--9 { stroke: var(--chart-line-9); background-color: var(--chart-line-9); }
+.mi-chart-line--10 { stroke: var(--chart-line-10); background-color: var(--chart-line-10); }
+.mi-chart-line--11 { stroke: var(--chart-line-11); background-color: var(--chart-line-11); }
+.mi-chart-line--12 { stroke: var(--chart-line-12); background-color: var(--chart-line-12); }
+.mi-chart-line--13 { stroke: var(--chart-line-13); background-color: var(--chart-line-13); }
+.mi-chart-line--14 { stroke: var(--chart-line-14); background-color: var(--chart-line-14); }
+.mi-chart-line--15 { stroke: var(--chart-line-15); background-color: var(--chart-line-15); }
+.mi-chart-line--16 { stroke: var(--chart-line-16); background-color: var(--chart-line-16); }
+/* 9番目以降は破線（線種はオプションなので、不要なら stroke-dasharray を none にする） */
+.mi-chart-line--9,
+.mi-chart-line--10,
+.mi-chart-line--11,
+.mi-chart-line--12,
+.mi-chart-line--13,
+.mi-chart-line--14,
+.mi-chart-line--15,
+.mi-chart-line--16 {
+  stroke-dasharray: var(--chart-line-dash, 8 4);
+}

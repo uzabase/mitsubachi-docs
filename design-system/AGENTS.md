@@ -34,6 +34,7 @@ mitsubachi-ui に基づくモック作成・実装・レビューを行う AI �
 | `elevation.md` | 影・グラデーション（検討中） |
 | `typography.md` | フォントサイズ・ウェイト |
 | `color.md` | 色の使い分けルール |
+| `chart-color.md` | グラフの配色（凡例への色の割り当て。**暫定**） |
 | `principles.md` | 設計原則（印象・トーン・一貫性） |
 | `prohibited.md` | 禁止事項（カラー等の逸脱パターン） |
 | `layout.md` | 汎用レイアウト（2カラムのアプリケーションシェル） |

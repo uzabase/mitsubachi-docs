@@ -19,6 +19,9 @@
  *          get_metadata でページ内のコンポーネントセット node を特定してから取得する。
  *   3. mitsubachi-ui（公式実装）: text-field / search-box の styles.css
  *        https://github.com/uzabase/mitsubachi-ui （取得日 2026-06-11）
+ *   4. Notion「グラフの配色ルール（暫定）」— `--chart-*` のみ（取得日 2026-07-29）
+ *        Figma のトークンには未反映で、Figma MCP では取得できない。**暫定値**（詳細は
+ *        下の「グラフの配色」ブロックのコメント）。他のトークンとは扱いが異なる
  *
  * 【重要】
  *   - 値の正は常に Figma。優先順位は Figma MCP > mitsubachi-token > このファイル。
@@ -300,4 +303,62 @@
   --menu-item-min-height-phone: 40px;
   /* report-heading phone: h1=25px(bold) / h6=14px（h2〜h5 は desktop と同じ） */
   --report-heading-1-font-phone: 25px;
+
+  /* ====== グラフの配色（★暫定。出所は Figma ではなく Notion） ==========
+   * 出所: Notion「グラフの配色ルール（暫定）」
+   *   https://www.notion.so/uzabase/38158a33603580f39454e3bdaa961360
+   *   ステータス=進行中 / 取得日 2026-07-29（Notion 側の最終更新 2026-06-24）
+   * 【他のトークンと扱いが違う点】
+   *   - 値の正は Notion（Figma のトークンにはまだ無い）。Figma MCP では取得できない
+   *   - **primitive color のカラーパレット再検討後に多色使いを再検討する予定**があり、
+   *     そのとき値ごと変わる。恒久的な値として扱わないこと
+   *   - 現パレットの多色使いは明るすぎるため、暫定で色相を抑えた配色にしている
+   *   - 割り当てのルール（凡例数ごとにどの色を使うか）は
+   *     foundations/chart-color.md を参照。ここは値だけを持つ
+   * ================================================================== */
+  /* 棒・円グラフ: 5色相 × 5シェード（25=最薄 … 160=最濃）。最大25凡例 */
+  --chart-blue-25: #dae4ff;
+  --chart-blue-60: #8ea8fc;
+  --chart-blue-100: #3f69f3;
+  --chart-blue-140: #143ccf;
+  --chart-blue-160: #011b78;
+  --chart-viridian-25: #b4f0f0;
+  --chart-viridian-60: #5abab9;
+  --chart-viridian-100: #0c8282;
+  --chart-viridian-140: #01595a;
+  --chart-viridian-160: #012f2d;
+  --chart-green-25: #c0f0d8;
+  --chart-green-60: #21c473;
+  --chart-green-100: #008744;
+  --chart-green-140: #005b2f;
+  --chart-green-160: #012e17;
+  --chart-leaf-25: #baf5a5;
+  --chart-leaf-60: #68bf4a;
+  --chart-leaf-100: #29880a;
+  --chart-leaf-140: #175c00;
+  --chart-leaf-160: #012e17; /* Notion 上で green-160 と同値 */
+  --chart-lemon-25: #edea7f;
+  --chart-lemon-60: #b3ae46;
+  --chart-lemon-100: #7a7706;
+  --chart-lemon-140: #555300;
+  --chart-lemon-160: #2c2a01;
+
+  /* 折れ線グラフ: 16色。9番目以降は破線（線種はオプション） */
+  --chart-line-1: #12a35b; /* グリーン */
+  --chart-line-2: #db351f; /* トマト */
+  --chart-line-3: #3f69f2; /* ブルー */
+  --chart-line-4: #b89900; /* イエロー */
+  --chart-line-5: #239176; /* エメラルド */
+  --chart-line-6: #d65b2b; /* テラコッタ */
+  --chart-line-7: #6759ff; /* バイオレット */
+  --chart-line-8: #83a739; /* ライム */
+  --chart-line-9: #2a8f8e; /* ヴィリディアン */
+  --chart-line-10: #ad7821; /* アンバー */
+  --chart-line-11: #a442e8; /* パープル */
+  --chart-line-12: #4eb02d; /* リーフ */
+  --chart-line-13: #157da3; /* シアン */
+  --chart-line-14: #a17e1d; /* コルク */
+  --chart-line-15: #c32ec4; /* プラム */
+  --chart-line-16: #36b34a; /* バンブー */
+  --chart-line-dash: 8 4; /* 9番目以降の破線パターン */
 }
