@@ -1,12 +1,8 @@
 # mitsubachi-docs
 
-mitsubachi-ui デザインシステムのドキュメント集。**人間と AI の両方が参照する「デザインシステムの素」**です。
-
-AI（Claude / Cursor / ChatGPT など）にこのリポジトリを読ませることで、mitsubachi-ui に沿ったモック生成・実装・レビューができます。
-
 ## 導入方法
 
-使い方は2通りあります。どちらの場合も、AI には「**まず `design-system/AGENTS.md` を読むこと**」と伝えてください。
+使い方は2通りあります。どちらの場合も、AI には「**まず [design-system/AGENTS.md](./design-system/AGENTS.md) を読むこと**」と伝えてください。読む順序・作業手順・守るべきルールはすべてそこに書いてあります。
 
 ### ① URL を指定して参照させる
 
@@ -50,32 +46,15 @@ mitsubachi-ui は出力するコードの種類によって3つのパターン�
 | **react** | mitsubachi-ui-react を使った React コード | React プロジェクトでの実装 |
 | **web-component** | `<mi-*>` タグを使った HTML | Web Components が動く環境での実装 |
 
-## AI 向けの入口案内
+## できあがったモックを検査する
 
-AI が読む順序は決まっています。**上から順に辿れば、必要な情報にたどり着けます**。
+AI が作ったモックは、クラスの誤用・kit を使わない自作・独自 CSS での見た目づくりを機械的に検査できます。
 
-1. **[design-system/AGENTS.md](./design-system/AGENTS.md)** — 最初に読むファイル。デザインシステムの構造・3つのパターン・**mockup の作業手順（新規／改修／レビュー）**
-2. **[design-system/mockup-kit/CHEATSHEET.md](./design-system/mockup-kit/CHEATSHEET.md)** — mockup を作るなら次にこれ。全クラスの当て方と間違えやすい規則の1枚まとめ
-3. **`design-system/mockup-kit/templates/starter.html`** — 新規モックはこの雛形をコピーして組み立てる
-4. **[design-system/component-selection.md](./design-system/component-selection.md)** — 「絞り込みたい」「知らせたい」から**何を使うか**を引く逆引きガイド
-5. **`design-system/components/<名前>.md`** — 使うコンポーネントの使い分け・Do/Don't。各 md に kit への導線（使うクラス名）が1行入っています
-6. **`design-system/mockup-kit/components/<名前>.html`** — 構造が深いコンポーネント（table / layout / dialog / menu / ai-chat / timeline / suggestion）は、組む前にこの見本を読んでマークアップ構造を踏襲します
-7. **`python3 tools/check-mockup.py <作ったファイル>`** — **作り終えたら必ず実行**。クラスの誤用・自作・未申告の逸脱を機械的に検出します（error が 0 になるまで直す）
+```bash
+python3 tools/check-mockup.py <モックのファイル.html>
+```
 
-> `design-system/CLAUDE.md` は Claude Code 互換のための薄いポインタで、中身は AGENTS.md を指しているだけです。
-
-### AI の逸脱を止める仕組み
-
-AI は「クラスを間違える」よりも「**kit を使わずに自作する**」「**独自 CSS で見た目を作る**」ことで世界観を壊します。これを機械的に止めるのが `tools/check-mockup.py` です。
-
-| 層 | 何を見るか |
-|---|---|
-| 層0 | クラスの使い方（存在しないクラス・必須修飾子の欠落・単独では効かない修飾子・幻覚アイコン名・CSS の読み込み・ベースフォント未指定＝地の文の明朝体化） |
-| 層1 | kit に等価物があるタグを素で使っていないか（`<table>` に `.mi-table` が無い等） |
-| 層2 | 未申告の逸脱（独自クラスや `style` 属性で「見た目」を書いていないか） |
-| 層3 | レビュー材料（申告された DS 外の箇所・独自クラス・構造見本を読むべきコンポーネント） |
-
-kit に無い UI（日付選択・グラフ等）を作らざるを得ない場合は、HTML の直前に `<!-- ds-exception: 理由 -->` と申告します。**申告があれば層2は通り、層3のレビュー材料に載ります**（申告の無い逸脱は error）。判定の根拠は `kit-index.json`（CSS と見本 HTML から自動生成）で、スクリプトは固定リストを持ちません。
+error が 0 なら kit のルールに沿っています。検査の中身と `ds-exception`（kit に無い UI を作る場合の申告）の書き方は [design-system/AGENTS.md](./design-system/AGENTS.md) を参照してください。
 
 ## リポジトリ構成
 
@@ -84,7 +63,7 @@ kit に無い UI（日付選択・グラフ等）を作らざるを得ない場�
 ├── AGENTS.md            ← AI 向けの入口ポインタ
 ├── CLAUDE.md            ← AGENTS.md への薄いポインタ
 ├── tools/
-│   ├── check-mockup.py       ← 作ったモックのセルフチェック（AI が毎回実行）
+│   ├── check-mockup.py       ← 作ったモックの検査
 │   ├── check-kit.py          ← kit の整合性チェック（保守用）
 │   └── build-kit-index.py    ← kit-index.json の生成（保守用）
 └── design-system/
@@ -112,7 +91,7 @@ kit に無い UI（日付選択・グラフ等）を作らざるを得ない場�
 
 | ファイル | 役割 |
 |---|---|
-| `CHEATSHEET.md` | 全クラス・併用規則の1枚まとめ（AI が最初に読む） |
+| `CHEATSHEET.md` | 全クラス・併用規則の1枚まとめ |
 | `kit-index.json` | 機械可読の索引（必須修飾子・併用規則・必須属性・アイコン名一覧）。**自動生成・手編集しない** |
 | `tokens.css` | 値の単一の源（CSS 変数）。**手編集しない**（Figma から取り直す） |
 | `mitsubachi-mockup.css` | `.mi-*` クラス本体。値は `tokens.css` を参照 |
