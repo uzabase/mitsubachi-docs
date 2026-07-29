@@ -1,0 +1,11 @@
+{
+  "name": "@uzabase/mitsubachi-docs",
+  "version": "0.0.0",
+  "description": "mitsubachi-ui デザインシステムのドキュメントとモックアップキット",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/uzabase/mitsubachi-docs.git"
+  }
+}
