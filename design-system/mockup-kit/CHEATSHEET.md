@@ -25,7 +25,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 1. **コンポーネントを自作しない**。`.mi-*` クラスを当てるだけ。
 2. **色・寸法を直書きしない**。見た目は全てクラスが持っている（モック側に書いてよいのは配置＝余白・グリッド・並びだけ）。
 3. **構造が深い7種（table / layout / dialog / menu / ai-chat / timeline / suggestion）は、組む前に `components/` の同名見本 HTML を読んで構造を踏襲する**。
-4. **kit に無い UI（日付選択・アコーディオン・グラフ等）は勝手に作らない**。代替を検討し、それでも作るなら直前に `<!-- ds-exception: 理由 -->` を書いて申告する。
+4. **kit に無い UI（日付選択・アコーディオン・グラフ等）**: ユーザーの指示で作る場合は**代替検討をスキップして作ってよい**（代替案を提案して回り道しない）。指示が無いのに「無い」と気づいた場合はまず代替を検討する。**どちらの場合も申告を1行書く** → CSS は `/* ds-exception: 理由 */`（ブロックの以降がまとめて免除）、HTML は `<!-- ds-exception: 理由 -->`（その要素と子孫が免除）。
 5. **作り終えたらセルフチェックを実行し、error 0 にする** → `python3 tools/check-mockup.py <ファイル>`
 6. 迷ったら: 何を使うか＝[../component-selection.md](../component-selection.md) / 使い分けの詳細＝該当コンポーネントの md（`../components/`）/ 文言＝[../foundations/writing.md](../foundations/writing.md) / クラスの厳密な仕様＝`kit-index.json`
 
