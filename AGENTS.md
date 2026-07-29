@@ -6,10 +6,4 @@ mitsubachi-ui デザインシステムのドキュメント集です。
 
 モック（mockup パターン＝見た目だけを再現した HTML）を作る場合は、続けて [design-system/mockup-kit/CHEATSHEET.md](./design-system/mockup-kit/CHEATSHEET.md) を読み、コンポーネントを自作せず `.mi-*` クラスを当てて組み立ててください。
 
-**作り終えたら必ずセルフチェックを実行し、error が 0 になるまで直してください。**
-
-```bash
-python3 tools/check-mockup.py <作ったファイル.html>
-```
-
-人間向けの導入方法・リポジトリ構成は [README.md](./README.md) を参照。
+人間向けの導入方法は [README.md](./README.md) を参照。

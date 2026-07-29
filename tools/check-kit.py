@@ -93,13 +93,37 @@ def check_orphan_files():
 
 # --- 3) md 導線漏れ: components の各 md に kit 導線があるか -------------------
 def check_md_coverage():
-    mds = [p for p in (DS / "components").rglob("*.md") if p.name != "_TEMPLATE.md"]
+    # _TEMPLATE.md も対象にする（新規 md は必ずここから作られるため、
+    # テンプレに導線の枠が無いと追加した md から導線が抜ける）
+    mds = list((DS / "components").rglob("*.md"))
     issues = [
         f"{p.relative_to(ROOT)}（kit 導線の行が無い）"
         for p in mds
         if "mockup" not in read(p)
     ]
     report("md 導線", f"components の {len(mds)} md すべてに導線あり", issues)
+
+
+# --- 3-2) md のクラス名: md に手書きされた .mi-* が CSS に実在するか -----------
+def check_md_class_names():
+    """クラス名は各 md の導線・CHEATSHEET・component-selection.md に手書きで散在する。
+    CSS 側で rename すると取り残されるため、実在を照合する。"""
+    defined = set()
+    for css in KIT.glob("*.css"):
+        defined |= css_classes(read(css))
+    issues, checked = [], 0
+    for md in sorted(DS.rglob("*.md")):
+        if md.name == "_TEMPLATE.md":  # {クラス名} 等のプレースホルダを含む
+            continue
+        used = set()
+        for cls in re.findall(r"\.(mi-[\w-]+)", read(md)):
+            # 末尾が - のものはワイルドカード表記（.mi-banner--* / .mi-icon--<名前>）
+            if not cls.endswith("-"):
+                used.add(cls)
+        checked += len(used)
+        for cls in sorted(used - defined):
+            issues.append(f"{md.relative_to(ROOT)} → .{cls}（CSS に定義が無い）")
+    report("md のクラス名", f"md に書かれた {checked} 件のクラス参照は全て CSS に実在", issues)
 
 
 # --- 4) 見本の陳腐化: 見本/テンプレが使うクラスが CSS に実在するか -----------
@@ -193,6 +217,7 @@ def main():
     check_broken_links()
     check_orphan_files()
     check_md_coverage()
+    check_md_class_names()
     check_undefined_classes()
     check_compound_only_documented()
     check_index_freshness()

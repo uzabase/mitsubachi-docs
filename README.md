@@ -2,7 +2,7 @@
 
 ## 導入方法
 
-使い方は2通りあります。どちらの場合も、AI には「**まず [design-system/AGENTS.md](./design-system/AGENTS.md) を読むこと**」と伝えてください。読む順序・作業手順・守るべきルールはすべてそこに書いてあります。
+使い方は2通りあります。
 
 ### ① URL を指定して参照させる
 
@@ -56,58 +56,10 @@ python3 tools/check-mockup.py <モックのファイル.html>
 
 error が 0 なら kit のルールに沿っています。検査の中身と `ds-exception`（kit に無い UI を作る場合の申告）の書き方は [design-system/AGENTS.md](./design-system/AGENTS.md) を参照してください。
 
-## リポジトリ構成
+## もっと詳しく
 
-```
-├── README.md            ← このファイル（人間向けの導入方法）
-├── AGENTS.md            ← AI 向けの入口ポインタ
-├── CLAUDE.md            ← AGENTS.md への薄いポインタ
-├── tools/
-│   ├── check-mockup.py       ← 作ったモックの検査
-│   ├── check-kit.py          ← kit の整合性チェック（保守用）
-│   └── build-kit-index.py    ← kit-index.json の生成（保守用）
-└── design-system/
-    ├── AGENTS.md               ← AI 向けの指示の本体
-    ├── CLAUDE.md               ← AGENTS.md への薄いポインタ
-    ├── README.md               ← ドキュメント集としての概要
-    ├── component-selection.md  ← やりたいこと → 何を使うかの逆引き
-    ├── foundations/            ← デザインの基盤（11ファイル）
-    ├── components/             ← 各 UI パーツのルール（75ファイル）
-    └── mockup-kit/             ← AI の生成エンジン向けアセット（CSS・JS・見本・雛形・索引）
-```
-
-ルートの `AGENTS.md` / `CLAUDE.md` は、エージェントがリポジトリのルートで起動しても入口を見つけられるようにするためのポインタです。指示の本体は `design-system/AGENTS.md` にあります。
-
-役割は3層に分かれています。
-
-| 層 | 場所 | 中身 | 値を持つか |
-|---|---|---|---|
-| **ルール層** | `foundations/` | 色・余白・タイポグラフィ・設計原則・アクセシビリティなど、**使い分けの判断基準** | 持たない（具体値は Figma / トークンリポジトリが正） |
-| **ルール層** | `components/` | 各コンポーネントの使い分け・Do/Don't・Figma URL・kit への導線 | 持たない |
-| **ルール層** | `component-selection.md` | やりたいことからコンポーネントを選ぶ判断基準（逆引き） | 持たない |
-| **アセット層** | `mockup-kit/` | `.mi-*` クラスの CSS・挙動 JS・見本 HTML・テンプレート・索引。**AI がクラスを当てるだけで正しい見た目になる** | 持つ（Figma のスナップショット） |
-
-`mockup-kit/` の中身:
-
-| ファイル | 役割 |
-|---|---|
-| `CHEATSHEET.md` | 全クラス・併用規則の1枚まとめ |
-| `kit-index.json` | 機械可読の索引（必須修飾子・併用規則・必須属性・アイコン名一覧）。**自動生成・手編集しない** |
-| `tokens.css` | 値の単一の源（CSS 変数）。**手編集しない**（Figma から取り直す） |
-| `mitsubachi-mockup.css` | `.mi-*` クラス本体。値は `tokens.css` を参照 |
-| `mitsubachi-mockup.js` | 最小の挙動（タブ・メニュー・ダイアログ・snackbar・行選択・ソート）。任意読み込み |
-| `mitsubachi-icons.css` | 公式アイコン全97種（容量が大きいため分離・任意読み込み） |
-| `mitsubachi-logos.css` | 公式ロゴ SVG（同上） |
-| `components/*.html` | コンポーネント見本。ブラウザで開いて見た目を確認できる |
-| `templates/` | `starter.html`（新規モックの雛形）、`error-403.html` / `error-404.html` / `error-500.html`（そのまま使えるエラーページ） |
-
-詳細は [design-system/mockup-kit/README.md](./design-system/mockup-kit/README.md) を参照してください。
-
-## 値の正・鮮度
-
-- **値の正は常に Figma。** 優先順位は `Figma MCP > mitsubachi-token > mockup-kit のスナップショット`
-- md にトークン値をハードコードしない（Figma 側の変更と乖離するため）
-- `mockup-kit/tokens.css` は Figma を機械的に写したスナップショットなので、上記の原則とは矛盾しません
+- [design-system/AGENTS.md](./design-system/AGENTS.md) — ドキュメントの構成・mockup の作業手順・トークンの取得方法
+- [design-system/mockup-kit/README.md](./design-system/mockup-kit/README.md) — kit に入っているもの・対応コンポーネント・値の正と鮮度
 
 ## 関連リポジトリ
 
