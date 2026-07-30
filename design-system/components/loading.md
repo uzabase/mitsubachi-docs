@@ -19,6 +19,20 @@ Loading（ローディング）は、処理中であることをユーザーに�
 
 > mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-loading`（AI色は `--ai`） を使う（自作しない）。
 
+## サイズと挙動（Figma node 866-2609 の仕様）
+
+| size | 直径 |
+|---|---|
+| medium | **14px** |
+| large（既定） | **18px** |
+| x-large | **20px** |
+| 2x-large | **22px** |
+| 3x-large | **32px** |
+| 4x-large | **46px** |
+
+- アニメーションは **1秒間に1回転**
+- `ai=true`（kit では `.mi-loading--ai`）は **AI による生成中などに限る。それ以外での使用は禁止**
+
 ## バリアントプロパティ
 | プロパティ | 値 |
 |---|---|

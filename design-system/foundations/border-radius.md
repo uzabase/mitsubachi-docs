@@ -15,11 +15,15 @@
 
 ## 使い分け
 
-| 用途 | 例 |
-|------|-----|
-| 最小サイズ。正方形のため丸すぎる印象を避けたいコンポーネント | checkbox |
-| 高さが小さいコンポーネント / コンポーネント内部の要素 | read-only-tag, toolchip, breadcrumb, segment-control |
-| 基準サイズ。コンポーネントの small・medium にあたる部分 | search-box, text-area |
-| コンポーネントの large・x-large にあたる部分 | カード類 |
-| 最大サイズ。高さが大きめのコンポーネント | dialog, 投資実績カード |
-| 丸い形状が一般的なアクション要素 | floating-button |
+| 用途 | semantic 名 | mockup kit の変数 | 例 |
+|------|------------|------------------|-----|
+| 最小サイズ。正方形のため丸すぎる印象を避けたいコンポーネント | `radius/x-small` | `--border-radius-x-small` | checkbox |
+| 高さが小さいコンポーネント / コンポーネント内部の要素 | `radius/small` | `--border-radius-small` | read-only-tag, tooltip, breadcrumb, 必須バッジ |
+| 基準サイズ。コンポーネントの small・medium にあたる部分 | `radius/medium` | `--border-radius-medium` | search-box, text-area, select-box, **segmented-control**, menu, banner, page-tab / section-tab, sidenav-item |
+| コンポーネントの large・x-large にあたる部分 | `radius/large` | `--border-radius-large` | カード類（card, radio-button-card） |
+| 最大サイズ。高さが大きめのコンポーネント | `radius/x-large` | `--border-radius-x-large` | dialog, 投資実績カード |
+| pill（左右が半円） | `9999px` | `--border-radius-full` | button 類（neutral / danger / ai / icon-button）, filter-chip, input-chip, link-tag, notification-badge, switch の track |
+| 真円 | `50%` | （`50%` を直接指定） | avatar, floating-button, loading, radio, switch のノブ, timeline の点 |
+
+> **注**: 具体的な px は `mockup-kit/tokens.css` にスナップショットがある（値の正は Figma / mitsubachi-token）。
+> `9999px` と `50%` は結果が違う（正方形なら同じだが、横長の要素では `50%` が楕円になる）。左右が半円の pill には `9999px` を使う。

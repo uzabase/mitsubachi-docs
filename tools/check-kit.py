@@ -173,7 +173,54 @@ def check_compound_only_documented():
     )
 
 
-# --- 6) 索引の鮮度: kit-index.json が CSS / 見本の現状と一致しているか ---------
+# --- 6) 未定義トークンの参照: var(--x, fallback) はトークンを消しても壊れない ---
+def check_undefined_tokens():
+    """`var(--token, フォールバック)` はトークンが未定義でもフォールバックで描画されるため、
+    tokens.css からトークンを消しても壊れず、古い値が黙って生き残る（suggestion が削除済みの
+    --banner-shadow を参照し続けていた実例）。参照先の実在を照合する。"""
+    tokens = read(KIT / "tokens.css")
+    defined = set(re.findall(r"^\s*(--[a-z0-9-]+)\s*:", tokens, re.M))
+    issues, checked = [], 0
+    for css in sorted(KIT.glob("*.css")):
+        if css.name == "tokens.css":
+            continue
+        body = re.sub(r"/\*.*?\*/", "", read(css), flags=re.S)  # コメント内の例を除く
+        local = set(re.findall(r"^\s*(--[a-z0-9-]+)\s*:", body, re.M))  # コンポーネント固有の可変値
+        used = set(re.findall(r"var\(\s*(--[a-z0-9-]+)", body))
+        checked += len(used)
+        for name in sorted(used - defined - local):
+            line = next((i for i, l in enumerate(body.splitlines(), 1) if f"var({name}" in l), "?")
+            issues.append(f"{css.relative_to(ROOT)} L{line}: var({name}) は tokens.css に定義が無い")
+    report("トークンの実在", f"CSS の {checked} 件の var(--*) 参照は全て tokens.css か同ファイルに定義あり", issues)
+
+
+# --- 7) フォールバック値の陳腐化: var(--x, fallback) の fallback が tokens と食い違わないか ---
+def check_fallback_values():
+    """`var(--token, フォールバック)` のフォールバックは tokens.css が読まれなかったときの値。
+    トークンの値を更新してもフォールバックは自動で追随しないため、古い値が残る
+    （layout のヘッダー高さが tokens 60px / フォールバック 56px だった実例）。
+    px 値だけを比較する（色やフォントスタックは表記揺れが多く誤検知になるため）。"""
+    tokens = read(KIT / "tokens.css")
+    defined = {}
+    for m in re.finditer(r"^\s*(--[a-z0-9-]+)\s*:\s*([^;]+);", tokens, re.M):
+        defined[m.group(1)] = m.group(2).strip()
+    issues, checked = [], 0
+    for css in sorted(KIT.glob("*.css")):
+        if css.name == "tokens.css":
+            continue
+        body = re.sub(r"/\*.*?\*/", "", read(css), flags=re.S)
+        for m in re.finditer(r"var\(\s*(--[a-z0-9-]+)\s*,\s*(-?[\d.]+px)\s*\)", body):
+            name, fb = m.group(1), m.group(2)
+            if name not in defined or not re.fullmatch(r"-?[\d.]+px", defined[name]):
+                continue
+            checked += 1
+            if fb != defined[name]:
+                line = next((i for i, l in enumerate(body.splitlines(), 1) if f"var({name}, {fb})" in l), "?")
+                issues.append(f"{css.relative_to(ROOT)} L{line}: var({name}, {fb}) は tokens の {defined[name]} と違う")
+    report("フォールバックの鮮度", f"px のフォールバック {checked} 件は tokens.css の値と一致", issues)
+
+
+# --- 8) 索引の鮮度: kit-index.json が CSS / 見本の現状と一致しているか ---------
 def check_index_freshness():
     index_path = KIT / "kit-index.json"
     issues = []
@@ -190,7 +237,7 @@ def check_index_freshness():
     report("索引の鮮度", "kit-index.json は CSS・見本と一致", issues)
 
 
-# --- 7) 見本自身のセルフチェック: 見本・テンプレが check-mockup.py を通るか -----
+# --- 9) 見本自身のセルフチェック: 見本・テンプレが check-mockup.py を通るか -----
 def check_samples_pass_selfcheck():
     files = [str(p) for p in sorted(list((KIT / "components").glob("*.html")) +
                                     list((KIT / "templates").glob("*.html")))]
@@ -220,6 +267,8 @@ def main():
     check_md_class_names()
     check_undefined_classes()
     check_compound_only_documented()
+    check_undefined_tokens()
+    check_fallback_values()
     check_index_freshness()
     check_samples_pass_selfcheck()
     print()

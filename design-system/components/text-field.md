@@ -6,7 +6,7 @@
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=3-325
 - Do / Don't は Figma ページ内の「仕様」フレームを参照
 
-> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-text-field`（ラベル+エラー一式は `.mi-text-field-unit` / `.mi-error-text`）を使う（自作しない）。size は既定が large、やや小さくする場合は `.mi-text-field--medium`、タッチ操作向けに文字を大きくする場合は `.mi-text-field--phone` を付ける。
+> mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-text-field`（ラベル+エラー一式は `.mi-text-field-unit` / `.mi-error-text`）を使う（自作しない）。size は既定が large、やや小さくする場合は `.mi-text-field--medium`、タッチ操作向けに文字を大きくする場合は `.mi-text-field--phone` を付ける。エラー文を 12px にする場合は `.mi-error-text--small`。
 
 ## 使い分け
 

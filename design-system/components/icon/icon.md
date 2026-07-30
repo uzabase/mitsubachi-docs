@@ -2,6 +2,22 @@
 
 情報を視覚的に伝えるためのシンボル。ボタンやラベルと組み合わせて使用する。
 
+## サイズ
+
+kit の `.mi-icon` は **既定 20px**（`--icon-size-medium`）。単体で使うときに大きさを変える場合だけ修飾子を足す。
+
+| クラス | サイズ |
+|---|---|
+| `.mi-icon`（既定） | **20px**（`--icon-size-medium`） |
+| `.mi-icon--size-small` | 18px（`--icon-size-small`） |
+| `.mi-icon--size-large` | 22px（`--icon-size-large`） |
+
+- **コンポーネントの中では修飾子を付けない。** button / icon-button / menu-item / segment などは
+  各コンポーネントの CSS が正しいサイズを決めるので、`.mi-icon .mi-icon--<名前>` だけ書けばよい
+- 32px 以上（floating-button の 32px など）はコンポーネント側で指定される
+- **em で font-size に連動させない**（2026-07-29 まで `1.5em` だったため、サイズ指定のない場所で
+  1.2〜1.5 倍に大きくなる問題があった）
+
 ## Figma
 - https://www.figma.com/design/0TyVfKpH9I54YV21lcOLeQ/Iconography?node-id=0-1&t=QkVMCef1Qcm5klSE-1
 

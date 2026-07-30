@@ -29,7 +29,7 @@
     </div>
     <div class="mi-text-field-unit">
       <div class="mi-label-unit">
-        <span class="mi-label-unit__label">メールアドレス <span class="mi-label-unit__required">必須</span></span>
+        <span class="mi-label-unit__label">メールアドレス<span class="mi-label-unit__required">必須</span></span>
       </div>
       <input class="mi-text-field mi-text-field--error" id="tf-2" type="text" value="invalid@"
              aria-invalid="true" aria-describedby="tf-2-error">
@@ -57,6 +57,7 @@
     <label class="mi-search-box mi-search-box--primary">
       <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
       <input class="mi-search-box__input" type="search" placeholder="企業名・業界名で検索">
+      <button class="mi-icon-button mi-icon-button--ghost mi-icon-button--small" type="button" aria-label="入力を消去"><span class="mi-icon mi-icon--cross-small" aria-hidden="true"></span></button>
     </label>
     <label class="mi-search-box mi-search-box--primary mi-search-box--phone">
       <span class="mi-icon mi-icon--search mi-search-box__icon" aria-hidden="true"></span>
@@ -90,14 +91,14 @@
   <h2>segmented-control（選択中は check アイコン付き / --phone 36px / variant=icon）</h2>
   <div class="mi-segmented-control" role="radiogroup">
     <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">
-      <span class="mi-icon mi-icon--check" style="width:18px;height:18px;" aria-hidden="true"></span>表
+      <span class="mi-icon mi-icon--check" aria-hidden="true"></span>表
     </button>
     <button class="mi-segment" role="radio" aria-checked="false">グラフ</button>
     <button class="mi-segment" role="radio" aria-checked="false">マップ</button>
   </div>
   <div class="mi-segmented-control mi-segmented-control--phone" role="radiogroup" style="margin-top:12px;">
     <button class="mi-segment mi-segment--selected" role="radio" aria-checked="true">
-      <span class="mi-icon mi-icon--check" style="width:18px;height:18px;" aria-hidden="true"></span>表
+      <span class="mi-icon mi-icon--check" aria-hidden="true"></span>表
     </button>
     <button class="mi-segment" role="radio" aria-checked="false">グラフ</button>
   </div>
@@ -123,6 +124,7 @@
   <h2>text-area（既定=medium 58px / --large 64px / --phone）</h2>
   <div class="col">
     <textarea class="mi-text-area" rows="3" placeholder="既定（medium・58px・14px）"></textarea>
+    <span class="mi-text-area-count">0/100</span>
     <textarea class="mi-text-area mi-text-area--large" rows="3" placeholder="--large（64px・16px）"></textarea>
     <textarea class="mi-text-area mi-text-area--phone" rows="3" placeholder="--phone（64px・16px）"></textarea>
   </div>
@@ -187,7 +189,7 @@
   <h2>label-unit（ラベル＋必須＋補足）と組み合わせ</h2>
   <div class="col">
     <div class="mi-label-unit">
-      <span class="mi-label-unit__label">企業名 <span class="mi-label-unit__required">必須</span></span>
+      <span class="mi-label-unit__label">企業名<span class="mi-label-unit__required">必須</span></span>
       <span class="mi-label-unit__support">正式名称で入力してください</span>
       <input class="mi-text-field" type="text" placeholder="例: 三和電機">
     </div>

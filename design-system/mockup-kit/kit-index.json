@@ -32,9 +32,12 @@
       "chevron-right",
       "chevron-right-small",
       "cross",
+      "cross-small",
       "magic",
       "magic-fill",
-      "search"
+      "search",
+      "size-large",
+      "size-small"
     ],
     "extra": [
       "app",
@@ -173,7 +176,7 @@
         "mi-section-tab",
         "mi-segment"
       ],
-      "sampleCount": 135,
+      "sampleCount": 136,
       "severity": "error"
     },
     "h3": {
@@ -449,8 +452,10 @@
       "sampleCount": 3,
       "exclusiveGroups": [
         [
+          "--2x-large",
           "--large",
-          "--small"
+          "--small",
+          "--x-large"
         ]
       ],
       "docs": [
@@ -944,7 +949,9 @@
       "sampleCount": 3
     },
     "mi-error-text": {
-      "modifiers": [],
+      "modifiers": [
+        "--small"
+      ],
       "samples": [
         "components/form.html"
       ],
@@ -1070,6 +1077,8 @@
         "--share",
         "--side-left",
         "--side-right",
+        "--size-large",
+        "--size-small",
         "--stop-fill",
         "--success",
         "--success-fill",
@@ -1092,7 +1101,7 @@
         "components/table.html",
         "templates/starter.html"
       ],
-      "sampleCount": 196,
+      "sampleCount": 197,
       "requiredAnyModifier": true,
       "docs": [
         "components/icon/icon.md"
@@ -1112,13 +1121,14 @@
         "components/ai-chat.html",
         "components/button.html",
         "components/display.html",
+        "components/form.html",
         "components/interactive.html",
         "components/layout.html",
         "components/menu.html",
         "components/table.html",
         "templates/starter.html"
       ],
-      "sampleCount": 26,
+      "sampleCount": 27,
       "exclusiveGroups": [
         [
           "--ghost",
@@ -1146,13 +1156,6 @@
       "modifierRequiresChild": {
         "--selected": [
           "mi-icon"
-        ]
-      },
-      "compoundOnly": {
-        "--selected": [
-          "--ghost",
-          "--secondary",
-          "--tertiary"
         ]
       },
       "docs": [
@@ -1611,6 +1614,28 @@
         "components/menu/select-menu-item.md"
       ]
     },
+    "mi-menu-item__support": {
+      "modifiers": [],
+      "samples": [
+        "components/menu.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true,
+      "docs": [
+        "components/menu/index.md"
+      ]
+    },
+    "mi-menu-item__text": {
+      "modifiers": [],
+      "samples": [
+        "components/menu.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true,
+      "docs": [
+        "components/menu/index.md"
+      ]
+    },
     "mi-page-tab": {
       "modifiers": [
         "--selected"
@@ -1978,6 +2003,7 @@
     "mi-sidenav-item": {
       "modifiers": [
         "--disabled",
+        "--phone",
         "--selected"
       ],
       "samples": [
@@ -2054,7 +2080,9 @@
       "lowConfidence": true
     },
     "mi-suggestion": {
-      "modifiers": [],
+      "modifiers": [
+        "--phone"
+      ],
       "samples": [
         "components/suggestion.html"
       ],
@@ -2071,7 +2099,9 @@
       ]
     },
     "mi-suggestion-item": {
-      "modifiers": [],
+      "modifiers": [
+        "--phone"
+      ],
       "samples": [
         "components/suggestion.html"
       ],
@@ -2227,6 +2257,17 @@
           "--phone"
         ]
       ],
+      "docs": [
+        "components/text-area.md"
+      ]
+    },
+    "mi-text-area-count": {
+      "modifiers": [],
+      "samples": [
+        "components/form.html"
+      ],
+      "sampleCount": 1,
+      "lowConfidence": true,
       "docs": [
         "components/text-area.md"
       ]

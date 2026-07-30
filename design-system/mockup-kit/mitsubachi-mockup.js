@@ -23,7 +23,7 @@
  *   <button data-mi-dialog-open="dlg-save">…</button>  ダイアログを開く
  *     <div class="mi-dialog-backdrop" id="dlg-save" hidden>…</div>
  *     ・backdrop の外側クリック / ESC / data-mi-dialog-close を持つ要素で閉じる
- *   <button data-mi-snackbar="保存しました">…</button>  snackbar を出す（4秒で消える）
+ *   <button data-mi-snackbar="保存しました">…</button>  snackbar を出す（5秒で消える）
  *   <button data-mi-tab-panel="panel-1">…</button>     タブに付けるとパネルを切り替える
  *     切り替え対象は data-mi-panel="panel-1" を持つ要素
  *
@@ -34,7 +34,7 @@
 (function () {
   'use strict';
 
-  var SNACKBAR_MS = 4000;
+  var SNACKBAR_MS = 5000; // Figma「一定時間（目安 5 秒以上）で自動的に非表示」
 
   // --- 小さなヘルパ ---------------------------------------------------------
   function $$(sel, root) {
