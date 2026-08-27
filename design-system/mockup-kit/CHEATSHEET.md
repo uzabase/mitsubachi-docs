@@ -8,7 +8,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 ```html
 <link rel="stylesheet" href="design-system/mockup-kit/tokens.css">
 <link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-mockup.css">
-<!-- 内蔵10種以外のアイコンを使うときだけ -->
+<!-- 内蔵11種以外のアイコンを使うときだけ -->
 <link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-icons.css">
 <!-- ロゴを使うときだけ -->
 <link rel="stylesheet" href="design-system/mockup-kit/mitsubachi-logos.css">
@@ -52,7 +52,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 | menu-button は chevron を内包 | `.mi-button--menu` ＋ variant 併用、末尾に `<span class="mi-icon mi-icon--chevron-down-small">` |
 | `.mi-select` はネイティブ `<select>` | 開いた選択肢メニューは `.mi-menu`（role="listbox"）で組む → 見本 `components/menu.html` |
 | icon-button は必ず `aria-label` | アイコンだけでは意味が伝わらないため。tooltip 併用推奨 |
-| アイコンは内蔵10種以外 icons.css が必要 | 内蔵: magic / magic-fill / search / check / cross / chevron-down(-small) / chevron-right(-small) / chevron-left。それ以外（home / bell 等97種）は icons.css |
+| アイコンは内蔵11種以外 icons.css が必要 | 内蔵: magic / magic-fill / search / check / cross(-small) / chevron-down(-small) / chevron-right(-small) / chevron-left。それ以外（home / bell 等97種）は icons.css |
 | Null 表示・影を発明しない | table の値が無いセルは**「–」（en dash）が既定**（文言指定があればそれに従う）。card に影は付けない |
 
 ## ボタン系
@@ -110,7 +110,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 | report-heading | `.mi-report-heading--1〜6` | 読み物見出し。`--phone` |
 | timeline | `.mi-timeline` | **→ 見本 `components/timeline.html` を読む**（item の flow/dot/content 構造） |
 | ai-chat | `.mi-ai-chat` | **→ 見本 `components/ai-chat.html` を読む**（messages/input/disclaimer の3部） |
-| icon | `.mi-icon .mi-icon--<名前>` | 内蔵10種以外は icons.css。一覧 `components/icons.html`。**既定 20px**（medium）。単体で変えるときは `--size-small`(18) / `--size-large`(22) を併用。コンポーネント内（button / menu-item など）は各コンポーネントが自動でサイズを決めるので付けない |
+| icon | `.mi-icon .mi-icon--<名前>` | 内蔵11種以外は icons.css。一覧 `components/icons.html`。**既定 20px**（medium）。単体で変えるときは `--size-small`(18) / `--size-large`(22) を併用。コンポーネント内（button / menu-item など）は各コンポーネントが自動でサイズを決めるので付けない |
 | グラフの色 | `.mi-chart-fill--<色相>-<シェード>` / `.mi-chart-line--<1〜16>` | 棒・円は 5色相(blue/viridian/green/leaf/lemon)×5シェード(25/60/100/140/160)、折れ線は16色（9番目以降は破線が自動）。**どの凡例にどの色を割り当てるかは [../foundations/chart-color.md](../foundations/chart-color.md)**（凡例数で変わる。★暫定ルール）。グラフ本体は kit に無いので枠組みは申告して組む |
 | logo | `.mi-logo .mi-logo--<名前>` | `--speeda`(既定・symbol付き)/`--speeda-text`/`--speeda-zh`/`--speeda-ai-agent`/`--speeda-expert-research`/各`-inverse`(暗背景)/`--uzabase`。logos.css 必須。一覧 `components/logos.html` |
 

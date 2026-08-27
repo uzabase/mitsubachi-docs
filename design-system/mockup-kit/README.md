@@ -120,7 +120,7 @@ python3 tools/check-kit.py         # 整合性チェック
 | inline-notification | `.mi-inline-notification` | 公式実装 | — |
 | banner | `.mi-banner--*` | Figma `5702-2824` | — |
 | icon-color | `.mi-icon-color--*` | 公式実装 | 通知系の先頭アイコンに使う |
-| icon | `.mi-icon` | 公式 icons.ts | 本体に10種内蔵、残り97種は `mitsubachi-icons.css`。基底クラス `.mi-icon` は本体側 |
+| icon | `.mi-icon` | 公式 icons.ts | 本体に11種内蔵、残り97種は `mitsubachi-icons.css`。基底クラス `.mi-icon` は本体側 |
 | グラフの色 | `.mi-chart-fill--*` / `.mi-chart-line--*` | **Notion「グラフの配色ルール（暫定）」**（2026-07-29 取得。Figma のトークンには未反映） | **暫定値**。primitive color のパレット再検討後に多色使いを再検討予定＝値ごと変わる。割り当てルールは `foundations/chart-color.md`。グラフ本体は kit に無い |
 | logo | `.mi-logo--*` | Figma Logo ファイル `3abXEj4vbUt5UUf37Ld2Cn` sp-logo frame `1:13`（2026-07-23 取得）。`--uzabase` のみ公式実装 | **旧 `--speeda-ja`（カタカナ）/ `--speeda-en` は廃止** |
 | layout（app shell） | `.mi-layout` ＋ `__sidenav` / `__content` / `__header` / `__page-title` / `__contents` | Figma ① page-title 無し `11461-12912` / ② page-title 有り `11461-13900`（サイドナビ詳細 `11461-14147`） | ざっくり版 `11395-2402`（ヘッダー56px）/ `11395-2427`（1カラム）は簡易表現で**正値ではない**（ヘッダーは60px）。`components/` に md が無い net-new |

@@ -15,7 +15,7 @@
  *   section-tab / card / layout / dialog / menu / tooltip / snackbar /
  *   snackbar-viewport / inline-notification / banner / avatar / label-unit /
  *   loading / breadcrumb / pagination /
- *   icon(magic, magic-fill, search, check, chevron-down/right, cross) /
+ *   icon(magic, magic-fill, search, check, chevron-down/right, cross, cross-small) /
  *   icon-color(error, information, success, warning)
  * - ロゴ（speeda / speeda-text / speeda-zh / speeda-ai-agent / speeda-expert-research
  *   各 -inverse, uzabase）は別ファイル mitsubachi-logos.css（任意読み込み）
@@ -107,7 +107,8 @@
   height: var(--button-icon-size, 18px);
 }
 .mi-button__icon > svg,
-.mi-button__icon > img {
+.mi-button__icon > img,
+.mi-button__icon > .mi-icon {
   width: 100%;
   height: 100%;
   display: block;
@@ -1253,7 +1254,7 @@
 }
 
 /* ============================================================================
- * icon 追加（check / chevron-down / chevron-right / cross。公式 icons.ts）
+ * icon 追加（check / chevron-down / chevron-right / cross / cross-small。公式 icons.ts）
  * ========================================================================== */
 .mi-icon--check {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.81001 17.99L2.99001 11.2L4.05001 10.14L9.81001 15.88L19.95 5.76L21.01 6.82L9.81001 17.99Z'/%3E%3C/svg%3E");
@@ -1278,6 +1279,11 @@
 .mi-icon--cross {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 5.06L18.94 4L12 10.94L5.07 4.01L4.01 5.07L10.94 12L4 18.94L5.06 20L12 13.06L18.93 19.99L19.99 18.93L13.06 12L20 5.06Z'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 5.06L18.94 4L12 10.94L5.07 4.01L4.01 5.07L10.94 12L4 18.94L5.06 20L12 13.06L18.93 19.99L19.99 18.93L13.06 12L20 5.06Z'/%3E%3C/svg%3E");
+}
+
+.mi-icon--cross-small {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17 8.06L15.94 7L12 10.94L8.06 7L7 8.06L10.94 12L7 15.94L8.06 17L12 13.06L15.94 17L17 15.94L13.06 12L17 8.06Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17 8.06L15.94 7L12 10.94L8.06 7L7 8.06L10.94 12L7 15.94L8.06 17L12 13.06L15.94 17L17 15.94L13.06 12L17 8.06Z'/%3E%3C/svg%3E");
 }
 
 /* ============================================================================
@@ -1735,8 +1741,8 @@
   letter-spacing: 0.14px;
   color: var(--text-regular, rgba(0, 0, 0, 0.84));
   cursor: pointer;
-  /* chevron-down（公式 icons.ts。object/regular 相当） */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23454545'%3E%3Cpath d='M12 17L3.03 8.97998L4.03 7.85999L12 14.99L19.45 8.37999L20.45 9.49999L12 17Z'/%3E%3C/svg%3E");
+  /* chevron-down-small（公式 icons.ts。Figma node 8257:8342 の icon/chevron-down-small） */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23454545'%3E%3Cpath d='M12.01 16.01L6.01 10.75L7 9.62L12.01 14.01L17.02 9.62L18.01 10.75L12.01 16.01Z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 8px center;
   /* Figma の icon/chevron-down-small は 20px（右 padding 32px = 枠8 + アイコン20 + gap4 と整合）*/

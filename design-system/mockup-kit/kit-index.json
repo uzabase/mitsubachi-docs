@@ -1101,7 +1101,7 @@
         "components/table.html",
         "templates/starter.html"
       ],
-      "sampleCount": 197,
+      "sampleCount": 204,
       "requiredAnyModifier": true,
       "docs": [
         "components/icon/icon.md"
@@ -1153,11 +1153,6 @@
       "requiredAttrs": [
         "aria-label"
       ],
-      "modifierRequiresChild": {
-        "--selected": [
-          "mi-icon"
-        ]
-      },
       "docs": [
         "components/button/icon-button.md",
         "components/button/index.md"
