@@ -259,6 +259,31 @@ def check_samples_pass_selfcheck():
            f"見本・テンプレ {len(files)} 件は check-mockup.py で error 0", issues)
 
 
+# --- 10) Figma 参照の実在: md の Figma URL の node が figma-watch の基準に存在するか -----
+def check_figma_refs_exist():
+    """md の `## Figma` の URL が指す node が、figma-watch が最後に確認したページ一覧
+    （design-system/figma-watch/state.json）にあるか。Figma 側でページを消したり作り直した
+    ときのリンク切れを検知する。state.json が無ければ省略する。"""
+    state_path = DS / "figma-watch" / "state.json"
+    if not state_path.exists():
+        print("- Figma 参照の実在: 省略（figma-watch/state.json が無い。README の「初回」参照）")
+        return
+    spec = importlib.util.spec_from_file_location("figma_sources", ROOT / "tools" / "figma-sources.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    state = json.loads(read(state_path))
+    derived = mod.derive()
+    issues, checked = [], 0
+    for key, fstate in state.get("files", {}).items():
+        known = set(fstate.get("pages", {}))
+        for nid, pv in derived["files"].get(key, {}).get("pages", {}).items():
+            checked += 1
+            if nid not in known:
+                issues.append(f"{', '.join(pv['docs'])} → node {nid}（figma-watch の基準に無い。"
+                              "`python3 tools/figma-watch.py targets` で更新するか URL を見直す）")
+    report("Figma 参照の実在", f"md の Figma URL {checked} 件は figma-watch の基準に存在", issues)
+
+
 def main():
     print(f"mockup kit 整合性チェック（{KIT.relative_to(ROOT)}）\n")
     check_broken_links()
@@ -271,6 +296,7 @@ def main():
     check_fallback_values()
     check_index_freshness()
     check_samples_pass_selfcheck()
+    check_figma_refs_exist()
     print()
     if problems:
         print(f"指摘 {len(problems)} 件。上記を修正してください。")

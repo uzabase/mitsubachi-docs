@@ -148,3 +148,4 @@ get_variable_defs(fileKey, nodeId)
 - `foundations/` 配下の md ファイルはトークンの **使い分けルール** を記述したもので、具体値は含まない。具体値は常に Figma MCP またはトークンリポジトリ（[mitsubachi-token](https://github.com/uzabase/mitsubachi-token)）を正とする
 - md にトークン値をハードコードしない（Figma 側の変更と乖離するため）
 - mockup パターンでは `mockup-kit/tokens.css`（Figma のスナップショット）が値を持つため、通常は Figma MCP を呼ぶ必要はない。**kit に未収録のコンポーネント**の値が必要なときだけ取得する（対応一覧は [mockup-kit/README.md](./mockup-kit/README.md)）
+- Figma 側の変更は公開のたびに [figma-watch](./figma-watch/README.md) が Issue で知らせ、人の指示でローカルの Claude Code が docs と kit に反映する（モック生成時に気にする必要はない）

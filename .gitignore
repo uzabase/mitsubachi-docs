@@ -7,3 +7,6 @@
 # Python（tools/ のスクリプトを相互 import した際に生成される）
 __pycache__/
 *.pyc
+
+# Figma 公開の当たり付け結果（ローカル作業用。tools/figma-watch.py targets が書く）
+design-system/figma-watch/targets.local.json

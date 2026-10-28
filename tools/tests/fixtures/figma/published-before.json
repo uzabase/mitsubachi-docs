@@ -1,0 +1,14 @@
+{
+  "components": [
+    {"key": "c-menu-button-1", "name": "size=medium", "node_id": "8301:3450", "updated_at": "2026-09-01T00:00:00Z", "containing_frame": {"pageId": "8301:3447", "pageName": "✅ menu-button", "nodeId": "8301:3448", "name": "menu-button"}},
+    {"key": "c-switch-1", "name": "viewport=desktop, selected=true, state=default", "node_id": "9925:6688", "updated_at": "2026-09-01T00:00:00Z", "containing_frame": {"pageId": "9925:5880", "pageName": "✅ switch", "nodeId": "9925:6684", "name": "switch"}}
+  ],
+  "component_sets": [
+    {"key": "s-menu-button", "name": "menu-button", "node_id": "8301:3448", "updated_at": "2026-09-01T00:00:00Z", "containing_frame": {"pageId": "8301:3447", "pageName": "✅ menu-button"}},
+    {"key": "s-switch", "name": "switch", "node_id": "9925:6684", "updated_at": "2026-09-01T00:00:00Z", "containing_frame": {"pageId": "9925:5880", "pageName": "✅ switch"}},
+    {"key": "s-old", "name": "control-menu", "node_id": "7000:1", "updated_at": "2026-09-01T00:00:00Z", "containing_frame": {"pageId": "8376:4715", "pageName": "✅ menu"}}
+  ],
+  "styles": [
+    {"key": "st-text", "name": "label/regular", "style_type": "TEXT", "updated_at": "2026-09-01T00:00:00Z"}
+  ]
+}

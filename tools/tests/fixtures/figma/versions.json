@@ -1,0 +1,10 @@
+{
+  "versions": [
+    {"id": "9001", "created_at": "2026-10-27T03:10:00Z", "label": "", "description": "", "user": {"handle": "Ai Uetake"}},
+    {"id": "9000", "created_at": "2026-10-27T03:00:00Z", "label": "コンポーネント公開", "description": "ステータス：更新\n変更内容：menu-buttonをmenuへ移動", "user": {"handle": "Ai Uetake"}},
+    {"id": "8900", "created_at": "2026-10-25T09:00:00Z", "label": "レビュー前", "description": "手動で保存した版", "user": {"handle": "Someone"}},
+    {"id": "8800", "created_at": "2026-10-20T01:00:00Z", "label": "Components published", "description": "", "user": {"handle": "Ai Uetake"}},
+    {"id": "8700", "created_at": "2026-10-10T01:00:00Z", "label": "コンポーネント公開", "description": "ステータス：新規\n変更内容：switch を追加", "user": {"handle": "Ai Uetake"}}
+  ],
+  "pagination": {}
+}

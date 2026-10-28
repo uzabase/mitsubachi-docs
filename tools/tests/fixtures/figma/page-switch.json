@@ -1,0 +1,71 @@
+{
+  "nodes": {
+    "9925:5880": {
+      "document": {
+        "id": "9925:5880", "name": "✅ switch", "type": "CANVAS",
+        "children": [
+          {"id": "10771:37786", "name": "switch", "type": "FRAME", "absoluteBoundingBox": {"x": -933, "y": -1018, "width": 1866, "height": 3086},
+           "children": [
+             {"id": "10771:37787", "name": "Header", "type": "INSTANCE", "componentId": "100:1",
+              "componentProperties": {"title#1:0": {"type": "TEXT", "value": "switch"}},
+              "children": [{"id": "I10771:37787;1:2", "name": "title", "type": "TEXT", "characters": "switch（インスタンス内部・除外）"}]},
+             {"id": "10771:37795", "name": "Component", "type": "FRAME", "absoluteBoundingBox": {"x": -933, "y": -794, "width": 1866, "height": 384},
+              "children": [
+                {"id": "9925:6684", "name": "switch", "type": "COMPONENT_SET",
+                 "componentPropertyDefinitions": {
+                   "viewport": {"type": "VARIANT", "defaultValue": "desktop", "variantOptions": ["desktop", "phone"]},
+                   "selected": {"type": "VARIANT", "defaultValue": "false", "variantOptions": ["true", "false"]},
+                   "state": {"type": "VARIANT", "defaultValue": "default", "variantOptions": ["default", "hover", "active", "focus", "disabled"]}
+                 },
+                 "children": [
+                   {"id": "9925:6688", "name": "viewport=desktop, selected=true, state=default", "type": "COMPONENT",
+                    "children": [{"id": "9925:6689", "name": "Label", "type": "TEXT", "characters": "内部テキスト（除外）"}]},
+                   {"id": "9925:6717", "name": "viewport=desktop, selected=false, state=default", "type": "COMPONENT"}
+                 ]}
+              ]},
+             {"id": "9954:1793", "name": "パターン", "type": "TEXT", "characters": "パターン", "style": {"fontSize": 32, "fontWeight": 700}, "absoluteBoundingBox": {"x": -866, "y": -359, "width": 125, "height": 42}},
+             {"id": "9925:6624", "name": "Default", "type": "TEXT", "characters": "Default", "style": {"fontSize": 14}, "absoluteBoundingBox": {"x": -866, "y": -261, "width": 46, "height": 21}},
+             {"id": "9954:2158", "name": "checkboxとswitchの使い分け", "type": "TEXT", "characters": "checkboxとswitchの使い分け", "style": {"fontSize": 32, "fontWeight": 700}, "absoluteBoundingBox": {"x": -866, "y": 2, "width": 405, "height": 42}},
+             {"id": "9954:2159", "name": "反映タイミング", "type": "TEXT", "characters": "反映タイミング\nCheckboxはフォーム送信など別アクションで確定。\nSwitchは操作した瞬間に即時反映\n用途\nCheckboxは選択・同意\nSwitchはオン/オフの状態切り替え", "style": {"fontSize": 14}, "absoluteBoundingBox": {"x": -866, "y": 61, "width": 373, "height": 189}},
+             {"id": "9954:1794", "name": "ラベルとSwitchの位置", "type": "TEXT", "characters": "ラベルとSwitchの位置", "style": {"fontSize": 32, "fontWeight": 700}, "absoluteBoundingBox": {"x": -866, "y": 296, "width": 311, "height": 42}},
+             {"id": "9954:1795", "name": "ラベルは…", "type": "TEXT", "characters": "ラベルはswitchの左側に置く。\n右側にラベルを置くのは、checkboxが適切なケースが多いので非推奨。", "style": {"fontSize": 14}, "absoluteBoundingBox": {"x": -866, "y": 348, "width": 477, "height": 42}},
+             {"id": "9954:1796", "name": "ラベルとSwitchの位置", "type": "FRAME", "absoluteBoundingBox": {"x": -857, "y": 425, "width": 621, "height": 213},
+              "children": [
+                {"id": "9954:2214", "name": "Frame 630871", "type": "FRAME", "children": [
+                  {"id": "9954:1801", "name": "ラベル", "type": "TEXT", "characters": "ラベル", "style": {"fontSize": 14}, "absoluteBoundingBox": {"x": -757, "y": 495, "width": 43, "height": 21}},
+                  {"id": "9954:1797", "name": "switch", "type": "INSTANCE", "componentId": "9925:6688"}
+                ]},
+                {"id": "9954:2182", "name": "do-dont", "type": "INSTANCE", "componentId": "200:1", "componentProperties": {"Type": {"type": "VARIANT", "value": "Do"}}},
+                {"id": "9954:2193", "name": "do-dont", "type": "INSTANCE", "componentId": "200:1", "componentProperties": {"Type": {"type": "VARIANT", "value": "Don't"}}}
+              ]},
+             {"id": "9925:6810", "name": "Frame 630869", "type": "FRAME", "absoluteBoundingBox": {"x": -386, "y": 725, "width": 264, "height": 74},
+              "children": [
+                {"id": "9967:213", "name": "switch-text（作らない、ルールの意に記載）", "type": "FRAME", "children": [
+                  {"id": "9967:215", "name": "Label", "type": "TEXT", "characters": "Label", "style": {"fontSize": 14}, "absoluteBoundingBox": {"x": -386, "y": 725, "width": 212, "height": 21}}
+                ]}
+              ]},
+             {"id": "9925:6735", "name": "Comment Note", "type": "WIDGET", "children": [
+               {"id": "9925:6746", "name": "CommentArea", "type": "TEXT", "characters": "作業者メモ（除外）"}
+             ]},
+             {"id": "9997:199", "name": "Comment Note", "type": "INSTANCE", "componentId": "300:1",
+              "children": [{"id": "9997:211", "name": "CommentArea", "type": "TEXT", "characters": "修正メモ（除外）"}]},
+             {"id": "9925:6999", "name": "hidden note", "type": "TEXT", "visible": false, "characters": "非表示（除外）", "absoluteBoundingBox": {"x": 0, "y": 0}}
+           ]},
+          {"id": "11749:5247", "name": "Section 1", "type": "SECTION", "children": [
+            {"id": "9925:6628", "name": "Toggle Switch", "type": "FRAME", "children": []}
+          ]}
+        ]
+      },
+      "components": {
+        "100:1": {"key": "k-header", "name": "Header", "description": ""},
+        "200:1": {"key": "k-dodont", "name": "do-dont", "description": "Do/Don't マーカー"},
+        "300:1": {"key": "k-note", "name": "Comment Note", "description": ""},
+        "9925:6688": {"key": "k-sw-1", "name": "viewport=desktop, selected=true, state=default", "description": "", "componentSetId": "9925:6684"},
+        "9925:6717": {"key": "k-sw-2", "name": "viewport=desktop, selected=false, state=default", "description": "", "componentSetId": "9925:6684"}
+      },
+      "componentSets": {
+        "9925:6684": {"key": "k-switch", "name": "switch", "description": "設定や機能のオン/オフを即時に切り替える"}
+      }
+    }
+  }
+}

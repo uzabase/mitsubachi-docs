@@ -60,6 +60,8 @@ python3 tools/check-kit.py         # 整合性チェック
 
 検査ルールは実ファイルから導出しており固定リストを持たないため、kit を拡張してもスクリプトの更新は原則不要。
 
+Figma 側の変更は [figma-watch](../figma-watch/README.md) が公開のたびに Issue で知らせる。反映はローカルの Claude Code で `/figma-sync`（手順は [SKILL.md](../../.claude/skills/figma-sync/SKILL.md)）。
+
 ## 値の正・鮮度
 
 - **値の正は常に Figma。** 優先順位は `Figma MCP > mitsubachi-token > このスナップショット`。

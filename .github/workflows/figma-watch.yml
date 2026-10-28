@@ -1,0 +1,58 @@
+# Figma ライブラリの公開を朝夕に見張り、新しい公開があれば Issue を立てる。
+# ブランチも state.json も触らない。md の書き換えはローカルの Claude Code（/figma-sync）で行う。
+# 仕組みと運用: design-system/figma-watch/README.md
+name: figma-watch
+
+on:
+  schedule:
+    - cron: "0 23 * * *"   # JST 08:00
+    - cron: "0 10 * * *"   # JST 19:00
+  workflow_dispatch:
+  repository_dispatch:
+    types: [figma-updated]   # 将来 Figma webhook の中継から叩く受け口
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: figma-watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 公開を確認する
+        id: check
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIGMA_TOKEN:-}" ]; then
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            echo "⚠️ Secrets に FIGMA_TOKEN が無いため公開を確認できませんでした（README の「PAT」参照）" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python3 tools/figma-watch.py check --github-output --issue-body-file "$RUNNER_TEMP/issue-body.md" | tee "$RUNNER_TEMP/check.log"
+          cat "$RUNNER_TEMP/check.log" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Issue を立てる
+        if: steps.check.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: ${{ steps.check.outputs.issue_title }}
+          SEARCH_KEY: ${{ steps.check.outputs.search_key }}
+        run: |
+          set -euo pipefail
+          gh label create figma-publish --color "A259FF" --description "Figma ライブラリ公開の通知" --force >/dev/null 2>&1 || true
+          existing=$(gh issue list --label figma-publish --state open --search "$SEARCH_KEY in:body" --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            echo "同じ版の Issue #$existing が既にあるため作成しません" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          url=$(gh issue create --label figma-publish --title "$TITLE" --body-file "$RUNNER_TEMP/issue-body.md")
+          echo "Issue を作成: $url" >> "$GITHUB_STEP_SUMMARY"

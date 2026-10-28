@@ -164,6 +164,14 @@ Figma にあって kit・md・公式実装のいずれにも無いもの。**取
 | menu の微差（未決） | **menu-item の右 padding は 2026-07-29 の監査で 16px に修正済み**。残っているのは shadow のみ（Figma は elevation-30、kit は `--menu-shadow`）。上の「影」の判断待ちに含まれる |
 | `--button-plane-hover` / `-active` | plane variant の hover 面（rgba(49,92,232,0.08) / 0.12）は公式実装由来で **Figma 未確認**。plain の hover symbol（node `5128:4013`）で確定できる。使用頻度が低いので後回し |
 
+## F. Figma 差分の保留
+
+[figma-watch](design-system/figma-watch/README.md) の Issue / PR で「対応しない」と決めた Figma 側の変更をここに残す（`/figma-sync` の手順 7）。
+
+| 公開日 | 変更内容（説明文） | 対応しない理由 |
+|---|---|---|
+| — | — | — |
+
 ## E. 検証
 
 | 項目 | 内容 |

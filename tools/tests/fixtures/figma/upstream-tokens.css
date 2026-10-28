@@ -1,0 +1,11 @@
+:root {
+  --color-primitive-neutral-10: #282828;
+  --color-primitive-white: #FFF;
+  --color-primitive-black-20-alpha: rgba(0, 0, 0, 0.07);
+  --color-semantic-surface-strong-default: var(--color-primitive-neutral-10);
+  --color-semantic-surface-regular-default: var(--color-primitive-white);
+  --color-semantic-surface-semi-strong-disabled: var(--color-primitive-black-20-alpha);
+  --color-semantic-text-regular: #111111;
+  --color-semantic-object-link: #1b4de4;
+  --color-semantic-text-old: var(--color-semantic-text-regular); /* Deprecated in 1.1.0, removed in 2.0.0. Use color-semantic-text-regular. */
+}
