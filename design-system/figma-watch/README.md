@@ -100,6 +100,19 @@ git add design-system/figma-watch/state.json && git commit -m "figma-watch の�
 
 Secrets に `FIGMA_TOKEN` を入れ、Actions の `figma-watch` を手動実行して「公開なし」になれば完成。
 
+## 自動実行（ローカルの定期タスク）
+
+Issue を拾って `/figma-sync` を回すところも、保守者の Mac の Claude Code デスクトップに
+**定期タスク（scheduled task）`figma-sync-morning`** として置いてある（毎朝 08:30 JST。CI の検知が 08:00）。
+中身はタスクの SKILL.md（`~/.claude/scheduled-tasks/figma-sync-morning/SKILL.md`）にあり、要点は:
+
+- 元のチェックアウトを触らず、`origin/main` から **git worktree** を切って作業する（作業中の未コミット変更と衝突しない）
+- `check` と `gh issue list --label figma-publish` で公開が無ければ 1 行報告して終了。同じ Issue を `Closes` に書いた open PR があれば二重に作らない
+- 公開があれば SKILL.md の手順をそのまま実行し、`Closes #Issue` 付きの PR を出す。kit の見た目の値は Figma MCP が使えるときだけ直し、使えなければ PR 本文にその旨を書く
+- Mac が閉じている・アプリが起動していないときは次に開いたときに実行される。CI での Claude 実行や API キーは使わない
+
+止めたいときはデスクトップの定期タスク一覧で無効にする。別の人が引き継ぐときは同じ SKILL.md を自分の Mac に置く。
+
 ## 対象ファイルを増やすには
 
 md の `## Figma` に URL を書けば監視対象に入る（自動導出）。ファイル単位で切り替えるときは `--file <fileKey>` を渡す。
