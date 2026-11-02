@@ -47,6 +47,10 @@
           "hash": "67d16f41762737373bf28fec9e354d7fc86a87c99f55f9561f347a7414907be2",
           "name": "✅ radio-button"
         },
+        "3070:328": {
+          "hash": "edac20ee685d04c9866e4e4822f65c77238b9e52532274bdc56e848cb825a205",
+          "name": "✅ menu"
+        },
         "3769:1412": {
           "hash": "33ceb22726e08f90c2a2530fcc3a055d7a7ec7995a0e83d7a94d49d7a5e02b03",
           "name": "✅ avatar"
@@ -184,7 +188,7 @@
           "name": "action-menu-item"
         },
         "8376:4776": {
-          "hash": "c1b424d84864b9866bfb6ec688701030b9d3899cb961c43e618f9143d1c95625",
+          "hash": "0290d9bed05703ea3a6dd4abd1bb7a5f200d9056330c13efac80770b8e767c1d",
           "name": "select-menu-item"
         },
         "8376:4959": {

@@ -12,8 +12,8 @@ select-box は、あらかじめ定められた選択肢の中から単一の値
 
 - 複数の値を同時に選択させる場合（→ [checkbox](../checkbox/index.md) を使います）
 - ユーザーがテキストを入力しながら候補を動的に絞り込む場合（→ [search-box](../search-box.md) と [suggestion](../suggestion.md) を使います）
-- アクション（保存・削除・移動など操作）の一覧を提示する場合（→ [menu-button](../button/menu-button.md) を使います）
-- **[menu-button](../button/menu-button.md) との違い**：menu-button はアクションを呼び出すためのトリガーであり、選択状態を持ちません。select-box は「現在何が選ばれているか」という値を表示・保持する点が異なります
+- アクション（保存・削除・移動など操作）の一覧を提示する場合（→ [menu-button](../menu/menu-button.md) を使います）
+- **[menu-button](../menu/menu-button.md) との違い**：menu-button はアクションを呼び出すためのトリガーであり、選択状態を持ちません。select-box は「現在何が選ばれているか」という値を表示・保持する点が異なります
 - **[suggestion](../suggestion.md) との違い**：suggestion は入力テキストに応じて候補を動的に絞り込む補完UIです。select-box は事前に確定した固定の選択肢から選ばせる場合に使います
 
 ## Figma
@@ -63,4 +63,4 @@ select-box は、あらかじめ定められた選択肢の中から単一の値
 
 - 複数の値を同時に選択させる場面で使わない → [checkbox](../checkbox/index.md) を使う
 - ユーザーがテキスト入力で候補を絞り込む場面で使わない → [search-box](../search-box.md) と [suggestion](../suggestion.md) を使う
-- アクションの一覧を提示する場面で使わない → [menu-button](../button/menu-button.md) を使う
+- アクションの一覧を提示する場面で使わない → [menu-button](../menu/menu-button.md) を使う

@@ -80,7 +80,7 @@ Figma 側の変更は [figma-watch](../figma-watch/README.md) が公開のたび
 | neutral-button | `.mi-button` | 公式実装 button.styles.ts | variant 名は `plane`（Figma 表記は plain。`--plain` も同じ見た目） |
 | danger-button | `.mi-button--danger` | 公式実装 | variant との併用が前提 |
 | ai-button | `.mi-ai-button` | 公式 `<mi-ai-button>` | 2026-07-23 刷新。**旧「neutral-button ＋ magic-fill」表現は廃止** |
-| menu-button | `.mi-button--menu` | Figma `8301-3447` | chevron は size 連動（18/20/22px） |
+| menu-button | `.mi-button--menu` | Figma `8301-3447`（✅ menu ページ配下） | chevron は size 連動（18/20/22px） |
 | icon-button | `.mi-icon-button` | 公式実装 | — |
 | floating-button | `.mi-floating-button` | 公式実装 | — |
 | text-field | `.mi-text-field` | 公式実装 | — |

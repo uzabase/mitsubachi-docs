@@ -12,8 +12,9 @@
 | [danger-button](./danger-button.md) | 削除・リセットなど破壊的操作 |
 | [ai-button](./ai-button.md) | AI生成・提案など生成系AIのトリガー |
 | [icon-button](./icon-button.md) | テキストなし、アイコンのみの操作 |
-| [menu-button](./menu-button.md) | 複数アクションをドロップダウンで提示 |
 | [floating-button](./floating-button.md) | 画面に常時浮かぶ主要アクション |
+
+複数アクションをドロップダウンで提示する [menu-button](../menu/menu-button.md) は、Figma で menu と同じページに置かれているため menu 配下にある。
 
 ## 共通ルール
 

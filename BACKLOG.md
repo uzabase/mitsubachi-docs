@@ -170,7 +170,7 @@ Figma にあって kit・md・公式実装のいずれにも無いもの。**取
 
 | 公開日 | 変更内容（説明文） | 対応しない理由 |
 |---|---|---|
-| — | — | — |
+| 2026-08-06 | 「menu-buttonをmenuへ移動」の公開で ✅ menu ページを読み直したところ、menu-category（menu 内の見出しラベル）が component として公開されているが md が無い | `/figma-sync` では新規 md を作らない方針。kit には `.mi-menu-category` があり menu/index.md で触れている。単体 md が要るか別途判断 |
 
 ## E. 検証
 
