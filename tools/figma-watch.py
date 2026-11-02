@@ -113,11 +113,6 @@ def day(v):
     return (v.get("created_at") or "")[:10]
 
 
-def user_name(v):
-    u = v.get("user") or {}
-    return u.get("handle") or u.get("email") or ""
-
-
 def issue_title(entries):
     latest = entries[-1]
     extra = f" ほか {len(entries) - 1} 件" if len(entries) > 1 else ""
@@ -128,7 +123,7 @@ def issue_body(entries, file_key, file_name):
     lines = [f"Figma ライブラリ **{file_name or file_key}**（`{file_key}`）が公開されました。",
              "", "## 公開の説明文（バージョン履歴の原文）", ""]
     for v in entries:
-        lines.append(f"### {v.get('label') or '（版名なし）'} — {day(v)} / {user_name(v)} / 版 `{v.get('id')}`")
+        lines.append(f"### {v.get('label') or '（版名なし）'} — {day(v)} / 版 `{v.get('id')}`")
         desc = (v.get("description") or "").strip() or "（説明文なし）"
         lines += ["> " + l for l in desc.splitlines()]
         lines.append("")
@@ -340,7 +335,7 @@ def apply_tokens(kit_css, mismatches, today=None):
 # --- report ---------------------------------------------------------------
 def render_report(targets, meta, tokens_result, issues=()):
     entries = meta.get("entries", [])
-    head = f"「{change_summary(entries[-1])}」（{day(entries[-1])} / {user_name(entries[-1])}）" if entries else "（公開エントリなし）"
+    head = f"「{change_summary(entries[-1])}」（{day(entries[-1])}）" if entries else "（公開エントリなし）"
     lines = [f"# Figma 公開: {head}"]
     for n in issues:
         lines.append(f"Closes #{n}")
@@ -348,7 +343,7 @@ def render_report(targets, meta, tokens_result, issues=()):
     lines.append(f"基準: main の state.json（前回確認 {base.get('created_at', '')[:10] or '—'} の版 `{base.get('id', '—')}` まで）")
     lines += ["", "## 公開の説明文（原文）", ""]
     for v in entries:
-        lines.append(f"**{v.get('label') or '（版名なし）'}** — {day(v)} / {user_name(v)}")
+        lines.append(f"**{v.get('label') or '（版名なし）'}** — {day(v)}")
         lines += ["> " + l for l in ((v.get("description") or "").strip() or "（説明文なし）").splitlines()]
         lines.append("")
     main_rows = [r for r in targets if not r["insuranceOnly"]]
@@ -440,7 +435,7 @@ def cmd_check(args):
     elif entries:
         print(f"公開あり: {len(entries)} 件（{key}）")
         for v in entries:
-            print(f"  {day(v)} {v.get('label')} / {user_name(v)} — {change_summary(v)}")
+            print(f"  {day(v)} {v.get('label')} — {change_summary(v)}")
     else:
         print(f"公開なし（基準 {baseline.get('created_at', '')[:10]} の版 {baseline.get('id')} 以降）")
     if args.github_output or args.issue_body_file:

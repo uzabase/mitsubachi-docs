@@ -15,7 +15,7 @@
 - AIによる生成・提案を実行する操作 → [ai-button](./ai-button.md)
 - テキストを持たずアイコンのみで操作を表現したい場合 → [icon-button](./icon-button.md)
 - 画面に常時浮かんで表示する主要アクション → [floating-button](./floating-button.md)
-- 1つのボタンから複数の操作を提供したい場合 → [menu-button](./menu-button.md)
+- 1つのボタンから複数の操作を提供したい場合 → [menu-button](../menu/menu-button.md)
 
 ## Figma
 

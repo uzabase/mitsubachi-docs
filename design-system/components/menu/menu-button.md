@@ -1,6 +1,6 @@
 # menu-button
 
-menu（複数の操作や遷移先をリスト形式で提示するコンポーネント）を表示するためのトリガーとなるボタンコンポーネントです。
+[menu](./index.md)（複数の操作や遷移先をリスト形式で提示するコンポーネント）を表示するためのトリガーとなるボタンコンポーネントです。「操作の入り口」であり、現在の値を表示・選択する目的では使いません。Figma では menu と同じページに置かれています（2026-08 に button から移動）。
 
 ## いつ使うか
 
@@ -9,8 +9,8 @@ menu（複数の操作や遷移先をリスト形式で提示するコンポー�
 
 ## いつ使わないか
 
-- 単一のアクションを実行する場合 → [neutral-button](./neutral-button.md)
-- 「何が選ばれているか」という選択状態を示す場合 → select-box を使う
+- 単一のアクションを実行する場合 → [neutral-button](../button/neutral-button.md)
+- 「何が選ばれているか」という選択状態を示す場合 → [select-box](../select-box/select-box.md) を使う
 - フォームの選択肢としてオプションを提示する場合 → select-box を使う
 - 値の選択には使わない（選択状態を持たず、アクションの起点として機能する）
 
@@ -18,6 +18,7 @@ menu（複数の操作や遷移先をリスト形式で提示するコンポー�
 
 - コンポーネント: https://www.figma.com/design/kHQNLM1dnk0EhZwOKBEBkL/Base-Component-Speeda-3.1-MITSUBACHI?node-id=8301-3447
 - 各variantの値は Figma MCP（`get_design_context`）で取得
+- 開く先の menu の構成ルールは [menu](./index.md) を参照
 
 > mockup で再現する場合は `mockup-kit/mitsubachi-mockup.css` の `.mi-button--menu`（+ variant 併用） を使う（自作しない）。size は neutral-button と同じ `.mi-button--medium/--large/--x-large`（既定=medium）。末尾の chevron は size に追従（medium 18 / large 20 / x-large 22px）。
 
@@ -53,5 +54,5 @@ menu（複数の操作や遷移先をリスト形式で提示するコンポー�
 ## Don't
 
 - 値の選択に menu-button を使わない → select-box を使う
-- 単一のアクションに menu-button を使わない → [neutral-button](./neutral-button.md) を使う
+- 単一のアクションに menu-button を使わない → [neutral-button](../button/neutral-button.md) を使う
 - ラベルを長文にしない — 1行に収まる長さにする

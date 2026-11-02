@@ -12,7 +12,7 @@
 
 - アイコンだけでは意味が伝わりにくいアクション（ツールチップで補完できない場合はテキスト付きの [neutral-button](./neutral-button.md) を使う）
 - ページ内でもっとも重要な主要アクション → [floating-button](./floating-button.md) の使用を検討する
-- 1つのボタンから複数の操作を提供したい場合 → [menu-button](./menu-button.md)
+- 1つのボタンから複数の操作を提供したい場合 → [menu-button](../menu/menu-button.md)
 
 ## Figma
 

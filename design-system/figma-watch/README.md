@@ -65,6 +65,7 @@ Issue が来たら  ローカルで Claude Code を開き /figma-sync（.claude/
 
 - 例: 「変更内容：menu-button を menu へ移動」「変更内容：switch にラベル位置のルールを追記」
 - 日本語だけでも Issue は立ちます（人が読んで判断します）
+- Issue・PR 本文・`check` の出力には公開の説明文と日時・版 id だけを載せ、**投稿者名は出さない**（リポジトリが public のため）
 
 ## PAT（Figma Personal Access Token）
 

@@ -87,7 +87,7 @@ class SourcesTest(unittest.TestCase):
         d = fs.derive(BASE)["dictionary"]
         hits = fs.find_terms("ステータス：更新\n変更内容：menu-buttonをmenuへ移動", d)
         self.assertEqual([h["term"] for h in hits], ["menu-button", "menu"])
-        self.assertIn("design-system/components/button/menu-button.md", d["menu-button"]["docs"])
+        self.assertIn("design-system/components/menu/menu-button.md", d["menu-button"]["docs"])
         self.assertEqual(fs.find_terms("色味の調整のみ", d), [])
 
     def test_lookup_component_node_via_readme(self):
@@ -210,7 +210,7 @@ class WatchTest(unittest.TestCase):
         labels = {t["label"]: t for t in targets}
         self.assertIn("menu-button", labels)
         self.assertEqual(labels["menu-button"]["triggers"], ["説明文"])
-        self.assertIn("design-system/components/button/menu-button.md", labels["menu-button"]["docs"])
+        self.assertIn("design-system/components/menu/menu-button.md", labels["menu-button"]["docs"])
         ins = [t for t in targets if t["insuranceOnly"]]
         self.assertEqual(len(ins), 1)
         self.assertIn("design-system/components/switch.md", ins[0]["docs"])
