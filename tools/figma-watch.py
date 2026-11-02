@@ -182,11 +182,17 @@ def fetch_published(client, key):
 
 
 def fetch_file_name(client, key):
-    """ファイル名（Tier 3 の /meta）。取れなくても致命ではない。"""
-    try:
-        return (client.get(f"/files/{key}/meta").get("file") or {}).get("name", "")
-    except fp.FigmaError:
-        return ""
+    """ファイル名。/meta は file_metadata:read が要り 403 になりやすいので、/files/:key?depth=1 に落とす。
+    取れなくても致命ではない。"""
+    for path, params, pick in ((f"/files/{key}/meta", None, lambda r: (r.get("file") or {}).get("name", "")),
+                               (f"/files/{key}", {"depth": 1}, lambda r: r.get("name", ""))):
+        try:
+            name = pick(client.get(path, params))
+            if name:
+                return name
+        except fp.FigmaError:
+            continue
+    return ""
 
 
 def diff_published(before, after):
@@ -415,7 +421,7 @@ def cmd_check(args):
     baseline = fstate.get("lastSeenVersion")
     try:
         client = fp.FigmaClient(interval=args.interval)
-        versions = client.versions(key).get("versions", [])
+        versions = client.versions(key, since=(baseline or {}).get("created_at")).get("versions", [])
     except fp.FigmaError as e:
         print(f"エラー: {e}", file=sys.stderr)
         return 1
@@ -463,7 +469,7 @@ def cmd_targets(args):
         return 1
     try:
         client = fp.FigmaClient(interval=args.interval)
-        versions = client.versions(key).get("versions", [])
+        versions = client.versions(key, since=(baseline or {}).get("created_at")).get("versions", [])
         entries = [] if args.init else new_entries(versions, baseline, args.include_named_versions)
         pub, variables_hash = fetch_published(client, key)
     except fp.FigmaError as e:

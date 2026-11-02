@@ -85,13 +85,14 @@ Enterprise では管理者が発行を制限している場合があるので、
 | ローカルの環境変数 `FIGMA_TOKEN`（リポジトリには置かない） | `targets`・`figma-page.py` | 保険のページ比較が使えない（`targets --no-pages`）。ページは Figma MCP で読む |
 
 期限切れや権限不足は 403 で止まり、メッセージに再発行の案内が出る。
+ファイル名の取得に使う `/files/:key/meta` は別スコープ（`file_metadata:read`）で 403 になりやすいが、その場合は `/files/:key?depth=1` から取るので付けなくてよい。
 GitHub は 60 日間コミットが無いと schedule を止めるので、止まっていたら Actions から手動実行する。
 
 ## 初回
 
 ```bash
 export FIGMA_TOKEN=...
-python3 tools/figma-watch.py targets --init     # 基準を作る（約 60 回の API 呼び出し、2〜3 分）
+python3 tools/figma-watch.py targets --init     # 基準を作る（約 80 回の API 呼び出し、8 分前後。大きいページは分割取得になる）
 python3 tools/check-kit.py
 git add design-system/figma-watch/state.json && git commit -m "figma-watch の基準を作成"
 ```

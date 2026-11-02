@@ -39,9 +39,12 @@ class FigmaClient:
     """REST の薄いクライアント。呼び出し間隔・429・5xx の再試行を担う。"""
 
     def __init__(self, token=None, interval=2.0, timeout=60, max_retry=5, sleep=time.sleep):
-        self.token = token or os.environ.get("FIGMA_TOKEN")
+        self.token = (token or os.environ.get("FIGMA_TOKEN") or "").strip()
         if not self.token:
             raise FigmaError("FIGMA_TOKEN が未設定です（Figma の設定 → セキュリティ → Personal access tokens で発行）")
+        if not self.token.isascii() or " " in self.token:
+            raise FigmaError("FIGMA_TOKEN の値が PAT の形ではありません（日本語や空白を含む）。"
+                             "例文のプレースホルダのままになっていないか ~/.zshenv などを確認してください")
         self.interval = interval
         self.timeout = timeout
         self.max_retry = max_retry
@@ -95,8 +98,19 @@ class FigmaClient:
             params["depth"] = depth
         return self.get(f"/files/{file_key}/nodes", params)
 
-    def versions(self, file_key):
-        return self.get(f"/files/{file_key}/versions")
+    def versions(self, file_key, since=None, max_pages=10):
+        """版履歴を新しい順に返す。since（ISO 日時）を渡すと、その日時以前の版に届くまでページ送りする
+        （自動保存が多く、公開エントリが先頭ページに収まらないことがあるため。実測: 1 ページ 30〜50 件）。"""
+        out, params = [], {"page_size": 50}
+        for _ in range(max_pages):
+            r = self.get(f"/files/{file_key}/versions", params)
+            vs = r.get("versions", [])
+            out.extend(vs)
+            nxt = (r.get("pagination") or {}).get("next_page")
+            if not vs or not nxt or (since and (vs[-1].get("created_at") or "") <= since):
+                break
+            params = {k: v[0] for k, v in urllib.parse.parse_qs(urllib.parse.urlparse(nxt).query).items()}
+        return {"versions": out}
 
     def published(self, file_key, kind):
         """kind: components / component_sets / styles"""
@@ -155,7 +169,7 @@ def _is_comment_note(name):
 
 def _is_dodont(name):
     n = name.lower().replace(" ", "")
-    return n.startswith("do-dont") or n.startswith("dodont") or n in ("do", "don't", "dont", "エリア指定")
+    return n.startswith("do-dont") or n.startswith("dodont") or n in ("do", "don't", "dont")
 
 
 def _intent_frame(name):

@@ -51,7 +51,7 @@ class FakeClient:
             return {"file": {"name": "Base-Component-Speeda-3.1-MITSUBACHI"}}
         raise fp.FigmaError(f"unexpected {path}")
 
-    def versions(self, key):
+    def versions(self, key, since=None, max_pages=10):
         self.calls += 1
         return self.versions_data
 
