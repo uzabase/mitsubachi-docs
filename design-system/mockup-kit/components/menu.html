@@ -26,7 +26,8 @@
     <code>.mi-menu</code>（容器）＋<code>.mi-menu-item</code>（項目）で組む。位置決め（どこに出すか）はモック側。
     項目は3種: <b>action</b>（操作を実行。<code>role="menu"/"menuitem"</code>）/ <b>link</b>（<code>&lt;a&gt;</code> で遷移）/
     <b>select</b>（値を選択。<code>role="listbox"/"option"</code>）。
-    項目の変種: 選択中 <code>--selected</code>（<b>select-menu-item のみ</b>。右に check-small 20px）/ サブメニュー <code>--sub</code>（右に chevron-right-small）/
+    項目の変種: 選択中 <code>--selected</code>（<b>select-menu-item の text 型のみ</b>。右に check-small 20px）/
+    複数選択 <code>--checkbox</code>（<b>select-menu-item の checkbox 型</b>。中に <code>.mi-checkbox-label</code>。選択中は checkbox を checked にし、<code>--selected</code> は付けない）/ サブメニュー <code>--sub</code>（右に chevron-right-small）/
     無効 <code>--disabled</code>（action と select のみ。link には無い）/ 危険 <code>--danger</code>（赤文字）/ phone <code>--phone</code>（高さ40px・文字16px）。
     区切りは <code>.mi-menu-group</code>。ラベルが長い場合は<b>折り返す（省略・truncate は禁止）</b>。原則1行で済む幅・文言を検討する。
   </p>
@@ -102,7 +103,7 @@
   </div>
   <p class="note">link-menu-item は <code>&lt;a&gt;</code> で実装するため<b> disabled 状態が存在しない</b>。新規タブ（target="_blank"）で開くリンクには <code>open-in-new</code> アイコン（icons.css）を右に置いて視覚的に伝える。</p>
 
-  <h2>select-box の展開メニュー（role="listbox" ＋ select-menu-item。選択中はチェック。single-select のみ）</h2>
+  <h2>select-box の展開メニュー（role="listbox" ＋ select-menu-item の text 型＝単一選択。選択中は右にチェック）</h2>
   <div class="row">
     <div>
       <div class="mi-menu" role="listbox" aria-label="業種を選択" style="min-width: 216px;">
@@ -129,7 +130,50 @@
   </div>
   <p class="note">
     トリガー（閉じた状態）は <code>.mi-select</code>（見本は form.html）。<code>.mi-select</code> はネイティブ <code>&lt;select&gt;</code> のため、開いた状態はこの部品で組む。
-    選択は <b>single-select のみ</b>: 新しい項目を選ぶと前の選択は自動解除される。<b>menu での複数選択（multi-select）は禁止</b>（Figma 2026/6/12 追記: 実装しない・考慮しない。複数選択はチェックボックスグループを使う）。
+    text 型は<b>単一選択</b>: 新しい項目を選ぶと前の選択は自動解除され、menu は閉じる（未選択も 1 つの選択肢）。
+    <b>text 型を複数選択に使わない</b>（単一選択か複数選択かユーザーが判断できず、複数選んだ場合の確定方法も曖昧になる）。複数選択は下の checkbox 型で組む。
+  </p>
+
+  <h2>select-menu-item の複数選択（content-type=checkbox。<code>--checkbox</code> ＋ <code>.mi-checkbox-label</code>。role="listbox" aria-multiselectable）</h2>
+  <div class="row">
+    <div>
+      <div class="mi-menu" role="listbox" aria-label="企業区分で絞り込む" aria-multiselectable="true" style="min-width: 216px;">
+        <div class="mi-menu-item mi-menu-item--checkbox" role="option" aria-selected="true">
+          <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox" checked> 上場企業</label>
+        </div>
+        <div class="mi-menu-item mi-menu-item--checkbox" role="option" aria-selected="true">
+          <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox" checked> 未上場企業</label>
+        </div>
+        <div class="mi-menu-item mi-menu-item--checkbox" role="option" aria-selected="false">
+          <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox"> スタートアップ</label>
+        </div>
+        <div class="mi-menu-item mi-menu-item--checkbox mi-menu-item--disabled" role="option" aria-selected="false" aria-disabled="true">
+          <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox" disabled> 海外企業（選択不可）</label>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="mi-menu" role="listbox" aria-label="データ種別で絞り込む" aria-multiselectable="true" style="min-width: 240px;">
+        <div class="mi-menu-item mi-menu-item--checkbox" role="option" aria-selected="true">
+          <span class="mi-menu-item__text">
+            <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox" checked> 財務データ</label>
+            <span class="mi-menu-item__support">有価証券報告書ベース</span>
+          </span>
+        </div>
+        <div class="mi-menu-item mi-menu-item--checkbox" role="option" aria-selected="false">
+          <span class="mi-menu-item__text">
+            <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox"> ニュース</label>
+            <span class="mi-menu-item__support">過去 1 年分</span>
+          </span>
+        </div>
+      </div>
+      <p class="note" style="max-width:260px;">補助文は <code>__text</code> ＋ <code>__support</code>（左の見本と同じ構造）。checkbox の分だけ字下げされ、ラベルの開始位置に揃う。</p>
+    </div>
+  </div>
+  <p class="note">
+    複数の項目を同時にオン/オフできる。項目を選んでも menu は閉じず、<b>menu の外側をクリック（or ESC）で閉じる</b>。選択中は checkbox を checked にすれば面色が付く（<code>--selected</code> と右の check-small は使わない）。
+    <b>1 つの menu の中で text 型と checkbox 型を混ぜない</b>（どこまでが複数選択でどこからが単一選択か読めない）。
+    <b>複数選択が同時に成り立たない選択肢</b>（並び順・表示件数など 1 つしか選べないもの）には checkbox 型を使わず text 型にする。
   </p>
 
   <h2>sub-menu の配置（親 menu の右側にぴったり・上端は親項目に揃える。右にスペースが無ければ左でもよい）</h2>
@@ -154,6 +198,15 @@
     <div class="mi-menu-item mi-menu-item--phone" role="menuitem">--phone（高さ40px・文字16px）</div>
     <div class="mi-menu-item mi-menu-item--phone mi-menu-item--danger" role="menuitem">削除する</div>
   </div>
+  <div class="mi-menu" role="listbox" aria-label="企業区分で絞り込む（phone）" aria-multiselectable="true" style="margin-top: 12px;">
+    <div class="mi-menu-item mi-menu-item--phone mi-menu-item--checkbox" role="option" aria-selected="true">
+      <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox" checked> 上場企業（--phone ＋ --checkbox）</label>
+    </div>
+    <div class="mi-menu-item mi-menu-item--phone mi-menu-item--checkbox" role="option" aria-selected="false">
+      <label class="mi-checkbox-label"><input type="checkbox" class="mi-checkbox"> 未上場企業</label>
+    </div>
+  </div>
+  <p class="note">checkbox 型の phone は高さ 40px になるが、ラベルの文字は checkbox-text のまま 14px（text 型の 16px とは違う。Figma 13744-10751）。</p>
 
   <h2>使用例①: menu-button から開く（資料自動作成）</h2>
   <div style="max-width: 192px;">

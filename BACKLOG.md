@@ -171,6 +171,9 @@ Figma にあって kit・md・公式実装のいずれにも無いもの。**取
 | 公開日 | 変更内容（説明文） | 対応しない理由 |
 |---|---|---|
 | 2026-08-06 | 「menu-buttonをmenuへ移動」の公開で ✅ menu ページを読み直したところ、menu-category（menu 内の見出しラベル）が component として公開されているが md が無い | `/figma-sync` では新規 md を作らない方針。kit には `.mi-menu-category` があり menu/index.md で触れている。単体 md が要るか別途判断 |
+| 2026-11-05 | select-menu-item / link-menu-item の content-type に `slot`（任意要素の差し込み）がある | kit に単体クラスは作らない。モック側で `.mi-menu-item` の中に要素を置けば足りる。md には値として記載済み |
+| 2026-11-05 | checkbox 型（複数選択）の選択値をトリガー（select-box 等）にどう表示するかは Figma に記述が無い | kit の `data-mi-menu-label` は text 型（単一選択）だけ対応。Figma 側に仕様が出たら追従 |
+| 2026-11-05 | Figma の checkbox-text（178:273）は checkbox 枠と文字の間に gap 4px があるが、kit の `.mi-checkbox-label` には無い | 今回は menu 内（`.mi-menu-item--checkbox`）だけ 4px を付けた。checkbox 単体の kit 値は checkbox ページの公開時に見直す |
 
 ## E. 検証
 

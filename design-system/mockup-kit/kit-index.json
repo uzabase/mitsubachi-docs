@@ -220,7 +220,7 @@
         "mi-checkbox",
         "mi-switch"
       ],
-      "sampleCount": 18,
+      "sampleCount": 26,
       "severity": "error"
     },
     "input[type=radio]": {
@@ -782,9 +782,10 @@
       "samples": [
         "components/form.html",
         "components/interactive.html",
+        "components/menu.html",
         "components/table.html"
       ],
-      "sampleCount": 13,
+      "sampleCount": 21,
       "requiredAttrs": [
         "type"
       ],
@@ -792,6 +793,7 @@
         "components/checkbox/checkbox-text.md",
         "components/checkbox/checkbox.md",
         "components/checkbox/index.md",
+        "components/menu/select-menu-item.md",
         "components/table.md"
       ]
     },
@@ -799,13 +801,15 @@
       "modifiers": [],
       "samples": [
         "components/form.html",
-        "components/interactive.html"
+        "components/interactive.html",
+        "components/menu.html"
       ],
-      "sampleCount": 5,
+      "sampleCount": 13,
       "docs": [
         "components/checkbox/checkbox-text.md",
         "components/checkbox/checkbox.md",
-        "components/checkbox/index.md"
+        "components/checkbox/index.md",
+        "components/menu/select-menu-item.md"
       ]
     },
     "mi-chip": {
@@ -1530,7 +1534,7 @@
         "components/interactive.html",
         "components/menu.html"
       ],
-      "sampleCount": 16,
+      "sampleCount": 19,
       "requiredAttrs": [
         "role"
       ],
@@ -1568,6 +1572,7 @@
     },
     "mi-menu-item": {
       "modifiers": [
+        "--checkbox",
         "--danger",
         "--disabled",
         "--phone",
@@ -1578,13 +1583,17 @@
         "components/interactive.html",
         "components/menu.html"
       ],
-      "sampleCount": 61,
+      "sampleCount": 69,
       "exclusiveGroups": [
         [
+          "--checkbox",
           "--danger",
-          "--disabled",
           "--selected",
           "--sub"
+        ],
+        [
+          "--disabled",
+          "--phone"
         ]
       ],
       "requiredAttrs": [
@@ -1595,6 +1604,10 @@
         "option"
       ],
       "modifierRequiresChild": {
+        "--checkbox": [
+          "mi-checkbox",
+          "mi-checkbox-label"
+        ],
         "--selected": [
           "mi-icon--check-small"
         ],
@@ -1614,8 +1627,7 @@
       "samples": [
         "components/menu.html"
       ],
-      "sampleCount": 1,
-      "lowConfidence": true,
+      "sampleCount": 3,
       "docs": [
         "components/menu/index.md"
       ]
@@ -1625,8 +1637,7 @@
       "samples": [
         "components/menu.html"
       ],
-      "sampleCount": 1,
-      "lowConfidence": true,
+      "sampleCount": 3,
       "docs": [
         "components/menu/index.md"
       ]

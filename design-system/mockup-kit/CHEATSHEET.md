@@ -94,7 +94,7 @@ mockup を組む AI が**最初に読む1枚**。全クラスの当て方と、�
 | section-tab | `.mi-section-tab` | セクション内の切替。`--phone` |
 | breadcrumb | `.mi-breadcrumb` | `--phone`（12→14px） |
 | pagination | `.mi-pagination` | chevron の icon-button ＋ ページ番号 select ＋「/ 総数」。`--phone` |
-| menu | `.mi-menu` ＋ `.mi-menu-item` | **→ 見本 `components/menu.html` を読む**（action/link/select の3種・`.mi-menu-group` 区切り・`.mi-menu-category` 見出し・--selected/--sub/--disabled/--danger/--phone）。select は single のみ・**selected は select-menu-item だけ**（action に selected は無い。check-small 20px）・link に disabled 無し・長文は折り返し（省略禁止）。表示位置は「下・左揃え」既定 |
+| menu | `.mi-menu` ＋ `.mi-menu-item` | **→ 見本 `components/menu.html` を読む**（action/link/select の3種・`.mi-menu-group` 区切り・`.mi-menu-category` 見出し・--selected/--checkbox/--sub/--disabled/--danger/--phone）。select は text 型＝単一選択（`--selected` ＋ check-small 20px）と checkbox 型＝複数選択（`--checkbox` ＋ 中に `.mi-checkbox-label`。選択中は checked、`--selected` は付けない。1 つの menu で両方を混ぜない）・**selected は select-menu-item だけ**（action に selected は無い）・link に disabled 無し・長文は折り返し（省略禁止）。表示位置は「下・左揃え」既定 |
 | notification-badge | `.mi-badge` | 数値 / `--dot`。右上重ねは `.mi-badge-anchor` で包む |
 
 ## 表示系

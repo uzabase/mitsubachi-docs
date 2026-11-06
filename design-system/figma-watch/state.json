@@ -2,8 +2,8 @@
   "files": {
     "kHQNLM1dnk0EhZwOKBEBkL": {
       "lastSeenVersion": {
-        "created_at": "2026-08-06T03:03:16Z",
-        "id": "2384428709829476108"
+        "created_at": "2026-11-05T07:28:14Z",
+        "id": "2418281280730444345"
       },
       "name": "Base Component Speeda 3.1 MITSUBACHI",
       "pages": {
@@ -48,7 +48,7 @@
           "name": "✅ radio-button"
         },
         "3070:328": {
-          "hash": "edac20ee685d04c9866e4e4822f65c77238b9e52532274bdc56e848cb825a205",
+          "hash": "401911f18373ec02e9d35dc9c1b31c5cb753228a27a8583b96519bcfc17c18bf",
           "name": "✅ menu"
         },
         "3769:1412": {
@@ -550,7 +550,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.349Z"
+          "updated_at": "2026-11-06T00:27:46.148Z"
         },
         "06dcf6368b5e3ed479d348bbadab4093ccb6cd51": {
           "name": "view=grid, content-type=text, last-column=false, sort=false, sort-state=default, state=default",
@@ -568,7 +568,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.355Z"
+          "updated_at": "2026-11-06T00:27:46.152Z"
         },
         "06eb6dd7cd57b24278ed4ea739c5c0f83d1ddce2": {
           "name": "variant=ghost, size=medium, state=disabled",
@@ -614,6 +614,15 @@
           "setName": "menu-button",
           "type": "component",
           "updated_at": "2026-08-06T03:03:30.698Z"
+        },
+        "07982efc75bc567e4160332d25e40592a0d488ae": {
+          "name": "viewport=desktop, content-type=checkbox, selected=true, state=focus",
+          "nodeId": "13744:10758",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.997Z"
         },
         "07cde95753697557e5f6db9ccaef78b80995943f": {
           "name": "view=grid, content-type=header, selected=false, last-column=true, content-state=filled, text-link=true, state=hover",
@@ -695,6 +704,15 @@
           "setName": "search-box",
           "type": "component",
           "updated_at": "2026-05-27T08:08:10.365Z"
+        },
+        "09dd982aa32b732a8dbd3c8d32298640dccade95": {
+          "name": "viewport=phone, content-type=checkbox, selected=true, state=focus",
+          "nodeId": "13744:10765",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.966Z"
         },
         "0a88806d463852f6de804803d3e0a0a64f502d34": {
           "name": "variant=tertiary, size=medium, selected=false, state=hover",
@@ -912,6 +930,15 @@
           "type": "component",
           "updated_at": "2026-05-27T08:09:05.421Z"
         },
+        "0ef13f00197d9f7b125a7702fc340a44dd475e97": {
+          "name": "viewport=phone, content-type=checkbox, selected=true, state=active",
+          "nodeId": "13744:10737",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.976Z"
+        },
         "0f53aed00d4bca62acf7b47ac6864c880084484f": {
           "name": "viewport=phone, selected=false, state=default",
           "nodeId": "5634:1352",
@@ -1019,6 +1046,15 @@
           "setName": "menu-button",
           "type": "component",
           "updated_at": "2026-08-06T03:03:30.713Z"
+        },
+        "11dab685dc0cf7d1a8f3b0f0401ca6d19919278e": {
+          "name": "viewport=desktop, content-type=checkbox, selected=false, state=disabled",
+          "nodeId": "13744:10682",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.948Z"
         },
         "129d5d45f078ffb17cd5ed81fbe40e489ed0e0b9": {
           "name": "variant=primary, size=large, state=loading",
@@ -1576,7 +1612,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.437Z"
+          "updated_at": "2026-11-06T00:27:46.155Z"
         },
         "1da84d6075fef50c7c427b523d6f5811488cd250": {
           "name": "viewport=desktop, variant=primary, size=medium, state=error-focus, show-text=false",
@@ -1765,7 +1801,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.451Z"
+          "updated_at": "2026-11-06T00:27:46.159Z"
         },
         "2104ead665cc943ac9667e12eef760a465e23cd9": {
           "name": "viewport=phone, variant=secondary, size=small, state=error-focus, show-text=false",
@@ -1819,7 +1855,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.457Z"
+          "updated_at": "2026-11-06T00:27:46.164Z"
         },
         "21d15fd0a4a0c49ce75b1c53195d2300a2f3cec5": {
           "name": "size=x-large, item=2, max-item=5",
@@ -1999,7 +2035,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.467Z"
+          "updated_at": "2026-11-06T00:27:46.168Z"
         },
         "25185f437dc948afbd9b2509df5803f1448df4b8": {
           "name": "group=true, position=middle, emphasized=true, item-spacing=loose",
@@ -2368,7 +2404,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.494Z"
+          "updated_at": "2026-11-06T00:27:46.172Z"
         },
         "2a89588103c84a0506395833e23d32bcf60e7eda": {
           "name": "icon-button",
@@ -2449,7 +2485,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.505Z"
+          "updated_at": "2026-11-06T00:27:46.175Z"
         },
         "2cc1b1b1326416d1fe7b1ae8b97938a2ad3049cf": {
           "name": "viewport=phone, selected=true, state=disabled",
@@ -2675,6 +2711,15 @@
           "setName": "table",
           "type": "component",
           "updated_at": "2026-06-06T12:59:16.906Z"
+        },
+        "30661a2870e30f371f13a5797c8cdd38c62d6ad8": {
+          "name": "viewport=desktop, content-type=checkbox, selected=true, state=active",
+          "nodeId": "13744:10730",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.971Z"
         },
         "3148fee6f7fee874e1086a2d659e21814ef1f6bc": {
           "name": "group=true, position=first, emphasized=true, item-spacing=loose",
@@ -2935,7 +2980,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.578Z"
+          "updated_at": "2026-11-06T00:27:46.179Z"
         },
         "368eb2a8300cc46645fc585a3d00fa89c5c652b9": {
           "name": "viewport=desktop, size=large, state=error-hover, show-placeholder=false, show-text=false",
@@ -3189,6 +3234,24 @@
           "type": "component",
           "updated_at": "2026-06-06T12:59:16.941Z"
         },
+        "3a44fd81533d201dddf80bc1187ad27309a258f4": {
+          "name": "viewport=phone, content-type=checkbox, selected=true, state=default",
+          "nodeId": "13744:10751",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:46.006Z"
+        },
+        "3a54535911373606afe095c7acaef65c3da5031c": {
+          "name": "viewport=desktop, content-type=checkbox, selected=true, state=default",
+          "nodeId": "13744:10744",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:46.002Z"
+        },
         "3a57a1740ca0b79d3091bf261b5c3a6a829d7b2f": {
           "name": "viewport=phone, variant=secondary, state=error, show-placeholder=false, show-text=false",
           "nodeId": "10274:7127",
@@ -3396,6 +3459,15 @@
           "type": "component",
           "updated_at": "2026-06-06T12:59:16.964Z"
         },
+        "3ce64208da81868b6dbcae852f84bd325954abba": {
+          "name": "viewport=phone, content-type=checkbox, selected=false, state=hover",
+          "nodeId": "13744:10725",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.989Z"
+        },
         "3cf9fcffcda1ee6c49ac5667db351a19ff5dbe80": {
           "name": "viewport=desktop, size=large, state=error-hover, show-placeholder=true, show-text=false",
           "nodeId": "5039:1695",
@@ -3475,7 +3547,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.605Z"
+          "updated_at": "2026-11-06T00:27:46.185Z"
         },
         "3e82f228a2687ba5a6f6311577b6314df7e404c6": {
           "name": "view=list, content-type=text, last-column=false, sort=true, sort-state=ascending, state=default",
@@ -3601,7 +3673,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.617Z"
+          "updated_at": "2026-11-06T00:27:46.189Z"
         },
         "40370c2633376c288461aff8591376ab977f2fbc": {
           "name": "show-placeholder=true, show-text=false, state=in-progress",
@@ -3862,7 +3934,7 @@
           "pageName": "✅ menu",
           "setName": "",
           "type": "component_set",
-          "updated_at": "2026-05-27T08:08:07.422Z"
+          "updated_at": "2026-11-06T00:27:45.928Z"
         },
         "44aa267a0e25063572f9ab4dd13874bf9562ad72": {
           "name": "view=list, content-type=text, selected=true, last-column=false, content-state=null, text-link=false, state=hover",
@@ -4422,6 +4494,15 @@
           "type": "component",
           "updated_at": "2026-05-29T08:46:30.453Z"
         },
+        "4e5a45a6f0dae1170836c3c5fd89171c2498bd64": {
+          "name": "viewport=phone, content-type=checkbox, selected=false, state=active",
+          "nodeId": "13744:10777",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.993Z"
+        },
         "4e5f4de4e6380e05bcebb42ed0683e56103953cc": {
           "name": "viewport=desktop, variant=primary, status=error",
           "nodeId": "5638:4190",
@@ -4537,7 +4618,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.675Z"
+          "updated_at": "2026-11-06T00:27:46.193Z"
         },
         "5115905c1151020ae198194ac0508d4e5dcf74fc": {
           "name": "viewport=desktop, variant=secondary, size=medium, state=hover, show-text=true",
@@ -4726,7 +4807,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.685Z"
+          "updated_at": "2026-11-06T00:27:46.196Z"
         },
         "567f5a6b716b3ec3618f68a982dcb2ece9d1d0b7": {
           "name": "state=focus, selected=false",
@@ -5383,7 +5464,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.713Z"
+          "updated_at": "2026-11-06T00:27:46.200Z"
         },
         "61b5bb9bf4adaf29808e00c9b3c558bb03ed5030": {
           "name": "viewport=phone, selected=true, state=default",
@@ -5500,7 +5581,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.719Z"
+          "updated_at": "2026-11-06T00:27:46.203Z"
         },
         "62f399939d927d6ab0e8fbc406b967f500944edd": {
           "name": "view=grid, content-type=slot, selected=true, last-column=true, content-state=filled, text-link=false, state=default",
@@ -5582,6 +5663,15 @@
           "setName": "checkbox",
           "type": "component",
           "updated_at": "2026-05-30T10:19:54.111Z"
+        },
+        "6422d2fa89d261153b87f383aa5e1b3598debdf4": {
+          "name": "viewport=desktop, content-type=checkbox, selected=false, state=default",
+          "nodeId": "13744:10672",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.941Z"
         },
         "645beed8ace693649374a454c2ffd9fb93303c70": {
           "name": "variant=primary, size=medium, state=hover",
@@ -5707,7 +5797,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.749Z"
+          "updated_at": "2026-11-06T00:27:46.207Z"
         },
         "674e52a016a77fd90787a8821e76fbff62e29178": {
           "name": "variant=secondary, size=medium, state=active",
@@ -6303,6 +6393,15 @@
           "type": "component",
           "updated_at": "2026-05-28T06:29:17.334Z"
         },
+        "72fc2eac15652b1534210e677fa52f18b10bd5d0": {
+          "name": "viewport=phone, content-type=checkbox, selected=true, state=disabled",
+          "nodeId": "13744:10699",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.962Z"
+        },
         "7309d939d4c265fbbf4e6e3491b1acc0c0eaa9d5": {
           "name": "variant=primary, size=large, state=focus",
           "nodeId": "5345:4089",
@@ -6373,7 +6472,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.781Z"
+          "updated_at": "2026-11-06T00:27:46.210Z"
         },
         "7405f7a49db0ddaff33b76b18163530a31bae056": {
           "name": "viewport=phone, variant=secondary, state=focus, show-placeholder=false, show-text=false",
@@ -6510,6 +6609,15 @@
           "type": "component",
           "updated_at": "2026-05-27T08:09:05.820Z"
         },
+        "770e7390491abb4e906c1102e40bdc80edf802d7": {
+          "name": "viewport=phone, content-type=checkbox, selected=false, state=default",
+          "nodeId": "13744:10677",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.958Z"
+        },
         "7741696be8dbc5f1189234a2d96c6113627b9535": {
           "name": "view=list, content-type=number, selected=true, last-column=false, content-state=filled, text-link=false, state=default",
           "nodeId": "6423:12011",
@@ -6544,7 +6652,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.824Z"
+          "updated_at": "2026-11-06T00:27:46.213Z"
         },
         "77f59cbf624d2577dbeb1e1cc1f252ae2056ab7c": {
           "name": "viewport=phone, state=hover",
@@ -6598,7 +6706,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.834Z"
+          "updated_at": "2026-11-06T00:27:46.216Z"
         },
         "78d34b1dec12adf6547c7f1250fc0efc890ab6e5": {
           "name": "state=active, checked=checked",
@@ -6967,7 +7075,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.858Z"
+          "updated_at": "2026-11-06T00:27:46.220Z"
         },
         "7f2744d0f4bd5b79f390d577b611b7dd73bf7ba1": {
           "name": "variant=secondary, size=x-large, state=active",
@@ -7993,7 +8101,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.924Z"
+          "updated_at": "2026-11-06T00:27:46.223Z"
         },
         "8e59d0ba34ea7cf84ce5ee55f6019ee3e114cb7a": {
           "name": "viewport=desktop, selected=true, state=disabled",
@@ -8274,6 +8382,15 @@
           "type": "component",
           "updated_at": "2026-05-27T08:07:54.757Z"
         },
+        "918931a8a441116a52262ae8193953f99c98039d": {
+          "name": "viewport=desktop, content-type=checkbox, selected=false, state=focus",
+          "nodeId": "13744:10782",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:46.019Z"
+        },
         "91a2909031f4abdec52e70830161db4483152748": {
           "name": "text-area-unit",
           "nodeId": "7136:7463",
@@ -8308,7 +8425,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.940Z"
+          "updated_at": "2026-11-06T00:27:46.227Z"
         },
         "9228b0e04ab3fdd64e5911a14667645d26ae380e": {
           "name": "viewport=desktop, variant=primary, status=warning",
@@ -8902,7 +9019,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.977Z"
+          "updated_at": "2026-11-06T00:27:46.231Z"
         },
         "9d93a739b8c0c0818a41aaada8c1c27ae955b26b": {
           "name": "viewport=phone, selected=true, state=default",
@@ -8920,7 +9037,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:10.988Z"
+          "updated_at": "2026-11-06T00:27:46.235Z"
         },
         "9df1dfe91c27c5bc6fa9e903b917f3e80b3e8bab": {
           "name": "viewport=desktop, variant=secondary, state=error-active, show-placeholder=false, show-text=false",
@@ -9703,7 +9820,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.062Z"
+          "updated_at": "2026-11-06T00:27:46.238Z"
         },
         "ac765fdb699517e1930372a6a95220e906b852a9": {
           "name": "view=grid, content-type=text, last-column=false, sort=true, sort-state=descending, state=default",
@@ -9793,7 +9910,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.079Z"
+          "updated_at": "2026-11-06T00:27:46.242Z"
         },
         "ad7efdfd1b282ff6c1eed463af12291b830bb55d": {
           "name": "variant=tertiary, size=x-large, selected=true, state=active",
@@ -10308,6 +10425,15 @@
           "type": "component",
           "updated_at": "2026-06-06T12:59:17.391Z"
         },
+        "b76f0fd260437447444c281ee9c3c0a172fbe72c": {
+          "name": "viewport=desktop, content-type=checkbox, selected=true, state=disabled",
+          "nodeId": "13744:10692",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.980Z"
+        },
         "b776cbe2cd9c48431bfe793c9c923c400d27152c": {
           "name": "viewport=phone, size=medium, state=error-hover, show-placeholder=false, show-text=true",
           "nodeId": "6907:8488",
@@ -10342,7 +10468,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.122Z"
+          "updated_at": "2026-11-06T00:27:46.245Z"
         },
         "b8609c250c08bd40356f9af6ab1d4056c1b8ca8a": {
           "name": "variant=secondary, size=large, state=default",
@@ -11010,6 +11136,15 @@
           "type": "component",
           "updated_at": "2026-05-27T08:09:06.199Z"
         },
+        "c3f05dd481cdb3f6816dfabbfcac6cffda724dbb": {
+          "name": "viewport=phone, content-type=checkbox, selected=false, state=disabled",
+          "nodeId": "13744:10687",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.953Z"
+        },
         "c3ff4bbf60e07aa6d2811bb5ba1de846bf4e8e89": {
           "name": "state=hover, checked=false",
           "nodeId": "178:278",
@@ -11116,7 +11251,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.153Z"
+          "updated_at": "2026-11-06T00:27:46.249Z"
         },
         "c6f1a4c7da4cf94e4aa90ec73b0cf910e6512dad": {
           "name": "checkbox",
@@ -11287,7 +11422,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.164Z"
+          "updated_at": "2026-11-06T00:27:46.252Z"
         },
         "c8d45c7570cdd6a7936952d0624bc46e8d3830dd": {
           "name": "viewport=desktop, selected=false, state=disabled",
@@ -11847,6 +11982,15 @@
           "type": "component",
           "updated_at": "2026-04-26T07:39:26.309Z"
         },
+        "d3d996f974310a58947fad0e54a5140576576f10": {
+          "name": "viewport=phone, content-type=checkbox, selected=false, state=focus",
+          "nodeId": "13744:10787",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:46.022Z"
+        },
         "d41b4a3666cf98bce79e9c6fa6003d991897c076": {
           "name": "viewport=desktop, size=large, state=error, show-placeholder=false, show-text=false",
           "nodeId": "182:4826",
@@ -12144,6 +12288,15 @@
           "type": "component",
           "updated_at": "2026-05-27T08:07:55.118Z"
         },
+        "d9956134596e5151c320a4e974e7091c2ad70f8f": {
+          "name": "viewport=desktop, content-type=checkbox, selected=false, state=active",
+          "nodeId": "13744:10772",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:46.015Z"
+        },
         "d9a0cabe71116087f1615f2e4f46f14f169cac93": {
           "name": "viewport=desktop, size=small",
           "nodeId": "9080:10707",
@@ -12178,7 +12331,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.222Z"
+          "updated_at": "2026-11-06T00:27:46.256Z"
         },
         "d9ff5e25a46787bf8c002c05524b40d1aea27083": {
           "name": "variant=secondary, size=medium, selected=true, state=hover",
@@ -12223,7 +12376,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.233Z"
+          "updated_at": "2026-11-06T00:27:46.259Z"
         },
         "dad3901a2c565e383619b8ae927b5b5dc7577d44": {
           "name": "viewport=phone, selected=true, state=active",
@@ -12547,7 +12700,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.239Z"
+          "updated_at": "2026-11-06T00:27:46.262Z"
         },
         "dff50a28304054c06ce4ff58c65fffacdb862b3b": {
           "name": "view=list, content-type=text, last-column=false, sort=true, sort-state=default, state=hover",
@@ -12592,7 +12745,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.245Z"
+          "updated_at": "2026-11-06T00:27:46.265Z"
         },
         "e08d371763ee604af2369e84090c74eac2e0ed17": {
           "name": "viewport=desktop, size=large, state=hover, show-placeholder=true, show-text=false",
@@ -12666,6 +12819,15 @@
           "type": "component",
           "updated_at": "2026-05-27T08:09:06.269Z"
         },
+        "e14879f6969514248c370da72ff83049bfd7c7ed": {
+          "name": "viewport=phone, content-type=checkbox, selected=true, state=hover",
+          "nodeId": "13744:10713",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:46.010Z"
+        },
         "e152784d0febcf48c42fea56a56c40e93b806515": {
           "name": "variant=primary, size=small, selected=false, state=hover",
           "nodeId": "6616:11693",
@@ -12709,7 +12871,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.262Z"
+          "updated_at": "2026-11-06T00:27:46.269Z"
         },
         "e1cec2cab5a4933a9fdac9ef143496fce486b795": {
           "name": "viewport=desktop, variant=danger, state=active",
@@ -12745,7 +12907,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.267Z"
+          "updated_at": "2026-11-06T00:27:46.272Z"
         },
         "e2356424fe96aab129f8e4eebf3258d067e37567": {
           "name": "state=default, checked=indeterminate",
@@ -12772,7 +12934,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.272Z"
+          "updated_at": "2026-11-06T00:27:46.275Z"
         },
         "e285ab4dbdbae8cdeac06b94262076f79dbad6e2": {
           "name": "variant=secondary, size=large, state=hover",
@@ -13096,7 +13258,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.278Z"
+          "updated_at": "2026-11-06T00:27:46.279Z"
         },
         "e7a83594e372eb1c0feed8555c9f71b2a348458e": {
           "name": "variant=secondary, size=medium, state=focus",
@@ -13422,6 +13584,15 @@
           "type": "component",
           "updated_at": "2026-05-29T08:46:30.924Z"
         },
+        "ecd5e8ef1aea48eba8ae6c4287bb2838b97516c6": {
+          "name": "viewport=desktop, content-type=checkbox, selected=false, state=hover",
+          "nodeId": "13744:10720",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:45.984Z"
+        },
         "ecf7d16a3463851f0c3f82059033038ad3eeb21d": {
           "name": "variant=secondary, size=medium, selected=false, state=active",
           "nodeId": "855:2155",
@@ -13439,6 +13610,15 @@
           "setName": "text-field",
           "type": "component",
           "updated_at": "2026-05-27T08:08:53.184Z"
+        },
+        "ed38761de77358f0f716db8c666181f33240e9ee": {
+          "name": "viewport=desktop, content-type=checkbox, selected=true, state=hover",
+          "nodeId": "13744:10706",
+          "pageId": "3070:328",
+          "pageName": "✅ menu",
+          "setName": "select-menu-item",
+          "type": "component",
+          "updated_at": "2026-11-06T00:27:46.027Z"
         },
         "ed48e239e57606aa1488b780997b8471f28b1ed5": {
           "name": "viewport=phone, size=medium, state=disabled, show-placeholder=false, show-text=false",
@@ -13600,7 +13780,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.303Z"
+          "updated_at": "2026-11-06T00:27:46.284Z"
         },
         "effe356a115a054f67169b9cf3cd26ba79b576b9": {
           "name": "viewport=desktop, size=large, state=hover, show-placeholder=false, show-text=true",
@@ -13744,7 +13924,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.314Z"
+          "updated_at": "2026-11-06T00:27:46.288Z"
         },
         "f2ee9f3863a9b5ab2425d94519239e455374c1d6": {
           "name": "variant=secondary, size=large, selected=true, state=default",
@@ -14239,7 +14419,7 @@
           "pageName": "✅ menu",
           "setName": "select-menu-item",
           "type": "component",
-          "updated_at": "2026-05-27T08:08:11.361Z"
+          "updated_at": "2026-11-06T00:27:46.292Z"
         },
         "fdc2d9cfa96159edcd6b2de6f84cf905e2396ec1": {
           "name": "viewport=phone, size=medium, state=error-focus, show-placeholder=false, show-text=true",
