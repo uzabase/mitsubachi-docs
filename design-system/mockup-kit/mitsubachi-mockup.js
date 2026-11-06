@@ -14,6 +14,7 @@
  *   - table の checkbox 列     … 行の aria-selected を同期・ヘッダーは全選択
  *   - table の th[aria-sort]   … クリックで 昇順 → 降順 → 解除、行を並べ替え
  *   - menu[role=listbox]       … option を選ぶと --selected と check-small を移動
+ *                                （--checkbox の option は checked をトグルするだけで閉じない＝複数選択）
  *
  * 【data 属性で宣言するもの】
  *   <button data-mi-menu="menu-export">…</button>      トリガー（対象 .mi-menu の id）
@@ -121,7 +122,17 @@
     openMenu = { menu: menu, trigger: trigger };
   }
 
-  /** listbox の option 選択（select-menu-item のみ selected を持つ） */
+  /** checkbox 型の option（select-menu-item content-type=checkbox。複数選択）。
+   *  checked と aria-selected を同期する。menu は閉じない（閉じるのは menu の外側クリック or ESC） */
+  function toggleCheckOption(option, target) {
+    var box = option.querySelector('.mi-checkbox');
+    if (!box || box.disabled) return;
+    // label / input 自身のクリックはブラウザが checked を切り替える。項目の余白クリックだけ手で切り替える
+    if (!closest(target, '.mi-checkbox-label')) box.checked = !box.checked;
+    option.setAttribute('aria-selected', box.checked ? 'true' : 'false');
+  }
+
+  /** listbox の option 選択（select-menu-item のみ selected を持つ。text 型＝単一選択） */
   function selectOption(item) {
     var menu = closest(item, '.mi-menu');
     selectOne(item, '.mi-menu', '.mi-menu-item[role="option"]',
@@ -284,7 +295,11 @@
     }
 
     var option = closest(t, '.mi-menu-item[role="option"]');
-    if (option && !isDisabled(option)) { selectOption(option); return; }
+    if (option && !isDisabled(option)) {
+      if (option.classList.contains('mi-menu-item--checkbox')) toggleCheckOption(option, t);
+      else selectOption(option);
+      return;
+    }
 
     var menuItem = closest(t, '.mi-menu-item');
     if (menuItem) { if (!isDisabled(menuItem)) closeMenu(); return; }

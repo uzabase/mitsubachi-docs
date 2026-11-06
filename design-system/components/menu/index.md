@@ -15,7 +15,7 @@
 | [menu-button](./menu-button.md) | menu を開くトリガーとなるボタン |
 | [action-menu-item](./action-menu-item.md) | クリックでアクションを即時実行する項目 |
 | [link-menu-item](./link-menu-item.md) | 別ページへ遷移するリンク項目 |
-| [select-menu-item](./select-menu-item.md) | 選択状態（チェックマーク）を持つ項目 |
+| [select-menu-item](./select-menu-item.md) | 選択状態を持つ項目。単一選択（text・選択中は右にチェックマーク）と複数選択（checkbox・左にチェックボックス）がある |
 | [sub-menu-item](./sub-menu-item.md) | サブメニューを持つ項目（ネスト） |
 
 menu 内の見出しラベル menu-category（関連する項目をグループ化する）は kit の `.mi-menu-category` で再現する。単体の md は無い。

@@ -102,7 +102,7 @@ Figma 側の変更は [figma-watch](../figma-watch/README.md) が公開のたび
 | section-tab | `.mi-section-tab` | Figma `5634-1269` | — |
 | breadcrumb | `.mi-breadcrumb` | Figma `9926-7237` | — |
 | pagination | `.mi-pagination` | Figma `8910-6776` | — |
-| menu | `.mi-menu` / `.mi-menu-item` | 公式実装 ＋ Figma 無題ファイル `3dqm7vUqafFzdEkdpyqG9U`（menu 全6ページ） | `.mi-menu-category` は node `96:984` で正値化済み |
+| menu | `.mi-menu` / `.mi-menu-item` | 公式実装 ＋ Figma 無題ファイル `3dqm7vUqafFzdEkdpyqG9U`（menu 全6ページ） | `.mi-menu-category` は node `96:984` で正値化済み。select-menu-item の checkbox 型 `.mi-menu-item--checkbox` は Figma `13744-10744`（selected）/ `13744-10672` / phone `13744-10751` 正値（2026-11-05 公開）。右 padding は select `8376-4849` / link `8376-4986` が 12px、action `8376-4716` が 16px |
 | sub-menu-item | `.mi-menu-item--sub` | Figma `8376-4959` | — |
 | notification-badge | `.mi-badge` / `.mi-badge-anchor` | Figma `10748-4969` | — |
 | table | `.mi-table` | Figma header-cell `6055-17160` / body-cell `6055-17729`（Null 表示・ソートの仕様は Figma ページ内の仕様フレーム） | ページ全体 `6055-16930` は MCP タイムアウト。値が無いセルは「–」が既定 |
@@ -143,7 +143,7 @@ Figma にはあるが従来 kit が「desktop の1サイズ・loading 無し」�
   - **snackbar** — 既定=medium(min-h 56px) ＋ `--small`(hug・padding 8px)
 - **viewport=phone**（`--phone` を併用。主に文字 14→16px・アイコン 20→22px のタッチ最適化）: **text-field / text-area / select-box / search-box / segmented-control（`--phone` は容器側）/ pagination / banner / inline-notification / dialog / report-heading（h1=25px太字・h6=14px のみ差）/ radio-button-card / menu-item**。（従来からある breadcrumb / chip / input-chip / section-tab / switch に加わる）
 - **loading**（ボタン全系統）— `.mi-button--loading` ＋ 中に `<span class="mi-loading">`。loading 中は variant 色に依らず disabled 相当の面＋通常文字色（danger 含む）。スピナーは large/x-large=20px・medium=18px。
-- **variant個別** — `.mi-menu-item--danger`（危険メニュー項目・赤文字）/ `.mi-inline-notification--secondary`（グレー面固定・補足扱いの小さめ）/ `.mi-select--secondary`（枠なし・auto幅）/ `.mi-segment--icon`（アイコンのみセグメント）
+- **variant個別** — `.mi-menu-item--checkbox`（select-menu-item の複数選択。中に `.mi-checkbox-label`）/ `.mi-menu-item--danger`（危険メニュー項目・赤文字）/ `.mi-inline-notification--secondary`（グレー面固定・補足扱いの小さめ）/ `.mi-select--secondary`（枠なし・auto幅）/ `.mi-segment--icon`（アイコンのみセグメント）
 
 > ※ **search-box** は Figma に size バリアントが無く単一サイズ（追加は `--phone` のみ）。**global-search 系・avatar の icon variant** は「コンポーネント単位の差分」側で別途管理（未収録）。
 > 見本: 追加変種は各 `components/*.html`（button / form / feedback / display）に収録済み。
